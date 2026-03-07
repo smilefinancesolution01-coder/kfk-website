@@ -3,248 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fresh Fish Basket | KFK India - Online Fresh Fish & Seafood Delivery</title>
+    <title>Fresh Fish Basket | KFK India - Fresh Seafood Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8f9fa; }
-        .text-fix { overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; }
-        .product-card { background: #fff; border: 1px solid #eee; border-radius: 12px; transition: 0.3s; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
-        .product-card:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-color: #f97316; }
-        .img-box { height: 210px; width: 100%; overflow: hidden; position: relative; background: #f0f0f0; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
-        .product-card:hover .img-box img { transform: scale(1.08); }
-        .offer-tag { position: absolute; top: 10px; left: 10px; background: #d91f1f; color: #fff; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 4px; z-index: 10; }
-        .btn-basket { background: #1e3a8a; color: #fff; font-size: 11px; font-weight: 800; padding: 12px; border-radius: 8px; width: 100%; transition: 0.3s; letter-spacing: 1px; }
-        .btn-basket:hover { background: #f97316; }
-        .category-item { min-width: 100px; text-align: center; cursor: pointer; }
-        .category-item img { width: 75px; height: 75px; border-radius: 50%; border: 2px solid #eee; transition: 0.3s; margin: 0 auto; object-fit: cover; }
-        .category-item:hover img { border-color: #f97316; transform: translateY(-5px); }
-        .sticky-nav { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 2px solid #f97316; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f4f4f4; }
+        .text-fix { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
+        .product-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 4px; transition: 0.2s; height: 100%; display: flex; flex-direction: column; }
+        .product-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .img-container { width: 100%; height: 180px; overflow: hidden; background: #eee; position: relative; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .offer-badge { position: absolute; top: 0; left: 0; background: #d32f2f; color: #fff; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 0 0 4px 0; }
+        .btn-add { background: #002e6e; color: #fff; width: 100%; padding: 10px; font-weight: 800; font-size: 11px; border-radius: 2px; }
+        .category-circle { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 2px solid #ddd; margin: 0 auto; transition: 0.3s; }
+        .category-circle:hover { border-color: #f97316; transform: scale(1.05); }
+        .category-circle img { width: 100%; height: 100%; object-fit: cover; }
+        .sticky-nav { position: sticky; top: 0; z-index: 1000; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
     </style>
 </head>
 <body x-data="{ cart: 0 }">
 
-    <div class="bg-blue-900 text-white py-2 px-6 flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-        <span>📍 Delivering in: Kolkata, Delhi, Gurgaon, Mumbai</span>
-        <span>⚡ 120 Mins Express Delivery</span>
+    <div class="bg-[#002e6e] text-white py-1.5 px-6 flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+        <span>📍 Delivering in: Delhi, Gurgaon, Kolkata, Mumbai</span>
+        <span class="hidden md:block">Chemical Free | Net Weight | Home Delivery</span>
     </div>
 
-    <header class="sticky-nav px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
-            <a href="index.html" class="text-3xl font-black text-blue-950 italic shrink-0">KFK<span class="text-orange-500">.</span></a>
+    <header class="sticky-nav">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black text-[#002e6e] italic">KFK<span class="text-orange-500">.</span></a>
             
-            <div class="hidden lg:flex flex-1 max-w-xl relative">
-                <input type="text" placeholder="Search Fresh Fish, Chicken, Mutton..." class="w-full bg-gray-100 border-none rounded-full py-2.5 px-6 text-sm focus:ring-2 focus:ring-orange-500">
-                <button class="absolute right-4 top-2.5">🔍</button>
+            <div class="flex-1 max-w-lg mx-6 hidden lg:block relative">
+                <input type="text" placeholder="Search Fish, Chicken, Mutton..." class="w-full bg-gray-100 border-none rounded py-2 px-4 text-sm focus:ring-1 focus:ring-blue-950">
+                <button class="absolute right-3 top-2">🔍</button>
             </div>
 
             <div class="flex items-center gap-6">
-                <nav class="hidden xl:flex gap-6 text-[10px] font-black uppercase tracking-widest text-gray-500">
-                    <a href="menu.html" class="hover:text-orange-600">Fresh Menu</a>
-                    <a href="franchise.html" class="hover:text-orange-600">Franchise</a>
-                    <a href="training.html" class="hover:text-orange-600">Academy</a>
-                </nav>
                 <div class="relative cursor-pointer" onclick="location.href='order.html'">
-                    <span class="text-2xl">🛒</span>
-                    <span x-text="cart" class="absolute -top-2 -right-2 bg-orange-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+                    <span class="text-xl">🛒</span>
+                    <span x-text="cart" class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
                 </div>
+                <button class="bg-[#002e6e] text-white px-4 py-1.5 rounded text-[10px] font-bold uppercase">Login</button>
             </div>
         </div>
     </header>
 
-    <section class="w-full h-[350px] md:h-[480px] relative overflow-hidden bg-gray-200">
-        <img src="https://cdn2.freshfishbasket.com/upload/slider/1623912345.jpeg" onerror="this.src='https://images.unsplash.com/photo-1551135049-8a33b5883817?w=1600'" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-10">
-            <div class="text-white max-w-lg">
-                <h1 class="text-4xl md:text-6xl font-black uppercase leading-none mb-4 text-fix">Fresh From <br><span class="text-orange-500">The Source.</span></h1>
-                <p class="text-sm md:text-lg italic text-white/80 mb-8">No Chemicals. No Middlemen. Just Pure Seafood Excellence.</p>
-                <button class="bg-orange-600 text-white px-10 py-4 rounded-md font-black uppercase text-[10px] tracking-widest hover:bg-white hover:text-orange-600 transition">Shop Now</button>
+    <section class="w-full h-[300px] md:h-[420px] relative overflow-hidden">
+        <img src="https://cdn2.freshfishbasket.com/upload/slider/1623912345.jpeg" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black/10 flex items-center px-8 md:px-20">
+            <div class="max-w-lg">
+                <h1 class="text-3xl md:text-5xl font-black text-white uppercase leading-none mb-4 shadow-sm">Fresh Seafood <br><span class="text-orange-500">Delivered.</span></h1>
+                <a href="#shop" class="bg-orange-600 text-white px-8 py-3 rounded font-black uppercase text-[10px] tracking-widest">Shop Now</a>
             </div>
         </div>
     </section>
 
-    <section class="max-w-7xl mx-auto px-6 py-12">
-        <div class="flex overflow-x-auto gap-8 pb-4 no-scrollbar">
-            <div class="category-item" onclick="location.href='menu.html'">
-                <img src="https://cdn2.freshfishbasket.com/upload/category/1559339352.jpeg" alt="River Fish">
-                <p class="mt-3 text-[10px] font-black uppercase tracking-tight">Fresh Water</p>
-            </div>
-            <div class="category-item" onclick="location.href='menu.html'">
-                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=200" alt="Prawns">
-                <p class="mt-3 text-[10px] font-black uppercase tracking-tight">Prawns</p>
-            </div>
-            <div class="category-item" onclick="location.href='menu.html'">
-                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c170db76?w=200" alt="Sea Fish">
-                <p class="mt-3 text-[10px] font-black uppercase tracking-tight">Sea Fish</p>
-            </div>
-            <div class="category-item" onclick="location.href='menu.html'">
-                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=200" alt="Chicken">
-                <p class="mt-3 text-[10px] font-black uppercase tracking-tight">Chicken</p>
-            </div>
-            <div class="category-item" onclick="location.href='menu.html'">
-                <img src="https://images.unsplash.com/photo-1603048297172-c92544798d5e?w=200" alt="Mutton">
-                <p class="mt-3 text-[10px] font-black uppercase tracking-tight">Mutton</p>
-            </div>
+    <section class="max-w-7xl mx-auto px-4 py-10 flex overflow-x-auto gap-10 justify-start md:justify-center no-scrollbar">
+        <div class="text-center shrink-0 cursor-pointer" onclick="location.href='menu.html'">
+            <div class="category-circle"><img src="https://cdn2.freshfishbasket.com/upload/category/1559339352.jpeg"></div>
+            <p class="text-[9px] font-black uppercase mt-2">River Fish</p>
+        </div>
+        <div class="text-center shrink-0 cursor-pointer" onclick="location.href='menu.html'">
+            <div class="category-circle"><img src="https://cdn2.freshfishbasket.com/upload/category/1559339395.jpeg"></div>
+            <p class="text-[9px] font-black uppercase mt-2">Sea Fish</p>
+        </div>
+        <div class="text-center shrink-0 cursor-pointer" onclick="location.href='menu.html'">
+            <div class="category-circle"><img src="https://cdn2.freshfishbasket.com/upload/category/1559339414.jpeg"></div>
+            <p class="text-[9px] font-black uppercase mt-2">Prawns</p>
+        </div>
+        <div class="text-center shrink-0 cursor-pointer" onclick="location.href='menu.html'">
+            <div class="category-circle"><img src="https://cdn2.freshfishbasket.com/upload/category/1559339434.jpeg"></div>
+            <p class="text-[9px] font-black uppercase mt-2">Chicken</p>
+        </div>
+        <div class="text-center shrink-0 cursor-pointer" onclick="location.href='menu.html'">
+            <div class="category-circle"><img src="https://cdn2.freshfishbasket.com/upload/category/1559339454.jpeg"></div>
+            <p class="text-[9px] font-black uppercase mt-2">Mutton</p>
         </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-6 py-6">
-        <div class="flex items-center justify-between mb-8 border-b-2 border-orange-500 pb-3">
-            <h2 class="text-2xl font-black uppercase tracking-tighter text-blue-950">Recommended <span class="text-orange-600 italic">For You</span></h2>
-            <a href="menu.html" class="text-[10px] font-black uppercase text-orange-600 underline">View All Products</a>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <main id="shop" class="max-w-7xl mx-auto px-4 py-6">
+        <h3 class="text-lg font-black uppercase mb-8 border-l-4 border-orange-500 pl-4 text-[#002e6e]">Featured Items</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
             <div class="product-card" onclick="location.href='order.html'">
-                <div class="offer-tag">25% OFF</div>
-                <div class="img-box">
+                <div class="img-container">
                     <img src="https://cdn2.freshfishbasket.com/upload/product/1624000251.jpeg" alt="Bhetki">
+                    <div class="offer-badge">15% OFF</div>
                 </div>
-                <div class="p-5">
-                    <h3 class="text-xs font-black uppercase text-blue-950 mb-1 text-fix">Kolkata Bhetki Fillet</h3>
-                    <p class="text-[9px] text-gray-400 font-bold mb-3 italic">Ganga River, Cleaned, High Protein</p>
-                    <div class="flex justify-between items-center bg-gray-50 p-2 rounded mb-4 text-[10px] font-bold">
-                        <span class="text-gray-400">Gross: 500g</span>
-                        <span class="text-blue-900">Net: 420g</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <span class="text-[10px] text-gray-300 line-through">₹850</span>
-                            <span class="text-xl font-black text-orange-600 block">₹645</span>
+                <div class="p-4 flex-grow flex flex-col">
+                    <h4 class="text-xs font-black uppercase mb-1 text-fix">Kolkata Bhetki Fillet</h4>
+                    <p class="text-[9px] text-gray-400 font-bold mb-3">Gross: 500g | Net: 400g</p>
+                    <div class="mt-auto">
+                        <div class="flex justify-between items-end mb-4">
+                            <div>
+                                <span class="text-[10px] text-gray-300 line-through leading-none">₹850</span>
+                                <span class="text-lg font-black text-orange-600 block leading-none">₹645</span>
+                            </div>
+                            <span class="text-[8px] font-bold text-green-600">PREMIUM</span>
                         </div>
-                        <span class="text-[8px] font-black border border-green-500 text-green-500 px-2 py-1 rounded">FRESH</span>
+                        <button @click.stop="cart++; alert('Added to Basket')" class="btn-add">ADD TO BASKET</button>
                     </div>
-                    <button @click.stop="cart++; alert('Added to Basket')" class="btn-basket uppercase">Add to Basket</button>
                 </div>
             </div>
 
             <div class="product-card" onclick="location.href='order.html'">
-                <div class="offer-tag">BESTSELLER</div>
-                <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" alt="Prawns">
+                <div class="img-container">
+                    <img src="https://cdn2.freshfishbasket.com/upload/product/1623999901.jpeg" alt="Prawns">
+                    <div class="offer-badge">BESTSELLER</div>
                 </div>
-                <div class="p-5">
-                    <h3 class="text-xs font-black uppercase text-blue-950 mb-1 text-fix">Jumbo Tiger Prawns</h3>
-                    <p class="text-[9px] text-gray-400 font-bold mb-3 italic">Export Quality, Cleaned & Deveined</p>
-                    <div class="flex justify-between items-center bg-gray-50 p-2 rounded mb-4 text-[10px] font-bold">
-                        <span class="text-gray-400">20-25 Pcs</span>
-                        <span class="text-blue-900">Net: 450g</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <span class="text-[10px] text-gray-300 line-through">₹1,200</span>
-                            <span class="text-xl font-black text-orange-600 block">₹950</span>
+                <div class="p-4 flex-grow flex flex-col">
+                    <h4 class="text-xs font-black uppercase mb-1 text-fix">Tiger Prawns (Jumbo)</h4>
+                    <p class="text-[9px] text-gray-400 font-bold mb-3">Net Weight: 450g | 15-20 Pcs</p>
+                    <div class="mt-auto">
+                        <div class="flex justify-between items-end mb-4">
+                            <div>
+                                <span class="text-[10px] text-gray-300 line-through leading-none">₹990</span>
+                                <span class="text-lg font-black text-orange-600 block leading-none">₹820</span>
+                            </div>
+                            <span class="text-[8px] font-bold text-blue-600">CLEANED</span>
                         </div>
-                        <span class="text-[8px] font-black border border-blue-500 text-blue-500 px-2 py-1 rounded">PREMIUM</span>
+                        <button @click.stop="cart++; alert('Added to Basket')" class="btn-add">ADD TO BASKET</button>
                     </div>
-                    <button @click.stop="cart++; alert('Added to Basket')" class="btn-basket uppercase">Add to Basket</button>
                 </div>
             </div>
 
             <div class="product-card" onclick="location.href='order.html'">
-                <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1626509135521-e409da2f9746?w=600" alt="Ilish">
+                <div class="img-container">
+                    <img src="https://cdn2.freshfishbasket.com/upload/product/1624000401.jpeg" alt="Hilsa">
                 </div>
-                <div class="p-5">
-                    <h3 class="text-xs font-black uppercase text-blue-950 mb-1 text-fix">Padma Ilish (Hilsa)</h3>
-                    <p class="text-[9px] text-gray-400 font-bold mb-3 italic">Original Padma River, Whole Fish</p>
-                    <div class="flex justify-between items-center bg-gray-50 p-2 rounded mb-4 text-[10px] font-bold">
-                        <span class="text-gray-400">Gross: 1.2kg</span>
-                        <span class="text-blue-900">Net: 1kg</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <span class="text-[10px] text-gray-300 line-through">₹2,800</span>
-                            <span class="text-xl font-black text-orange-600 block">₹2,400</span>
+                <div class="p-4 flex-grow flex flex-col">
+                    <h4 class="text-xs font-black uppercase mb-1 text-fix">Padma Hilsa (Ilish)</h4>
+                    <p class="text-[9px] text-gray-400 font-bold mb-3">Weight: 1kg - 1.2kg | Whole</p>
+                    <div class="mt-auto">
+                        <div class="flex justify-between items-end mb-4">
+                            <div>
+                                <span class="text-[10px] text-gray-300 line-through leading-none">₹2,400</span>
+                                <span class="text-lg font-black text-orange-600 block leading-none">₹1,950</span>
+                            </div>
+                            <span class="text-[8px] font-bold text-orange-500">ORIGINAL</span>
                         </div>
-                        <span class="text-[8px] font-black border border-orange-500 text-orange-500 px-2 py-1 rounded">SEASONAL</span>
+                        <button @click.stop="cart++; alert('Added to Basket')" class="btn-add">ADD TO BASKET</button>
                     </div>
-                    <button @click.stop="cart++; alert('Added to Basket')" class="btn-basket uppercase">Add to Basket</button>
                 </div>
             </div>
 
             <div class="product-card" onclick="location.href='order.html'">
-                <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600" alt="Rohu">
+                <div class="img-container">
+                    <img src="https://cdn2.freshfishbasket.com/upload/product/1574064501.jpeg" alt="Chicken">
                 </div>
-                <div class="p-5">
-                    <h3 class="text-xs font-black uppercase text-blue-950 mb-1 text-fix">River Rohu (Bengali Cut)</h3>
-                    <p class="text-[9px] text-gray-400 font-bold mb-3 italic">Daily Catch, Chemical Free, Fresh Water</p>
-                    <div class="flex justify-between items-center bg-gray-50 p-2 rounded mb-4 text-[10px] font-bold">
-                        <span class="text-gray-400">Gross: 1kg</span>
-                        <span class="text-blue-900">Net: 850g</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <span class="text-[10px] text-gray-300 line-through">₹550</span>
-                            <span class="text-xl font-black text-orange-600 block">₹420</span>
+                <div class="p-4 flex-grow flex flex-col">
+                    <h4 class="text-xs font-black uppercase mb-1 text-fix">Fresh Chicken (Curry Cut)</h4>
+                    <p class="text-[9px] text-gray-400 font-bold mb-3">Weight: 1kg | Skinless</p>
+                    <div class="mt-auto">
+                        <div class="flex justify-between items-end mb-4">
+                            <div>
+                                <span class="text-[10px] text-gray-300 line-through leading-none">₹320</span>
+                                <span class="text-lg font-black text-orange-600 block leading-none">₹245</span>
+                            </div>
+                            <span class="text-[8px] font-bold text-green-600">ANTIBIOTIC FREE</span>
                         </div>
-                        <span class="text-[8px] font-black border border-green-500 text-green-500 px-2 py-1 rounded">FRESH</span>
+                        <button @click.stop="cart++; alert('Added to Basket')" class="btn-add">ADD TO BASKET</button>
                     </div>
-                    <button @click.stop="cart++; alert('Added to Basket')" class="btn-basket uppercase">Add to Basket</button>
                 </div>
             </div>
 
         </div>
     </main>
 
-    <section class="bg-blue-950 text-white py-16 px-6 mt-12">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-            <div class="space-y-3">
-                <span class="text-4xl block">🧊</span>
-                <h5 class="text-[10px] font-black uppercase tracking-widest">Cold Chain Integrity</h5>
-                <p class="text-[9px] text-white/40 italic">Temperature maintained at 0-4°C</p>
+    <section class="bg-gray-100 py-12 px-6 mt-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <img src="https://www.freshfishbasket.com/assets/images/delivery-truck.png" class="h-10 mx-auto mb-3 grayscale brightness-50" onerror="this.src='https://cdn-icons-png.flaticon.com/512/709/709790.png'">
+                <p class="text-[9px] font-black uppercase tracking-widest">Cold Chain Integrity</p>
             </div>
-            <div class="space-y-3">
-                <span class="text-4xl block">🛡️</span>
-                <h5 class="text-[10px] font-black uppercase tracking-widest">Chemical Free</h5>
-                <p class="text-[9px] text-white/40 italic">No Ammonia or Preservatives</p>
+            <div>
+                <img src="https://www.freshfishbasket.com/assets/images/chemical-free.png" class="h-10 mx-auto mb-3 grayscale brightness-50" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2913/2913520.png'">
+                <p class="text-[9px] font-black uppercase tracking-widest">No Chemicals</p>
             </div>
-            <div class="space-y-3">
-                <span class="text-4xl block">⚖️</span>
-                <h5 class="text-[10px] font-black uppercase tracking-widest">Net Weight Pricing</h5>
-                <p class="text-[9px] text-white/40 italic">Pay only for what you eat</p>
+            <div>
+                <img src="https://www.freshfishbasket.com/assets/images/weight.png" class="h-10 mx-auto mb-3 grayscale brightness-50" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1611/1611177.png'">
+                <p class="text-[9px] font-black uppercase tracking-widest">Transparent Weight</p>
             </div>
-            <div class="space-y-3">
-                <span class="text-4xl block">⚡</span>
-                <h5 class="text-[10px] font-black uppercase tracking-widest">120 Min Delivery</h5>
-                <p class="text-[9px] text-white/40 italic">Fastest Hub delivery network</p>
+            <div>
+                <img src="https://www.freshfishbasket.com/assets/images/fresh.png" class="h-10 mx-auto mb-3 grayscale brightness-50" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1041/1041355.png'">
+                <p class="text-[9px] font-black uppercase tracking-widest">Express Delivery</p>
             </div>
         </div>
     </section>
 
-    <footer class="bg-white border-t border-gray-100 pt-20 pb-10 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16">
-            <div class="col-span-1 md:col-span-2">
-                <a href="index.html" class="text-4xl font-black text-blue-950 italic">KFK<span class="text-orange-500">.</span></a>
-                <p class="text-gray-400 text-xs mt-6 leading-relaxed max-w-sm italic">
-                    Kolkata Fish Kitchen (KFK) is India's premier institutional seafood hub. We specialize in sourcing, processing, and delivering the highest quality fresh fish and meat directly from the coast to your kitchen.
-                </p>
-            </div>
+    <footer class="bg-white border-t border-gray-200 py-12 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
             <div>
-                <h6 class="text-[11px] font-black uppercase tracking-[0.2em] text-gray-300 mb-8 underline decoration-orange-500 underline-offset-8">Quick Links</h6>
-                <ul class="space-y-4 text-[10px] font-black uppercase text-gray-600 tracking-tighter">
-                    <li><a href="menu.html" class="hover:text-orange-600 transition">Fresh Fish Catalog</a></li>
-                    <li><a href="franchise.html" class="hover:text-orange-600 transition">Franchise Model</a></li>
-                    <li><a href="training.html" class="hover:text-orange-600 transition">Partner Academy</a></li>
-                    <li><a href="faq.html" class="hover:text-orange-600 transition">Support Center</a></li>
-                </ul>
+                <a href="index.html" class="text-3xl font-black text-[#002e6e] italic">KFK<span class="text-orange-500">.</span></a>
+                <p class="text-[10px] text-gray-400 mt-4 leading-relaxed font-bold uppercase italic">Pioneering Institutional Grade Seafood Hubs in India. Pure. Fresh. Delivered.</p>
             </div>
-            <div>
-                <h6 class="text-[11px] font-black uppercase tracking-[0.2em] text-gray-300 mb-8 underline decoration-orange-500 underline-offset-8">Support</h6>
-                <p class="text-[10px] font-black text-gray-700 mb-2">EMAIL: HELLO@KFKINDIA.COM</p>
-                <p class="text-[10px] font-black text-gray-700 mb-6">HELPLINE: +91 98765 43210</p>
-                <div class="flex gap-4">
-                    <span class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-xs cursor-pointer hover:bg-orange-500 hover:text-white transition">FB</span>
-                    <span class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-xs cursor-pointer hover:bg-orange-500 hover:text-white transition">IG</span>
-                </div>
+            <div class="flex flex-col gap-2 text-[10px] font-black uppercase tracking-widest text-gray-500">
+                <a href="menu.html">Fish Catalog</a>
+                <a href="franchise.html">Franchise</a>
+                <a href="faq.html">Support</a>
+                <a href="contact.html">Contact</a>
             </div>
-        </div>
-        <div class="mt-20 pt-10 border-t border-gray-50 text-center">
-            <p class="text-[9px] font-black text-gray-300 uppercase tracking-[0.5em]">© 2026 KFK INDIA | ALL RIGHTS RESERVED | INSTITUTIONAL HUB NETWORK</p>
+            <div class="text-[10px] font-black uppercase text-gray-300 tracking-[0.3em]">
+                © 2026 KFK INDIA | ALL RIGHTS RESERVED
+            </div>
         </div>
     </footer>
 
