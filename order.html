@@ -3,102 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout | KFK India - Secure Payment</title>
+    <title>KFK Order Checkout | Real-time Payout</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .form-input { width: 100%; padding: 1rem; border-radius: 0.75rem; border: 1px solid #e2e8f0; background: #f8fafc; font-size: 0.875rem; }
-        .form-input:focus { outline: 2px solid #f97316; border-color: transparent; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-[#f8fafc] text-slate-800">
 
-    <header class="h-20 bg-white border-b flex items-center px-6">
-        <a href="index.html" class="text-2xl font-black text-[#002e6e] italic uppercase">KFK<span class="text-orange-500">.</span>India</a>
+    <header class="bg-white border-b py-6 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>CHECKOUT</a>
+            <a href="menu.html" class="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-orange-500">← Back to Menu</a>
+        </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 py-12">
+    <main class="max-w-7xl mx-auto px-6 py-12">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
             
             <div class="lg:col-span-2 space-y-8">
-                <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-sm border border-gray-100">
-                    <h2 class="text-2xl font-black uppercase italic mb-8">Delivery Information</h2>
-                    <form class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="text-[10px] font-black uppercase mb-2 block">Full Name</label>
-                                <input type="text" class="form-input" placeholder="Enter name">
-                            </div>
-                            <div>
-                                <label class="text-[10px] font-black uppercase mb-2 block">Phone Number</label>
-                                <input type="tel" class="form-input" placeholder="+91 00000 00000">
-                            </div>
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
+                    <h2 class="text-xl font-black text-[#002e6e] uppercase italic mb-6">1. Delivery Address</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Full Name" class="bg-slate-50 border-none p-4 rounded-2xl text-xs font-bold outline-none focus:ring-2 focus:ring-[#002e6e]">
+                        <input type="text" placeholder="Phone Number" class="bg-slate-50 border-none p-4 rounded-2xl text-xs font-bold outline-none focus:ring-2 focus:ring-[#002e6e]">
+                        <input type="text" placeholder="Flat / House No." class="md:col-span-2 bg-slate-50 border-none p-4 rounded-2xl text-xs font-bold outline-none focus:ring-2 focus:ring-[#002e6e]">
+                        <input type="text" placeholder="Pincode" class="bg-slate-50 border-none p-4 rounded-2xl text-xs font-bold outline-none focus:ring-2 focus:ring-[#002e6e]">
+                        <select class="bg-slate-50 border-none p-4 rounded-2xl text-xs font-bold outline-none focus:ring-2 focus:ring-[#002e6e]">
+                            <option>Delhi NCR</option>
+                            <option>Kolkata</option>
+                            <option>Gurugram</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
+                    <h2 class="text-xl font-black text-[#002e6e] uppercase italic mb-6">2. Order Summary</h2>
+                    <div id="cart-items-list" class="space-y-4">
+                        <p class="text-slate-400 text-xs italic">Your cart is empty. Go to menu to add products.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="bg-[#002e6e] text-white p-8 rounded-[3rem] sticky top-32 shadow-2xl overflow-hidden relative">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/5 rounded-full"></div>
+                    
+                    <h2 class="text-xl font-black uppercase italic mb-8">Payment Summary</h2>
+                    
+                    <div class="space-y-4 border-b border-white/10 pb-6 mb-6">
+                        <div class="flex justify-between text-xs font-bold uppercase tracking-widest text-white/60">
+                            <span>Subtotal</span>
+                            <span id="subtotal">₹0</span>
                         </div>
+                        <div class="flex justify-between text-xs font-bold uppercase tracking-widest text-white/60">
+                            <span>GST (5%)</span>
+                            <span id="tax">₹0</span>
+                        </div>
+                        <div class="flex justify-between text-xs font-bold uppercase tracking-widest text-white/60">
+                            <span>Delivery Fee</span>
+                            <span id="delivery">₹0</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-end mb-10">
                         <div>
-                            <label class="text-[10px] font-black uppercase mb-2 block">Full Address (House No, Building, Street)</label>
-                            <textarea rows="3" class="form-input" placeholder="Type your full address..."></textarea>
+                            <p class="text-[10px] font-black uppercase tracking-widest text-orange-400">Total Payable</p>
+                            <p id="total-payable" class="text-4xl font-black italic">₹0</p>
                         </div>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-                            <div>
-                                <label class="text-[10px] font-black uppercase mb-2 block">Pincode</label>
-                                <input type="text" class="form-input" placeholder="6 Digits">
-                            </div>
-                            <div>
-                                <label class="text-[10px] font-black uppercase mb-2 block">City</label>
-                                <select class="form-input">
-                                    <option>Delhi</option>
-                                    <option>Kolkata</option>
-                                    <option>Gurugram</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-sm border border-gray-100">
-                    <h2 class="text-2xl font-black uppercase italic mb-6">Payment Method</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <label class="border-2 border-orange-500 p-4 rounded-xl flex items-center justify-center gap-3 cursor-pointer bg-orange-50">
-                            <input type="radio" name="pay" checked>
-                            <span class="text-xs font-black uppercase">COD</span>
-                        </label>
-                        <label class="border-2 border-gray-100 p-4 rounded-xl flex items-center justify-center gap-3 cursor-pointer">
-                            <input type="radio" name="pay">
-                            <span class="text-xs font-black uppercase">UPI/Card</span>
-                        </label>
                     </div>
+
+                    <button onclick="processPayment()" class="w-full bg-orange-500 hover:bg-white hover:text-[#002e6e] py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] transition-all shadow-xl active:scale-95">
+                        Proceed to Payment
+                    </button>
+
+                    <p class="text-[8px] text-center mt-6 text-white/40 uppercase font-black tracking-widest">
+                        Secure SSL Encrypted Transaction
+                    </p>
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <div class="bg-[#002e6e] text-white p-8 rounded-[2.5rem] sticky top-24 shadow-xl">
-                    <h2 class="text-xl font-black uppercase italic mb-8 border-b border-white/10 pb-4">Order Summary</h2>
-                    <div class="space-y-6">
-                        <div class="flex justify-between items-center border-b border-white/5 pb-4">
-                            <span class="text-[10px] font-bold uppercase text-slate-400">Subtotal</span>
-                            <span class="text-sm font-black">₹0.00</span>
-                        </div>
-                        <div class="flex justify-between items-center border-b border-white/5 pb-4">
-                            <span class="text-[10px] font-bold uppercase text-slate-400">Delivery Fee</span>
-                            <span class="text-sm font-black text-green-400">FREE</span>
-                        </div>
-                        <div class="flex justify-between items-center pt-4">
-                            <span class="text-lg font-black uppercase italic">Total</span>
-                            <span class="text-2xl font-black text-orange-500">₹0.00</span>
-                        </div>
-                    </div>
-                    <button class="w-full bg-orange-500 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest mt-10 hover:bg-white hover:text-black transition-all">Place Order</button>
-                    <p class="text-[8px] text-center mt-6 text-slate-400 font-bold uppercase tracking-widest">Secure 256-bit Encrypted Checkout</p>
-                </div>
-            </div>
-            
         </div>
     </main>
 
-    <footer class="py-12 text-center text-[9px] font-black text-slate-400 uppercase tracking-[0.4em]">
-        © 2026 KFK India | Express Delivery Network
-    </footer>
+    <script>
+        // Real-time Cart Logic
+        function loadOrderSummary() {
+            // Hum assume kar rahe hain ki menu.html se data localStorage me save ho raha hai
+            // Temporary Testing Data (Agar cart empty ho toh)
+            let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [
+                { name: "Jumbo Tiger Prawns", price: 549, qty: 1 },
+                { name: "Fish Burger Patty", price: 189, qty: 2 }
+            ];
 
+            const listContainer = document.getElementById('cart-items-list');
+            if (cart.length > 0) listContainer.innerHTML = '';
+
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                subtotal += (item.price * item.qty);
+                listContainer.innerHTML += `
+                    <div class="flex justify-between items-center bg-slate-50 p-4 rounded-2xl border border-gray-100">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center font-black text-[#002e6e] text-xs shadow-sm">${index + 1}</div>
+                            <div>
+                                <h4 class="text-[11px] font-black uppercase text-[#002e6e]">${item.name}</h4>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase">Qty: ${item.qty} × ₹${item.price}</p>
+                            </div>
+                        </div>
+                        <span class="font-black text-sm">₹${item.price * item.qty}</span>
+                    </div>
+                `;
+            });
+
+            // Payout Calculations
+            const tax = Math.round(subtotal * 0.05); // 5% GST
+            const delivery = subtotal > 500 ? 0 : 50; // Free delivery above 500
+            const total = subtotal + tax + delivery;
+
+            document.getElementById('subtotal').innerText = `₹${subtotal}`;
+            document.getElementById('tax').innerText = `₹${tax}`;
+            document.getElementById('delivery').innerText = delivery === 0 ? "FREE" : `₹${delivery}`;
+            document.getElementById('total-payable').innerText = `₹${total}`;
+        }
+
+        function processPayment() {
+            const total = document.getElementById('total-payable').innerText;
+            alert(`Redirecting to Secure Payment Gateway for ${total}... \n(UPI, Card, NetBanking)`);
+            // Yahan hum Razorpay ya PayU ka integration kar sakte hain
+        }
+
+        // Initialize on load
+        window.onload = loadOrderSummary;
+    </script>
 </body>
 </html>
