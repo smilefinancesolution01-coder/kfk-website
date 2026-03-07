@@ -3,254 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK India | Premium Fresh Meat & Fish</title>
+    <title>KFK India | Fresh Fish & Meat Delivery</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
-        .product-card:hover .zoom-img { transform: scale(1.1); }
-        .loader { border-top-color: #f97316; animation: spinner 0.6s linear infinite; }
-        @keyframes spinner { to { transform: rotate(3600deg); } }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .product-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+        .img-zoom { transition: transform 0.6s ease; }
+        .product-card:hover .img-zoom { transform: scale(1.1); }
+        .active-dot { width: 8px; height: 8px; background: #f97316; border-radius: 50%; display: inline-block; margin-right: 5px; }
     </style>
 </head>
-<body class="bg-slate-50">
+<body class="bg-gray-50 text-slate-900">
 
-    <div class="bg-[#002e6e] text-white py-2.5 px-4 text-center text-[11px] font-bold uppercase tracking-[0.2em] z-[100] relative">
-        ⚡ Fast Delivery in Delhi NCR & Kolkata | 100% Antibiotic Free Meat
+    <div class="bg-[#002e6e] text-white py-2 text-center text-[11px] font-bold uppercase tracking-widest sticky top-0 z-[100]">
+        <span class="animate-pulse">●</span> LIVE: Fresh Catch Reached Delhi & Kolkata Hubs | Order Now
     </div>
 
-    <header class="sticky top-0 z-[90] bg-white/80 backdrop-blur-xl border-b border-slate-200">
+    <header class="bg-white/90 backdrop-blur-md sticky top-[36px] z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <a href="#" class="text-3xl font-black italic text-[#002e6e] tracking-tighter">KFK<span class="text-orange-500">.</span>INDIA</a>
             
-            <nav class="hidden lg:flex gap-8 text-[12px] font-bold uppercase text-slate-600">
-                <a href="#fish" class="hover:text-orange-600 transition">River Fish</a>
-                <a href="#sea" class="hover:text-orange-600 transition">Sea Food</a>
-                <a href="#meat" class="hover:text-orange-600 transition">Meat & Poultry</a>
-                <a href="#deals" class="hover:text-orange-500">Flash Deals</a>
+            <nav class="hidden lg:flex gap-10 text-[12px] font-extrabold uppercase text-slate-500">
+                <a href="#categories" class="hover:text-orange-500 transition">Categories</a>
+                <a href="#fresh-catch" class="hover:text-orange-500 transition">River Fish</a>
+                <a href="#meat-section" class="hover:text-orange-500 transition">Meat & Poultry</a>
+                <a href="#why-us" class="hover:text-orange-500 transition">Why KFK?</a>
             </nav>
 
-            <div class="flex items-center gap-6">
-                <div class="hidden md:block relative">
-                    <input type="text" placeholder="Search Freshness..." class="bg-slate-100 border-none rounded-full py-2 px-6 text-xs w-64 focus:ring-2 focus:ring-orange-500 transition-all">
-                </div>
-                <button class="relative p-2 bg-orange-100 rounded-full text-orange-600 font-bold text-sm px-5">
-                    🛒 <span class="ml-1">CART (0)</span>
-                </button>
+            <div class="flex items-center gap-5">
+                <button class="hidden md:block text-slate-400 hover:text-orange-500 text-xl">🔍</button>
+                <div class="h-8 w-[1px] bg-gray-200 hidden md:block"></div>
+                <a href="#cart" class="flex items-center gap-2 bg-orange-50 text-orange-600 px-5 py-2.5 rounded-2xl font-bold text-sm hover:bg-orange-600 hover:text-white transition-all">
+                    <span>🛒</span> <span class="hidden sm:inline">My Cart</span> <span class="bg-orange-500 text-white text-[10px] px-2 py-0.5 rounded-full ml-1">0</span>
+                </a>
             </div>
         </div>
     </header>
 
-    <section class="relative h-[600px] flex items-center overflow-hidden bg-slate-900">
-        <img id="hero-img" class="absolute inset-0 w-full h-full object-cover opacity-60" src="" alt="Hero">
-        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full text-white">
-            <span class="bg-orange-600 px-4 py-1 rounded-full text-[10px] font-bold uppercase mb-6 inline-block">Direct From Harbors</span>
-            <h1 class="text-6xl md:text-8xl font-black leading-none mb-6">PURE.<br><span class="text-orange-500">UNTOUCHED.</span></h1>
-            <p class="text-lg md:text-xl text-slate-300 max-w-xl mb-10 font-light italic">Experience the gold standard of fresh meat delivery. No preservatives, just pure quality delivered in 120 minutes.</p>
-            <div class="flex gap-4">
-                <a href="#fish" class="bg-white text-slate-900 px-10 py-4 rounded-xl font-bold uppercase text-xs hover:bg-orange-500 hover:text-white transition-all shadow-2xl">Start Shopping</a>
-                <a href="#" class="border border-white/30 backdrop-blur-md px-10 py-4 rounded-xl font-bold uppercase text-xs hover:bg-white/10 transition">Our Quality Lab</a>
+    <section class="relative h-[650px] flex items-center bg-slate-900 overflow-hidden">
+        <img id="hero-img" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-opacity duration-1000" src="" alt="Fresh Fish">
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <div class="inline-flex items-center bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-white text-[10px] font-bold uppercase tracking-widest mb-6">
+                <span class="active-dot"></span> 100% Chemical Free Guarantee
+            </div>
+            <h1 class="text-6xl md:text-9xl font-black text-white leading-[0.9] mb-8 italic">THE<br><span class="text-orange-500">FRESH</span><br>CLUB.</h1>
+            <p class="text-gray-300 text-lg md:text-xl max-w-xl font-light leading-relaxed mb-10">Directly from the landing centers to your doorstep. No storage, no freezing, just pure freshness.</p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#fresh-catch" class="bg-orange-500 text-white px-12 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-orange-600 hover:-translate-y-1 transition-all shadow-xl shadow-orange-500/20">Shop Today's Catch</a>
+                <a href="#why-us" class="bg-white/10 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-white/20 transition-all">Our Story</a>
             </div>
         </div>
     </section>
 
-    <section class="py-20 max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
-            <div class="text-center group cursor-pointer">
-                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl mb-4 group-hover:border-orange-500 transition-all">
-                    <img id="cat-1" class="w-full h-full object-cover" src="">
-                </div>
-                <h3 class="text-sm font-bold text-slate-800 uppercase italic">Sea Fish</h3>
-            </div>
-            <div class="text-center group cursor-pointer">
-                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl mb-4 group-hover:border-orange-500 transition-all">
-                    <img id="cat-2" class="w-full h-full object-cover" src="">
-                </div>
-                <h3 class="text-sm font-bold text-slate-800 uppercase italic">Prawns</h3>
-            </div>
-            <div class="text-center group cursor-pointer">
-                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl mb-4 group-hover:border-orange-500 transition-all">
-                    <img id="cat-3" class="w-full h-full object-cover" src="">
-                </div>
-                <h3 class="text-sm font-bold text-slate-800 uppercase italic">Chicken</h3>
-            </div>
-            <div class="text-center group cursor-pointer">
-                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl mb-4 group-hover:border-orange-500 transition-all">
-                    <img id="cat-4" class="w-full h-full object-cover" src="">
-                </div>
-                <h3 class="text-sm font-bold text-slate-800 uppercase italic">Mutton</h3>
-            </div>
-            <div class="text-center group cursor-pointer">
-                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl mb-4 group-hover:border-orange-500 transition-all">
-                    <img id="cat-5" class="w-full h-full object-cover" src="">
-                </div>
-                <h3 class="text-sm font-bold text-slate-800 uppercase italic">Marinades</h3>
-            </div>
-        </div>
-    </section>
-
-    <section id="fish" class="py-20 bg-white">
+    <section id="categories" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-end mb-12">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-black text-orange-500 uppercase tracking-[0.3em] mb-3">Shop by</h2>
+                <h3 class="text-4xl font-black text-[#002e6e] uppercase italic">Top Categories</h3>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10">
+                <a href="#" class="group text-center">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-gray-50 shadow-lg group-hover:border-orange-500 transition-all duration-500">
+                        <img id="cat-1" class="w-full h-full object-cover group-hover:scale-110 transition-transform" src="">
+                    </div>
+                    <p class="mt-5 font-extrabold text-xs uppercase tracking-widest text-slate-700">Sea Fish</p>
+                </a>
+                <a href="#" class="group text-center">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-gray-50 shadow-lg group-hover:border-orange-500 transition-all duration-500">
+                        <img id="cat-2" class="w-full h-full object-cover group-hover:scale-110 transition-transform" src="">
+                    </div>
+                    <p class="mt-5 font-extrabold text-xs uppercase tracking-widest text-slate-700">Prawns</p>
+                </a>
+                <a href="#" class="group text-center">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-gray-50 shadow-lg group-hover:border-orange-500 transition-all duration-500">
+                        <img id="cat-3" class="w-full h-full object-cover group-hover:scale-110 transition-transform" src="">
+                    </div>
+                    <p class="mt-5 font-extrabold text-xs uppercase tracking-widest text-slate-700">Chicken</p>
+                </a>
+                <a href="#" class="group text-center">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-gray-50 shadow-lg group-hover:border-orange-500 transition-all duration-500">
+                        <img id="cat-4" class="w-full h-full object-cover group-hover:scale-110 transition-transform" src="">
+                    </div>
+                    <p class="mt-5 font-extrabold text-xs uppercase tracking-widest text-slate-700">Mutton</p>
+                </a>
+                <a href="#" class="group text-center">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-gray-50 shadow-lg group-hover:border-orange-500 transition-all duration-500">
+                        <img id="cat-5" class="w-full h-full object-cover group-hover:scale-110 transition-transform" src="">
+                    </div>
+                    <p class="mt-5 font-extrabold text-xs uppercase tracking-widest text-slate-700">River Fish</p>
+                </a>
+                <a href="#" class="group text-center">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-gray-50 shadow-lg group-hover:border-orange-500 transition-all duration-500">
+                        <img id="cat-6" class="w-full h-full object-cover group-hover:scale-110 transition-transform" src="">
+                    </div>
+                    <p class="mt-5 font-extrabold text-xs uppercase tracking-widest text-slate-700">Steaks</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="fresh-catch" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div>
-                    <h2 class="text-4xl font-black text-[#002e6e] uppercase italic">Fresh Catch</h2>
-                    <p class="text-slate-400 font-bold text-xs uppercase mt-2 tracking-widest">Available today in your city</p>
+                    <h2 class="text-4xl font-black text-[#002e6e] uppercase italic">Today's Fresh Catch</h2>
+                    <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.2em] mt-3">Sourced at 4:00 AM Today</p>
                 </div>
-                <a href="#" class="text-orange-500 font-bold text-xs uppercase border-b-2 border-orange-500 pb-1">View All</a>
+                <div class="flex gap-4">
+                    <button class="bg-white px-6 py-2 rounded-xl text-[10px] font-black uppercase shadow-sm border border-slate-100 hover:border-orange-500 transition">River</button>
+                    <button class="bg-white px-6 py-2 rounded-xl text-[10px] font-black uppercase shadow-sm border border-slate-100 hover:border-orange-500 transition">Marine</button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                <div class="product-card group cursor-pointer">
-                    <div class="relative h-72 rounded-3xl overflow-hidden bg-slate-100 shadow-lg mb-6">
-                        <img id="prod-1" class="zoom-img w-full h-full object-cover transition-transform duration-700" src="">
-                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[9px] font-black uppercase text-orange-600 shadow-sm">Bestseller</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="product-card group bg-white rounded-[40px] p-4 shadow-sm">
+                    <div class="relative h-64 rounded-[32px] overflow-hidden mb-6 bg-slate-100">
+                        <img id="prod-1" class="img-zoom w-full h-full object-cover" src="">
+                        <div class="absolute bottom-4 left-4 right-4 flex justify-between">
+                            <span class="bg-white/90 backdrop-blur text-[9px] font-black px-3 py-1.5 rounded-full uppercase">Cleaned</span>
+                            <span class="bg-orange-500 text-white text-[9px] font-black px-3 py-1.5 rounded-full uppercase">Best Choice</span>
+                        </div>
                     </div>
-                    <h4 class="text-lg font-black text-slate-800 uppercase italic">Premium Bhetki Fillet</h4>
-                    <p class="text-xs text-slate-400 font-medium mb-4">Boneless • 500g</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-2xl font-black text-[#002e6e]">₹645</span>
-                        <button class="bg-orange-500 text-white p-3 rounded-xl hover:bg-[#002e6e] transition-colors shadow-lg shadow-orange-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="product-card group cursor-pointer">
-                    <div class="relative h-72 rounded-3xl overflow-hidden bg-slate-100 shadow-lg mb-6">
-                        <img id="prod-2" class="zoom-img w-full h-full object-cover transition-transform duration-700" src="">
-                    </div>
-                    <h4 class="text-lg font-black text-slate-800 uppercase italic">Tiger Prawns (Jumbo)</h4>
-                    <p class="text-xs text-slate-400 font-medium mb-4">Cleaned & Deveined • 250g</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-2xl font-black text-[#002e6e]">₹420</span>
-                        <button class="bg-orange-500 text-white p-3 rounded-xl hover:bg-[#002e6e] transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
-                        </button>
+                    <div class="px-2 pb-4">
+                        <h4 class="text-lg font-black text-slate-800 uppercase italic leading-tight mb-2">Padma Hilsa (Ilish)</h4>
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase mb-6 tracking-widest">Whole • 1kg - 1.2kg Size</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-[10px] font-black text-slate-300 block line-through uppercase tracking-tighter">₹2800</span>
+                                <span class="text-2xl font-black text-[#002e6e]">₹2450</span>
+                            </div>
+                            <button class="bg-[#002e6e] text-white p-4 rounded-2xl hover:bg-orange-600 transition-all shadow-lg shadow-blue-900/10">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="product-card group cursor-pointer">
-                    <div class="relative h-72 rounded-3xl overflow-hidden bg-slate-100 shadow-lg mb-6">
-                        <img id="prod-3" class="zoom-img w-full h-full object-cover transition-transform duration-700" src="">
-                        <div class="absolute top-4 left-4 bg-red-600 px-3 py-1 rounded-full text-[9px] font-black uppercase text-white shadow-sm">15% OFF</div>
+                <div class="product-card group bg-white rounded-[40px] p-4 shadow-sm">
+                    <div class="relative h-64 rounded-[32px] overflow-hidden mb-6 bg-slate-100">
+                        <img id="prod-2" class="img-zoom w-full h-full object-cover" src="">
+                        <div class="absolute bottom-4 left-4 right-4 flex justify-between">
+                            <span class="bg-white/90 backdrop-blur text-[9px] font-black px-3 py-1.5 rounded-full uppercase">Fillet Cut</span>
+                        </div>
                     </div>
-                    <h4 class="text-lg font-black text-slate-800 uppercase italic">Farm Fresh Chicken</h4>
-                    <p class="text-xs text-slate-400 font-medium mb-4">Curry Cut • 1kg</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-2xl font-black text-[#002e6e]">₹299</span>
-                        <button class="bg-orange-500 text-white p-3 rounded-xl hover:bg-[#002e6e] transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
-                        </button>
+                    <div class="px-2 pb-4">
+                        <h4 class="text-lg font-black text-slate-800 uppercase italic leading-tight mb-2">Premium Bhetki</h4>
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase mb-6 tracking-widest">Boneless • 500g Pack</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-black text-[#002e6e]">₹645</span>
+                            <button class="bg-[#002e6e] text-white p-4 rounded-2xl hover:bg-orange-600 transition-all shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="product-card group cursor-pointer">
-                    <div class="relative h-72 rounded-3xl overflow-hidden bg-slate-100 shadow-lg mb-6">
-                        <img id="prod-4" class="zoom-img w-full h-full object-cover transition-transform duration-700" src="">
+                <div class="product-card group bg-white rounded-[40px] p-4 shadow-sm">
+                    <div class="relative h-64 rounded-[32px] overflow-hidden mb-6 bg-slate-100">
+                        <img id="prod-3" class="img-zoom w-full h-full object-cover" src="">
                     </div>
-                    <h4 class="text-lg font-black text-slate-800 uppercase italic">Tender Mutton Raan</h4>
-                    <p class="text-xs text-slate-400 font-medium mb-4">Premium Cut • 500g</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-2xl font-black text-[#002e6e]">₹740</span>
-                        <button class="bg-orange-500 text-white p-3 rounded-xl hover:bg-[#002e6e] transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
-                        </button>
+                    <div class="px-2 pb-4">
+                        <h4 class="text-lg font-black text-slate-800 uppercase italic leading-tight mb-2">Tiger Prawns (XL)</h4>
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase mb-6 tracking-widest">Ready to Cook • 250g</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-black text-[#002e6e]">₹420</span>
+                            <button class="bg-[#002e6e] text-white p-4 rounded-2xl hover:bg-orange-600 transition-all shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card group bg-white rounded-[40px] p-4 shadow-sm">
+                    <div class="relative h-64 rounded-[32px] overflow-hidden mb-6 bg-slate-100">
+                        <img id="prod-4" class="img-zoom w-full h-full object-cover" src="">
+                    </div>
+                    <div class="px-2 pb-4">
+                        <h4 class="text-lg font-black text-slate-800 uppercase italic leading-tight mb-2">Rohu (Freshwater)</h4>
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase mb-6 tracking-widest">Steaks Cut • 1kg Pack</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-black text-[#002e6e]">₹380</span>
+                            <button class="bg-[#002e6e] text-white p-4 rounded-2xl hover:bg-orange-600 transition-all shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-[#002e6e] py-24 text-white">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
-            <div class="flex flex-col items-center">
-                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6 text-3xl">🔬</div>
-                <h4 class="text-xl font-bold uppercase italic mb-3">Lab Tested</h4>
-                <p class="text-slate-400 text-sm leading-relaxed">Har batch 10+ quality check se guzarta hai.</p>
+    <section id="meat-section" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center mb-16">
+                <h2 class="text-4xl font-black text-[#002e6e] uppercase italic leading-none">Fresh Meat<br>& Poultry</h2>
+                <div class="hidden md:block w-32 h-1 bg-orange-500 rounded-full"></div>
             </div>
-            <div class="flex flex-col items-center">
-                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6 text-3xl">❄️</div>
-                <h4 class="text-xl font-bold uppercase italic mb-3">Vacuum Packed</h4>
-                <p class="text-slate-400 text-sm leading-relaxed">Freshness lock hoti hai bina kisi chemical ke.</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6 text-3xl">🚚</div>
-                <h4 class="text-xl font-bold uppercase italic mb-3">120 Min Delivery</h4>
-                <p class="text-slate-400 text-sm leading-relaxed">Aapke ghar ki ghanti 2 ghante mein bajegi.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="group relative rounded-[40px] overflow-hidden h-[500px]">
+                    <img id="meat-1" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10 right-10 text-white">
+                        <h4 class="text-2xl font-black uppercase italic mb-2">Tender Mutton</h4>
+                        <p class="text-xs font-bold text-slate-300 mb-6 uppercase tracking-widest">Premium Goat Curry Cut</p>
+                        <button class="bg-white text-slate-900 px-8 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-orange-500 hover:text-white transition-all">Shop Mutton</button>
+                    </div>
+                </div>
+                <div class="group relative rounded-[40px] overflow-hidden h-[500px]">
+                    <img id="meat-2" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10 right-10 text-white">
+                        <h4 class="text-2xl font-black uppercase italic mb-2">Farm Chicken</h4>
+                        <p class="text-xs font-bold text-slate-300 mb-6 uppercase tracking-widest">Antibiotic Free | Curry Cut</p>
+                        <button class="bg-white text-slate-900 px-8 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-orange-500 hover:text-white transition-all">Shop Chicken</button>
+                    </div>
+                </div>
+                <div class="group relative rounded-[40px] overflow-hidden h-[500px]">
+                    <img id="meat-3" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10 right-10 text-white">
+                        <h4 class="text-2xl font-black uppercase italic mb-2">Daily Eggs</h4>
+                        <p class="text-xs font-bold text-slate-300 mb-6 uppercase tracking-widest">Brown & White Farm Eggs</p>
+                        <button class="bg-white text-slate-900 px-8 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-orange-500 hover:text-white transition-all">Shop Eggs</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-white pt-24 pb-12 px-6 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
-            <div class="col-span-1 md:col-span-1">
-                <h2 class="text-3xl font-black italic text-[#002e6e] tracking-tighter">KFK<span class="text-orange-500">.</span>INDIA</h2>
-                <p class="mt-6 text-slate-400 text-sm font-medium uppercase tracking-widest leading-loose">The Future of Meat Sourcing.</p>
-            </div>
-            <div>
-                <h5 class="font-bold text-slate-800 uppercase mb-8 border-b-2 border-orange-500 pb-1 inline-block italic">Markets</h5>
-                <ul class="text-xs font-bold text-slate-500 uppercase italic space-y-4">
-                    <li>Kolkata City</li>
-                    <li>Delhi NCR</li>
-                    <li>Gurugram</li>
-                    <li>Noida Express</li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="font-bold text-slate-800 uppercase mb-8 border-b-2 border-orange-500 pb-1 inline-block italic">Help</h5>
-                <ul class="text-xs font-bold text-slate-500 uppercase italic space-y-4">
-                    <li>Track Order</li>
-                    <li>Refunds</li>
-                    <li>Quality Certs</li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="font-bold text-slate-800 uppercase mb-8 border-b-2 border-orange-500 pb-1 inline-block italic">Join the Club</h5>
-                <div class="flex flex-col gap-4">
-                    <input type="text" placeholder="Email Address" class="bg-slate-50 border border-slate-200 p-4 rounded-xl text-xs font-bold uppercase outline-none focus:ring-2 focus:ring-orange-500">
-                    <button class="bg-[#002e6e] text-white py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-xl">Subscribe</button>
+    <section id="why-us" class="py-24 bg-[#002e6e] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
+                <div>
+                    <div class="text-5xl mb-6">🚢</div>
+                    <h5 class="text-lg font-black uppercase italic mb-4">Direct Sourcing</h5>
+                    <p class="text-xs text-blue-200 font-medium leading-loose uppercase tracking-tighter">No middlemen. Directly from fishermen and farmers.</p>
+                </div>
+                <div>
+                    <div class="text-5xl mb-6">❄️</div>
+                    <h5 class="text-lg font-black uppercase italic mb-4">Vacuum Sealed</h5>
+                    <p class="text-xs text-blue-200 font-medium leading-loose uppercase tracking-tighter">German technology vacuum packing for zero contamination.</p>
+                </div>
+                <div>
+                    <div class="text-5xl mb-6">🔬</div>
+                    <h5 class="text-lg font-black uppercase italic mb-4">Chemical Free</h5>
+                    <p class="text-xs text-blue-200 font-medium leading-loose uppercase tracking-tighter">0% Ammonia. 0% Formalin. Only natural ice used.</p>
+                </div>
+                <div>
+                    <div class="text-5xl mb-6">🛵</div>
+                    <h5 class="text-lg font-black uppercase italic mb-4">120 Min Delivery</h5>
+                    <p class="text-xs text-blue-200 font-medium leading-loose uppercase tracking-tighter">Hyper-local delivery units in Delhi & Kolkata Hubs.</p>
                 </div>
             </div>
         </div>
-        <div class="text-center pt-10 border-t border-slate-50 text-[10px] font-bold text-slate-300 uppercase tracking-[1em]">
-            © 2026 KFK INDIA | FRESHNESS REDEFINED
+    </section>
+
+    <footer class="bg-white pt-32 pb-12 border-t border-slate-100 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-20 mb-24">
+                <div class="col-span-1 md:col-span-1">
+                    <h2 class="text-4xl font-black italic text-[#002e6e] tracking-tighter mb-8">KFK<span class="text-orange-500">.</span>INDIA</h2>
+                    <p class="text-slate-400 text-xs font-extrabold uppercase tracking-widest leading-loose">India's most trusted seafood destination. Freshness that talks.</p>
+                    <div class="flex gap-4 mt-8">
+                        <a href="#" class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center grayscale hover:grayscale-0 hover:bg-orange-50 transition-all">FB</a>
+                        <a href="#" class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center grayscale hover:grayscale-0 hover:bg-orange-50 transition-all">IG</a>
+                        <a href="#" class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center grayscale hover:grayscale-0 hover:bg-orange-50 transition-all">YT</a>
+                    </div>
+                </div>
+                <div>
+                    <h6 class="font-black text-slate-800 uppercase italic mb-8 border-b-2 border-orange-500 pb-2 inline-block">Popular Fish</h6>
+                    <ul class="text-[10px] font-black text-slate-400 uppercase italic space-y-4">
+                        <li><a href="#" class="hover:text-orange-500">Hilsa / Ilish</a></li>
+                        <li><a href="#" class="hover:text-orange-500">Bhetki Fillet</a></li>
+                        <li><a href="#" class="hover:text-orange-500">Tiger Prawns</a></li>
+                        <li><a href="#" class="hover:text-orange-500">Rohu & Catla</a></li>
+                        <li><a href="#" class="hover:text-orange-500">Atlantic Salmon</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="font-black text-slate-800 uppercase italic mb-8 border-b-2 border-orange-500 pb-2 inline-block">Company</h6>
+                    <ul class="text-[10px] font-black text-slate-400 uppercase italic space-y-4">
+                        <li><a href="#" class="hover:text-orange-500">Our Story</a></li>
+                        <li><a href="#" class="hover:text-orange-500">Quality Standards</a></li>
+                        <li><a href="#" class="hover:text-orange-500">Partner with us</a></li>
+                        <li><a href="#" class="hover:text-orange-500">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="font-black text-slate-800 uppercase italic mb-8 border-b-2 border-orange-500 pb-2 inline-block">Contact Us</h6>
+                    <ul class="text-[10px] font-black text-slate-400 uppercase italic space-y-4">
+                        <li class="flex items-center gap-3"><span>📍</span> Delhi & Kolkata</li>
+                        <li class="flex items-center gap-3"><span>📞</span> +91 91430 12513</li>
+                        <li class="flex items-center gap-3"><span>✉️</span> care@kfkindia.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-[9px] font-black text-slate-300 uppercase tracking-[0.5em]">© 2026 KFK INDIA | ALL RIGHTS RESERVED</p>
+                <div class="flex gap-4 opacity-30">
+                    <img src="https://img.icons8.com/color/48/visa.png" class="h-6">
+                    <img src="https://img.icons8.com/color/48/mastercard.png" class="h-6">
+                    <img src="https://img.icons8.com/color/48/google-pay.png" class="h-6">
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
         const API_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
 
-        async function fetchImages() {
+        async function loadImages() {
             try {
-                // Fetch for different categories
-                const resHero = await fetch('https://api.pexels.com/v1/search?query=raw fish meat platter&per_page=1', { headers: { Authorization: API_KEY } });
-                const resCat = await fetch('https://api.pexels.com/v1/search?query=seafood meat&per_page=5', { headers: { Authorization: API_KEY } });
-                const resProd = await fetch('https://api.pexels.com/v1/search?query=fresh raw meat fish&per_page=8', { headers: { Authorization: API_KEY } });
+                // Fetch Categories (Fish, Prawns, Chicken, Mutton, River Fish, Steak)
+                const catQueries = ['salmon fish', 'prawns shrimp', 'raw chicken', 'mutton meat', 'river fish', 'fish steak'];
+                for(let i=0; i < catQueries.length; i++) {
+                    const res = await fetch(`https://api.pexels.com/v1/search?query=${catQueries[i]}&per_page=1`, { headers: { Authorization: API_KEY } });
+                    const data = await res.json();
+                    if(data.photos.length > 0) document.getElementById(`cat-${i+1}`).src = data.photos[0].src.large;
+                }
 
+                // Fetch Products
+                const prodQueries = ['hilsa fish', 'fish fillet', 'large prawns', 'rohu fish'];
+                for(let i=0; i < prodQueries.length; i++) {
+                    const res = await fetch(`https://api.pexels.com/v1/search?query=${prodQueries[i]}&per_page=1`, { headers: { Authorization: API_KEY } });
+                    const data = await res.json();
+                    if(data.photos.length > 0) document.getElementById(`prod-${i+1}`).src = data.photos[0].src.large;
+                }
+
+                // Fetch Meat Section
+                const meatQueries = ['raw goat meat', 'whole chicken raw', 'eggs basket'];
+                for(let i=0; i < meatQueries.length; i++) {
+                    const res = await fetch(`https://api.pexels.com/v1/search?query=${meatQueries[i]}&per_page=1`, { headers: { Authorization: API_KEY } });
+                    const data = await res.json();
+                    if(data.photos.length > 0) document.getElementById(`meat-${i+1}`).src = data.photos[0].src.large;
+                }
+
+                // Hero Image
+                const resHero = await fetch('https://api.pexels.com/v1/search?query=seafood platter fish&per_page=1', { headers: { Authorization: API_KEY } });
                 const heroData = await resHero.json();
-                const catData = await resCat.json();
-                const prodData = await resProd.json();
-
-                // Inject Hero
                 document.getElementById('hero-img').src = heroData.photos[0].src.large2x;
 
-                // Inject Categories
-                for(let i=1; i<=5; i++) {
-                    document.getElementById(`cat-${i}`).src = catData.photos[i-1].src.large;
-                }
-
-                // Inject Products
-                for(let i=1; i<=4; i++) {
-                    document.getElementById(`prod-${i}`).src = prodData.photos[i-1].src.large;
-                }
-
-            } catch (error) {
-                console.log("Error loading images:", error);
+            } catch (err) {
+                console.warn("Check API Key or Connection", err);
             }
         }
 
-        // Run on load
-        fetchImages();
+        loadImages();
     </script>
 </body>
 </html>
