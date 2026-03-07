@@ -3,27 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK Mega Menu | 100+ Premium Varieties</title>
+    <title>KFK Mega Menu | 100+ Unique Products</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        .product-card { transition: all 0.3s ease; }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .product-card { transition: all 0.4s ease; border-radius: 2.5rem; overflow: hidden; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .category-btn.active { background: #002e6e; color: white; border-color: #002e6e; }
     </style>
 </head>
 <body class="bg-[#f8fafc]">
 
-    <header class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b border-gray-100 py-4 shadow-sm">
+    <header class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b border-gray-100 py-4">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>MENU</a>
-            <div class="flex items-center gap-6">
-                <nav class="hidden md:flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                    <a href="index.html" class="hover:text-orange-500">Home</a>
-                    <a href="franchise.html" class="hover:text-orange-500">Franchise</a>
-                </nav>
+            <div class="flex items-center gap-4">
                 <div class="relative bg-slate-100 p-3 rounded-2xl cursor-pointer" onclick="location.href='order.html'">
                     <span id="cart-counter" class="absolute -top-1 -right-1 bg-orange-600 text-white text-[9px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#002e6e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
@@ -32,23 +28,23 @@
         </div>
     </header>
 
-    <section class="bg-[#002e6e] text-white py-16 px-6 text-center">
-        <h1 class="text-4xl md:text-6xl font-black italic uppercase leading-tight mb-4">The Fresh <span class="text-orange-500">Inventory.</span></h1>
-        <p class="text-slate-300 text-xs font-bold uppercase tracking-[0.3em]">100% Chemical Free | 120 Mins Delivery</p>
+    <section class="bg-[#002e6e] text-white py-12 text-center">
+        <h1 class="text-4xl font-black italic uppercase italic">KFK Fresh <span class="text-orange-500">Inventory</span></h1>
+        <p class="text-[10px] font-bold tracking-[0.4em] mt-2 opacity-70">100+ GOOGLE ANALYZED REAL SEAFOOD PRODUCTS</p>
     </section>
 
-    <div class="sticky top-20 z-[90] bg-white border-b py-6 shadow-sm overflow-x-auto hide-scrollbar">
-        <div class="max-w-7xl mx-auto px-6 flex gap-4">
-            <button onclick="filterMenu('all')" class="category-btn active px-8 py-3 rounded-xl border text-[10px] font-black uppercase tracking-widest whitespace-nowrap">All Items</button>
-            <button onclick="filterMenu('prawns')" class="category-btn px-8 py-3 rounded-xl border text-[10px] font-black uppercase tracking-widest whitespace-nowrap">Prawns (25)</button>
-            <button onclick="filterMenu('seafood')" class="category-btn px-8 py-3 rounded-xl border text-[10px] font-black uppercase tracking-widest whitespace-nowrap">Seafood (20)</button>
-            <button onclick="filterMenu('snacks')" class="category-btn px-8 py-3 rounded-xl border text-[10px] font-black uppercase tracking-widest whitespace-nowrap">Fish Snacks (32)</button>
-            <button onclick="filterMenu('bengali')" class="category-btn px-8 py-3 rounded-xl border text-[10px] font-black uppercase tracking-widest whitespace-nowrap">Bengali Cut (21)</button>
+    <div class="sticky top-[73px] z-[90] bg-white border-b py-4 overflow-x-auto hide-scrollbar">
+        <div class="max-w-7xl mx-auto px-6 flex gap-3">
+            <button onclick="filterMenu('all')" class="category-btn active px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Show All</button>
+            <button onclick="filterMenu('prawns')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Prawns (25)</button>
+            <button onclick="filterMenu('seafood')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Seafood (20)</button>
+            <button onclick="filterMenu('snacks')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Snacks (32)</button>
+            <button onclick="filterMenu('bengali')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Bengali Cut (21)</button>
         </div>
     </div>
 
-    <section class="max-w-7xl mx-auto px-6 py-16">
-        <div id="menu-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <section class="max-w-7xl mx-auto px-6 py-12">
+        <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             </div>
     </section>
 
@@ -56,115 +52,81 @@
         const PEXELS_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
         let cartCount = 0;
 
-        // GOOGLE ANALYZED DATA
-        const productDatabase = [
-            // PRAWNS (25 Items)
-            ...Array.from({length: 25}, (_, i) => ({
-                id: `p${i}`,
-                name: ["Jumbo Tiger Prawns", "Pink Shrimps", "White Prawns (Cleaned)", "King Prawns", "Vannamei Prawns", "Karavali Prawns", "Scampi", "Small Cocktail Prawns"][i % 8] + ` Batch ${Math.floor(i/8) + 1}`,
-                cat: 'prawns',
-                price: 499 + (i * 15),
-                search: 'fresh prawns shrimp raw',
-                weight: '500g'
+        // REAL PRODUCT DATABASE WITH UNIQUE SEARCH KEYWORDS
+        const db = [
+            // PRAWNS - 25 UNIQUE ITEMS
+            ...["Tiger Prawns", "Jumbo King Prawns", "Pink Shrimp", "White Prawns", "Vannamei", "Scampi", "Cocktail Prawns", "Deep Sea Prawns", "Brown Shrimps", "Karavali Prawns", "Flower Shrimps", "Ghost Prawns", "Blue Shrimps", "Banana Prawns", "Red Claw Prawns", "Freshwater Gold Prawns", "Prawns Tail On", "Prawns Tail Off", "Deveined Prawns", "Minced Prawn Meat", "Small Shrimps", "Colossal Prawns", "Prawn Skewers", "Marinated Prawns", "Wild Caught Prawns"].map((name, i) => ({
+                id: `p${i}`, name, cat: 'prawns', price: 450 + (i*10), search: `fresh raw ${name}`, weight: '500g'
             })),
-            // SEAFOOD (20 Items)
-            ...Array.from({length: 20}, (_, i) => ({
-                id: `s${i}`,
-                name: ["Silver Pomfret", "Surmai Steaks", "Atlantic Salmon", "Mud Crab", "Squid Rings", "Octopus Whole", "Red Snapper", "Indian Mackerel"][i % 8] + ` Premium ${Math.floor(i/8) + 1}`,
-                cat: 'seafood',
-                price: 650 + (i * 40),
-                search: 'sea fish seafood pomfret salmon',
-                weight: '1kg'
+            // SEAFOOD - 20 UNIQUE ITEMS
+            ...["Silver Pomfret", "Black Pomfret", "Atlantic Salmon", "Surmai Steak", "Red Snapper", "Indian Mackerel", "Tuna Chunks", "Mud Crab", "Blue Crab", "Squid Rings", "Octopus", "Lobster Whole", "Bhetki Fillet", "Sea Bass", "Yellowfin Tuna", "Calamari", "Oysters Shell", "Baby Shark", "Leather Skin Fish", "Reef Cod"].map((name, i) => ({
+                id: `s${i}`, name, cat: 'seafood', price: 700 + (i*25), search: `fresh ${name} seafood`, weight: '1kg'
             })),
-            // SNACKS (32 Items)
-            ...Array.from({length: 32}, (_, i) => ({
-                id: `sn${i}`,
-                name: ["Fish Fingers", "Salmon Burger Patty", "Amritsari Fish Pakoda", "Fish Tacos Base", "Popcorn Fish", "Fish Cutlet", "Crab Claw Snacks", "Fish Seekh Kebab"][i % 8] + ` Ready-to-cook ${Math.floor(i/8) + 1}`,
-                cat: 'snacks',
-                price: 180 + (i * 10),
-                search: 'fried fish snacks finger burger',
-                weight: '250g'
+            // SNACKS - 32 UNIQUE ITEMS
+            ...["Fish Finger", "Salmon Burger", "Fish Tacos", "Fish Pakoda", "Fish Popcorn", "Fish Cutlet", "Fish Kebab", "Fish Nuggets", "Crispy Fish Strip", "Fish Fry Desi", "Crab Sticks", "Shrimp Tempura", "Fish Samosa", "Fish Momos", "Grill Fish Fillet", "Fish Tikka", "Amritsari Fish", "Fish Roll", "Fish Ball", "Fish Patty", "Fish Steak Fry", "Spicy Fish Bites", "Breaded Fish", "Lemon Butter Fish", "Chilli Fish", "Fish Manchurian", "Fish 65", "Butter Garlic Prawns", "Peri Peri Fish", "Tandoori Fish", "Fish Spring Roll", "Cheesy Fish snack"].map((name, i) => ({
+                id: `sn${i}`, name, cat: 'snacks', price: 150 + (i*8), search: `cooked ${name} food`, weight: '250g'
             })),
-            // BENGALI CUT (21 Items)
-            ...Array.from({length: 21}, (_, i) => ({
-                id: `b${i}`,
-                name: ["Rohu Bengali Cut", "Catla (Large) Peti", "Hilsa (Ilish) Slices", "Pabda Whole", "Bhetki Fillet Bengali", "Tengra Fish", "Chital Muitha"][i % 7] + ` Grade-A ${Math.floor(i/7) + 1}`,
-                cat: 'bengali',
-                price: 320 + (i * 20),
-                search: 'fresh river fish rohu hilsa catla',
-                weight: '500g'
+            // BENGALI CUT - 21 UNIQUE ITEMS
+            ...["Rohu Bengali Cut", "Catla Peti", "Ilish (Hilsa)", "Pabda Whole", "Tangra", "Parshe", "Bhetki Bengali", "Magur", "Singi", "Koi Fish", "Chital Muitha", "Aar Fish", "Boal Steak", "Small Mourala", "Batchua", "Pangash Cut", "Rupchanda", "Lotte Fish", "Kajoli", "Shol Fish", "Gurjali"].map((name, i) => ({
+                id: `b${i}`, name, cat: 'bengali', price: 300 + (i*12), search: `raw ${name} fish`, weight: '500g'
             }))
         ];
 
-        // ADD TO CART FUNCTION
         function addToCart(btn) {
             cartCount++;
             document.getElementById('cart-counter').innerText = cartCount;
             btn.innerHTML = "Added ✓";
-            btn.classList.add('bg-green-600');
+            btn.className = "bg-green-600 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase";
             setTimeout(() => {
                 btn.innerHTML = "Add to Cart";
-                btn.classList.remove('bg-green-600');
-            }, 1000);
+                btn.className = "bg-[#002e6e] text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase";
+            }, 800);
         }
 
-        // GENERATE MENU
-        async function renderMenu(category = 'all') {
-            const container = document.getElementById('menu-container');
-            container.innerHTML = '<p class="text-center col-span-full font-bold uppercase tracking-widest py-20">Analysing Fresh Stock...</p>';
-            
-            const filtered = category === 'all' ? productDatabase : productDatabase.filter(p => p.cat === category);
-            
-            let html = '';
-            for (let p of filtered) {
-                html += `
-                    <div class="product-card bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-sm flex flex-col">
-                        <div class="relative h-48 overflow-hidden bg-slate-100">
-                            <img id="img-${p.id}" src="https://via.placeholder.com/400x300?text=KFK+Fresh" class="w-full h-full object-cover">
-                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-tighter text-[#002e6e]">${p.weight}</span>
+        async function fetchImage(query, elementId) {
+            try {
+                const r = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=1`, {
+                    headers: { Authorization: PEXELS_KEY }
+                });
+                const d = await r.json();
+                if(d.photos.length > 0) document.getElementById(elementId).src = d.photos[0].src.medium;
+            } catch(e) {}
+        }
+
+        function renderMenu(filter = 'all') {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = '';
+            const filtered = filter === 'all' ? db : db.filter(x => x.cat === filter);
+
+            filtered.forEach(p => {
+                const card = `
+                    <div class="product-card bg-white border border-gray-100 shadow-sm flex flex-col">
+                        <div class="h-44 overflow-hidden bg-slate-100">
+                            <img id="img-${p.id}" class="w-full h-full object-cover" src="https://via.placeholder.com/400x300?text=KFK+Fresh">
                         </div>
-                        <div class="p-6 flex-1 flex flex-col">
-                            <p class="text-[8px] font-black text-orange-500 uppercase tracking-widest mb-1">${p.cat}</p>
-                            <h3 class="font-black text-sm text-[#002e6e] leading-snug mb-4 h-10 overflow-hidden">${p.name}</h3>
+                        <div class="p-5 flex-1 flex flex-col">
+                            <span class="text-[8px] font-black text-orange-500 uppercase tracking-widest">${p.cat}</span>
+                            <h3 class="text-sm font-black text-[#002e6e] mt-1 mb-4 leading-tight h-10 overflow-hidden">${p.name}</h3>
                             <div class="mt-auto flex justify-between items-center">
-                                <div>
-                                    <p class="text-[9px] text-slate-400 font-bold uppercase">Price</p>
-                                    <p class="text-lg font-black text-slate-800">₹${p.price}</p>
-                                </div>
-                                <button onclick="addToCart(this)" class="bg-[#002e6e] text-white px-5 py-3 rounded-xl text-[9px] font-black uppercase tracking-widest active:scale-95 transition-all">Add to Cart</button>
+                                <span class="text-lg font-black text-slate-800">₹${p.price}</span>
+                                <button onclick="addToCart(this)" class="bg-[#002e6e] text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest active:scale-95 transition-all">Add to Cart</button>
                             </div>
                         </div>
                     </div>
                 `;
-            }
-            container.innerHTML = html;
-
-            // Fetch Real Images via Pexels for each item
-            filtered.forEach(p => fetchPexels(p.search, `img-${p.id}`));
-        }
-
-        async function fetchPexels(query, imgId) {
-            try {
-                const res = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=1`, {
-                    headers: { Authorization: PEXELS_KEY }
-                });
-                const data = await res.json();
-                if(data.photos.length > 0) {
-                    document.getElementById(imgId).src = data.photos[0].src.medium;
-                }
-            } catch(e) {}
+                grid.innerHTML += card;
+                // Unique image fetch call for each product
+                fetchImage(p.search, `img-${p.id}`);
+            });
         }
 
         function filterMenu(cat) {
-            // Update Active Buttons
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if(btn.innerText.toLowerCase().includes(cat)) btn.classList.add('active');
-            });
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
             renderMenu(cat);
         }
 
-        // Initialize
+        // Run on load
         renderMenu();
     </script>
 </body>
