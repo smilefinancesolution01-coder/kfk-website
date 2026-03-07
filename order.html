@@ -3,112 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK Order Checkout | Real Payout</title>
+    <title>KFK | Secure Checkout & Payment</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .payment-option:checked + label { border-color: #002e6e; background-color: #f0f7ff; }
+        .offer-slide { animation: scroll 20s linear infinite; }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
     </style>
 </head>
-<body class="bg-[#f8fafc]">
+<body class="bg-[#f4f7f9] text-slate-800">
 
-    <header class="bg-white border-b py-6 sticky top-0 z-50">
+    <header class="bg-white border-b py-4 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>CHECKOUT</a>
-            <a href="menu.html" class="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-orange-500">← Back to Menu</a>
+            <a href="index.html" class="text-2xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>INDIA</a>
+            <div class="flex items-center gap-2 text-[10px] font-bold text-green-600 uppercase">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04 PelA12.02 12.02 0 00-3.04 8.618c0 5.83 4.146 10.74 9.618 11.882a11.956 11.956 0 009.618-11.882 12.02 12.02 0 00-3.04-8.618z" /></svg>
+                Secure Checkout
+            </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-12">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <main class="max-w-7xl mx-auto px-4 md:px-6 py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <div class="lg:col-span-2 space-y-8">
-                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
-                    <h2 class="text-xl font-black text-[#002e6e] uppercase italic mb-6">Your Fresh Selection</h2>
-                    <div id="cart-items-display" class="space-y-4">
+            <div class="lg:col-span-8 space-y-6">
+                
+                <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100">
+                    <h2 class="text-lg font-black text-[#002e6e] uppercase mb-6 flex items-center gap-3">
+                        <span class="w-7 h-7 bg-[#002e6e] text-white rounded-full flex items-center justify-center text-xs">1</span>
+                        Delivery Address
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Receiver's Name" class="w-full bg-gray-50 border border-gray-200 p-4 rounded-xl text-sm outline-none focus:border-[#002e6e]">
+                        <input type="text" placeholder="10-Digit Mobile Number" class="w-full bg-gray-50 border border-gray-200 p-4 rounded-xl text-sm outline-none focus:border-[#002e6e]">
+                        <input type="text" placeholder="Flat / House No. / Building" class="md:col-span-2 w-full bg-gray-50 border border-gray-200 p-4 rounded-xl text-sm outline-none focus:border-[#002e6e]">
+                        <input type="text" placeholder="Landmark (Optional)" class="w-full bg-gray-50 border border-gray-200 p-4 rounded-xl text-sm outline-none focus:border-[#002e6e]">
+                        <input type="text" placeholder="Pincode" class="w-full bg-gray-50 border border-gray-200 p-4 rounded-xl text-sm outline-none focus:border-[#002e6e]">
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100">
+                    <h2 class="text-lg font-black text-[#002e6e] uppercase mb-6 flex items-center gap-3">
+                        <span class="w-7 h-7 bg-[#002e6e] text-white rounded-full flex items-center justify-center text-xs">2</span>
+                        Select Payment Method
+                    </h2>
+                    
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <input type="radio" name="pay" id="upi" class="payment-option hidden" checked>
+                            <label for="upi" class="flex items-center justify-between p-4 border-2 border-gray-100 rounded-2xl cursor-pointer hover:bg-gray-50 transition-all">
+                                <div class="flex items-center gap-4">
+                                    <img src="https://img.icons8.com/color/48/upi.png" class="w-8">
+                                    <span class="font-bold text-sm">UPI (Google Pay, PhonePe, Paytm)</span>
+                                </div>
+                                <div class="w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+                            </label>
                         </div>
+
+                        <div class="relative">
+                            <input type="radio" name="pay" id="card" class="payment-option hidden">
+                            <label for="card" class="flex items-center justify-between p-4 border-2 border-gray-100 rounded-2xl cursor-pointer hover:bg-gray-50 transition-all">
+                                <div class="flex items-center gap-4">
+                                    <img src="https://img.icons8.com/color/48/visa.png" class="w-8">
+                                    <span class="font-bold text-sm">Credit / Debit Cards</span>
+                                </div>
+                                <div class="w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+                            </label>
+                        </div>
+
+                        <div class="relative">
+                            <input type="radio" name="pay" id="net" class="payment-option hidden">
+                            <label for="net" class="flex items-center justify-between p-4 border-2 border-gray-100 rounded-2xl cursor-pointer hover:bg-gray-50 transition-all">
+                                <div class="flex items-center gap-4">
+                                    <img src="https://img.icons8.com/color/48/bank.png" class="w-8">
+                                    <span class="font-bold text-sm">Net Banking</span>
+                                </div>
+                                <div class="w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+                            </label>
+                        </div>
+
+                        <div class="relative">
+                            <input type="radio" name="pay" id="cod" class="payment-option hidden">
+                            <label for="cod" class="flex items-center justify-between p-4 border-2 border-gray-100 rounded-2xl cursor-pointer hover:bg-gray-50 transition-all">
+                                <div class="flex items-center gap-4">
+                                    <img src="https://img.icons8.com/color/48/cash-in-hand.png" class="w-8">
+                                    <span class="font-bold text-sm">Cash on Delivery (COD)</span>
+                                </div>
+                                <div class="w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-1">
-                <div class="bg-[#002e6e] text-white p-8 rounded-[3rem] sticky top-32 shadow-2xl">
-                    <h2 class="text-xl font-black uppercase italic mb-8">Bill Details</h2>
+            <div class="lg:col-span-4">
+                <div class="bg-white rounded-3xl p-6 shadow-lg border border-gray-100 sticky top-24">
+                    <h2 class="text-lg font-black text-[#002e6e] uppercase mb-6 italic">Order Summary</h2>
                     
-                    <div class="space-y-4 border-b border-white/10 pb-6 mb-6">
-                        <div class="flex justify-between text-xs font-bold uppercase tracking-widest">
-                            <span>Item Total</span>
+                    <div id="summary-items" class="max-h-60 overflow-y-auto mb-6 space-y-3 pr-2">
+                        </div>
+
+                    <div class="border-t border-dashed pt-4 space-y-3">
+                        <div class="flex justify-between text-xs font-bold text-slate-500 uppercase">
+                            <span>Item Subtotal</span>
                             <span id="subtotal">₹0</span>
                         </div>
-                        <div class="flex justify-between text-xs font-bold uppercase tracking-widest">
-                            <span>Delivery Partner Fee</span>
-                            <span class="text-orange-400">₹65</span>
+                        <div class="flex justify-between text-xs font-bold text-slate-500 uppercase">
+                            <span>Delivery Fee (Distance Based)</span>
+                            <span class="text-orange-600 font-black">₹65</span>
                         </div>
-                        <div class="flex justify-between text-xs font-bold uppercase tracking-widest">
-                            <span>Govt. Taxes (GST)</span>
+                        <div class="flex justify-between text-xs font-bold text-slate-500 uppercase">
+                            <span>GST & Taxes</span>
                             <span id="tax">₹0</span>
                         </div>
-                    </div>
-
-                    <div class="flex justify-between items-end mb-10">
-                        <div>
-                            <p class="text-[10px] font-black uppercase tracking-widest text-orange-400">Total to Pay</p>
-                            <p id="final-total" class="text-4xl font-black italic">₹0</p>
+                        <div class="flex justify-between text-lg font-black text-[#002e6e] pt-2 border-t mt-2">
+                            <span>Total Payable</span>
+                            <span id="final-total">₹0</span>
                         </div>
                     </div>
 
-                    <button onclick="payNow()" class="w-full bg-orange-500 hover:bg-white hover:text-[#002e6e] py-5 rounded-2xl font-black uppercase text-xs tracking-widest transition-all shadow-xl">
-                        Pay & Confirm Order
+                    <button onclick="handlePayment()" class="w-full mt-8 bg-[#002e6e] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-blue-100 active:scale-95">
+                        Place Order Now
                     </button>
+                    
+                    <p class="text-[8px] text-center mt-4 text-slate-400 font-bold uppercase tracking-tighter">
+                        By placing the order, you agree to KFK's terms of service.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-20 overflow-hidden bg-white py-10 rounded-[3rem] border border-gray-100 relative">
+            <h3 class="text-center text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 mb-8">Exclusive Bank Offers</h3>
+            <div class="flex gap-8 offer-slide whitespace-nowrap px-10">
+                <div class="inline-block bg-blue-50 px-8 py-6 rounded-2xl border border-blue-100">
+                    <p class="text-[10px] font-black text-blue-800 uppercase">HDFC BANK</p>
+                    <p class="text-sm font-bold text-blue-900">10% Instant Discount on Credit Cards</p>
+                </div>
+                <div class="inline-block bg-orange-50 px-8 py-6 rounded-2xl border border-orange-100">
+                    <p class="text-[10px] font-black text-orange-800 uppercase">ICICI PayLater</p>
+                    <p class="text-sm font-bold text-orange-900">Get ₹150 Cashback on first order</p>
+                </div>
+                <div class="inline-block bg-green-50 px-8 py-6 rounded-2xl border border-green-100">
+                    <p class="text-[10px] font-black text-green-800 uppercase">Airtel Payments Bank</p>
+                    <p class="text-sm font-bold text-green-900">Flat ₹50 Cashback via Wallet</p>
+                </div>
+                <div class="inline-block bg-indigo-50 px-8 py-6 rounded-2xl border border-indigo-100">
+                    <p class="text-[10px] font-black text-indigo-800 uppercase">SBI CARDS</p>
+                    <p class="text-sm font-bold text-indigo-900">Free Delivery on orders above ₹999</p>
+                </div>
+                <div class="inline-block bg-blue-50 px-8 py-6 rounded-2xl border border-blue-100">
+                    <p class="text-[10px] font-black text-blue-800 uppercase">HDFC BANK</p>
+                    <p class="text-sm font-bold text-blue-900">10% Instant Discount on Credit Cards</p>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        function updateOrderPage() {
-            // LocalStorage se cart data uthana
+        function loadOrderData() {
             const cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            const display = document.getElementById('cart-items-display');
+            const container = document.getElementById('summary-items');
             
             if (cart.length === 0) {
-                display.innerHTML = `<p class="text-slate-400 font-bold uppercase text-[10px]">Cart is empty! Machhli add karo pehle.</p>`;
+                container.innerHTML = `<p class="text-slate-400 font-bold uppercase text-[9px] text-center py-10">No items added</p>`;
                 return;
             }
 
             let itemTotal = 0;
-            display.innerHTML = '';
+            container.innerHTML = '';
 
-            cart.forEach((item, index) => {
+            cart.forEach(item => {
                 const price = parseInt(item.price);
                 itemTotal += price;
-                display.innerHTML += `
-                    <div class="flex justify-between items-center bg-slate-50 p-5 rounded-2xl border border-gray-100">
-                        <div class="flex items-center gap-4">
-                            <span class="w-8 h-8 bg-[#002e6e] text-white rounded-full flex items-center justify-center text-[10px] font-black">${index + 1}</span>
-                            <div>
-                                <h4 class="text-xs font-black uppercase text-[#002e6e]">${item.name}</h4>
-                                <p class="text-[9px] font-bold text-slate-400 uppercase">Premium Quality Fresh Catch</p>
-                            </div>
+                container.innerHTML += `
+                    <div class="flex justify-between items-center text-xs border-b border-gray-50 pb-2">
+                        <div>
+                            <p class="font-black text-[#002e6e] uppercase">${item.name}</p>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase">Fresh Pack × 1</p>
                         </div>
-                        <span class="font-black text-sm">₹${price}</span>
+                        <span class="font-black">₹${price}</span>
                     </div>
                 `;
             });
 
-            const deliveryCharge = 65;
+            const delivery = 65;
             const gst = Math.round(itemTotal * 0.05);
-            const finalPay = itemTotal + deliveryCharge + gst;
+            const total = itemTotal + delivery + gst;
 
             document.getElementById('subtotal').innerText = `₹${itemTotal}`;
             document.getElementById('tax').innerText = `₹${gst}`;
-            document.getElementById('final-total').innerText = `₹${finalPay}`;
+            document.getElementById('final-total').innerText = `₹${total}`;
         }
 
-        function payNow() {
-            alert("Redirecting to Secure Payment Gateway... ₹" + document.getElementById('final-total').innerText);
+        function handlePayment() {
+            const method = document.querySelector('input[name="pay"]:checked').id;
+            const total = document.getElementById('final-total').innerText;
+            
+            if(method === 'upi') {
+                alert(`Opening Payment Apps... \nTotal: ${total} \nPaying via UPI (GPay/PhonePe)`);
+            } else if(method === 'cod') {
+                alert(`Order Confirmed! \nPlease keep ${total} ready at the time of delivery.`);
+            } else {
+                alert(`Redirecting to Secure Gateway for ${method.toUpperCase()} payment...`);
+            }
+            
+            // Success hone par cart saaf kar sakte hain
+            // localStorage.removeItem('kfk_cart');
         }
 
-        window.onload = updateOrderPage;
+        window.onload = loadOrderData;
     </script>
 </body>
 </html>
