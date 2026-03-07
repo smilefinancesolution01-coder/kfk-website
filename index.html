@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK India | Fresh Fish, Chicken & Mutton Online Delivery</title>
+    <title>KFK India | Premium Fresh Fish & Seafood Online Delivery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -12,12 +12,13 @@
         .product-shadow:hover { box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); transform: translateY(-5px); transition: all 0.3s ease; }
         .break-word { word-wrap: break-word; word-break: break-word; overflow-wrap: break-word; }
         .sticky-nav { position: sticky; top: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); }
+        .hero-gradient { background: linear-gradient(to right, rgba(0,46,110,0.9), rgba(0,46,110,0.2)); }
     </style>
 </head>
 <body class="bg-gray-50 text-slate-800">
 
     <div class="bg-[#002e6e] text-white text-[10px] py-2 px-4 text-center font-bold tracking-widest uppercase border-b border-white/10">
-        ⚡ 120 Mins Express Delivery in Delhi & Kolkata | Chemical Free Fresh Catch ⚡
+        ⚡ 120 Mins Express Delivery in Delhi & Kolkata | Chemical Free Fresh Fish ⚡
     </div>
 
     <header class="sticky-nav border-b border-gray-100">
@@ -25,15 +26,15 @@
             <div class="flex items-center gap-8">
                 <a href="index.html" class="text-3xl font-extrabold text-[#002e6e] tracking-tighter italic">KFK<span class="text-orange-500">.</span>INDIA</a>
                 <nav class="hidden lg:flex gap-6 text-[11px] font-bold uppercase tracking-widest text-slate-500">
-                    <a href="menu.html" class="hover:text-orange-500">Products</a>
+                    <a href="menu.html" class="hover:text-orange-500">Fresh Fish</a>
+                    <a href="menu.html" class="hover:text-orange-500">Sea Food</a>
                     <a href="franchise.html" class="hover:text-orange-500">Franchise</a>
-                    <a href="locations.html" class="hover:text-orange-500">Hubs</a>
-                    <a href="training.html" class="hover:text-orange-500">Training</a>
+                    <a href="compliance.html" class="hover:text-orange-500">Quality Check</a>
                 </nav>
             </div>
             <div class="flex items-center gap-5">
                 <div class="hidden sm:block text-right">
-                    <p class="text-[9px] text-slate-400 font-bold uppercase">Customer Care</p>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase">Fish Expert Support</p>
                     <p class="text-sm font-black text-[#002e6e]">+91 91430 12513</p>
                 </div>
                 <div class="relative cursor-pointer" onclick="location.href='order.html'">
@@ -44,25 +45,29 @@
         </div>
     </header>
 
-    <section class="relative bg-slate-900 h-[60vh] overflow-hidden">
-        <img id="hero-img" class="absolute inset-0 w-full h-full object-cover opacity-70" src="">
+    <section class="relative bg-slate-900 h-[70vh] overflow-hidden">
+        <img id="hero-img" class="absolute inset-0 w-full h-full object-cover opacity-60" src="">
+        <div class="absolute inset-0 hero-gradient"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-6 h-full flex flex-col justify-center text-white">
-            <h1 class="text-5xl md:text-8xl font-black italic uppercase leading-none break-word">The Gold<br><span class="text-orange-500">Standard</span></h1>
-            <p class="mt-6 max-w-lg text-gray-300 font-medium break-word">Fish, Chicken, and Mutton delivered with 100% cold-chain integrity. No Freezing, Just Freshness.</p>
+            <h1 class="text-5xl md:text-8xl font-black italic uppercase leading-none break-word">River to<br><span class="text-orange-500">Kitchen.</span></h1>
+            <p class="mt-6 max-w-lg text-gray-200 font-medium break-word">India's most trusted source for Chemical-Free Freshwater and Sea Fish. Cleaned, cut, and delivered in 120 minutes.</p>
             <div class="mt-10 flex gap-4">
-                <a href="menu.html" class="bg-orange-500 px-10 py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-lg shadow-orange-500/20">Order Fish</a>
-                <a href="menu.html" class="bg-white text-black px-10 py-4 rounded-xl font-black uppercase text-xs tracking-widest">Shop Meat</a>
+                <a href="menu.html" class="bg-orange-500 px-10 py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-lg shadow-orange-500/20">Shop Freshwater</a>
+                <a href="menu.html" class="bg-white text-black px-10 py-4 rounded-xl font-black uppercase text-xs tracking-widest">Shop Seafood</a>
             </div>
         </div>
     </section>
 
     <section class="py-12 bg-white border-b">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-3 md:grid-cols-6 gap-4">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             <script>
                 const cats = [
-                    {n:'Fresh Fish', i:'cat-0', q:'river fish'}, {n:'Sea Food', i:'cat-1', q:'shrimp lobster'}, 
-                    {n:'Mutton', i:'cat-2', q:'raw mutton'}, {n:'Chicken', i:'cat-3', q:'raw chicken'},
-                    {n:'Eggs', i:'cat-4', q:'farm eggs'}, {n:'Ready Cook', i:'cat-5', q:'marinated meat'}
+                    {n:'River Fish', i:'cat-0', q:'rohu fish'}, 
+                    {n:'Sea Fish', i:'cat-1', q:'pomfret fish'}, 
+                    {n:'Prawns', i:'cat-2', q:'large prawns'}, 
+                    {n:'Boneless Fillets', i:'cat-3', q:'fish fillet raw'},
+                    {n:'Bengali Cuts', i:'cat-4', q:'catla fish'}, 
+                    {n:'Dry Fish', i:'cat-5', q:'dried seafood'}
                 ];
                 cats.forEach(c => {
                     document.write(`
@@ -82,19 +87,19 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-end mb-12">
                 <div>
-                    <h2 class="text-3xl font-black uppercase italic tracking-tighter break-word">Bestsellers in Delhi</h2>
-                    <p class="text-xs text-orange-600 font-bold uppercase mt-2">Chemical-Free & Express Delivery</p>
+                    <h2 class="text-3xl font-black uppercase italic tracking-tighter break-word">Today's Fresh Catch</h2>
+                    <p class="text-xs text-orange-600 font-bold uppercase mt-2">100% Formaline Free | Lab Tested</p>
                 </div>
-                <a href="menu.html" class="text-[10px] font-black uppercase border-b-2 border-orange-500 pb-1">Shop All</a>
+                <a href="menu.html" class="text-[10px] font-black uppercase border-b-2 border-orange-500 pb-1">View All Fish</a>
             </div>
 
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                 <script>
                     const best = [
                         {n:'Premium Rohu (Cleaned)', p:'428', dp:'549', w:'500g', q:'rohu fish raw'},
-                        {n:'Mutton Curry Cut', p:'849', dp:'999', w:'500g', q:'goat meat raw'},
-                        {n:'Chicken Breast Fillet', p:'350', dp:'420', w:'1kg', q:'chicken breast raw'},
-                        {n:'King Prawns (Jumbo)', p:'699', dp:'850', w:'250g', q:'prawns jumbo'}
+                        {n:'Hilsa (Padma River)', p:'1899', dp:'2200', w:'1kg', q:'hilsa fish raw'},
+                        {n:'Bhetki Fillet (Premium)', p:'950', dp:'1100', w:'500g', q:'bhetki fish'},
+                        {n:'Jumbo King Prawns', p:'699', dp:'850', w:'250g', q:'prawns jumbo'}
                     ];
                     best.forEach((p, i) => {
                         document.write(`
@@ -112,7 +117,7 @@
                                         <span class="text-xl font-black text-[#002e6e]">₹${p.p}</span>
                                         <span class="text-[11px] line-through text-slate-300 font-bold italic">₹${p.dp}</span>
                                     </div>
-                                    <button onclick="location.href='order.html'" class="w-full bg-[#002e6e] text-white py-3.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-orange-500 transition-all shadow-lg shadow-blue-900/10">Add to Cart</button>
+                                    <button onclick="location.href='order.html'" class="w-full bg-[#002e6e] text-white py-3.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-orange-500 transition-all">Add to Cart</button>
                                 </div>
                             </div>
                         `);
@@ -125,20 +130,20 @@
     <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-16">
             <div class="text-center">
-                <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">🧊</div>
-                <h4 class="font-black uppercase text-sm mb-4">Cold Chain Technology</h4>
-                <p class="text-slate-500 text-xs leading-relaxed break-word uppercase font-bold tracking-tighter">Humara temperature control system ensures ki machhli landing se ghar tak ek hi temperature par rahe.</p>
+                <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">🐟</div>
+                <h4 class="font-black uppercase text-sm mb-4">Direct from Landing</h4>
+                <p class="text-slate-500 text-xs leading-relaxed break-word uppercase font-bold tracking-tighter">Humari machhli seedha rivers aur coastal landing centers se aati hai, bina kisi middlemen ke.</p>
             </div>
             <div class="text-center">
                 <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">🔬</div>
-                <h4 class="font-black uppercase text-sm mb-4">No Chemicals Allowed</h4>
-                <p class="text-slate-500 text-xs leading-relaxed break-word uppercase font-bold tracking-tighter">Hum formaline aur ammonia ka zero-tolerance policy rakhte hain. Compliance check har ghante hota hai.</p>
-                <a href="compliance.html" class="text-[9px] text-orange-500 font-black uppercase mt-3 block">Compliance Details →</a>
+                <h4 class="font-black uppercase text-sm mb-4">Lab Certified</h4>
+                <p class="text-slate-500 text-xs leading-relaxed break-word uppercase font-bold tracking-tighter">Zero Formaline policy. Har batch ka lab-test hota hai taaki aapki sehat safe rahe.</p>
+                <a href="compliance.html" class="text-[9px] text-orange-500 font-black uppercase mt-3 block">View Lab Reports →</a>
             </div>
             <div class="text-center">
-                <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">🛵</div>
-                <h4 class="font-black uppercase text-sm mb-4">120-Mins Delivery</h4>
-                <p class="text-slate-500 text-xs leading-relaxed break-word uppercase font-bold tracking-tighter">Delhi aur Kolkata ke hubs se express delivery system taaki aapka order bilkul fresh pahuche.</p>
+                <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">❄️</div>
+                <h4 class="font-black uppercase text-sm mb-4">Ozone Washed</h4>
+                <p class="text-slate-500 text-xs leading-relaxed break-word uppercase font-bold tracking-tighter">Ozone washing se bacteria kill hote hain aur machhli ki shelf-life natural tarike se badhti hai.</p>
             </div>
         </div>
     </section>
@@ -146,8 +151,8 @@
     <section class="bg-slate-100 py-20 px-6">
         <div class="max-w-7xl mx-auto bg-[#002e6e] rounded-[3rem] p-10 md:p-20 flex flex-col md:flex-row items-center gap-10">
             <div class="flex-1 text-white">
-                <h2 class="text-4xl md:text-6xl font-black italic uppercase leading-none mb-6">Order Smarter,<br>Eat Better.</h2>
-                <p class="text-slate-400 text-sm mb-10 max-w-sm font-medium">Download the KFK INDIA app for exclusive discounts and live order tracking of your fresh catch.</p>
+                <h2 class="text-4xl md:text-6xl font-black italic uppercase leading-none mb-6">Fresh Fish,<br>One Click Away.</h2>
+                <p class="text-slate-400 text-sm mb-10 max-w-sm font-medium">Download the KFK INDIA app for live tracking of your fresh catch and special seafood offers.</p>
                 <div class="flex gap-4">
                     <img src="https://img.icons8.com/color/48/google-play.png" class="h-10 opacity-80 cursor-pointer">
                     <img src="https://img.icons8.com/color/48/app-store.png" class="h-10 opacity-80 cursor-pointer">
@@ -161,51 +166,54 @@
         </div>
     </section>
 
-    <footer class="bg-white pt-24 pb-10 border-t">
+    <footer class="bg-white pt-24 pb-10 border-t relative">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
             <div>
                 <h3 class="text-3xl font-black text-[#002e6e] italic mb-6">KFK<span class="text-orange-500">.</span>INDIA</h3>
-                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest leading-loose break-word">Premium seafood and meat delivery services across North & East India.</p>
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest leading-loose break-word">India's largest institutional fresh fish supply network.</p>
             </div>
             <div>
-                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-8">Navigation</h6>
+                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-8">Fish Varieties</h6>
                 <ul class="space-y-4 text-[11px] font-bold uppercase tracking-tighter text-slate-500">
-                    <li><a href="about.html" class="hover:text-orange-500">Our Story</a></li>
-                    <li><a href="menu.html" class="hover:text-orange-500">Product List</a></li>
-                    <li><a href="gallery.html" class="hover:text-orange-500">Photo Gallery</a></li>
-                    <li><a href="faq.html" class="hover:text-orange-500">Customer FAQ</a></li>
-                    <li><a href="contact.html" class="hover:text-orange-500 text-orange-600">Contact Support</a></li>
+                    <li><a href="menu.html" class="hover:text-orange-500">River Fish</a></li>
+                    <li><a href="menu.html" class="hover:text-orange-500">Sea Food</a></li>
+                    <li><a href="menu.html" class="hover:text-orange-500">Prawns & Crabs</a></li>
+                    <li><a href="menu.html" class="hover:text-orange-500">Boneless Cuts</a></li>
                 </ul>
             </div>
             <div>
-                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-8">Business & Legal</h6>
+                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-8">Business</h6>
                 <ul class="space-y-4 text-[11px] font-bold uppercase tracking-tighter text-slate-500">
-                    <li><a href="franchise.html" class="hover:text-orange-500">Partner With Us</a></li>
-                    <li><a href="marketing.html" class="hover:text-orange-500">Marketing Assets</a></li>
-                    <li><a href="training.html" class="hover:text-orange-500">Staff Training</a></li>
-                    <li><a href="compliance.html" class="hover:text-orange-500">Certifications</a></li>
-                    <li><a href="material.html" class="hover:text-orange-500">Legal Material</a></li>
+                    <li><a href="franchise.html" class="hover:text-orange-500">Open a Hub</a></li>
+                    <li><a href="training.html" class="hover:text-orange-500">Fish Filleting Training</a></li>
+                    <li><a href="compliance.html" class="hover:text-orange-500">FSSAI Standards</a></li>
                 </ul>
             </div>
             <div>
-                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-8">Newsletter</h6>
-                <div class="flex border-b border-gray-200 pb-2 mb-6">
-                    <input type="email" placeholder="Your Email" class="bg-transparent text-[11px] w-full focus:outline-none">
-                    <button class="text-orange-500 font-black text-[11px]">JOIN</button>
-                </div>
+                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-8">Support</h6>
+                <p class="text-[11px] font-bold text-[#002e6e] mb-4">care@kfkindia.com</p>
                 <div class="flex gap-4">
-                    <a href="success.html" class="text-[9px] font-black uppercase bg-slate-100 px-4 py-2 rounded-lg">Success Stories</a>
+                    <a href="success.html" class="text-[9px] font-black uppercase bg-slate-100 px-4 py-2 rounded-lg">Partner Success</a>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 pt-10 border-t flex flex-col md:flex-row justify-between items-center text-[9px] font-black text-slate-400 tracking-[0.4em]">
-            <p>© 2026 KFK INDIA OPERATIONS. ALL RIGHTS RESERVED.</p>
-            <div class="flex gap-6 mt-4 md:mt-0">
-                <a href="order.html">Privacy</a>
-                <a href="order.html">Terms</a>
-            </div>
+        <div class="max-w-7xl mx-auto px-4 pt-10 border-t text-center text-[9px] font-black text-slate-400 tracking-[0.4em]">
+            © 2026 KFK INDIA OPERATIONS. ONLY FISH & SEAFOOD SPECIALISTS.
         </div>
     </footer>
+
+    <div class="fixed bottom-6 right-6 z-[1000] flex flex-col items-end gap-3">
+        <div id="bot-msg" class="bg-white text-[#002e6e] p-3 rounded-2xl shadow-xl border border-gray-100 text-[10px] font-black uppercase tracking-widest hidden md:block">
+            Ask our Fish Expert! 🐟
+        </div>
+        <a href="https://wa.me/919143012513?text=Hi KFK India, I am interested in your Fresh Fish and Seafood varieties. Can you help me with today's stock?" 
+           target="_blank" 
+           class="bg-[#25D366] p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.164 1.236 8.41 3.484 2.246 2.248 3.481 5.233 3.481 8.404 0 6.556-5.332 11.89-11.888 11.89-2.015 0-3.991-.511-5.741-1.486l-6.249 1.639zm6.007-4.041c1.554.922 3.09 1.393 4.708 1.393 5.32 0 9.65-4.329 9.65-9.652 0-2.578-1.003-5.003-2.825-6.824-1.821-1.822-4.246-2.824-6.825-2.824-5.32 0-9.652 4.331-9.652 9.653 0 1.706.469 3.374 1.356 4.829l-.893 3.264 3.481-.913zm10.151-5.378c-.273-.136-1.619-.799-1.869-.89-.25-.091-.433-.136-.615.136-.182.273-.705.89-.864 1.071-.159.182-.319.205-.591.068-.273-.136-1.152-.425-2.195-1.355-.811-.724-1.359-1.618-1.518-1.891-.159-.273-.017-.42.119-.556.122-.122.273-.319.41-.478.136-.159.182-.273.273-.455.091-.182.046-.341-.023-.478-.068-.136-.615-1.481-.842-2.028-.221-.532-.444-.459-.615-.468-.159-.008-.341-.01-.524-.01s-.478.068-.728.341c-.25.273-.956.934-.956 2.277 0 1.342.978 2.639 1.115 2.821.136.182 1.924 2.939 4.661 4.12.65.28 1.158.448 1.554.574.654.208 1.25.178 1.721.108.525-.078 1.619-.661 1.846-1.298.227-.638.227-1.185.159-1.298-.068-.113-.25-.182-.523-.318z"/>
+            </svg>
+        </a>
+    </div>
 
     <script>
         const API_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
@@ -214,14 +222,15 @@
             try {
                 const r = await fetch(`https://api.pexels.com/v1/search?query=${q}&per_page=1`, {headers:{Authorization:API_KEY}});
                 const d = await r.json();
-                document.getElementById(id).src = large ? d.photos[0].src.large2x : d.photos[0].src.large;
+                if(d.photos.length > 0) {
+                    document.getElementById(id).src = large ? d.photos[0].src.large2x : d.photos[0].src.large;
+                }
             } catch(e) {}
         }
 
         function init() {
-            fetchAPI('gourmet seafood platter', 'hero-img', true);
-            fetchAPI('smartphone food delivery', 'app-promo');
-            
+            fetchAPI('fresh river fish market', 'hero-img', true);
+            fetchAPI('customer using smartphone for food', 'app-promo');
             cats.forEach(c => fetchAPI(c.q, c.i));
             best.forEach((p, i) => fetchAPI(p.q, `prod-${i}`));
         }
