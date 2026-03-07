@@ -3,76 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK INDIA | Global Seafood Franchise & Health Revolution</title>
+    <title>KFK INDIA | Global Healthy Seafood Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); }
-        .hero-gradient { background: radial-gradient(circle at top right, #f8fafc, #ffffff); }
+        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); }
+        .full-section { min-height: 100vh; display: flex; align-items: center; padding: 100px 0; }
+        .gradient-text { background: linear-gradient(90deg, #1e3a8a, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body class="bg-white text-slate-900" x-data="{ cartCount: 0 }">
 
     <header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100">
-        <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-extrabold tracking-tighter text-blue-900 italic">KFK<span class="text-orange-500">.</span></div>
-            <div class="hidden lg:flex space-x-10 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
-                <a href="index.html" class="hover:text-orange-500 transition">Home</a>
-                <a href="about.html" class="hover:text-orange-500 transition">About</a>
-                <a href="menu.html" class="hover:text-orange-500 transition">Menu</a>
-                <a href="franchise.html" class="hover:text-orange-500 transition">Franchise</a>
-                <a href="contact.html" class="hover:text-orange-500 transition">Contact</a>
+        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-3xl font-black tracking-tighter text-blue-950 italic">KFK<span class="text-orange-500">.</span></div>
+            
+            <div class="hidden lg:flex space-x-10 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
+                <a href="index.html" class="text-orange-600">Home</a>
+                <a href="about.html" class="hover:text-blue-900 transition">Our Story</a>
+                <a href="menu.html" class="hover:text-blue-900 transition">Signature Menu</a>
+                <a href="franchise.html" class="hover:text-blue-900 transition">Franchise</a>
+                <a href="training.html" class="hover:text-blue-900 transition">Training</a>
+                <a href="contact.html" class="hover:text-blue-900 transition">Support</a>
             </div>
+
             <div class="flex items-center gap-6">
-                <div class="relative cursor-pointer">
+                <a href="menu.html" class="relative group">
                     <span class="text-xl">🛒</span>
                     <span x-text="cartCount" class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
-                </div>
-                <a href="contact.html" class="bg-blue-900 text-white px-6 py-2.5 rounded-full text-[10px] font-black tracking-widest hover:bg-orange-600 transition">GET STARTED</a>
+                </a>
+                <a href="franchise.html" class="bg-blue-950 text-white px-8 py-3 rounded-full text-[10px] font-black tracking-widest hover:bg-orange-600 transition shadow-lg">PARTNER WITH US</a>
             </div>
         </nav>
     </header>
 
-    <section class="min-h-screen flex items-center pt-20 hero-gradient">
+    <section class="full-section bg-slate-50 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
             <div>
-                <span class="text-orange-600 font-bold text-xs tracking-[0.3em] uppercase">The Future of Healthy Fast Food</span>
-                <h1 class="text-6xl md:text-8xl font-extrabold text-blue-950 leading-none mt-6 mb-8 tracking-tighter">Pure Taste. <br><span class="italic underline decoration-orange-400">Pure Energy.</span></h1>
-                <p class="text-lg text-slate-500 max-w-lg mb-12 leading-relaxed">Revolutionizing the Indian snack industry with 100% boneless, chemical-free seafood. High protein, Omega-3 rich, and zero compromises.</p>
-                <div class="flex gap-4">
-                    <a href="menu.html" class="bg-blue-900 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition shadow-xl">Explore Menu</a>
-                    <a href="franchise.html" class="border border-slate-200 px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-50 transition">Franchise Kit</a>
+                <span class="bg-orange-100 text-orange-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">India's Premier Seafood Chain</span>
+                <h1 class="text-7xl md:text-9xl font-extrabold text-blue-950 leading-[0.9] mt-8 mb-10 tracking-tighter">
+                    Healthier <br><span class="gradient-text italic">Lifestyle.</span>
+                </h1>
+                <p class="text-xl text-slate-500 max-w-lg mb-12 leading-relaxed font-medium">
+                    Redefining the snack industry with 100% Boneless, Protein-Rich Seafood. No chemicals. No compromises. Just pure energy.
+                </p>
+                <div class="flex flex-wrap gap-6">
+                    <a href="menu.html" class="bg-blue-950 text-white px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition shadow-2xl">View Menu</a>
+                    <a href="about.html" class="border-2 border-slate-200 text-slate-800 px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white transition">Learn Our Vision</a>
                 </div>
             </div>
             <div class="relative">
-                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1000" class="rounded-[60px] shadow-2xl" alt="Premium Fish Dish">
+                
+                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1000" class="rounded-[80px] shadow-2xl transform rotate-2 hover:rotate-0 transition duration-700" alt="Seafood Excellence">
+                <div class="absolute -bottom-10 -left-10 bg-white p-10 rounded-[40px] shadow-2xl border border-slate-50">
+                    <p class="text-5xl font-black text-blue-950">58%</p>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-2">Pure Lean Protein</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="py-12 border-y border-slate-50 text-center uppercase tracking-[0.5em] text-[10px] font-bold text-slate-300">
-        Empowering 500+ Entrepreneurs Across 50+ Global Cities
+    <section class="full-section bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-24">
+                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-orange-500 mb-4">Our Ecosystem</h2>
+                <h3 class="text-5xl font-black text-blue-950 uppercase tracking-tighter">Everything You Need To <span class="italic font-light">Succeed.</span></h3>
+            </div>
+            <div class="grid md:grid-cols-3 gap-10">
+                <a href="marketing.html" class="group p-12 bg-slate-50 rounded-[60px] hover:bg-blue-950 transition duration-500">
+                    <div class="text-4xl mb-8 group-hover:scale-110 transition">📢</div>
+                    <h4 class="text-xl font-black uppercase mb-4 group-hover:text-white">Marketing Support</h4>
+                    <p class="text-sm text-slate-400 group-hover:text-slate-300 italic">Advanced digital branding and hyper-local advertising to drive footfall.</p>
+                </a>
+                <a href="training.html" class="group p-12 bg-slate-50 rounded-[60px] hover:bg-orange-600 transition duration-500">
+                    <div class="text-4xl mb-8 group-hover:scale-110 transition">🎓</div>
+                    <h4 class="text-xl font-black uppercase mb-4 group-hover:text-white">Professional Training</h4>
+                    <p class="text-sm text-slate-400 group-hover:text-orange-50 italic">Comprehensive SOPs and kitchen management for consistent quality.</p>
+                </a>
+                <a href="material.html" class="group p-12 bg-slate-50 rounded-[60px] hover:bg-blue-950 transition duration-500">
+                    <div class="text-4xl mb-8 group-hover:scale-110 transition">🐟</div>
+                    <h4 class="text-xl font-black uppercase mb-4 group-hover:text-white">Supply Chain</h4>
+                    <p class="text-sm text-slate-400 group-hover:text-slate-300 italic">Direct access to our proprietary boneless fish and secret spice blends.</p>
+                </a>
+            </div>
+        </div>
     </section>
 
-    <section class="py-24 max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-center">
-        <div>
-            <h3 class="font-black text-blue-900 uppercase text-xs tracking-widest mb-4">Quality Assurance</h3>
-            <p class="text-sm text-slate-400 italic">Sourced directly from coastal belts to ensure 100% freshness in every bite.</p>
-        </div>
-        <div>
-            <h3 class="font-black text-blue-900 uppercase text-xs tracking-widest mb-4">Scalable Model</h3>
-            <p class="text-sm text-slate-400 italic">Low investment with high ROI, designed for rapid urban expansion.</p>
-        </div>
-        <div>
-            <h3 class="font-black text-blue-900 uppercase text-xs tracking-widest mb-4">Marketing Support</h3>
-            <p class="text-sm text-slate-400 italic">Full-stack digital promotion to drive local footfall to your outlet.</p>
+    <section class="full-section bg-blue-950 text-white rounded-[100px] mx-6">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-12 italic">The Ultimate <br><span class="text-orange-500">Business</span> Asset.</h2>
+            <p class="text-xl opacity-70 mb-16 leading-relaxed italic font-light">Join the revolution of healthy seafood. KFK is not just a kitchen; it’s a high-ROI institutional model engineered for the future of urban dining.</p>
+            <div class="flex justify-center gap-8">
+                <a href="franchise.html" class="bg-white text-blue-950 px-14 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-500 hover:text-white transition shadow-2xl">Franchise Inquiry</a>
+                <a href="contact.html" class="border border-white/20 px-14 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition">Contact Advisor</a>
+            </div>
         </div>
     </section>
 
-    <footer class="py-10 text-center border-t border-slate-50 text-[9px] font-bold text-slate-300 uppercase tracking-[0.5em]">
-        © 2026 KFK International | Sustainable Seafood Excellence
+    <footer class="py-24 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-16">
+            <div class="col-span-2">
+                <div class="text-4xl font-black text-blue-950 italic mb-8">KFK<span class="text-orange-500">.</span></div>
+                <p class="text-slate-400 max-w-sm italic leading-relaxed">Pioneering a sustainable and healthy seafood culture in India. Institutional quality. Unmatched taste.</p>
+            </div>
+            <div>
+                <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-8 underline decoration-orange-500">Strategic Links</h6>
+                <ul class="space-y-4 text-xs font-black uppercase tracking-tighter text-slate-600">
+                    <li><a href="index.html" class="hover:text-orange-600">Home Portal</a></li>
+                    <li><a href="about.html" class="hover:text-orange-600">Our Heritage</a></li>
+                    <li><a href="menu.html" class="hover:text-orange-600">Product Portfolio</a></li>
+                    <li><a href="franchise.html" class="hover:text-orange-600">Investment Model</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-8 underline decoration-orange-500">Global Support</h6>
+                <ul class="space-y-4 text-xs font-black uppercase tracking-tighter text-slate-600">
+                    <li><a href="contact.html" class="hover:text-orange-600">Inquiry Desk</a></li>
+                    <li><a href="locations.html" class="hover:text-orange-600">Store Locator</a></li>
+                    <li><a href="compliance.html" class="hover:text-orange-600">Legal Compliance</a></li>
+                    <li><a href="training.html" class="hover:text-orange-600">Partner Academy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-24 pt-10 border-t border-slate-50 text-center">
+            <p class="text-[9px] font-black text-slate-200 uppercase tracking-[0.6em]">© 2026 Kolkata Fish Kitchen | International Standards | No Watermarks</p>
+        </div>
     </footer>
+
 </body>
 </html>
