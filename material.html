@@ -3,29 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supply Chain | KFK Global Logistics</title>
+    <title>Material & Branding | KFK India Procurement</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Outfit:wght@900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .hero-font { font-family: 'Outfit', sans-serif; }
+        .item-card { background: white; border-radius: 2rem; padding: 2rem; border: 1px solid #f1f5f9; }
+    </style>
 </head>
-<body class="bg-white text-slate-900">
-    <nav class="p-6 border-b flex justify-between items-center sticky top-0 bg-white z-50">
-        <a href="index.html" class="text-[10px] font-bold uppercase tracking-widest text-blue-900">← Back</a>
-        <div class="text-xl font-black text-blue-900 italic">KFK <span class="text-orange-500">SUPPLY</span></div>
-    </nav>
+<body class="bg-gray-50 text-slate-900">
 
-    <section class="py-24 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
-        <div>
-            <h1 class="text-5xl font-black text-blue-950 uppercase leading-none mb-8 tracking-tighter italic">Sourced Fresh. <br><span class="text-orange-600">Delivered Cold.</span></h1>
-            <p class="text-slate-500 text-lg mb-10 leading-relaxed italic">Our proprietary supply chain ensures that every KFK outlet receives the same premium-grade, boneless fish and secret spice blends, maintaining global quality standards.</p>
-            <div class="space-y-4">
-                <div class="p-6 bg-slate-50 rounded-3xl font-bold text-xs uppercase tracking-widest">❄️ Cold-Chain Logistics (0°C - 4°C)</div>
-                <div class="p-6 bg-slate-50 rounded-3xl font-bold text-xs uppercase tracking-widest">🧪 Zero-Chemical Preservation</div>
-                <div class="p-6 bg-slate-50 rounded-3xl font-bold text-xs uppercase tracking-widest">📦 Bi-Weekly Stock Replenishment</div>
+    <header class="h-20 bg-white border-b flex items-center px-6">
+        <a href="index.html" class="text-2xl font-black text-[#002e6e] hero-font italic uppercase">KFK<span class="text-orange-500">.</span>India</a>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-20">
+        <h1 class="text-4xl md:text-6xl font-black hero-font uppercase italic mb-12 text-center">Procurement <span class="text-orange-500">& Supplies</span></h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="item-card">
+                <img id="mat-1" class="w-full h-48 object-cover rounded-xl mb-6" src="">
+                <h4 class="font-black uppercase text-sm mb-2">Professional Kits</h4>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Industrial Knives, Aprons, and Safety Gloves.</p>
+            </div>
+            <div class="item-card">
+                <img id="mat-2" class="w-full h-48 object-cover rounded-xl mb-6" src="">
+                <h4 class="font-black uppercase text-sm mb-2">Branding Material</h4>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Signboards, Packaging Bags, and Brochures.</p>
+            </div>
+            <div class="item-card">
+                <img id="mat-3" class="w-full h-48 object-cover rounded-xl mb-6" src="">
+                <h4 class="font-black uppercase text-sm mb-2">Packaging Tools</h4>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Vacuum Sealers and Cold-Storage Boxes.</p>
             </div>
         </div>
-        <div class="bg-blue-900 h-[500px] rounded-[60px] flex items-center justify-center text-white font-black italic text-4xl text-center px-10">THE ART OF LOGISTICS</div>
-    </section>
+    </main>
 
-    <footer class="py-10 text-center text-[9px] font-bold text-slate-200 uppercase tracking-[0.5em]">© 2026 KFK Supply Chain Division</footer>
+    <script>
+        const API_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
+        async function load() {
+            const q = ['butcher tools', 'marketing brochures', 'packaging machine'];
+            for(let i=0; i<3; i++) {
+                const res = await fetch(`https://api.pexels.com/v1/search?query=${q[i]}&per_page=1`, { headers: { Authorization: API_KEY } });
+                const d = await res.json();
+                document.getElementById(`mat-${i+1}`).src = d.photos[0].src.large;
+            }
+        }
+        load();
+    </script>
 </body>
 </html>
