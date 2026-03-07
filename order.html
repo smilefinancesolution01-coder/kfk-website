@@ -3,152 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout | KFK Secure Payment Gateway</title>
+    <title>Checkout | KFK India - Secure Payment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
-        .input-field { border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 16px; width: 100%; transition: 0.3s; font-size: 14px; }
-        .input-field:focus { border-color: #f97316; outline: none; ring: 2px; ring-color: #fed7aa; }
-        .checkout-card { background: white; border-radius: 30px; border: 1px solid #f1f5f9; padding: 32px; }
-        .step-badge { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
-        /* Prevent word overflow on small screens */
-        .text-fix { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .form-input { width: 100%; padding: 1rem; border-radius: 0.75rem; border: 1px solid #e2e8f0; background: #f8fafc; font-size: 0.875rem; }
+        .form-input:focus { outline: 2px solid #f97316; border-color: transparent; }
     </style>
 </head>
-<body class="text-slate-900">
+<body class="bg-gray-50">
 
-    <header class="bg-white border-b border-slate-100 py-6 px-6 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-black text-blue-950 italic">KFK<span class="text-orange-500">.</span></a>
-            <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400">
-                <span class="text-orange-600">Cart</span> ➔ <span>Checkout</span> ➔ <span>Payment</span>
-            </div>
-        </div>
+    <header class="h-20 bg-white border-b flex items-center px-6">
+        <a href="index.html" class="text-2xl font-black text-[#002e6e] italic uppercase">KFK<span class="text-orange-500">.</span>India</a>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-12">
-        <div class="grid lg:grid-cols-3 gap-10">
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
             
             <div class="lg:col-span-2 space-y-8">
-                
-                <div class="checkout-card">
-                    <div class="flex items-center gap-3 mb-8">
-                        <div class="step-badge bg-blue-950 text-white">1</div>
-                        <h2 class="text-xl font-black uppercase tracking-tight text-blue-950">Delivery Address</h2>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Full Name</label>
-                            <input type="text" placeholder="John Doe" class="input-field">
+                <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-sm border border-gray-100">
+                    <h2 class="text-2xl font-black uppercase italic mb-8">Delivery Information</h2>
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="text-[10px] font-black uppercase mb-2 block">Full Name</label>
+                                <input type="text" class="form-input" placeholder="Enter name">
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-black uppercase mb-2 block">Phone Number</label>
+                                <input type="tel" class="form-input" placeholder="+91 00000 00000">
+                            </div>
                         </div>
                         <div>
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Phone Number</label>
-                            <input type="tel" placeholder="+91 00000 00000" class="input-field">
+                            <label class="text-[10px] font-black uppercase mb-2 block">Full Address (House No, Building, Street)</label>
+                            <textarea rows="3" class="form-input" placeholder="Type your full address..."></textarea>
                         </div>
-                        <div class="md:col-span-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Street Address</label>
-                            <input type="text" placeholder="House No, Building, Area" class="input-field">
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="text-[10px] font-black uppercase mb-2 block">Pincode</label>
+                                <input type="text" class="form-input" placeholder="6 Digits">
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-black uppercase mb-2 block">City</label>
+                                <select class="form-input">
+                                    <option>Delhi</option>
+                                    <option>Kolkata</option>
+                                    <option>Gurugram</option>
+                                </select>
+                            </div>
                         </div>
-                        <div>
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">City</label>
-                            <input type="text" placeholder="Kolkata" class="input-field">
-                        </div>
-                        <div>
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Pin Code</label>
-                            <input type="text" placeholder="700001" class="input-field">
-                        </div>
-                    </div>
+                    </form>
                 </div>
 
-                <div class="checkout-card">
-                    <div class="flex items-center gap-3 mb-8">
-                        <div class="step-badge bg-blue-950 text-white">2</div>
-                        <h2 class="text-xl font-black uppercase tracking-tight text-blue-950">Payment Method</h2>
-                    </div>
-
-                    <div class="space-y-4">
-                        <label class="flex items-center gap-4 p-5 border border-slate-100 rounded-2xl cursor-pointer hover:border-orange-500 transition">
-                            <input type="radio" name="pay" checked class="accent-orange-600">
-                            <span class="text-sm font-bold text-blue-950">UPI / Google Pay / PhonePe</span>
-                            <span class="ml-auto text-xl">📱</span>
+                <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-sm border border-gray-100">
+                    <h2 class="text-2xl font-black uppercase italic mb-6">Payment Method</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <label class="border-2 border-orange-500 p-4 rounded-xl flex items-center justify-center gap-3 cursor-pointer bg-orange-50">
+                            <input type="radio" name="pay" checked>
+                            <span class="text-xs font-black uppercase">COD</span>
                         </label>
-                        <label class="flex items-center gap-4 p-5 border border-slate-100 rounded-2xl cursor-pointer hover:border-orange-500 transition">
-                            <input type="radio" name="pay" class="accent-orange-600">
-                            <span class="text-sm font-bold text-blue-950">Credit / Debit Card</span>
-                            <span class="ml-auto text-xl">💳</span>
-                        </label>
-                        <label class="flex items-center gap-4 p-5 border border-slate-100 rounded-2xl cursor-pointer hover:border-orange-500 transition opacity-50">
-                            <input type="radio" name="pay" disabled class="accent-orange-600">
-                            <span class="text-sm font-bold text-blue-950">Cash on Delivery (Disabled)</span>
-                            <span class="ml-auto text-xl">🚚</span>
+                        <label class="border-2 border-gray-100 p-4 rounded-xl flex items-center justify-center gap-3 cursor-pointer">
+                            <input type="radio" name="pay">
+                            <span class="text-xs font-black uppercase">UPI/Card</span>
                         </label>
                     </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-1">
-                <div class="checkout-card sticky top-28 bg-slate-900 text-white border-none">
-                    <h3 class="text-lg font-black uppercase tracking-widest mb-8 border-b border-white/10 pb-4">Order Summary</h3>
-                    
-                    <div class="space-y-6 mb-8">
-                        <div class="flex justify-between items-start gap-4">
-                            <div>
-                                <p class="text-[11px] font-black uppercase tracking-tight text-fix">Kolkata Bhetki Fillet</p>
-                                <p class="text-[10px] text-white/40">500g x 1</p>
-                            </div>
-                            <span class="text-[11px] font-bold">₹645.00</span>
+            <div class="space-y-6">
+                <div class="bg-[#002e6e] text-white p-8 rounded-[2.5rem] sticky top-24 shadow-xl">
+                    <h2 class="text-xl font-black uppercase italic mb-8 border-b border-white/10 pb-4">Order Summary</h2>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center border-b border-white/5 pb-4">
+                            <span class="text-[10px] font-bold uppercase text-slate-400">Subtotal</span>
+                            <span class="text-sm font-black">₹0.00</span>
                         </div>
-                        <div class="flex justify-between items-start gap-4">
-                            <div>
-                                <p class="text-[11px] font-black uppercase tracking-tight text-fix">Prawn Popcorn (Ready to Eat)</p>
-                                <p class="text-[10px] text-white/40">200g x 1</p>
-                            </div>
-                            <span class="text-[11px] font-bold">₹320.00</span>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-4">
+                            <span class="text-[10px] font-bold uppercase text-slate-400">Delivery Fee</span>
+                            <span class="text-sm font-black text-green-400">FREE</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-4">
+                            <span class="text-lg font-black uppercase italic">Total</span>
+                            <span class="text-2xl font-black text-orange-500">₹0.00</span>
                         </div>
                     </div>
-
-                    <div class="space-y-3 border-t border-white/10 pt-6 mb-8">
-                        <div class="flex justify-between text-[11px] font-bold text-white/60 uppercase">
-                            <span>Subtotal</span>
-                            <span>₹965.00</span>
-                        </div>
-                        <div class="flex justify-between text-[11px] font-bold text-white/60 uppercase">
-                            <span>Delivery Fee</span>
-                            <span class="text-green-400">FREE</span>
-                        </div>
-                        <div class="flex justify-between text-lg font-black pt-4 border-t border-white/10 mt-4">
-                            <span>TOTAL</span>
-                            <span class="text-orange-500">₹965.00</span>
-                        </div>
-                    </div>
-
-                    <button onclick="window.location.href='success.html'" class="w-full bg-orange-600 hover:bg-white hover:text-orange-600 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] transition shadow-2xl">
-                        Place Secure Order
-                    </button>
-                    
-                    <p class="text-center text-[9px] font-bold text-white/30 uppercase mt-6 tracking-widest">
-                        🔒 SSL Encrypted Checkout
-                    </p>
+                    <button class="w-full bg-orange-500 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest mt-10 hover:bg-white hover:text-black transition-all">Place Order</button>
+                    <p class="text-[8px] text-center mt-6 text-slate-400 font-bold uppercase tracking-widest">Secure 256-bit Encrypted Checkout</p>
                 </div>
             </div>
             
         </div>
     </main>
 
-    <footer class="py-12 border-t border-slate-100 bg-white px-6">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                KFK Institutional Supply Hub
-            </div>
-            <div class="flex gap-8">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" class="h-4 opacity-30 grayscale hover:grayscale-0 transition" alt="PayPal">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="h-4 opacity-30 grayscale hover:grayscale-0 transition" alt="Visa">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" class="h-4 opacity-30 grayscale hover:grayscale-0 transition" alt="Mastercard">
-            </div>
-        </div>
+    <footer class="py-12 text-center text-[9px] font-black text-slate-400 uppercase tracking-[0.4em]">
+        © 2026 KFK India | Express Delivery Network
     </footer>
 
 </body>
