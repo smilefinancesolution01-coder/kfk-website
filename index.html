@@ -13,7 +13,7 @@
         .product-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .product-card:hover { transform: translateY(-12px); }
         .break-word { word-wrap: break-word; word-break: break-word; }
-        #smart-bot { transition: all 0.3s ease-in-out; max-height: 80vh; }
+        #chat-window { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
 <body class="bg-[#f8fafc] text-slate-800">
@@ -167,34 +167,47 @@
         </div>
     </footer>
 
-    <div id="smart-bot" class="fixed bottom-28 right-6 z-[2000] w-[90%] sm:w-[380px] bg-white rounded-[2.5rem] shadow-[0_30px_100px_rgba(0,0,0,0.3)] border border-gray-100 overflow-hidden hidden flex flex-col">
-        <div class="bg-[#002e6e] p-6 text-white flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center font-black italic shadow-lg">K</div>
-                <div>
-                    <h4 class="text-[10px] font-black uppercase tracking-widest leading-none">KFK AI Assistant</h4>
-                    <p id="bot-status" class="text-[8px] text-green-400 font-bold uppercase mt-1">● Online & Ready</p>
+    <div id="kfk-chatbot-container" class="fixed bottom-8 right-6 z-[2000] font-['Plus_Jakarta_Sans']">
+        <button onclick="toggleKFKChat()" id="chat-bubble" class="bg-[#002e6e] text-white w-16 h-16 rounded-full shadow-[0_15px_50px_rgba(0,46,110,0.4)] flex items-center justify-center hover:scale-110 transition-all active:scale-95 border-4 border-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+        </button>
+
+        <div id="chat-window" class="hidden absolute bottom-20 right-0 w-[90vw] sm:w-[380px] bg-white rounded-[2.5rem] shadow-[0_30px_100px_rgba(0,0,0,0.2)] border border-gray-100 overflow-hidden flex flex-col origin-bottom-right transition-all">
+            <div class="bg-[#002e6e] p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center font-black italic shadow-lg text-sm">K</div>
+                        <div>
+                            <h4 class="text-[11px] font-black uppercase tracking-widest leading-none">KFK AI Manager</h4>
+                            <p class="text-[8px] font-bold text-green-400 uppercase mt-1 tracking-widest">● Active & Expert</p>
+                        </div>
+                    </div>
+                    <button onclick="toggleKFKChat()" class="text-white/50 hover:text-white transition-all text-2xl">&times;</button>
                 </div>
             </div>
-            <button onclick="toggleBot()" class="text-white/50 hover:text-white transition-all text-xl">✕</button>
-        </div>
-        
-        <div class="p-6 h-[400px] overflow-y-auto bg-gray-50 space-y-4 text-[11px]" id="bot-content">
-            <div class="bg-white p-4 rounded-2xl border border-gray-200 font-bold text-slate-500 shadow-sm">
-                Namaste! Main KFK Expert hoon. Aap mujhse **Franchise, 100+ Menu Items, ya Training** ke baare mein kuch bhi poochein.
+
+            <div id="chat-messages" class="h-[380px] overflow-y-auto p-6 space-y-4 bg-slate-50 text-[11px] font-bold">
+                <div class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 text-slate-600 leading-relaxed">
+                    Namaste! 🙏 Main KFK India ka AI assistant hoon. Delhi-NCR aur Kolkata ke **150+ franchises** ke liye main aapki help kar sakta hoon. <br><br>
+                    Kya aapko **Franchise**, **Quality Check**, ya **Price comparison** ke baare mein jaanna hai?
+                </div>
+            </div>
+
+            <div class="p-4 border-t bg-white flex flex-wrap gap-2">
+                <button onclick="askKFK('Franchise details?')" class="text-[9px] font-black bg-gray-100 px-3 py-2 rounded-full hover:bg-[#002e6e] hover:text-white transition-all">Franchise Cost</button>
+                <button onclick="askKFK('Quality check?')" class="text-[9px] font-black bg-gray-100 px-3 py-2 rounded-full hover:bg-[#002e6e] hover:text-white transition-all">Chemical Free?</button>
+                <button onclick="askKFK('Menu items?')" class="text-[9px] font-black bg-gray-100 px-3 py-2 rounded-full hover:bg-[#002e6e] hover:text-white transition-all">32+ Snacks List</button>
+            </div>
+
+            <div class="p-4 border-t bg-white flex gap-2">
+                <input type="text" id="bot-input-field" placeholder="Ask about Franchise or Quality..." class="flex-1 bg-gray-100 border-none rounded-xl p-3 text-xs font-bold focus:ring-2 focus:ring-[#002e6e] outline-none">
+                <button onclick="sendMessage()" class="bg-[#002e6e] text-white p-3 rounded-xl hover:bg-orange-600 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                </button>
             </div>
         </div>
-
-        <div class="p-4 bg-white border-t flex gap-2">
-            <input type="text" id="user-input" placeholder="Type: 'Franchise cost?' or 'Bengali Fish'..." class="flex-1 bg-gray-100 rounded-xl px-4 py-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#002e6e]">
-            <button onclick="handleUserInput()" class="bg-[#002e6e] text-white px-5 rounded-xl font-black uppercase text-[10px] active:scale-95 transition-all">Send</button>
-        </div>
-    </div>
-
-    <div class="fixed bottom-8 right-6 z-[1000]">
-        <button onclick="toggleBot()" class="bg-[#002e6e] p-5 rounded-full shadow-2xl hover:scale-110 transition-transform border-4 border-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
-        </button>
     </div>
 
     <script>
@@ -210,52 +223,64 @@
         }
 
         // CART LOGIC
-        let cart = 0;
+        let cartCount = 0;
         function addToCart() {
-            cart++;
-            document.getElementById('cart-count').innerText = cart;
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
         }
 
-        // CHATBOT LOGIC
-        function toggleBot() { document.getElementById('smart-bot').classList.toggle('hidden'); }
+        // --- MERGED & UPDATED PRO CHATBOT LOGIC ---
+        const KFK_BRAIN = {
+            "franchise": "KFK Franchise ke liye investment ₹5-8 Lakh hai. Hum Delhi-NCR aur Kolkata mein 150+ outlets manage karte hain. Humara 'Zero-Chef' model hai jisme centralized processing plant se mal supply hota hai.",
+            "quality": "KFK ki fish 100% chemical aur Formalin free hoti hai. Hum 'Ozone Wash' aur strict 0-4°C cold chain maintain karte hain taaki fish mein smell na aaye aur wo fresh rahe.",
+            "price": "Local market se mehenga isliye hai kyunki hum safety aur hygiene pe invest karte hain. Sasta aksar chemicals ke saath aata hai, KFK health ke saath compromise nahi karta.",
+            "manufacturing": "Hum distributor nahi, 'Fish Processing House' hain. Hamare apne plants hain jaha 100+ fresh varieties aur 32+ snacks (Fish fingers, burgers) manufacture hote hain.",
+            "delivery": "Hum Delhi NCR aur Kolkata mein 120 mins express delivery karte hain. ₹500 se upar ke order par delivery free hai.",
+            "menu": "Hamare menu mein 21+ Bengali Cuts, 25+ Prawn items, aur 32+ snacks hain. Popular: Amritsari Fish, Salmon Burgers, aur Jumbo Prawns."
+        };
 
-        function handleUserInput() {
-            const input = document.getElementById('user-input');
-            const msg = input.value.trim().toLowerCase();
-            if(!msg) return;
+        function toggleKFKChat() {
+            const win = document.getElementById('chat-window');
+            win.classList.toggle('hidden');
+        }
+
+        function askKFK(q) {
+            document.getElementById('bot-input-field').value = q;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('bot-input-field');
+            const text = input.value.trim().toLowerCase();
+            if(!text) return;
 
             addMessage(input.value, 'user');
             input.value = '';
 
-            // REAL KNOWLEDGE ENGINE
-            let reply = "Main check kar raha hoon... Tab tak aap +91 99173 85863 par call kar sakte hain.";
+            setTimeout(() => {
+                let response = "Maaf kijiye, main check kar raha hoon. Aap +91 99173 85863 par franchise ya quality ki detail ke liye call kar sakte hain.";
+                
+                if(text.includes('franchise') || text.includes('bussiness')) response = KFK_BRAIN.franchise;
+                else if(text.includes('quality') || text.includes('clean') || text.includes('chemical')) response = KFK_BRAIN.quality;
+                else if(text.includes('price') || text.includes('mehenga') || text.includes('expensive')) response = KFK_BRAIN.price;
+                else if(text.includes('manufacturing') || text.includes('plant')) response = KFK_BRAIN.manufacturing;
+                else if(text.includes('delivery') || text.includes('time')) response = KFK_BRAIN.delivery;
+                else if(text.includes('menu') || text.includes('item') || text.includes('snacks') || text.includes('burger')) response = KFK_BRAIN.menu;
+                else if(text.includes('hi') || text.includes('hello')) response = "Namaste! Main KFK Expert hoon. Kya main aapki business ya order mein help karoon?";
 
-            if(msg.includes('franchise') || msg.includes('bussiness')) {
-                reply = "KFK Franchise ke liye investment ₹5-8 Lakh hai. Hum store setup, training (training.html), aur daily supply provide karte hain.";
-            } else if(msg.includes('burger') || msg.includes('chips') || msg.includes('snacks')) {
-                reply = "Hamare pas 32+ Fish Snacks hain. Popular: Fish Burgers (₹129), Fish & Chips (₹249), aur Amritsari Pakodas. Sab high protein hain.";
-            } else if(msg.includes('bengali') || msg.includes('hilsa') || msg.includes('rohu')) {
-                reply = "Bengali Cut me 21 varieties hain: Rohu, Catla, Hilsa (Ilish), aur Pabda. Sab clean-cut milti hain (menu.html dekhein).";
-            } else if(msg.includes('prawns') || msg.includes('shrimp')) {
-                reply = "Prawns me 25 items hain: Jumbo, Tiger, aur Pink Prawns. Prices ₹499 se shuru hain.";
-            } else if(msg.includes('delivery')) {
-                reply = "Hum Delhi NCR aur Kolkata me 120 mins me delivery karte hain. Zero delivery charge on orders above ₹500.";
-            } else if(msg.includes('hi') || msg.includes('hello')) {
-                reply = "Namaste! Kaise hain aap? Main KFK Expert hoon. Kya main aapki business ya order me help karoon?";
-            }
-
-            setTimeout(() => addMessage(reply, 'bot'), 700);
+                addMessage(response, 'bot');
+            }, 600);
         }
 
-        function addMessage(t, s) {
-            const c = document.getElementById('bot-content');
-            const d = document.createElement('div');
-            d.className = s === 'user' 
-                ? "bg-[#002e6e] text-white p-3 rounded-2xl rounded-tr-none ml-12 shadow-sm font-bold break-word" 
-                : "bg-white p-3 rounded-2xl rounded-tl-none mr-12 border border-gray-200 font-bold text-slate-600 shadow-sm break-word";
-            d.innerText = t;
-            c.appendChild(d);
-            c.scrollTop = c.scrollHeight;
+        function addMessage(text, side) {
+            const chat = document.getElementById('chat-messages');
+            const msg = document.createElement('div');
+            msg.className = side === 'user' 
+                ? 'bg-[#002e6e] text-white p-4 rounded-2xl rounded-tr-none ml-10 shadow-sm' 
+                : 'bg-white p-4 rounded-2xl rounded-tl-none border border-gray-100 shadow-sm text-slate-600 leading-relaxed';
+            msg.innerText = text;
+            chat.appendChild(msg);
+            chat.scrollTop = chat.scrollHeight;
         }
 
         // INIT IMAGES
@@ -263,97 +288,8 @@
         setImg('food testing laboratory quality', 'lab-img');
         cats.forEach(c => setImg(c.q, c.i));
 
-        document.getElementById('user-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') handleUserInput(); });
+        // Enter key support for chatbot
+        document.getElementById('bot-input-field').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
     </script>
-    <div id="kfk-chatbot-container" class="fixed bottom-6 right-6 z-[200] font-['Plus_Jakarta_Sans']">
-    <button onclick="toggleKFKChat()" id="chat-bubble" class="bg-[#002e6e] text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-all active:scale-95 border-4 border-white">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-        </svg>
-    </button>
-
-    <div id="chat-window" class="hidden absolute bottom-20 right-0 w-[350px] bg-white rounded-[2rem] shadow-2xl border border-gray-100 overflow-hidden flex flex-col scale-0 transition-all origin-bottom-right">
-        <div class="bg-[#002e6e] p-5 text-white">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center font-bold text-sm italic">KFK</div>
-                <div>
-                    <h4 class="text-sm font-black uppercase tracking-tighter">KFK AI Manager</h4>
-                    <p class="text-[9px] font-bold text-orange-300 uppercase tracking-widest">150+ Outlets Network</p>
-                </div>
-                <button onclick="toggleKFKChat()" class="ml-auto opacity-50 hover:opacity-100 text-2xl">&times;</button>
-            </div>
-        </div>
-
-        <div id="chat-messages" class="h-80 overflow-y-auto p-5 space-y-4 bg-slate-50 text-[12px]">
-            <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 text-slate-700">
-                Namaste! 🙏 Main KFK India ka AI assistant hoon. Main aapki **Business Franchise** ya **Fresh Fish Quality** se judi har madad kar sakta hoon. Aap kya puchna chahte hain?
-            </div>
-        </div>
-
-        <div class="p-3 border-t bg-white flex flex-wrap gap-2">
-            <button onclick="askKFK('Franchise details?')" class="text-[9px] font-bold bg-slate-100 px-3 py-1.5 rounded-full hover:bg-[#002e6e] hover:text-white transition-all">Franchise Details</button>
-            <button onclick="askKFK('Quality check?')" class="text-[9px] font-bold bg-slate-100 px-3 py-1.5 rounded-full hover:bg-[#002e6e] hover:text-white transition-all">Quality Check</button>
-            <button onclick="askKFK('Price too high?')" class="text-[9px] font-bold bg-slate-100 px-3 py-1.5 rounded-full hover:bg-[#002e6e] hover:text-white transition-all">Price vs Market</button>
-        </div>
-
-        <div class="p-4 border-t bg-white flex gap-2">
-            <input type="text" id="user-input" placeholder="Type your doubt here..." class="flex-1 bg-slate-100 border-none rounded-xl p-3 text-xs focus:ring-2 focus:ring-[#002e6e] outline-none">
-            <button onclick="sendMessage()" class="bg-[#002e6e] text-white p-3 rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
-            </button>
-        </div>
-    </div>
-</div>
-
-<script>
-    const KFK_BRAIN = {
-        "franchise": "KFK India ke 150+ outlets Delhi-NCR aur Kolkata mein hain. Hum 'Zero-Chef' model par kaam karte hain, jisme manufacturing humare plant se hoti hai aur aapko bas quality service deni hai. Investment aur setup ke liye hum full training support dete hain.",
-        "quality": "Humara har product chemical-free aur 100% Formalin-free hota hai. Hum Ozone Wash technique use karte hain taaki fish ki smell khatam ho jaye aur tajgi barkarar rahe.",
-        "price": "Market se sasta aksar zeher (chemicals) ke saath aata hai. KFK premium rates leta hai kyunki hum cold-chain logistics (0-4°C) maintain karte hain jo aapki health ke liye 100% safe hai.",
-        "manufacturing": "Hum sirf distributor nahi hain, hum 'Fish Processing House' hain. Delhi aur Kolkata ke 150+ outlets hamare manufacturing unit se hi supply lete hain.",
-        "delivery": "Hum 120 minutes express delivery guarantee karte hain across Delhi-NCR aur Kolkata."
-    };
-
-    function toggleKFKChat() {
-        const win = document.getElementById('chat-window');
-        win.classList.toggle('hidden');
-        setTimeout(() => win.classList.toggle('scale-100'), 10);
-    }
-
-    function askKFK(q) {
-        document.getElementById('user-input').value = q;
-        sendMessage();
-    }
-
-    function sendMessage() {
-        const input = document.getElementById('user-input');
-        const text = input.value.toLowerCase();
-        if(!text) return;
-
-        addMessage(input.value, 'user');
-        input.value = '';
-
-        setTimeout(() => {
-            let response = "Maaf kijiye, main samajh nahi paya. Par aap KFK Franchise (150+ outlets) ya humari Chemical-free fish manufacturing ke baare mein puch sakte hain!";
-            
-            if(text.includes('franchise')) response = KFK_BRAIN.franchise;
-            else if(text.includes('quality') || text.includes('check')) response = KFK_BRAIN.quality;
-            else if(text.includes('price') || text.includes('expensive')) response = KFK_BRAIN.price;
-            else if(text.includes('manufacturing') || text.includes('make')) response = KFK_BRAIN.manufacturing;
-            else if(text.includes('delivery')) response = KFK_BRAIN.delivery;
-
-            addMessage(response, 'bot');
-        }, 600);
-    }
-
-    function addMessage(text, side) {
-        const chat = document.getElementById('chat-messages');
-        const msg = document.createElement('div');
-        msg.className = side === 'user' ? 'bg-[#002e6e] text-white p-3 rounded-2xl rounded-tr-none ml-10 shadow-sm' : 'bg-white p-3 rounded-2xl rounded-tl-none border border-gray-100 shadow-sm text-slate-700';
-        msg.innerText = text;
-        chat.appendChild(msg);
-        chat.scrollTop = chat.scrollHeight;
-    }
-</script>
 </body>
 </html>
