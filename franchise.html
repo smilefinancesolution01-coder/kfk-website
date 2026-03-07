@@ -3,145 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invest in KFK | India's #1 Seafood Franchise Model</title>
+    <title>Franchise Opportunity | KFK India - Revolutionizing Fresh Protein</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Outfit:wght@900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; }
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .roi-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); }
-        .input-dark { background: #111827; border: 1px solid #374151; color: white; border-radius: 12px; padding: 12px 16px; width: 100%; }
-        .input-dark:focus { border-color: #f97316; outline: none; }
-        .text-fix { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        .hero-font { font-family: 'Outfit', sans-serif; }
+        .break-word { overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .benefit-card:hover { transform: translateY(-10px); transition: 0.4s; border-color: #f97316; }
     </style>
 </head>
-<body class="text-slate-900">
+<body class="bg-white text-slate-900">
 
-    <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
-        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-black text-blue-950 italic">KFK<span class="text-orange-500">.</span></a>
-            <div class="hidden lg:flex space-x-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                <a href="index.html" class="hover:text-blue-900 transition">Home</a>
-                <a href="menu.html" class="hover:text-blue-900 transition">Product Portfolio</a>
-                <a href="franchise.html" class="text-orange-600">Investment Model</a>
-                <a href="training.html" class="hover:text-blue-900 transition">Partner Academy</a>
-            </div>
-            <a href="#apply" class="bg-blue-950 text-white px-6 py-2.5 rounded-full text-[10px] font-black tracking-widest hover:bg-orange-600 transition uppercase shadow-lg">Apply Now</a>
-        </nav>
+    <header class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-black text-[#002e6e] hero-font italic">KFK<span class="text-orange-500">.</span>INDIA</a>
+            <nav class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-widest">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Products</a>
+                <a href="about.html">Our Story</a>
+                <a href="franchise.html" class="text-orange-500">Franchise</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <a href="order.html" class="bg-[#002e6e] text-white px-6 py-3 rounded-xl font-bold text-[10px] uppercase">Join the Network</a>
+        </div>
     </header>
 
-    <section class="pt-40 pb-20 bg-slate-50 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <span class="bg-orange-100 text-orange-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-6 inline-block">Institutional Growth</span>
-            <h1 class="text-5xl md:text-8xl font-black text-blue-950 uppercase tracking-tighter leading-none mb-8 text-fix">
-                Own The <br><span class="italic text-orange-500">Future</span> of Food.
-            </h1>
-            <p class="text-slate-500 max-w-2xl mx-auto text-lg italic leading-relaxed">Join India's most tech-advanced seafood supply chain. High ROI, low operational complexity, and 100% institutional support.</p>
-        </div>
-    </section>
-
-    <section class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-10">
-            <div class="p-12 rounded-[50px] bg-white border border-slate-100 shadow-sm hover:shadow-2xl transition duration-500">
-                <div class="text-4xl mb-6">☁️</div>
-                <h3 class="text-2xl font-black text-blue-950 uppercase mb-2">Cloud Kitchen</h3>
-                <p class="text-slate-400 text-sm mb-8 italic">Ideal for high-density urban areas focusing on delivery.</p>
-                <ul class="space-y-4 mb-10">
-                    <li class="flex justify-between text-[11px] font-black uppercase border-b border-slate-50 pb-2"><span>Investment</span> <span class="text-orange-600">₹7 - 10 Lakhs</span></li>
-                    <li class="flex justify-between text-[11px] font-black uppercase border-b border-slate-50 pb-2"><span>Space Required</span> <span>250 - 300 Sq Ft</span></li>
-                    <li class="flex justify-between text-[11px] font-black uppercase border-b border-slate-50 pb-2"><span>ROI Timeline</span> <span>12 - 14 Months</span></li>
-                </ul>
-                <button onclick="document.getElementById('apply').scrollIntoView()" class="w-full py-4 rounded-2xl bg-slate-100 text-blue-950 text-[10px] font-black uppercase tracking-widest hover:bg-blue-950 hover:text-white transition">Get Deck</button>
-            </div>
-
-            <div class="p-12 rounded-[50px] bg-blue-950 text-white shadow-2xl hover:scale-[1.02] transition duration-500">
-                <div class="text-4xl mb-6">🏬</div>
-                <h3 class="text-2xl font-black uppercase mb-2">Experience Center</h3>
-                <p class="text-white/50 text-sm mb-8 italic">Premium dine-in and retail counter for maximum brand impact.</p>
-                <ul class="space-y-4 mb-10">
-                    <li class="flex justify-between text-[11px] font-black uppercase border-b border-white/10 pb-2"><span>Investment</span> <span class="text-orange-500">₹15 - 25 Lakhs</span></li>
-                    <li class="flex justify-between text-[11px] font-black uppercase border-b border-white/10 pb-2"><span>Space Required</span> <span>800 - 1200 Sq Ft</span></li>
-                    <li class="flex justify-between text-[11px] font-black uppercase border-b border-white/10 pb-2"><span>ROI Timeline</span> <span>18 - 22 Months</span></li>
-                </ul>
-                <button onclick="document.getElementById('apply').scrollIntoView()" class="w-full py-4 rounded-2xl bg-orange-600 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-orange-600 transition">Request Visit</button>
+    <section class="relative h-[80vh] flex items-center bg-slate-950 overflow-hidden">
+        <img id="franchise-hero" class="absolute inset-0 w-full h-full object-cover opacity-40" src="">
+        <div class="relative z-10 max-w-7xl mx-auto px-6 text-white">
+            <h6 class="text-orange-500 font-black text-xs uppercase tracking-[0.4em] mb-6">Investment Opportunity 2026</h6>
+            <h1 class="text-5xl md:text-8xl font-black hero-font uppercase italic leading-none break-word">India's Most<br><span class="text-orange-500">Profitable</span> Model</h1>
+            <p class="mt-8 max-w-2xl text-gray-400 text-lg font-medium break-word">While fast food is declining due to health concerns, KFK India offers a sustainable, health-focused growth model. Partner with us to lead the fresh-protein revolution.</p>
+            <div class="mt-12">
+                <a href="#apply" class="bg-orange-500 px-12 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all">Get Brochure</a>
             </div>
         </div>
     </section>
 
-    <section class="py-24 roi-gradient text-white rounded-[60px] md:rounded-[100px] mx-4 md:mx-10 px-6">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-            <div>
-                <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-10 leading-none text-fix">The KFK <br><span class="text-orange-500">Advantage.</span></h2>
-                <div class="space-y-8">
-                    <div class="flex gap-6">
-                        <div class="text-3xl text-orange-500">✔</div>
-                        <div>
-                            <h4 class="font-black uppercase text-sm mb-1 tracking-widest">Supply Chain Control</h4>
-                            <p class="text-white/50 text-sm italic">Direct sourcing from coast ensures 40% higher margins than competitors.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-6">
-                        <div class="text-3xl text-orange-500">✔</div>
-                        <div>
-                            <h4 class="font-black uppercase text-sm mb-1 tracking-widest">SOP-Driven Training</h4>
-                            <p class="text-white/50 text-sm italic">No dependence on highly skilled chefs. Our SOPs make operations "plug & play".</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white/5 p-10 rounded-[50px] border border-white/10">
-                <p class="text-[10px] font-black uppercase tracking-[0.5em] text-orange-500 mb-6">Market Potential</p>
-                <p class="text-4xl font-black tracking-tighter mb-4">$20 Billion</p>
-                <p class="text-white/40 italic text-sm">Estimated size of the Indian Organized Seafood Market by 2027. KFK is positioned to lead.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="apply" class="py-32 px-6">
-        <div class="max-w-3xl mx-auto bg-slate-900 rounded-[60px] p-12 md:p-20 text-white shadow-2xl relative overflow-hidden">
-            <div class="relative z-10 text-center mb-12">
-                <h3 class="text-3xl font-black uppercase tracking-tighter mb-4">Partner Application</h3>
-                <p class="text-white/40 italic text-sm">Fill out the form below to receive the Confidential Information Memorandum (CIM).</p>
-            </div>
-            
-            <form class="space-y-6 relative z-10">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <input type="text" placeholder="FULL NAME" class="input-dark text-[10px] font-bold tracking-widest uppercase">
-                    <input type="email" placeholder="EMAIL ADDRESS" class="input-dark text-[10px] font-bold tracking-widest uppercase">
-                </div>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <input type="tel" placeholder="PHONE NUMBER" class="input-dark text-[10px] font-bold tracking-widest uppercase">
-                    <input type="text" placeholder="LOCATION (CITY)" class="input-dark text-[10px] font-bold tracking-widest uppercase">
-                </div>
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div>
-                    <select class="input-dark text-[10px] font-bold tracking-widest uppercase">
-                        <option>SELECT INVESTMENT MODEL</option>
-                        <option>CLOUD KITCHEN (7-10L)</option>
-                        <option>EXPERIENCE CENTER (15-25L)</option>
-                        <option>MASTER FRANCHISE (UPON REQUEST)</option>
+                    <h2 class="text-4xl font-black hero-font uppercase italic mb-8 break-word">Health Is Wealth:<br><span class="text-orange-500">The Future of Food</span></h2>
+                    <p class="text-slate-600 leading-relaxed mb-6 break-word">In an era where processed fast food is causing widespread health issues, KFK India stands for purity. We don't just sell meat; we sell nutrition.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                            <span class="text-orange-500 font-bold">✓</span>
+                            <p class="text-xs font-bold uppercase tracking-wider">High Profit Margins on Value-Added Products (Ready-to-Cook)</p>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                            <span class="text-orange-500 font-bold">✓</span>
+                            <p class="text-xs font-bold uppercase tracking-wider">Direct Sourcing - No Middlemen Cost</p>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                            <span class="text-orange-500 font-bold">✓</span>
+                            <p class="text-xs font-bold uppercase tracking-wider">Rapid Market Expansion with Cold-Chain Support</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="rounded-[3rem] overflow-hidden shadow-2xl">
+                    <img id="health-visual" class="w-full h-full object-cover" src="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-black hero-font italic uppercase break-word">What We Provide</h2>
+                <div class="h-1 w-20 bg-orange-500 mx-auto mt-6"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="benefit-card p-10 rounded-[2.5rem] glass-card">
+                    <div class="text-4xl mb-6">🎓</div>
+                    <h4 class="text-xl font-black mb-4 uppercase">Advanced Training</h4>
+                    <p class="text-gray-400 text-sm break-word">We provide comprehensive institutional-grade training for your staff on meat handling, cutting, and hygiene standards.</p>
+                    <a href="training.html" class="text-[10px] text-orange-500 font-bold mt-6 block uppercase underline">Explore Modules</a>
+                </div>
+                <div class="benefit-card p-10 rounded-[2.5rem] glass-card">
+                    <div class="text-4xl mb-6">📦</div>
+                    <h4 class="text-xl font-black mb-4 uppercase">Complete Material</h4>
+                    <p class="text-gray-400 text-sm break-word">From professional butcher kits to vacuum packaging material and store branding—we supply every single tool you need.</p>
+                    <a href="material.html" class="text-[10px] text-orange-500 font-bold mt-6 block uppercase underline">Supply List</a>
+                </div>
+                <div class="benefit-card p-10 rounded-[2.5rem] glass-card">
+                    <div class="text-4xl mb-6">📈</div>
+                    <h4 class="text-xl font-black mb-4 uppercase">Growth Strategy</h4>
+                    <p class="text-gray-400 text-sm break-word">Our marketing wing helps you capture local markets through digital campaigns and regional branding assets.</p>
+                    <a href="marketing.html" class="text-[10px] text-orange-500 font-bold mt-6 block uppercase underline">Marketing Kit</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-black hero-font italic uppercase mb-8">Ready to Start?</h2>
+            <p class="text-slate-500 mb-12 break-word leading-relaxed">Join India’s fastest-growing meat retail chain. With a proven ROI (Return on Investment) and professional institutional support, KFK India is your gateway to business success.</p>
+            
+            <form id="apply" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left p-10 bg-slate-50 rounded-[3rem] border border-slate-100">
+                <div class="flex flex-col">
+                    <label class="text-[10px] font-black uppercase mb-2">Full Name</label>
+                    <input type="text" class="p-4 rounded-xl border bg-white focus:outline-orange-500" placeholder="Enter Name">
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-[10px] font-black uppercase mb-2">Target Location</label>
+                    <input type="text" class="p-4 rounded-xl border bg-white focus:outline-orange-500" placeholder="e.g. Kolkata">
+                </div>
+                <div class="flex flex-col md:col-span-2">
+                    <label class="text-[10px] font-black uppercase mb-2">Investment Range</label>
+                    <select class="p-4 rounded-xl border bg-white focus:outline-orange-500">
+                        <option>10L - 25L</option>
+                        <option>25L - 50L</option>
+                        <option>50L+</option>
                     </select>
                 </div>
-                <textarea rows="4" placeholder="DESCRIBE YOUR BUSINESS BACKGROUND" class="input-dark text-[10px] font-bold tracking-widest uppercase"></textarea>
-                
-                <button type="submit" class="w-full bg-orange-600 py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.3em] hover:bg-white hover:text-orange-600 transition duration-500">Submit Application</button>
+                <button class="md:col-span-2 bg-orange-500 text-white py-5 rounded-xl font-black uppercase text-xs tracking-widest shadow-xl shadow-orange-200 mt-4">Submit Application</button>
             </form>
-            
-            <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-orange-600/20 rounded-full blur-[100px]"></div>
         </div>
     </section>
 
-    <footer class="py-20 bg-white px-6 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-            <div class="text-2xl font-black text-blue-950 italic">KFK<span class="text-orange-500">.</span></div>
-            <div class="flex gap-10 text-[10px] font-black uppercase tracking-widest text-slate-400">
-                <a href="compliance.html" class="hover:text-blue-950">Legal Privacy</a>
-                <a href="training.html" class="hover:text-blue-900">Partner Portal</a>
-                <a href="faq.html" class="hover:text-blue-900">FAQ Desk</a>
+    <footer class="bg-black text-white py-20 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div>
+                <h3 class="text-3xl font-black italic hero-font mb-6">KFK<span class="text-orange-500">.</span>INDIA</h3>
+                <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest break-word leading-loose">The Institutional Standard for Fresh Protein Delivery and Franchise Excellence.</p>
             </div>
-            <p class="text-[9px] font-bold text-slate-300 uppercase tracking-widest">© 2026 Kolkata Fish Kitchen | Global Investor Hub</p>
+            <div>
+                <h6 class="text-orange-500 font-black text-[10px] uppercase mb-8">Company</h6>
+                <ul class="text-[11px] font-bold space-y-4 uppercase text-gray-400">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="compliance.html">Compliance</a></li>
+                    <li><a href="success.html">Success Stories</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="text-orange-500 font-black text-[10px] uppercase mb-8">Business</h6>
+                <ul class="text-[11px] font-bold space-y-4 uppercase text-gray-400">
+                    <li><a href="franchise.html">Franchise</a></li>
+                    <li><a href="training.html">Staff Training</a></li>
+                    <li><a href="material.html">Procurement</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="text-orange-500 font-black text-[10px] uppercase mb-8">Follow Us</h6>
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">FB</div>
+                    <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">IG</div>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <script>
+        const API_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
+        
+        async function loadFranchiseMedia() {
+            try {
+                // Hero
+                const resH = await fetch('https://api.pexels.com/v1/search?query=modern business office&per_page=1', { headers: { Authorization: API_KEY } });
+                const dH = await resH.json();
+                document.getElementById('franchise-hero').src = dH.photos[0].src.large2x;
+
+                // Health Visual
+                const resV = await fetch('https://api.pexels.com/v1/search?query=healthy fresh fish salad&per_page=1', { headers: { Authorization: API_KEY } });
+                const dV = await resV.json();
+                document.getElementById('health-visual').src = dV.photos[0].src.large;
+
+            } catch (err) { console.error(err); }
+        }
+        loadFranchiseMedia();
+    </script>
 </body>
 </html>
