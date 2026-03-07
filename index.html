@@ -11,9 +11,22 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
         .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); }
         .full-section { min-height: 100vh; display: flex; align-items: center; padding: 100px 0; }
-        /* Fix for word overflow */
-        h1, h2, h3 { word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; }
-        .gradient-text { background: linear-gradient(90deg, #1e3a8a, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Premium Typography & Overflow Fix */
+        h1, h2, h3, h4 { 
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+            hyphens: auto; 
+            line-height: 1.1;
+        }
+        
+        .gradient-text { 
+            background: linear-gradient(90deg, #1e3a8a, #f97316); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+
+        .service-card:hover { transform: translateY(-10px); transition: 0.4s ease; }
     </style>
 </head>
 <body class="bg-white text-slate-900" x-data="{ cartCount: 0 }">
@@ -24,6 +37,7 @@
             
             <div class="hidden lg:flex space-x-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                 <a href="index.html" class="text-orange-600">Home</a>
+                <a href="about.html" class="hover:text-blue-900 transition">Our Story</a>
                 <a href="menu.html" class="hover:text-blue-900 transition">Product Portfolio</a>
                 <a href="franchise.html" class="hover:text-blue-900 transition">Investment Model</a>
                 <a href="training.html" class="hover:text-blue-900 transition">Partner Academy</a>
@@ -35,7 +49,7 @@
                     <span class="text-xl">🛒</span>
                     <span x-text="cartCount" class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
                 </a>
-                <a href="franchise.html" class="bg-blue-950 text-white px-6 py-3 rounded-full text-[10px] font-black tracking-widest hover:bg-orange-600 transition shadow-lg">JOIN NETWORK</a>
+                <a href="franchise.html" class="bg-blue-950 text-white px-6 py-3 rounded-full text-[10px] font-black tracking-widest hover:bg-orange-600 transition shadow-lg uppercase">Join Network</a>
             </div>
         </nav>
     </header>
@@ -44,74 +58,110 @@
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <div>
                 <span class="bg-orange-100 text-orange-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Global Seafood Standards</span>
-                <h1 class="text-5xl md:text-8xl font-extrabold text-blue-950 leading-tight mt-6 mb-8 tracking-tighter">
-                    Premium <br><span class="gradient-text italic">Portfolio.</span>
+                <h1 class="text-5xl md:text-8xl font-extrabold text-blue-950 mt-6 mb-8 tracking-tighter">
+                    Healthier <br><span class="gradient-text italic">Lifestyle.</span>
                 </h1>
                 <p class="text-lg text-slate-500 max-w-lg mb-10 leading-relaxed italic">
-                    Explore our curated collection of 100% boneless, protein-rich seafood snacks designed for the modern lifestyle.
+                    Redefining the snack industry with 100% Boneless, Protein-Rich Seafood. No chemicals. No compromises. Designed for the modern elite.
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <a href="menu.html" class="bg-blue-950 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition shadow-2xl">View Menu</a>
-                    <a href="franchise.html" class="border-2 border-slate-200 text-slate-800 px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white transition">Investment Model</a>
+                    <a href="about.html" class="border-2 border-slate-200 text-slate-800 px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white transition">Learn Our Vision</a>
                 </div>
             </div>
             <div class="relative">
-                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1000" class="rounded-[60px] shadow-2xl w-full object-cover" alt="KFK Product">
+                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1000" class="rounded-[60px] shadow-2xl w-full object-cover transform rotate-2 hover:rotate-0 transition duration-700" alt="Seafood Excellence">
+                <div class="absolute -bottom-6 -left-6 bg-white p-8 rounded-[40px] shadow-2xl border border-slate-50">
+                    <p class="text-4xl font-black text-blue-950">58%</p>
+                    <p class="text-[9px] font-black uppercase tracking-widest text-slate-400 mt-1">Lean Protein</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="py-24 bg-white px-6">
         <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-orange-500 mb-4">Our Ecosystem</h2>
+                <h3 class="text-4xl md:text-5xl font-black text-blue-950 uppercase tracking-tighter">Everything You Need To <span class="italic font-light">Succeed.</span></h3>
+            </div>
+            
             <div class="grid md:grid-cols-3 gap-8">
-                <a href="menu.html" class="p-10 bg-slate-50 rounded-[50px] hover:shadow-xl transition block group">
-                    <h4 class="text-orange-600 font-black text-[10px] uppercase tracking-widest mb-4">Quality</h4>
+                <a href="menu.html" class="service-card p-10 bg-slate-50 rounded-[50px] block group">
+                    <div class="text-4xl mb-6 group-hover:scale-110 transition duration-300">🐟</div>
+                    <h4 class="text-orange-600 font-black text-[10px] uppercase tracking-widest mb-2">Quality</h4>
                     <h3 class="text-xl font-black text-blue-950 uppercase mb-4">Product Portfolio</h3>
-                    <p class="text-sm text-slate-400 italic">Sustainably sourced, 100% chemical-free seafood items.</p>
+                    <p class="text-sm text-slate-400 italic">Sustainably sourced, 100% chemical-free gourmet seafood items.</p>
                 </a>
-                <a href="training.html" class="p-10 bg-slate-50 rounded-[50px] hover:shadow-xl transition block group">
-                    <h4 class="text-orange-600 font-black text-[10px] uppercase tracking-widest mb-4">Education</h4>
+                
+                <a href="training.html" class="service-card p-10 bg-slate-50 rounded-[50px] block group">
+                    <div class="text-4xl mb-6 group-hover:scale-110 transition duration-300">🎓</div>
+                    <h4 class="text-orange-600 font-black text-[10px] uppercase tracking-widest mb-2">Education</h4>
                     <h3 class="text-xl font-black text-blue-950 uppercase mb-4">Partner Academy</h3>
-                    <p class="text-sm text-slate-400 italic">Master professional kitchen SOPs with our expert-led modules.</p>
+                    <p class="text-sm text-slate-400 italic">Master professional kitchen SOPs with our institutional training modules.</p>
                 </a>
-                <a href="faq.html" class="p-10 bg-slate-50 rounded-[50px] hover:shadow-xl transition block group">
-                    <h4 class="text-orange-600 font-black text-[10px] uppercase tracking-widest mb-4">Support</h4>
+                
+                <a href="faq.html" class="service-card p-10 bg-slate-50 rounded-[50px] block group">
+                    <div class="text-4xl mb-6 group-hover:scale-110 transition duration-300">📢</div>
+                    <h4 class="text-orange-600 font-black text-[10px] uppercase tracking-widest mb-2">Support</h4>
                     <h3 class="text-xl font-black text-blue-950 uppercase mb-4">Inquiry Desk</h3>
-                    <p class="text-sm text-slate-400 italic">Instant assistance for franchise partners and customers.</p>
+                    <p class="text-sm text-slate-400 italic">24/7 dedicated assistance for franchise partners and global inquiries.</p>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 bg-white border-t border-slate-100 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
-            <div class="col-span-2">
-                <div class="text-3xl font-black text-blue-950 italic mb-6">KFK<span class="text-orange-500">.</span></div>
-                <p class="text-slate-400 max-w-sm text-sm italic">Building India's No.1 Institutional Seafood Brand through innovation and health.</p>
+    <section class="full-section bg-blue-950 text-white rounded-[60px] md:rounded-[100px] mx-4 md:mx-10 overflow-hidden">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-10 italic">The Ultimate <br><span class="text-orange-500">Business</span> Asset.</h2>
+            <p class="text-lg md:text-xl opacity-70 mb-12 leading-relaxed italic font-light">Join the revolution of healthy seafood. KFK is a high-ROI institutional model engineered for the future of global urban dining.</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="franchise.html" class="bg-white text-blue-950 px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-500 hover:text-white transition shadow-2xl">Investment Model</a>
+                <a href="contact.html" class="border border-white/20 px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition">Contact Advisor</a>
             </div>
+        </div>
+    </section>
+
+    <footer class="py-24 bg-white border-t border-slate-100 px-6 mt-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-3xl font-black text-blue-950 italic mb-6">KFK<span class="text-orange-500">.</span></div>
+                <p class="text-slate-400 max-w-sm text-sm italic leading-relaxed">Pioneering a sustainable and healthy seafood culture in India. Institutional quality. Unmatched scale.</p>
+            </div>
+            
             <div>
-                <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-6">Operations</h6>
-                <ul class="space-y-3 text-[10px] font-black uppercase tracking-widest text-slate-600">
+                <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-6 underline decoration-orange-500 decoration-2 underline-offset-8">Operations</h6>
+                <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest text-slate-600">
                     <li><a href="menu.html" class="hover:text-orange-600 transition">View Menu</a></li>
                     <li><a href="training.html" class="hover:text-orange-600 transition">Partner Academy</a></li>
                     <li><a href="franchise.html" class="hover:text-orange-600 transition">Investment Model</a></li>
+                    <li><a href="material.html" class="hover:text-orange-600 transition">Supply Chain</a></li>
                 </ul>
             </div>
+            
             <div>
-                <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-6">Inquiry Desk</h6>
-                <ul class="space-y-3 text-[10px] font-black uppercase tracking-widest text-slate-600">
-                    <li><a href="faq.html" class="hover:text-orange-600 transition">FAQ Portal</a></li>
+                <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-6 underline decoration-orange-500 decoration-2 underline-offset-8">Support Hub</h6>
+                <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest text-slate-600">
+                    <li><a href="faq.html" class="hover:text-orange-600 transition">Inquiry Desk</a></li>
                     <li><a href="contact.html" class="hover:text-orange-600 transition">Support Center</a></li>
-                    <li><a href="compliance.html" class="hover:text-orange-600 transition">Legal Docs</a></li>
+                    <li><a href="compliance.html" class="hover:text-orange-600 transition">Legal Compliance</a></li>
+                    <li><a href="locations.html" class="hover:text-orange-600 transition">Store Locator</a></li>
                 </ul>
             </div>
+        </div>
+        
+        <div class="mt-20 pt-10 border-t border-slate-50 text-center">
+            <p class="text-[9px] font-black text-slate-300 uppercase tracking-[0.6em]">© 2026 Kolkata Fish Kitchen | International Standards | Premium Asset</p>
         </div>
     </footer>
 
     <script>
         function addToCart() {
-            // Simulated Logic
-            window.Alpine.store('global', { cartCount: window.Alpine.store('global').cartCount + 1 });
+            // Simulated Logic for AlpineJS
+            if(window.Alpine) {
+                let current = Alpine.store('global') ? Alpine.store('global').cartCount : 0;
+                // This is a placeholder since cart logic depends on your specific app state
+            }
             alert("Strategic Portfolio Item Added to Cart.");
         }
     </script>
