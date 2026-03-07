@@ -3,40 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK India | River to Kitchen Premium Seafood</title>
+    <title>KFK India | Premium Fresh Fish & Seafood Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
         .hero-gradient { background: linear-gradient(to right, rgba(0,46,110,0.9), rgba(0,46,110,0.4)); }
+        .product-shadow { box-shadow: 0 10px 30px -5px rgba(0,0,0,0.05); }
         .break-word { word-wrap: break-word; overflow-wrap: break-word; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .product-card:hover { transform: translateY(-10px); transition: all 0.4s ease; }
     </style>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-[#f8fafc] text-slate-800">
 
-    <div class="bg-[#002e6e] text-white text-[10px] py-2.5 px-4 text-center font-black tracking-[0.2em] uppercase">
-        ⚡ 120 Mins Delivery in Delhi & Kolkata | Chemical Free Certified ⚡
+    <div class="bg-[#002e6e] text-white text-[10px] py-2.5 px-4 text-center font-black tracking-[0.2em] uppercase border-b border-white/10">
+        ⚡ 120 MINS EXPRESS DELIVERY | 100% CHEMICAL FREE | SOURCE TO KITCHEN ⚡
     </div>
 
     <header class="sticky top-0 z-[100] bg-white/95 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
-            <div class="flex items-center gap-12">
+            <div class="flex items-center gap-10">
                 <a href="index.html" class="text-3xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>INDIA</a>
-                <nav class="hidden lg:flex gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
-                    <a href="menu.html" class="hover:text-orange-500 transition-colors">Fresh Fish</a>
+                <nav class="hidden lg:flex gap-8 text-[11px] font-extrabold uppercase tracking-[0.15em] text-slate-400">
+                    <a href="menu.html?cat=all" class="hover:text-orange-500 transition-colors">Fresh Fish</a>
                     <a href="franchise.html" class="hover:text-orange-500 transition-colors">Franchise</a>
                     <a href="franchise.html" class="hover:text-orange-500 transition-colors">Quality Check</a>
                 </nav>
             </div>
-            <div class="flex items-center gap-6">
-                <a href="tel:+919917385863" class="hidden md:block text-right">
-                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Expert Support</p>
+            <div class="flex items-center gap-5">
+                <a href="tel:+919917385863" class="hidden sm:block text-right border-r pr-5 border-gray-200">
+                    <p class="text-[9px] text-slate-400 font-bold uppercase">Expert Support</p>
                     <p class="text-sm font-black text-[#002e6e]">+91 99173 85863</p>
                 </a>
                 <div class="relative cursor-pointer" onclick="location.href='menu.html'">
-                    <span class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white font-black">0</span>
+                    <span class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white font-bold">0</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
                 </div>
             </div>
@@ -47,7 +48,7 @@
         <img id="hero-img" class="absolute inset-0 w-full h-full object-cover opacity-60" src="">
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-6 text-white">
-            <h1 class="text-6xl md:text-9xl font-black italic uppercase leading-[0.85] mb-8 break-word">Purest<br><span class="text-orange-500 text-shadow-xl">Catch.</span></h1>
+            <h1 class="text-6xl md:text-9xl font-black italic uppercase leading-[0.85] mb-8 break-word">River to<br><span class="text-orange-500 text-shadow-xl">Kitchen.</span></h1>
             <p class="max-w-xl text-gray-200 text-sm md:text-lg font-medium leading-relaxed mb-10">Lab tested, professional cleaning, and delivery within 120 minutes. India's safest fish destination.</p>
             <div class="flex flex-wrap gap-4">
                 <a href="menu.html?cat=all" class="bg-orange-500 px-12 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-white hover:text-[#002e6e] transition-all shadow-xl">Order Fresh Catch</a>
@@ -56,24 +57,24 @@
         </div>
     </section>
 
-    <section class="py-16 bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 flex gap-8 overflow-x-auto hide-scrollbar pb-4">
+    <section class="py-12 bg-white border-b">
+        <div class="max-w-7xl mx-auto px-4 overflow-x-auto hide-scrollbar flex gap-8 md:justify-between items-center py-4">
             <script>
                 const cats = [
-                    {n:'River Fish', q:'fresh fish rohu', id:'c1', link:'river'},
-                    {n:'Prawns', q:'tiger prawns fresh', id:'c2', link:'prawns'},
-                    {n:'Boneless', q:'fish fillet raw', id:'c3', link:'boneless'},
-                    {n:'Bengali Cut', q:'catla fish bengali', id:'c4', link:'river'},
-                    {n:'Steaks', q:'fish steaks raw', id:'c5', link:'steaks'},
-                    {n:'Fast Food', q:'fish burger crispy', id:'c6', link:'fastfood'}
+                    {n:'River Fish', q:'fresh rohu fish', i:'c1', link:'river'}, 
+                    {n:'Seafood', q:'pomfret fish', i:'c2', link:'steaks'}, 
+                    {n:'Prawns', q:'fresh jumbo prawns', i:'c3', link:'prawns'}, 
+                    {n:'Boneless', q:'fish fillet raw', i:'c4', link:'boneless'},
+                    {n:'Bengali Cut', q:'catla fish', i:'c5', link:'river'}, 
+                    {n:'Steaks', q:'fish steaks raw', i:'c6', link:'steaks'}
                 ];
                 cats.forEach(c => {
                     document.write(`
-                        <a href="menu.html?cat=${c.link}" class="group text-center min-w-[120px]">
-                            <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-gray-100 group-hover:border-orange-500 transition-all mb-4 shadow-lg bg-slate-50">
-                                <img id="${c.id}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="">
+                        <a href="menu.html?cat=${c.link}" class="text-center group min-w-[100px]">
+                            <div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-gray-100 group-hover:border-orange-500 transition-all bg-gray-50 mb-3 shadow-sm">
+                                <img id="${c.i}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="">
                             </div>
-                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-[#002e6e] transition-colors">${c.n}</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-[#002e6e]">${c.n}</span>
                         </a>
                     `);
                 });
@@ -110,47 +111,51 @@
         </div>
     </section>
 
-    <footer class="bg-white py-20 px-6 border-t">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer class="bg-white border-t pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
             <div>
-                <a href="index.html" class="text-3xl font-black text-[#002e6e] italic tracking-tighter block mb-6">KFK<span class="text-orange-500">.</span>INDIA</a>
-                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-loose">River to Kitchen Freshness Guaranteed.</p>
+                <a href="index.html" class="text-3xl font-black text-[#002e6e] italic tracking-tighter mb-8 block">KFK<span class="text-orange-500">.</span>INDIA</a>
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] leading-loose">River to Kitchen Freshness Guaranteed.</p>
             </div>
             <div>
-                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-6">Explore</h6>
-                <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                    <li><a href="menu.html?cat=river">River Fish</a></li>
-                    <li><a href="menu.html?cat=prawns">Prawns Market</a></li>
-                    <li><a href="franchise.html">Franchise</a></li>
+                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-8">Quick Links</h6>
+                <ul class="space-y-4 text-[11px] font-black uppercase tracking-widest text-slate-500">
+                    <li><a href="menu.html?cat=river">Today's Fresh Catch</a></li>
+                    <li><a href="franchise.html">Business Franchise</a></li>
+                    <li><a href="franchise.html">Quality Policy</a></li>
                 </ul>
             </div>
             <div>
-                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-6">Contact</h6>
-                <p class="text-[11px] font-black text-[#002e6e] mb-2">+91 99173 85863</p>
-                <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest">care@kfkindia.com</p>
+                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-8">Contact</h6>
+                <p class="text-sm font-black text-[#002e6e] mb-4">+91 99173 85863</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">care@kfkindia.com</p>
             </div>
+        </div>
+        <div class="text-center text-[9px] font-black text-slate-300 tracking-[0.5em] uppercase">
+            © 2026 KFK INDIA OPERATIONS. ALL RIGHTS RESERVED.
         </div>
     </footer>
 
     <div id="smart-bot" class="fixed bottom-28 right-6 z-[2000] w-[320px] bg-white rounded-[2.5rem] shadow-[0_30px_100px_rgba(0,0,0,0.2)] border border-gray-100 overflow-hidden hidden transform transition-all">
         <div class="bg-[#002e6e] p-6 text-white flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center font-black italic text-sm">K</div>
+                <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center font-black italic">K</div>
                 <div>
                     <h4 class="text-[10px] font-black uppercase tracking-widest">KFK Expert</h4>
-                    <p class="text-[8px] text-orange-300 font-bold uppercase mt-1">Live Help Online</p>
+                    <p class="text-[8px] text-orange-300 font-bold uppercase mt-1">Online Help</p>
                 </div>
             </div>
             <button onclick="toggleBot()" class="text-white/50 hover:text-white">✕</button>
         </div>
         <div class="p-6 h-[380px] overflow-y-auto bg-gray-50 space-y-4" id="bot-content">
             <div class="bg-white p-4 rounded-2xl border border-gray-200 text-[11px] font-bold text-slate-500 leading-relaxed shadow-sm">
-                Namaste! Main KFK Expert Assistant hoon. Main aapki kya help kar sakta hoon?
+                Namaste! Main KFK Expert Assistant hoon. Aap kya jaanna chahte hain?
             </div>
-            <button onclick="botReply('franchise')" class="w-full text-left bg-white p-4 rounded-xl text-[10px] font-black uppercase border border-gray-200 hover:border-orange-500 hover:text-orange-600 transition-all shadow-sm">🏢 Franchise Setup?</button>
+            <button onclick="botReply('franchise')" class="w-full text-left bg-white p-4 rounded-xl text-[10px] font-black uppercase border border-gray-200 hover:border-orange-500 hover:text-orange-600 transition-all shadow-sm">🏢 Franchise?</button>
             <button onclick="botReply('delivery')" class="w-full text-left bg-white p-4 rounded-xl text-[10px] font-black uppercase border border-gray-200 hover:border-orange-500 hover:text-orange-600 transition-all shadow-sm">🚚 Delivery Time?</button>
-            <button onclick="botReply('quality')" class="w-full text-left bg-white p-4 rounded-xl text-[10px] font-black uppercase border border-gray-200 hover:border-orange-500 hover:text-orange-600 transition-all shadow-sm">🔬 Purity & Chemicals?</button>
-            <a href="https://wa.me/919917385863" target="_blank" class="block w-full text-center bg-[#25D366] text-white p-4 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg hover:scale-105 transition-all">Direct WhatsApp</a>
+            <button onclick="botReply('quality')" class="w-full text-left bg-white p-4 rounded-xl text-[10px] font-black uppercase border border-gray-200 hover:border-orange-500 hover:text-orange-600 transition-all shadow-sm">🔬 Purity Test?</button>
+            
+            <a href="https://wa.me/919917385863" target="_blank" class="block w-full text-center bg-[#25D366] text-white p-4 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg">Chat on WhatsApp</a>
         </div>
     </div>
 
@@ -167,7 +172,7 @@
             try {
                 const r = await fetch(`https://api.pexels.com/v1/search?query=${q}&per_page=1`, {headers:{Authorization:API_KEY}});
                 const d = await r.json();
-                if(d.photos.length > 0) document.getElementById(id).src = d.photos[0].src.large;
+                if(d.photos.length > 0) document.getElementById(id).src = d.photos[0].src.large2x;
             } catch(e) {}
         }
 
@@ -178,20 +183,20 @@
         function botReply(type) {
             const content = document.getElementById('bot-content');
             let text = "";
-            if(type === 'franchise') text = "KFK Franchise ke liye investment 5-8 Lakh hai. Hum aapko training, outlet setup aur daily fresh fish supply dete hain.";
-            else if(type === 'delivery') text = "Hum Delhi NCR aur Kolkata mein 120 minutes ke andar delivery karte hain. Minimum order ₹499 hai.";
-            else if(type === 'quality') text = "Humari fish 100% formaline-free hai. Hum har batch ko ozone wash karte hain aur lab test karte hain.";
+            if(type === 'franchise') text = "KFK Franchise ke liye investment ₹5-8 Lakh hai. Hum aapko training aur daily fresh supply dete hain.";
+            else if(type === 'delivery') text = "Hum Delhi NCR aur Kolkata mein 120 mins ke andar delivery karte hain.";
+            else if(type === 'quality') text = "Humari har machhli Chemical-free hai aur uska Lab test certificate milta hai.";
 
             const div = document.createElement('div');
-            div.className = "bg-orange-50 p-4 rounded-2xl border border-orange-100 text-[11px] font-bold text-[#002e6e] ml-4 shadow-sm animate-pulse";
+            div.className = "bg-orange-50 p-4 rounded-2xl border border-orange-100 text-[11px] font-bold text-[#002e6e] ml-4 shadow-sm animate-bounce";
             div.innerText = text;
             content.appendChild(div);
             content.scrollTop = content.scrollHeight;
-            setTimeout(() => div.classList.remove('animate-pulse'), 1000);
+            setTimeout(() => div.classList.remove('animate-bounce'), 1000);
         }
 
-        fetchAPI('fresh seafood raw fish on ice premium', 'hero-img');
-        cats.forEach(c => fetchAPI(c.q, c.id));
+        fetchAPI('fresh raw fish on market ice', 'hero-img');
+        cats.forEach(c => fetchAPI(c.q, c.i));
     </script>
 </body>
 </html>
