@@ -3,167 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK INDIA | Global Seafood Franchise & Investment Hub</title>
+    <title>KFK INDIA | Fresh Seafood & Institutional Supply</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
-        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); }
-        .full-section { min-height: 100vh; display: flex; align-items: center; padding: 100px 0; }
-        
-        /* Premium Typography & Overflow Fix */
-        h1, h2, h3, h4 { 
-            word-wrap: break-word; 
-            overflow-wrap: break-word; 
-            hyphens: auto; 
-            line-height: 1.1;
-        }
-        
-        .gradient-text { 
-            background: linear-gradient(90deg, #1e3a8a, #f97316); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-        }
-
-        .service-card:hover { transform: translateY(-10px); transition: 0.4s ease; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcfcfc; scroll-behavior: smooth; }
+        .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #f1f5f9; }
+        .product-card:hover { transform: translateY(-8px); shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); border-color: #fdba74; }
+        .nav-glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .badge-premium { background: linear-gradient(90deg, #1e3a8a, #3b82f6); }
+        /* Word wrap fix */
+        .text-fix { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
     </style>
 </head>
-<body class="bg-white text-slate-900" x-data="{ cartCount: 0 }">
+<body x-data="{ cartCount: 0 }">
 
-    <header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100">
-        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <div class="text-2xl md:text-3xl font-black tracking-tighter text-blue-950 italic">KFK<span class="text-orange-500">.</span></div>
+    <div class="bg-blue-950 text-white text-[10px] font-bold uppercase tracking-[0.3em] py-3 text-center">
+        ⚡ Direct from Coast to Kitchen | 100% Chemical Free | Pan India Delivery
+    </div>
+
+    <header class="sticky top-0 z-50 nav-glass border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-black text-blue-950 italic">KFK<span class="text-orange-500">.</span></a>
             
-            <div class="hidden lg:flex space-x-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                <a href="index.html" class="text-orange-600">Home</a>
-                <a href="about.html" class="hover:text-blue-900 transition">Our Story</a>
+            <div class="hidden lg:flex space-x-8 text-[11px] font-black uppercase tracking-widest text-slate-500">
                 <a href="menu.html" class="hover:text-blue-900 transition">Product Portfolio</a>
                 <a href="franchise.html" class="hover:text-blue-900 transition">Investment Model</a>
                 <a href="training.html" class="hover:text-blue-900 transition">Partner Academy</a>
                 <a href="faq.html" class="hover:text-blue-900 transition">Inquiry Desk</a>
             </div>
 
-            <div class="flex items-center gap-4">
-                <a href="order.html" class="relative group">
-                    <span class="text-xl">🛒</span>
+            <div class="flex items-center gap-6">
+                <div class="relative cursor-pointer group" onclick="location.href='order.html'">
+                    <span class="text-2xl group-hover:scale-110 transition inline-block">🛒</span>
                     <span x-text="cartCount" class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
-                </a>
-                <a href="franchise.html" class="bg-blue-950 text-white px-6 py-3 rounded-full text-[10px] font-black tracking-widest hover:bg-orange-600 transition shadow-lg uppercase">Join Network</a>
+                </div>
+                <a href="franchise.html" class="hidden md:block bg-blue-950 text-white px-6 py-2.5 rounded-full text-[10px] font-black tracking-widest hover:bg-orange-600 transition shadow-lg uppercase">Become a Partner</a>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <section class="full-section bg-slate-50 relative overflow-hidden px-6">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+    <section class="relative h-[60vh] md:h-[80vh] flex items-center overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1559740064-c60746c0d481?q=80&w=2000" class="absolute inset-0 w-full h-full object-cover" alt="Hero Fish">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-950/90 to-transparent"></div>
+        <div class="relative max-w-7xl mx-auto px-6 text-white">
+            <span class="badge-premium px-4 py-1 rounded-full text-[10px] font-black tracking-[0.2em] mb-6 inline-block">Pure Freshness</span>
+            <h1 class="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6 text-fix">
+                World-Class <br><span class="text-orange-500 italic">Seafood.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-white/70 max-w-xl italic mb-10 leading-relaxed">Sourced directly from the ports, processed under global hygiene standards, and delivered with cold-chain integrity.</p>
+            <div class="flex gap-4">
+                <a href="#shop" class="bg-orange-600 hover:bg-white hover:text-orange-600 px-10 py-4 rounded-xl font-black uppercase text-[11px] tracking-widest transition shadow-2xl">Shop Now</a>
+                <a href="franchise.html" class="bg-white/10 backdrop-blur-md border border-white/20 px-10 py-4 rounded-xl font-black uppercase text-[11px] tracking-widest transition hover:bg-white hover:text-blue-950">Investment Kit</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
-                <span class="bg-orange-100 text-orange-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Global Seafood Standards</span>
-                <h1 class="text-5xl md:text-8xl font-extrabold text-blue-950 mt-6 mb-8 tracking-tighter">
-                    Healthier <br><span class="gradient-text italic">Lifestyle.</span>
-                </h1>
-                <p class="text-lg text-slate-500 max-w-lg mb-10 leading-relaxed italic">
-                    Redefining the snack industry with 100% Boneless, Protein-Rich Seafood. No chemicals. No compromises. Designed for the modern elite.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="menu.html" class="bg-blue-950 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition shadow-2xl">View Menu</a>
-                    <a href="about.html" class="border-2 border-slate-200 text-slate-800 px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white transition">Learn Our Vision</a>
-                </div>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-orange-500 mb-4">Our Premium Selection</h2>
+                <h3 class="text-4xl font-black text-blue-950 uppercase tracking-tighter">Product Portfolio</h3>
             </div>
-            <div class="relative">
-                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1000" class="rounded-[60px] shadow-2xl w-full object-cover transform rotate-2 hover:rotate-0 transition duration-700" alt="Seafood Excellence">
-                <div class="absolute -bottom-6 -left-6 bg-white p-8 rounded-[40px] shadow-2xl border border-slate-50">
-                    <p class="text-4xl font-black text-blue-950">58%</p>
-                    <p class="text-[9px] font-black uppercase tracking-widest text-slate-400 mt-1">Lean Protein</p>
-                </div>
-            </div>
+            <a href="menu.html" class="text-[11px] font-black uppercase tracking-widest text-blue-900 border-b-2 border-orange-500 pb-1">View Full Collection →</a>
         </div>
-    </section>
 
-    <section class="py-24 bg-white px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20">
-                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-orange-500 mb-4">Our Ecosystem</h2>
-                <h3 class="text-4xl md:text-5xl font-black text-blue-950 uppercase tracking-tighter">Everything You Need To <span class="italic font-light">Succeed.</span></h3>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <a href="menu.html" class="service-card p-10 bg-slate-50 rounded-[50px] block group">
-                    <div class="text-4xl mb-6 group-hover:scale-110 transition duration-300">🐟</div>
-                    <h4 class="text-orange-600 font-black text-[10px] uppercase tracking-widest mb-2">Quality</h4>
-                    <h3 class="text-xl font-black text-blue-950 uppercase mb-4">Product Portfolio</h3>
-                    <p class="text-sm text-slate-400 italic">Sustainably sourced, 100% chemical-free gourmet seafood items.</p>
-                </a>
-                
-                <a href="training.html" class="service-card p-10 bg-slate-50 rounded-[50px] block group">
-                    <div class="text-4xl mb-6 group-hover:scale-110 transition duration-300">🎓</div>
-                    <h4 class="text-orange-600 font-black text-[10px] uppercase tracking-widest mb-2">Education</h4>
-                    <h3 class="text-xl font-black text-blue-950 uppercase mb-4">Partner Academy</h3>
-                    <p class="text-sm text-slate-400 italic">Master professional kitchen SOPs with our institutional training modules.</p>
-                </a>
-                
-                <a href="faq.html" class="service-card p-10 bg-slate-50 rounded-[50px] block group">
-                    <div class="text-4xl mb-6 group-hover:scale-110 transition duration-300">📢</div>
-                    <h4 class="text-orange-600 font-black text-[10px] uppercase tracking-widest mb-2">Support</h4>
-                    <h3 class="text-xl font-black text-blue-950 uppercase mb-4">Inquiry Desk</h3>
-                    <p class="text-sm text-slate-400 italic">24/7 dedicated assistance for franchise partners and global inquiries.</p>
-                </a>
+            <div class="product-card bg-white rounded-[40px] p-5 shadow-sm group cursor-pointer">
+                <div class="overflow-hidden rounded-[30px] h-56 mb-6">
+                    <img src="https://images.unsplash.com/photo-1534422298391-e4f8c170db76?w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Bhetki">
+                </div>
+                <h4 class="font-black text-blue-950 uppercase text-sm mb-1 tracking-tight">Kolkata Bhetki Fillet</h4>
+                <p class="text-[11px] text-slate-400 font-bold mb-4">Net Weight: 500g | Boneless</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-black text-orange-600">₹645</span>
+                    <button @click="cartCount++; alert('Added to Portfolio')" class="bg-slate-100 hover:bg-blue-950 hover:text-white p-3 rounded-2xl transition">
+                        <span class="text-xs font-black uppercase tracking-tighter">Add +</span>
+                    </button>
+                </div>
             </div>
+
+            <div class="product-card bg-white rounded-[40px] p-5 shadow-sm group cursor-pointer">
+                <div class="overflow-hidden rounded-[30px] h-56 mb-6">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Prawns">
+                </div>
+                <h4 class="font-black text-blue-950 uppercase text-sm mb-1 tracking-tight">Premium Tiger Prawns</h4>
+                <p class="text-[11px] text-slate-400 font-bold mb-4">Quantity: 15-18 Pcs | Jumbo</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-black text-orange-600">₹890</span>
+                    <button @click="cartCount++; alert('Added to Portfolio')" class="bg-slate-100 hover:bg-blue-950 hover:text-white p-3 rounded-2xl transition">
+                        <span class="text-xs font-black uppercase tracking-tighter">Add +</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card bg-white rounded-[40px] p-5 shadow-sm group cursor-pointer">
+                <div class="overflow-hidden rounded-[30px] h-56 mb-6">
+                    <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Salmon">
+                </div>
+                <h4 class="font-black text-blue-950 uppercase text-sm mb-1 tracking-tight">Norwegian Salmon</h4>
+                <p class="text-[11px] text-slate-400 font-bold mb-4">Net Weight: 250g | Rich Omega-3</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-black text-orange-600">₹1,250</span>
+                    <button @click="cartCount++; alert('Added to Portfolio')" class="bg-slate-100 hover:bg-blue-950 hover:text-white p-3 rounded-2xl transition">
+                        <span class="text-xs font-black uppercase tracking-tighter">Add +</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card bg-white rounded-[40px] p-5 shadow-sm group cursor-pointer">
+                <div class="overflow-hidden rounded-[30px] h-56 mb-6">
+                    <img src="https://images.unsplash.com/photo-1626509135521-e409da2f9746?w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Rohu">
+                </div>
+                <h4 class="font-black text-blue-950 uppercase text-sm mb-1 tracking-tight">Fresh Water Rohu</h4>
+                <p class="text-[11px] text-slate-400 font-bold mb-4">Net Weight: 1kg | Bengali Cut</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-black text-orange-600">₹420</span>
+                    <button @click="cartCount++; alert('Added to Portfolio')" class="bg-slate-100 hover:bg-blue-950 hover:text-white p-3 rounded-2xl transition">
+                        <span class="text-xs font-black uppercase tracking-tighter">Add +</span>
+                    </button>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <section class="full-section bg-blue-950 text-white rounded-[60px] md:rounded-[100px] mx-4 md:mx-10 overflow-hidden">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-10 italic">The Ultimate <br><span class="text-orange-500">Business</span> Asset.</h2>
-            <p class="text-lg md:text-xl opacity-70 mb-12 leading-relaxed italic font-light">Join the revolution of healthy seafood. KFK is a high-ROI institutional model engineered for the future of global urban dining.</p>
-            <div class="flex flex-wrap justify-center gap-6">
-                <a href="franchise.html" class="bg-white text-blue-950 px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-500 hover:text-white transition shadow-2xl">Investment Model</a>
-                <a href="contact.html" class="border border-white/20 px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition">Contact Advisor</a>
-            </div>
+    <section class="bg-blue-950 text-white py-24 mx-6 rounded-[60px] md:rounded-[100px] text-center px-6 overflow-hidden">
+        <h2 class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-8 italic leading-none">Global <br><span class="text-orange-500">Institutional</span> Asset.</h2>
+        <p class="text-white/60 text-lg md:text-xl max-w-2xl mx-auto mb-12 italic leading-relaxed">Scale your investment with India's most advanced seafood supply chain. Premium assets, high ROI, global standards.</p>
+        <div class="flex flex-wrap justify-center gap-6">
+            <a href="franchise.html" class="bg-white text-blue-950 px-12 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:bg-orange-500 hover:text-white transition">Investment Model</a>
+            <a href="training.html" class="bg-white/10 border border-white/20 px-12 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:bg-white hover:text-blue-950 transition">Partner Academy</a>
         </div>
     </section>
 
-    <footer class="py-24 bg-white border-t border-slate-100 px-6 mt-10">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer class="bg-white pt-24 pb-12 px-6 border-t border-slate-100 mt-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16">
             <div class="col-span-1 md:col-span-2">
-                <div class="text-3xl font-black text-blue-950 italic mb-6">KFK<span class="text-orange-500">.</span></div>
-                <p class="text-slate-400 max-w-sm text-sm italic leading-relaxed">Pioneering a sustainable and healthy seafood culture in India. Institutional quality. Unmatched scale.</p>
+                <div class="text-4xl font-black text-blue-950 italic mb-8">KFK<span class="text-orange-500">.</span></div>
+                <p class="text-slate-400 max-w-sm text-sm italic leading-relaxed">Pioneering the future of healthy seafood in India. We combine tradition with institutional technology to deliver pure energy.</p>
             </div>
-            
             <div>
-                <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-6 underline decoration-orange-500 decoration-2 underline-offset-8">Operations</h6>
-                <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest text-slate-600">
-                    <li><a href="menu.html" class="hover:text-orange-600 transition">View Menu</a></li>
-                    <li><a href="training.html" class="hover:text-orange-600 transition">Partner Academy</a></li>
+                <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-8 border-b border-orange-500 pb-2 inline-block">Explore Portfolio</h6>
+                <ul class="space-y-4 text-[11px] font-black uppercase tracking-widest text-slate-600">
+                    <li><a href="menu.html" class="hover:text-orange-600 transition">Signature Menu</a></li>
                     <li><a href="franchise.html" class="hover:text-orange-600 transition">Investment Model</a></li>
-                    <li><a href="material.html" class="hover:text-orange-600 transition">Supply Chain</a></li>
+                    <li><a href="training.html" class="hover:text-orange-600 transition">Partner Academy</a></li>
+                    <li><a href="faq.html" class="hover:text-orange-600 transition">Inquiry Desk</a></li>
                 </ul>
             </div>
-            
             <div>
-                <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-6 underline decoration-orange-500 decoration-2 underline-offset-8">Support Hub</h6>
-                <ul class="space-y-4 text-[10px] font-black uppercase tracking-widest text-slate-600">
-                    <li><a href="faq.html" class="hover:text-orange-600 transition">Inquiry Desk</a></li>
+                <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-8 border-b border-orange-500 pb-2 inline-block">Global Support</h6>
+                <ul class="space-y-4 text-[11px] font-black uppercase tracking-widest text-slate-600">
                     <li><a href="contact.html" class="hover:text-orange-600 transition">Support Center</a></li>
                     <li><a href="compliance.html" class="hover:text-orange-600 transition">Legal Compliance</a></li>
-                    <li><a href="locations.html" class="hover:text-orange-600 transition">Store Locator</a></li>
+                    <li><a href="locations.html" class="hover:text-orange-600 transition">Global Locations</a></li>
                 </ul>
             </div>
         </div>
-        
-        <div class="mt-20 pt-10 border-t border-slate-50 text-center">
-            <p class="text-[9px] font-black text-slate-300 uppercase tracking-[0.6em]">© 2026 Kolkata Fish Kitchen | International Standards | Premium Asset</p>
+        <div class="mt-24 pt-10 border-t border-slate-50 text-center">
+            <p class="text-[9px] font-black text-slate-300 uppercase tracking-[0.6em]">© 2026 KFK INDIA | Institutional Grade Seafood | All Assets Verified</p>
         </div>
     </footer>
 
-    <script>
-        function addToCart() {
-            // Simulated Logic for AlpineJS
-            if(window.Alpine) {
-                let current = Alpine.store('global') ? Alpine.store('global').cartCount : 0;
-                // This is a placeholder since cart logic depends on your specific app state
-            }
-            alert("Strategic Portfolio Item Added to Cart.");
-        }
-    </script>
 </body>
 </html>
