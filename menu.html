@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Portfolio | KFK Culinary & Seafood Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; overflow-x: hidden; }
+        .product-card { transition: all 0.4s ease; border: 1px solid #f1f5f9; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); border-color: #fb923c; }
+        .category-pill { transition: 0.3s; cursor: pointer; border: 1px solid #e2e8f0; }
+        .category-pill:hover { background: #1e3a8a; color: white; border-color: #1e3a8a; }
+        .text-wrap-fix { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
+        .chef-special { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); }
+    </style>
+</head>
+<body x-data="{ cartCount: 0 }">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
+        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black text-blue-950 italic">KFK<span class="text-orange-500">.</span></a>
+            <div class="hidden lg:flex space-x-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                <a href="index.html" class="hover:text-blue-900 transition">Home</a>
+                <a href="menu.html" class="text-orange-600">Product Portfolio</a>
+                <a href="franchise.html" class="hover:text-blue-900 transition">Investment Model</a>
+                <a href="training.html" class="hover:text-blue-900 transition">Partner Academy</a>
+            </div>
+            <div class="flex items-center gap-5">
+                <div class="relative cursor-pointer" onclick="location.href='order.html'">
+                    <span class="text-xl">🛒</span>
+                    <span x-text="cartCount" class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="py-20 bg-slate-50 px-6 text-center">
+        <h1 class="text-5xl md:text-7xl font-black text-blue-950 uppercase tracking-tighter mb-6 text-wrap-fix">
+            Institutional <span class="text-orange-600 italic">Portfolio.</span>
+        </h1>
+        <p class="text-slate-400 max-w-2xl mx-auto italic text-lg leading-relaxed">From raw premium harvests to gourmet fast-food innovations. Explore the versatility of KFK seafood.</p>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="flex items-center justify-between mb-12 border-b border-slate-100 pb-6">
+            <h2 class="text-2xl font-black text-blue-950 uppercase tracking-tight">01. Premium Raw Harvest</h2>
+            <span class="text-[10px] font-bold text-slate-300 uppercase tracking-widest italic">100% Boneless & Chemical Free</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="product-card bg-white rounded-[40px] p-6 shadow-sm group">
+                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c170db76?w=500" class="w-full h-48 object-cover rounded-[30px] mb-6 group-hover:scale-105 transition" alt="Bhetki">
+                <h4 class="font-black text-blue-950 uppercase text-sm mb-1">Asian Seabass (Bhetki)</h4>
+                <p class="text-[10px] text-slate-400 font-bold mb-4 uppercase">500g | Vacuum Packed</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-lg font-black text-orange-600">₹645</span>
+                    <button @click="cartCount++" class="bg-blue-950 text-white text-[9px] font-black uppercase px-4 py-2 rounded-xl">Add to Basket</button>
+                </div>
+            </div>
+            <div class="product-card bg-white rounded-[40px] p-6 shadow-sm group">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500" class="w-full h-48 object-cover rounded-[30px] mb-6 group-hover:scale-105 transition" alt="Prawns">
+                <h4 class="font-black text-blue-950 uppercase text-sm mb-1">Tiger Prawns (Jumbo)</h4>
+                <p class="text-[10px] text-slate-400 font-bold mb-4 uppercase">12-15 Pcs | Deveined</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-lg font-black text-orange-600">₹890</span>
+                    <button @click="cartCount++" class="bg-blue-950 text-white text-[9px] font-black uppercase px-4 py-2 rounded-xl">Add to Basket</button>
+                </div>
+            </div>
+            <div class="product-card bg-white rounded-[40px] p-6 shadow-sm group">
+                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=500" class="w-full h-48 object-cover rounded-[30px] mb-6 group-hover:scale-105 transition" alt="Salmon">
+                <h4 class="font-black text-blue-950 uppercase text-sm mb-1">Atlantic Salmon Steak</h4>
+                <p class="text-[10px] text-slate-400 font-bold mb-4 uppercase">250g | Rich Omega-3</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-lg font-black text-orange-600">₹1,250</span>
+                    <button @click="cartCount++" class="bg-blue-950 text-white text-[9px] font-black uppercase px-4 py-2 rounded-xl">Add to Basket</button>
+                </div>
+            </div>
+            <div class="product-card bg-white rounded-[40px] p-6 shadow-sm group">
+                <img src="https://images.unsplash.com/photo-1626509135521-e409da2f9746?w=500" class="w-full h-48 object-cover rounded-[30px] mb-6 group-hover:scale-105 transition" alt="Rohu">
+                <h4 class="font-black text-blue-950 uppercase text-sm mb-1">River Rohu (Premium)</h4>
+                <p class="text-[10px] text-slate-400 font-bold mb-4 uppercase">1kg | Bengali Style Cut</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-lg font-black text-orange-600">₹420</span>
+                    <button @click="cartCount++" class="bg-blue-950 text-white text-[9px] font-black uppercase px-4 py-2 rounded-xl">Add to Basket</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chef-special py-24 px-6 rounded-[60px] md:rounded-[100px] mx-4 md:mx-10 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-orange-400 mb-4">Culinary Versatility</h2>
+                <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-wrap-fix">02. Gourmet Fast-Food <span class="italic font-light">Range.</span></h3>
+                <p class="mt-6 text-white/60 italic">See how our premium fish transforms into world-class snacks.</p>
+            </div>
+
+            
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-white/10 backdrop-blur-md p-10 rounded-[50px] border border-white/10 hover:bg-orange-600 transition group cursor-pointer" onclick="location.href='order.html'">
+                    <span class="text-4xl mb-6 block group-hover:scale-110 transition">🍔</span>
+                    <h4 class="text-xl font-black uppercase mb-3">Crispy Bhetki Burger</h4>
+                    <p class="text-sm text-white/60 italic group-hover:text-white leading-relaxed">Golden fried Asian Seabass fillet, toasted brioche, and signature KFK tartar sauce.</p>
+                    <div class="mt-8 text-[10px] font-black uppercase tracking-widest bg-white text-blue-900 inline-block px-4 py-2 rounded-full">Explore Recipe</div>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md p-10 rounded-[50px] border border-white/10 hover:bg-orange-600 transition group cursor-pointer" onclick="location.href='order.html'">
+                    <span class="text-4xl mb-6 block group-hover:scale-110 transition">🌮</span>
+                    <h4 class="text-xl font-black uppercase mb-3">Seafood Soft Tacos</h4>
+                    <p class="text-sm text-white/60 italic group-hover:text-white leading-relaxed">Grilled Salmon flakes with lime-cilantro slaw and avocado crema on corn tortillas.</p>
+                    <div class="mt-8 text-[10px] font-black uppercase tracking-widest bg-white text-blue-900 inline-block px-4 py-2 rounded-full">Explore Recipe</div>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md p-10 rounded-[50px] border border-white/10 hover:bg-orange-600 transition group cursor-pointer" onclick="location.href='order.html'">
+                    <span class="text-4xl mb-6 block group-hover:scale-110 transition">🍟</span>
+                    <h4 class="text-xl font-black uppercase mb-3">Prawn Popcorn</h4>
+                    <p class="text-sm text-white/60 italic group-hover:text-white leading-relaxed">Bite-sized Tiger Prawns flash-fried with KFK secret spice blend. Ultimate protein snack.</p>
+                    <div class="mt-8 text-[10px] font-black uppercase tracking-widest bg-white text-blue-900 inline-block px-4 py-2 rounded-full">Explore Recipe</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-24 bg-white px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-20">
+            <div>
+                <div class="text-3xl font-black text-blue-950 italic mb-8">KFK<span class="text-orange-500">.</span></div>
+                <p class="text-slate-400 text-sm italic leading-relaxed">Transforming the Indian seafood landscape through institutional quality and gourmet fast-food innovation.</p>
+            </div>
+            <div class="col-span-2 grid grid-cols-2 md:grid-cols-3 gap-10">
+                <div>
+                    <h6 class="text-[10px] font-black uppercase tracking-widest text-orange-500 mb-6 underline decoration-2 underline-offset-8">Partnership</h6>
+                    <ul class="space-y-4 text-[10px] font-black uppercase text-slate-500">
+                        <li><a href="franchise.html" class="hover:text-blue-900">Investment Model</a></li>
+                        <li><a href="training.html" class="hover:text-blue-900">Partner Academy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="text-[10px] font-black uppercase tracking-widest text-orange-500 mb-6 underline decoration-2 underline-offset-8">Direct Help</h6>
+                    <ul class="space-y-4 text-[10px] font-black uppercase text-slate-500">
+                        <li><a href="faq.html" class="hover:text-blue-900">Inquiry Desk</a></li>
+                        <li><a href="contact.html" class="hover:text-blue-900">Contact Chef</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mt-20 pt-10 border-t border-slate-50 text-center">
+            <p class="text-[9px] font-black text-slate-200 uppercase tracking-[0.5em]">© 2026 Kolkata Fish Kitchen | No Watermarks | Global Standards</p>
+        </div>
+    </footer>
+
+</body>
+</html>
