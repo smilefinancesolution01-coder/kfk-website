@@ -3,101 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fish Menu | KFK India - Fresh Catch Market</title>
+    <title>Fresh Fish Market | KFK India</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .product-card { transition: all 0.3s ease; border: 1px solid #f1f5f9; }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1); border-color: #f97316; }
-        .filter-btn.active { background: #002e6e; color: white; border-color: #002e6e; }
+        .category-btn.active { background: #002e6e; color: white; border-color: #002e6e; }
+        .product-card { transition: all 0.3s ease; }
+        .product-card:hover { transform: translateY(-5px); }
     </style>
 </head>
-<body class="bg-white">
+<body class="bg-gray-50">
 
-    <header class="h-20 border-b flex items-center px-6 sticky top-0 bg-white/90 backdrop-blur-md z-50">
-        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-black text-[#002e6e] italic uppercase tracking-tighter">KFK<span class="text-orange-500">.</span>INDIA</a>
-            <div class="flex items-center gap-6">
-                <div class="relative cursor-pointer" onclick="location.href='order.html'">
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white font-bold">0</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
-                </div>
+    <header class="sticky top-0 z-[100] bg-white border-b border-gray-100 p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black text-[#002e6e] italic">KFK<span class="text-orange-500">.</span>INDIA</a>
+            <div class="flex items-center gap-4">
+                <span class="text-[10px] font-black uppercase text-slate-400">Delhi & Kolkata Express</span>
+                <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center">🛒</div>
             </div>
         </div>
     </header>
 
-    <section class="bg-gray-50 py-12 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <h1 class="text-4xl md:text-6xl font-black text-[#002e6e] uppercase italic mb-4">Fresh Fish <span class="text-orange-500">Market</span></h1>
-            <p class="text-slate-500 font-bold text-xs uppercase tracking-widest">100% Chemical Free | Cleaned & Cut | Delivery in 120 Mins</p>
+    <section class="bg-white border-b sticky top-[73px] z-[90] overflow-x-auto">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex gap-3 whitespace-nowrap hide-scrollbar" id="filter-bar">
+            <button onclick="filterProducts('all')" class="category-btn active px-6 py-2 rounded-full border border-gray-200 text-[10px] font-black uppercase tracking-widest">All</button>
+            <button onclick="filterProducts('river')" class="category-btn px-6 py-2 rounded-full border border-gray-200 text-[10px] font-black uppercase tracking-widest">River Fish</button>
+            <button onclick="filterProducts('prawns')" class="category-btn px-6 py-2 rounded-full border border-gray-200 text-[10px] font-black uppercase tracking-widest">Prawns</button>
+            <button onclick="filterProducts('boneless')" class="category-btn px-6 py-2 rounded-full border border-gray-200 text-[10px] font-black uppercase tracking-widest">Boneless</button>
+            <button onclick="filterProducts('steaks')" class="category-btn px-6 py-2 rounded-full border border-gray-200 text-[10px] font-black uppercase tracking-widest">Steaks</button>
+            <button onclick="filterProducts('fastfood')" class="category-btn px-6 py-2 rounded-full border border-gray-200 text-[10px] font-black uppercase tracking-widest">Fish Fast-Food</button>
         </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-4 py-16">
-        <div id="product-container" class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="product-grid">
             </div>
     </main>
 
-    <footer class="bg-[#002e6e] text-white py-12 text-center">
-        <p class="text-[10px] font-black uppercase tracking-[0.4em]">© 2026 KFK INDIA - Pure Seafood Specialists</p>
-    </footer>
-
-    <div class="fixed bottom-6 right-6 z-[1000] flex flex-col items-end gap-3">
-        <div class="bg-white text-[#002e6e] p-3 rounded-2xl shadow-xl border border-gray-100 text-[10px] font-black uppercase tracking-widest hidden md:block">
-            Fish Expert Online! 🐟
-        </div>
-        <a href="https://wa.me/919143012513?text=Hi KFK India, I want to know the current market price of Hilsa and Prawns." 
-           target="_blank" class="bg-[#25D366] p-4 rounded-full shadow-2xl hover:scale-110 transition-transform">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.164 1.236 8.41 3.484 2.246 2.248 3.481 5.233 3.481 8.404 0 6.556-5.332 11.89-11.888 11.89-2.015 0-3.991-.511-5.741-1.486l-6.249 1.639zm6.007-4.041c1.554.922 3.09 1.393 4.708 1.393 5.32 0 9.65-4.329 9.65-9.652 0-2.578-1.003-5.003-2.825-6.824-1.821-1.822-4.246-2.824-6.825-2.824-5.32 0-9.652 4.331-9.652 9.653 0 1.706.469 3.374 1.356 4.829l-.893 3.264 3.481-.913zm10.151-5.378c-.273-.136-1.619-.799-1.869-.89-.25-.091-.433-.136-.615.136-.182.273-.705.89-.864 1.071-.159.182-.319.205-.591.068-.273-.136-1.152-.425-2.195-1.355-.811-.724-1.359-1.618-1.518-1.891-.159-.273-.017-.42.119-.556.122-.122.273-.319.41-.478.136-.159.182-.273.273-.455.091-.182.046-.341-.023-.478-.068-.136-.615-1.481-.842-2.028-.221-.532-.444-.459-.615-.468-.159-.008-.341-.01-.524-.01s-.478.068-.728.341c-.25.273-.956.934-.956 2.277 0 1.342.978 2.639 1.115 2.821.136.182 1.924 2.939 4.661 4.12.65.28 1.158.448 1.554.574.654.208 1.25.178 1.721.108.525-.078 1.619-.661 1.846-1.298.227-.638.227-1.185.159-1.298-.068-.113-.25-.182-.523-.318z"/></svg>
-        </a>
-    </div>
-
     <script>
-        // Live Market Rates (Estimated from Delhi/Kolkata Online Markets)
         const products = [
-            { id: 1, name: "Rohu (Medium) Cleaned", price: 428, oldPrice: 519, weight: "500g", q: "rohu fish raw" },
-            { id: 2, name: "Catla (Bengali Cut)", price: 450, oldPrice: 550, weight: "500g", q: "catla fish" },
-            { id: 3, name: "Hilsa (Padma River)", price: 1899, oldPrice: 2200, weight: "1kg", q: "hilsa fish" },
-            { id: 4, name: "White Pomfret (Large)", price: 780, oldPrice: 950, weight: "2 pcs", q: "white pomfret" },
-            { id: 5, name: "King Prawns (Jumbo)", price: 699, oldPrice: 850, weight: "250g", q: "jumbo prawns" },
-            { id: 6, name: "Bhetki Fillet", price: 950, oldPrice: 1150, weight: "500g", q: "bhetki fillet" },
-            { id: 7, name: "Tengra (Small)", price: 380, oldPrice: 480, weight: "250g", q: "tengra fish" },
-            { id: 8, name: "Pabda (Freshwater)", price: 550, oldPrice: 650, weight: "500g", q: "pabda fish" },
-            { id: 9, name: "Pink Perch (Rani)", price: 299, oldPrice: 400, weight: "500g", q: "pink perch fish" },
-            { id: 10, name: "Mackerel (Bangda)", price: 350, oldPrice: 450, weight: "500g", q: "mackerel fish" }
+            // RIVER FISH
+            {id: 1, cat: 'river', n: 'Premium Rohu Cut', p: '428', w: '500g', q: 'rohu fish raw'},
+            {id: 2, cat: 'river', n: 'Catla Bengali Cut', p: '450', w: '500g', q: 'catla fish'},
+            {id: 3, cat: 'river', n: 'Hilsa (Padma)', p: '1899', w: '1kg', q: 'hilsa fish'},
+            
+            // PRAWNS
+            {id: 4, cat: 'prawns', n: 'Jumbo Tiger Prawns', p: '850', w: '250g', q: 'tiger prawns'},
+            {id: 5, cat: 'prawns', n: 'Small White Prawns', p: '399', w: '250g', q: 'fresh prawns'},
+
+            // BONELESS & STEAKS
+            {id: 6, cat: 'boneless', n: 'Bhetki Fillet', p: '950', w: '500g', q: 'fish fillet'},
+            {id: 7, cat: 'steaks', n: 'Surmai Steaks', p: '799', w: '500g', q: 'king fish steak'},
+
+            // FISH FAST FOOD (Your Menu Card Update)
+            {id: 8, cat: 'fastfood', n: 'KFK Special Fish Burger', p: '249', w: '2 Pcs', q: 'fish burger'},
+            {id: 9, cat: 'fastfood', n: 'Crunchy Fish Fingers', p: '320', w: '10 Pcs', q: 'fish fingers'},
+            {id: 10, cat: 'fastfood', n: 'Protein Fish Bowl', p: '450', w: '1 Bowl', q: 'grilled fish salad'}
         ];
 
         const API_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
 
-        function renderProducts() {
-            const container = document.getElementById('product-container');
-            products.forEach((p, i) => {
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            
+            const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+
+            filtered.forEach(p => {
                 const card = `
-                    <div class="product-card rounded-[2.5rem] p-4 bg-white flex flex-col justify-between">
+                    <div class="bg-white rounded-[2rem] p-4 shadow-sm border border-gray-100 product-card flex flex-col justify-between">
                         <div>
-                            <div class="aspect-square rounded-3xl overflow-hidden bg-gray-100 mb-6 relative">
-                                <img id="img-${i}" class="w-full h-full object-cover" src="https://via.placeholder.com/300">
-                                <span class="absolute top-4 left-4 bg-orange-500 text-white text-[9px] font-black px-3 py-1 rounded-full uppercase italic tracking-tighter shadow-lg">Live Catch</span>
+                            <div class="aspect-square rounded-2xl overflow-hidden bg-gray-50 mb-4">
+                                <img id="img-${p.id}" class="w-full h-full object-cover" src="https://via.placeholder.com/300?text=Loading...">
                             </div>
-                            <h3 class="font-black text-sm md:text-base text-[#002e6e] leading-tight mb-1 uppercase italic">${p.name}</h3>
-                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${p.weight} Net Weight</p>
+                            <h3 class="text-xs md:text-sm font-black uppercase italic leading-tight mb-1">${p.n}</h3>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">${p.w}</p>
                         </div>
-                        <div class="mt-8">
-                            <div class="flex items-center gap-3 mb-5">
-                                <span class="text-2xl font-black text-[#002e6e]">₹${p.price}</span>
-                                <span class="text-xs line-through text-slate-300 font-bold italic">₹${p.oldPrice}</span>
+                        <div class="mt-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-sm font-black text-[#002e6e]">₹${p.p}</span>
+                                <span class="text-[8px] font-black text-orange-500 uppercase tracking-tighter">Express Delivery</span>
                             </div>
-                            <button onclick="addToCart(${p.id})" class="w-full bg-[#002e6e] text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-orange-500 transition-all shadow-xl shadow-blue-900/10">Add To Cart</button>
+                            <button class="w-full bg-[#002e6e] text-white py-3 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] hover:bg-orange-500 transition-all">Add to Cart</button>
                         </div>
                     </div>
                 `;
-                container.innerHTML += card;
-                fetchImage(p.q, `img-${i}`);
+                grid.innerHTML += card;
+                fetchImg(p.q, `img-${p.id}`);
             });
         }
 
-        async function fetchImage(q, id) {
+        async function fetchImg(q, id) {
             try {
                 const r = await fetch(`https://api.pexels.com/v1/search?query=${q}&per_page=1`, {headers:{Authorization:API_KEY}});
                 const d = await r.json();
@@ -105,14 +102,20 @@
             } catch(e) {}
         }
 
-        let count = 0;
-        function addToCart(id) {
-            count++;
-            document.getElementById('cart-count').innerText = count;
-            alert("Added to cart! Total items: " + count);
+        function filterProducts(cat) {
+            // Update Active Button
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            renderProducts(cat);
         }
 
-        renderProducts();
+        // Automatic URL logic: Agar home page se ?cat=prawns aaye
+        const urlParams = new URLSearchParams(window.location.search);
+        const catParam = urlParams.get('cat') || 'all';
+        
+        renderProducts(catParam);
+
     </script>
 </body>
 </html>
