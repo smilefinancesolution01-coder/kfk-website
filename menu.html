@@ -29,13 +29,14 @@
     </header>
 
     <section class="bg-[#002e6e] text-white py-12 text-center">
-        <h1 class="text-4xl font-black italic uppercase italic">KFK Fresh <span class="text-orange-500">Inventory</span></h1>
+        <h1 class="text-4xl font-black italic uppercase">KFK Fresh <span class="text-orange-500">Inventory</span></h1>
         <p class="text-[10px] font-bold tracking-[0.4em] mt-2 opacity-70">100+ GOOGLE ANALYZED REAL SEAFOOD PRODUCTS</p>
     </section>
 
     <div class="sticky top-[73px] z-[90] bg-white border-b py-4 overflow-x-auto hide-scrollbar">
         <div class="max-w-7xl mx-auto px-6 flex gap-3">
             <button onclick="filterMenu('all')" class="category-btn active px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Show All</button>
+            <button onclick="filterMenu('ready-to-eat')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap border-orange-500 text-orange-600">Ready To Eat (New)</button>
             <button onclick="filterMenu('prawns')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Prawns (25)</button>
             <button onclick="filterMenu('seafood')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Seafood (20)</button>
             <button onclick="filterMenu('snacks')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Snacks (32)</button>
@@ -45,17 +46,21 @@
 
     <section class="max-w-7xl mx-auto px-6 py-12">
         <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            </div>
+        </div>
     </section>
 
     <script>
         const PEXELS_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
         
-        // Initial Cart Count Check
         let cartCount = JSON.parse(localStorage.getItem('kfk_cart'))?.length || 0;
         document.getElementById('cart-counter').innerText = cartCount;
 
         const db = [
+            // READY TO EAT - HANDMADE & PACKED ITEMS
+            ...["Handmade Fish Pickle", "Ghar ka Prawns Achar", "Ready-to-fry Bhetki Fillet", "Marinated Fish Tikka Pack", "Homemade Fish Curry Paste", "Dried Salted Fish", "Smoked River Fish", "Crispy Prawns Crackers", "Authentic Fish Masala Pack", "Ready-to-Steam Fish Patra"].map((name, i) => ({
+                id: `rte${i}`, name, cat: 'ready-to-eat', price: 199 + (i*30), search: `homemade ${name} food packaging`, weight: '200g'
+            })),
+
             // PRAWNS - 25 ITEMS
             ...["Tiger Prawns", "Jumbo King Prawns", "Pink Shrimp", "White Prawns", "Vannamei", "Scampi", "Cocktail Prawns", "Deep Sea Prawns", "Brown Shrimps", "Karavali Prawns", "Flower Shrimps", "Ghost Prawns", "Blue Shrimps", "Banana Prawns", "Red Claw Prawns", "Freshwater Gold Prawns", "Prawns Tail On", "Prawns Tail Off", "Deveined Prawns", "Minced Prawn Meat", "Small Shrimps", "Colossal Prawns", "Prawn Skewers", "Marinated Prawns", "Wild Caught Prawns"].map((name, i) => ({
                 id: `p${i}`, name, cat: 'prawns', price: 450 + (i*10), search: `fresh raw ${name}`, weight: '500g'
@@ -74,14 +79,11 @@
             }))
         ];
 
-        // ADD TO CART FUNCTION (MARGED WITH LOCALSTORAGE)
         function addToCart(btn, name, price) {
-            // LocalStorage logic
             let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
             cart.push({ name: name, price: price });
             localStorage.setItem('kfk_cart', JSON.stringify(cart));
 
-            // UI Feedback
             cartCount = cart.length;
             document.getElementById('cart-counter').innerText = cartCount;
             
@@ -133,7 +135,7 @@
 
         function filterMenu(cat) {
             document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-            if(event) event.target.classList.add('active');
+            if(window.event) window.event.target.classList.add('active');
             renderMenu(cat);
         }
 
