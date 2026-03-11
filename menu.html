@@ -62,7 +62,6 @@
     </main>
 
     <script>
-        // 1. DATA: Aapke Default Items + Admin Se Aane Wale Items
         const defaultProducts = [
             { id: 1, name: "Premium Rohu (Bengali Cut)", price: 450, cat: "river", img: "https://images.pexels.com/photos/2130134/pexels-photo-2130134.jpeg?auto=compress&cs=tinysrgb&w=800" },
             { id: 2, name: "Tiger Prawns (Jumbo)", price: 899, cat: "prawns", img: "https://images.pexels.com/photos/2871757/pexels-photo-2871757.jpeg?auto=compress&cs=tinysrgb&w=800" },
@@ -70,20 +69,23 @@
             { id: 4, name: "Fish Fingers (Frozen)", price: 299, cat: "ready", img: "https://images.pexels.com/photos/4040400/pexels-photo-4040400.jpeg?auto=compress&cs=tinysrgb&w=800" }
         ];
 
-        // 2. LOAD PRODUCTS FUNCTION
         function displayProducts(filter = 'all') {
             const grid = document.getElementById('product-grid');
-            grid.innerHTML = ""; // Pehle clear karein
+            grid.innerHTML = ""; 
 
-            // Admin wale items local storage se uthana
             const customItems = JSON.parse(localStorage.getItem('kfk_custom_menu')) || [];
-            
-            // Dono lists ko merge karna (Custom items top par aayenge)
             const allItems = [...customItems, ...defaultProducts];
 
             allItems.forEach(item => {
-                // Filter Logic
                 if(filter !== 'all' && item.cat !== filter) return;
+
+                // Important: Product details pass ho rahi hain function mein
+                const productData = JSON.stringify({
+                    id: item.id || Date.now(),
+                    name: item.name,
+                    price: item.price,
+                    image: item.image || item.img
+                }).replace(/"/g, '&quot;');
 
                 const card = `
                     <div class="product-card bg-white rounded-[2.5rem] overflow-hidden group">
@@ -100,7 +102,7 @@
                                     <span class="text-[10px] font-bold text-slate-400 block uppercase tracking-widest">Price per kg</span>
                                     <span class="text-2xl font-black text-orange-500 italic">₹${item.price}</span>
                                 </div>
-                                <button onclick="updateCart()" class="bg-[#002e6e] text-white p-4 rounded-2xl hover:bg-orange-500 transition-all active:scale-90 shadow-lg shadow-blue-900/10">
+                                <button onclick="addToCart('${productData}')" class="bg-[#002e6e] text-white p-4 rounded-2xl hover:bg-orange-500 transition-all active:scale-90 shadow-lg shadow-blue-900/10">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
                                 </button>
                             </div>
@@ -111,12 +113,9 @@
             });
         }
 
-        // 3. FILTER LOGIC
         function filterItems(category) {
             displayProducts(category);
             document.getElementById('item-count').innerText = `Category: ${category}`;
-            
-            // Buttons ka style change karna (optional)
             const buttons = document.querySelectorAll('.category-card');
             buttons.forEach(btn => {
                 btn.classList.remove('bg-orange-500', 'text-white');
@@ -125,24 +124,26 @@
             event.currentTarget.classList.add('bg-orange-500', 'text-white');
         }
 
-        // 4. CART UI UPDATE
-        let cartCount = JSON.parse(localStorage.getItem('kfk_cart'))?.length || 0;
-        document.getElementById('cart-count').innerText = cartCount;
-
-        function updateCart() {
-            cartCount++;
-            document.getElementById('cart-count').innerText = cartCount;
-            // Store simple cart logic
+        // Updated AddToCart Function
+        function addToCart(productString) {
+            const product = JSON.parse(productString);
             let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            cart.push({id: Date.now()});
+            
+            cart.push(product);
             localStorage.setItem('kfk_cart', JSON.stringify(cart));
             
-            // Feedback
-            alert("Added to cart! 🛒");
+            // Cart count update
+            document.getElementById('cart-count').innerText = cart.length;
+            
+            alert(`${product.name} basket mein add ho gaya! 🛒`);
         }
 
-        // Initialize
-        window.onload = () => displayProducts('all');
+        // Page load hone par count set karna
+        window.onload = () => {
+            const cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
+            document.getElementById('cart-count').innerText = cart.length;
+            displayProducts('all');
+        };
     </script>
 </body>
 </html>
