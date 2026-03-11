@@ -3,119 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK India | Live Fresh Menu</title>
+    <title>KFK India | Fresh Menu</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .cat-active { color: #e03546; border-bottom: 3px solid #e03546; font-weight: 800; }
-        .product-card { border-bottom: 1px solid #f1f5f9; transition: 0.3s; }
-        .product-card:hover { background: #fafafa; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fcfdfe; }
+        .glass-header { backdrop-filter: blur(15px); background: rgba(255,255,255,0.8); }
+        .category-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .category-card:hover { transform: scale(1.05); }
+        .product-card { transition: all 0.3s ease; border: 1px solid #f1f5f9; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,46,110,0.1); border-color: #fb923c; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="bg-white text-slate-900">
+<body class="text-slate-800">
 
-    <header class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b px-6 py-5">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-black italic text-[#e03546]">KFK<span class="text-slate-900">.INDIA</span></h1>
-            <div id="cart-info" class="bg-slate-900 text-white px-5 py-2 rounded-2xl text-[10px] font-black uppercase">
-                <span id="cart-count">0</span> Items
+    <div class="bg-[#002e6e] text-white text-[10px] py-3 px-4 text-center font-black tracking-[0.2em] uppercase sticky top-0 z-[110]">
+        ⚡ FASTEST DELIVERY TO YOUR KITCHEN | 100% CHEMICAL FREE
+    </div>
+
+    <header class="sticky top-9 z-[100] glass-header border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>INDIA</a>
+            
+            <div class="flex items-center gap-6">
+                <div class="relative cursor-pointer group p-2" onclick="location.href='order.html'">
+                    <span id="cart-count" class="absolute top-0 right-0 bg-orange-600 text-white text-[9px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white font-black">0</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-[#002e6e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                </div>
+                <button onclick="location.href='index.html'" class="bg-slate-100 p-2 rounded-xl hover:bg-orange-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#002e6e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                </button>
             </div>
         </div>
     </header>
 
-    <nav class="sticky top-[73px] z-[90] bg-white border-b overflow-x-auto no-scrollbar py-4 px-6">
-        <div id="category-tabs" class="max-w-5xl mx-auto flex gap-6 text-[11px] font-black uppercase tracking-widest">
-            <button onclick="filterCat('all')" class="cat-btn cat-active" id="btn-all">All Collection</button>
-            <button onclick="filterCat('river')" class="cat-btn" id="btn-river">River Fish</button>
-            <button onclick="filterCat('sea')" class="cat-btn" id="btn-sea">Sea Food</button>
-            <button onclick="filterCat('prawns')" class="cat-btn" id="btn-prawns">Prawns</button>
-            <button onclick="filterCat('bengali')" class="cat-btn" id="btn-bengali">Bengali Cut</button>
+    <section class="py-10 bg-white">
+        <div class="max-w-7xl mx-auto px-6 overflow-x-auto hide-scrollbar flex gap-6">
+            <button onclick="filterItems('all')" class="category-card min-w-[120px] bg-orange-500 text-white p-4 rounded-3xl text-center shadow-lg shadow-orange-500/20 font-black text-[10px] uppercase tracking-widest">All Items</button>
+            <button onclick="filterItems('river')" class="category-card min-w-[120px] bg-white border border-slate-100 p-4 rounded-3xl text-center font-black text-[10px] uppercase tracking-widest hover:border-orange-500">River Fish</button>
+            <button onclick="filterItems('seafood')" class="category-card min-w-[120px] bg-white border border-slate-100 p-4 rounded-3xl text-center font-black text-[10px] uppercase tracking-widest hover:border-orange-500">Sea Food</button>
+            <button onclick="filterItems('prawns')" class="category-card min-w-[120px] bg-white border border-slate-100 p-4 rounded-3xl text-center font-black text-[10px] uppercase tracking-widest hover:border-orange-500">Prawns</button>
+            <button onclick="filterItems('ready')" class="category-card min-w-[120px] bg-white border border-slate-100 p-4 rounded-3xl text-center font-black text-[10px] uppercase tracking-widest hover:border-orange-500">Ready To Eat</button>
         </div>
-    </nav>
+    </section>
 
-    <main class="max-w-4xl mx-auto px-6 py-10 mb-20">
-        <div id="loading-state" class="text-center py-20 font-bold text-slate-400">Fetching Fresh Catch...</div>
-        <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <main class="max-w-7xl mx-auto px-6 pb-32">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-[0.4em] mb-2">Daily Fresh Catch</h6>
+                <h2 class="text-4xl md:text-6xl font-black italic uppercase text-[#002e6e] tracking-tighter">The <span class="text-orange-500">Fresh</span> List.</h2>
+            </div>
+            <div id="item-count" class="text-slate-400 font-bold text-xs uppercase tracking-widest">Showing: All Items</div>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             </div>
     </main>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    <script>
+        // 1. DATA: Aapke Default Items + Admin Se Aane Wale Items
+        const defaultProducts = [
+            { id: 1, name: "Premium Rohu (Bengali Cut)", price: 450, cat: "river", img: "https://images.pexels.com/photos/2130134/pexels-photo-2130134.jpeg?auto=compress&cs=tinysrgb&w=800" },
+            { id: 2, name: "Tiger Prawns (Jumbo)", price: 899, cat: "prawns", img: "https://images.pexels.com/photos/2871757/pexels-photo-2871757.jpeg?auto=compress&cs=tinysrgb&w=800" },
+            { id: 3, name: "Fresh Pomfret", price: 750, cat: "seafood", img: "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=800" },
+            { id: 4, name: "Fish Fingers (Frozen)", price: 299, cat: "ready", img: "https://images.pexels.com/photos/4040400/pexels-photo-4040400.jpeg?auto=compress&cs=tinysrgb&w=800" }
+        ];
 
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDWHPt3Kya_s-9f62RsLfI_G1RgQU5P534",
-            authDomain: "kfk-fish.firebaseapp.com",
-            projectId: "kfk-fish",
-            storageBucket: "kfk-fish.firebasestorage.app",
-            messagingSenderId: "171442898165",
-            appId: "1:171442898165:web:9234070d781b8138d4b1bc"
-        };
+        // 2. LOAD PRODUCTS FUNCTION
+        function displayProducts(filter = 'all') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = ""; // Pehle clear karein
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        let allProducts = [];
-
-        // 1. Firebase se data fetch karna
-        async function fetchProducts() {
-            try {
-                const querySnapshot = await getDocs(collection(db, "products"));
-                allProducts = [];
-                querySnapshot.forEach((doc) => {
-                    allProducts.push({ id: doc.id, ...doc.data() });
-                });
-                document.getElementById('loading-state').classList.add('hidden');
-                renderUI(allProducts);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        }
-
-        // 2. Data ko screen par dikhana
-        window.renderUI = function(products) {
-            const list = document.getElementById('product-list');
-            list.innerHTML = '';
+            // Admin wale items local storage se uthana
+            const customItems = JSON.parse(localStorage.getItem('kfk_custom_menu')) || [];
             
-            if(products.length === 0) {
-                list.innerHTML = '<p class="col-span-full text-center py-10 font-bold text-slate-300 uppercase">No products found in this category</p>';
-                return;
-            }
+            // Dono lists ko merge karna (Custom items top par aayenge)
+            const allItems = [...customItems, ...defaultProducts];
 
-            products.forEach(p => {
-                list.innerHTML += `
-                    <div class="product-card flex justify-between gap-4 py-6">
-                        <div class="flex-1">
-                            <h3 class="text-lg font-black text-slate-800 uppercase tracking-tighter">${p.name}</h3>
-                            <p class="text-sm font-bold text-slate-900 mt-1">₹${p.price}</p>
-                            <p class="text-[10px] text-slate-400 mt-3 leading-relaxed uppercase font-bold tracking-widest italic">${p.category} | Freshly Processed</p>
+            allItems.forEach(item => {
+                // Filter Logic
+                if(filter !== 'all' && item.cat !== filter) return;
+
+                const card = `
+                    <div class="product-card bg-white rounded-[2.5rem] overflow-hidden group">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="${item.image || item.img}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-[10px] font-black text-[#002e6e]">
+                                FRESH CATCH
+                            </div>
                         </div>
-                        <div class="relative w-28 h-28 flex-shrink-0">
-                            <img src="${p.image}" class="w-full h-full object-cover rounded-2xl shadow-sm border border-slate-50">
-                            <button class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white text-[#e03546] border border-slate-100 px-6 py-1.5 rounded-xl text-[9px] font-black uppercase shadow-lg active:scale-90 transition-all">Add +</button>
+                        <div class="p-8">
+                            <h3 class="text-lg font-black text-[#002e6e] mb-2 leading-tight uppercase italic">${item.name}</h3>
+                            <div class="flex justify-between items-center mt-6">
+                                <div>
+                                    <span class="text-[10px] font-bold text-slate-400 block uppercase tracking-widest">Price per kg</span>
+                                    <span class="text-2xl font-black text-orange-500 italic">₹${item.price}</span>
+                                </div>
+                                <button onclick="updateCart()" class="bg-[#002e6e] text-white p-4 rounded-2xl hover:bg-orange-500 transition-all active:scale-90 shadow-lg shadow-blue-900/10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
+                grid.innerHTML += card;
             });
         }
 
-        // 3. Category Filter Logic
-        window.filterCat = function(cat) {
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('cat-active'));
-            document.getElementById('btn-' + cat).classList.add('cat-active');
+        // 3. FILTER LOGIC
+        function filterItems(category) {
+            displayProducts(category);
+            document.getElementById('item-count').innerText = `Category: ${category}`;
             
-            if(cat === 'all') {
-                renderUI(allProducts);
-            } else {
-                const filtered = allProducts.filter(p => p.category === cat);
-                renderUI(filtered);
-            }
+            // Buttons ka style change karna (optional)
+            const buttons = document.querySelectorAll('.category-card');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-orange-500', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-800');
+            });
+            event.currentTarget.classList.add('bg-orange-500', 'text-white');
         }
 
-        // Start fetching on load
-        fetchProducts();
+        // 4. CART UI UPDATE
+        let cartCount = JSON.parse(localStorage.getItem('kfk_cart'))?.length || 0;
+        document.getElementById('cart-count').innerText = cartCount;
+
+        function updateCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            // Store simple cart logic
+            let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
+            cart.push({id: Date.now()});
+            localStorage.setItem('kfk_cart', JSON.stringify(cart));
+            
+            // Feedback
+            alert("Added to cart! 🛒");
+        }
+
+        // Initialize
+        window.onload = () => displayProducts('all');
     </script>
 </body>
 </html>
