@@ -3,220 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK | Professional Checkout</title>
+    <title>KFK India | Checkout & Invoice</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f7f9fc; }
-        .payment-radio:checked + label { border-color: #002e6e; background-color: #f0f7ff; ring: 1px; }
-        
-        /* Fast Slider Animation */
-        .slider-track { display: flex; width: calc(250px * 10); animation: scroll 15s linear infinite; }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-250px * 5)); } }
-        .slider-track:hover { animation-play-state: paused; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fcfdfe; }
+        .invoice-box { border: 1px solid #eee; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
     </style>
 </head>
-<body class="pb-10">
+<body class="p-4 md:p-10">
 
-    <header class="bg-white border-b sticky top-0 z-50 py-4 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
-            <h1 class="text-2xl font-black text-[#002e6e] italic">KFK<span class="text-orange-500">.</span>INDIA</h1>
-            <a href="menu.html" class="text-xs font-bold text-slate-500 hover:text-orange-500 uppercase tracking-widest">← Back to Menu</a>
-        </div>
-    </header>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+        
+        <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl border border-gray-100">
+            <h2 class="text-3xl font-black text-[#002e6e] mb-2 italic">CHECKOUT</h2>
+            <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-8">Confirm your delivery details</p>
 
-    <div class="max-w-6xl mx-auto px-4 mt-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
-            <div class="lg:col-span-8 space-y-6">
+            <form id="order-form" class="space-y-5">
+                <input type="text" id="cust-name" placeholder="Full Name" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border focus:border-orange-500">
+                <input type="tel" id="cust-phone" placeholder="WhatsApp Number" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border focus:border-orange-500">
+                <textarea id="cust-address" placeholder="Complete Delivery Address" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border focus:border-orange-500 h-32"></textarea>
                 
-                <div class="bg-white rounded-3xl shadow-sm border p-6 md:p-8">
-                    <h2 class="text-lg font-black text-[#002e6e] mb-6 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
-                        DELIVERY ADDRESS
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" placeholder="Full Name" class="p-4 bg-slate-50 border rounded-2xl outline-none focus:border-blue-500 text-sm font-semibold">
-                        <input type="text" placeholder="Mobile Number" class="p-4 bg-slate-50 border rounded-2xl outline-none focus:border-blue-500 text-sm font-semibold">
-                        <input type="text" placeholder="Flat / House No. / Area" class="md:col-span-2 p-4 bg-slate-50 border rounded-2xl outline-none focus:border-blue-500 text-sm font-semibold">
-                        <input type="text" placeholder="Landmark (Optional)" class="p-4 bg-slate-50 border rounded-2xl outline-none focus:border-blue-500 text-sm font-semibold">
-                        <input type="text" placeholder="Pincode" class="p-4 bg-slate-50 border rounded-2xl outline-none focus:border-blue-500 text-sm font-semibold">
+                <div class="bg-orange-50 p-6 rounded-[2rem] border border-orange-100">
+                    <div class="flex justify-between font-black text-[#002e6e] mb-2 uppercase text-xs">
+                        <span>Cart Total:</span>
+                        <span id="total-amt">₹0</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-orange-600 uppercase text-[10px]">
+                        <span>Delivery:</span>
+                        <span>FREE</span>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl shadow-sm border p-6 md:p-8">
-                    <h2 class="text-lg font-black text-[#002e6e] mb-6">SELECT PAYMENT METHOD</h2>
-                    <div class="grid grid-cols-1 gap-3">
-                        
-                        <div class="relative">
-                            <input type="radio" name="pay" id="upi" class="payment-radio hidden" checked>
-                            <label for="upi" class="flex items-center justify-between p-4 border-2 rounded-2xl cursor-pointer transition-all">
-                                <div class="flex items-center gap-4">
-                                    <img src="https://img.icons8.com/color/48/upi.png" class="w-8">
-                                    <div>
-                                        <p class="font-bold text-sm text-slate-700">UPI Payments</p>
-                                        <div class="flex gap-2 mt-1">
-                                            <img src="https://img.icons8.com/color/48/google-logo.png" class="w-4 h-4">
-                                            <img src="https://img.icons8.com/color/48/phonepe.png" class="w-4 h-4">
-                                            <img src="https://img.icons8.com/color/48/paytm.png" class="w-4 h-4">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w-4 h-4 border-2 rounded-full border-blue-500"></div>
-                            </label>
-                        </div>
-
-                        <div class="relative">
-                            <input type="radio" name="pay" id="card" class="payment-radio hidden">
-                            <label for="card" class="flex items-center justify-between p-4 border-2 rounded-2xl cursor-pointer transition-all">
-                                <div class="flex items-center gap-4">
-                                    <img src="https://img.icons8.com/color/48/visa.png" class="w-8">
-                                    <span class="font-bold text-sm text-slate-700">Credit / Debit Cards</span>
-                                </div>
-                                <div class="w-4 h-4 border-2 rounded-full border-slate-300"></div>
-                            </label>
-                        </div>
-
-                        <div class="relative">
-                            <input type="radio" name="pay" id="cod" class="payment-radio hidden">
-                            <label for="cod" class="flex items-center justify-between p-4 border-2 rounded-2xl cursor-pointer transition-all">
-                                <div class="flex items-center gap-4">
-                                    <img src="https://img.icons8.com/color/48/cash-in-hand.png" class="w-8">
-                                    <span class="font-bold text-sm text-slate-700">Cash on Delivery (COD)</span>
-                                </div>
-                                <div class="w-4 h-4 border-2 rounded-full border-slate-300"></div>
-                            </label>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="lg:col-span-4">
-                <div class="bg-white rounded-[2.5rem] shadow-xl border p-6 sticky top-24">
-                    <h2 class="text-lg font-black text-[#002e6e] mb-6 italic uppercase tracking-tighter">Order Summary</h2>
-                    
-                    <div id="cart-list" class="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2">
-                        </div>
-
-                    <div class="space-y-3 border-t border-dashed pt-4">
-                        <div class="flex justify-between text-xs font-bold text-slate-500 uppercase">
-                            <span>Item Total</span>
-                            <span id="subtotal">₹0</span>
-                        </div>
-                        <div class="flex justify-between text-xs font-bold text-slate-500 uppercase">
-                            <span>Delivery Fee</span>
-                            <span class="text-green-600">₹65</span>
-                        </div>
-                        <div class="flex justify-between text-xs font-bold text-slate-500 uppercase">
-                            <span>GST (5%)</span>
-                            <span id="tax">₹0</span>
-                        </div>
-                        <div class="flex justify-between text-xl font-black text-[#002e6e] border-t pt-4 mt-2">
-                            <span>TOTAL</span>
-                            <span id="final-total">₹0</span>
-                        </div>
-                    </div>
-
-                    <button onclick="processOrder()" class="w-full mt-8 bg-orange-600 hover:bg-[#002e6e] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest transition-all shadow-lg active:scale-95">
-                        Place Order
-                    </button>
-                </div>
-            </div>
-
+                <button type="submit" class="w-full bg-[#002e6e] text-white py-6 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl hover:bg-orange-500 transition-all">Confirm Order & Generate Invoice</button>
+            </form>
         </div>
 
-        <div class="mt-16 bg-white py-8 rounded-[3rem] border border-gray-100 overflow-hidden shadow-sm">
-            <h3 class="text-center text-[10px] font-black uppercase text-slate-400 mb-6 tracking-[0.3em]">Special Bank Offers</h3>
-            <div class="slider-track gap-4">
-                <div class="w-[250px] flex-shrink-0 bg-blue-50 p-4 rounded-2xl border border-blue-100 mx-2">
-                    <p class="text-[9px] font-black text-blue-600">HDFC CREDIT CARDS</p>
-                    <p class="text-xs font-bold">10% Instant Discount upto ₹500</p>
+        <div id="invoice-container" class="hidden lg:block">
+            <div id="printable-invoice" class="bg-white p-10 rounded-[2rem] invoice-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-10 opacity-10 rotate-12">
+                    <h1 class="text-6xl font-black">KFK</h1>
                 </div>
-                <div class="w-[250px] flex-shrink-0 bg-orange-50 p-4 rounded-2xl border border-orange-100 mx-2">
-                    <p class="text-[9px] font-black text-orange-600">ICICI NETBANKING</p>
-                    <p class="text-xs font-bold">Flat ₹100 Cashback on first order</p>
+
+                <div class="flex justify-between items-start border-b pb-8 mb-8">
+                    <div>
+                        <h1 class="text-3xl font-black text-[#002e6e] italic">KFK<span class="text-orange-500">.</span>INDIA</h1>
+                        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">River to Kitchen Platform</p>
+                    </div>
+                    <div class="text-right">
+                        <h4 class="font-black text-sm uppercase">Tax Invoice</h4>
+                        <p id="inv-date" class="text-[10px] font-bold text-slate-400"></p>
+                    </div>
                 </div>
-                <div class="w-[250px] flex-shrink-0 bg-green-50 p-4 rounded-2xl border border-green-100 mx-2">
-                    <p class="text-[9px] font-black text-green-600">AIRTEL PAYMENTS BANK</p>
-                    <p class="text-xs font-bold">Flat ₹50 Cashback via Wallet</p>
+
+                <div class="mb-8">
+                    <h5 class="text-[10px] font-black text-orange-500 uppercase mb-2">Billed To:</h5>
+                    <p id="inv-name" class="font-black text-slate-800 uppercase text-lg leading-none"></p>
+                    <p id="inv-phone" class="text-xs font-bold text-slate-500 mt-1"></p>
+                    <p id="inv-addr" class="text-[10px] font-bold text-slate-400 mt-1 max-w-[200px]"></p>
                 </div>
-                <div class="w-[250px] flex-shrink-0 bg-indigo-50 p-4 rounded-2xl border border-indigo-100 mx-2">
-                    <p class="text-[9px] font-black text-indigo-600">SBI DEBIT CARDS</p>
-                    <p class="text-xs font-bold">Free Delivery on orders > ₹799</p>
+
+                <table class="w-full text-left mb-8">
+                    <thead>
+                        <tr class="border-b text-[10px] font-black text-slate-400 uppercase">
+                            <th class="pb-4">Description</th>
+                            <th class="pb-4 text-right">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inv-items" class="text-xs font-bold text-slate-700 uppercase">
+                        </tbody>
+                </table>
+
+                <div class="border-t pt-6 flex justify-between items-center">
+                    <div>
+                        <p class="text-[8px] font-bold text-slate-400 uppercase">Payment Status</p>
+                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-[9px] font-black uppercase">COD (Pending)</span>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] font-black text-slate-400 uppercase">Grand Total</p>
+                        <h2 id="inv-total" class="text-3xl font-black text-[#002e6e]">₹0</h2>
+                    </div>
                 </div>
-                <div class="w-[250px] flex-shrink-0 bg-red-50 p-4 rounded-2xl border border-red-100 mx-2">
-                    <p class="text-[9px] font-black text-red-600">AXIS BANK</p>
-                    <p class="text-xs font-bold">Flat 15% Off on premium seafood</p>
-                </div>
-                <div class="w-[250px] flex-shrink-0 bg-blue-50 p-4 rounded-2xl border border-blue-100 mx-2">
-                    <p class="text-[9px] font-black text-blue-600">HDFC CREDIT CARDS</p>
-                    <p class="text-xs font-bold">10% Instant Discount upto ₹500</p>
+
+                <div class="mt-10 pt-6 border-t border-dashed text-center">
+                    <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Thank you for choosing chemical-free fresh fish! 🐟</p>
                 </div>
             </div>
+            
+            <button onclick="downloadPDF()" class="w-full mt-6 bg-slate-100 text-slate-500 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-slate-200 transition-all flex items-center justify-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                Download PDF Receipt
+            </button>
         </div>
     </div>
 
     <script>
-        function renderCart() {
-            const cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            const container = document.getElementById('cart-list');
+        // 1. CALCULATE TOTAL FROM CART
+        let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
+        // Note: Real price should come from cart objects, here we use a sample sum for the logic
+        let total = cart.length * 450; // Sample average price
+        document.getElementById('total-amt').innerText = `₹${total}`;
+        document.getElementById('inv-total').innerText = `₹${total}`;
+        document.getElementById('inv-date').innerText = new Date().toLocaleDateString('en-IN');
+
+        // 2. FORM SUBMISSION
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            if (cart.length === 0) {
-                container.innerHTML = `<p class="text-slate-400 font-bold uppercase text-[9px] text-center py-10">Cart is empty!</p>`;
-                updateBill(0);
-                return;
-            }
+            // Fill Invoice Details
+            document.getElementById('inv-name').innerText = document.getElementById('cust-name').value;
+            document.getElementById('inv-phone').innerText = document.getElementById('cust-phone').value;
+            document.getElementById('inv-addr').innerText = document.getElementById('cust-address').value;
+            
+            // List Items in Invoice
+            const itemTable = document.getElementById('inv-items');
+            itemTable.innerHTML = `<tr><td class="py-4">Fresh Fish Mix Order (${cart.length} Items)</td><td class="py-4 text-right">₹${total}</td></tr>`;
 
-            let itemTotal = 0;
-            container.innerHTML = '';
-
-            cart.forEach((item, index) => {
-                const price = parseInt(item.price);
-                itemTotal += price;
-                container.innerHTML += `
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl border border-gray-100">
-                        <div class="flex-1">
-                            <p class="text-[11px] font-black text-[#002e6e] uppercase leading-tight">${item.name}</p>
-                            <p class="text-[10px] font-bold text-slate-400">₹${price}</p>
-                        </div>
-                        <button onclick="removeItem(${index})" class="ml-4 text-red-400 hover:text-red-600 transition-all p-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                        </button>
-                    </div>
-                `;
+            // Reveal Invoice for Mobile or Preview
+            document.getElementById('invoice-container').classList.remove('hidden');
+            alert("Order Placed Successfully! Generating your invoice...");
+            
+            // Save order to history
+            let orders = JSON.parse(localStorage.getItem('kfk_orders')) || [];
+            orders.push({
+                id: Date.now(),
+                customer: document.getElementById('cust-name').value,
+                amount: total,
+                status: 'Pending'
             });
+            localStorage.setItem('kfk_orders', JSON.stringify(orders));
+        });
 
-            updateBill(itemTotal);
+        // 3. DOWNLOAD AS PDF
+        function downloadPDF() {
+            const element = document.getElementById('printable-invoice');
+            const opt = {
+                margin: 0.5,
+                filename: 'KFK-Invoice.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
         }
-
-        function removeItem(index) {
-            let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            cart.splice(index, 1); // Remove item by index
-            localStorage.setItem('kfk_cart', JSON.stringify(cart));
-            renderCart(); // Refresh list and bill
-        }
-
-        function updateBill(itemTotal) {
-            const delivery = itemTotal > 0 ? 65 : 0;
-            const tax = Math.round(itemTotal * 0.05);
-            const total = itemTotal + delivery + tax;
-
-            document.getElementById('subtotal').innerText = `₹${itemTotal}`;
-            document.getElementById('tax').innerText = `₹${tax}`;
-            document.getElementById('final-total').innerText = `₹${total}`;
-        }
-
-        function processOrder() {
-            const total = document.getElementById('final-total').innerText;
-            if(total === "₹0") {
-                alert("Please add items to cart first!");
-                return;
-            }
-            alert(`Connecting to Payment Gateway...\nAmount: ${total}`);
-        }
-
-        window.onload = renderCart;
     </script>
 </body>
 </html>
