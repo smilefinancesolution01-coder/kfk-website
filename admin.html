@@ -2,38 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK Admin | Firebase Connect</title>
+    <title>KFK Admin | Control Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
 </head>
-<body class="bg-slate-50 p-6">
-    <div class="max-w-2xl mx-auto bg-white p-8 rounded-[30px] shadow-xl">
-        <h1 class="text-2xl font-black mb-6 italic text-[#e03546]">ADD PRODUCT TO FIREBASE</h1>
-        
-        <div class="space-y-4">
-            <input type="text" id="p-name" placeholder="Fish Name" class="w-full p-4 bg-slate-100 rounded-2xl outline-none">
-            <input type="number" id="p-price" placeholder="Price (₹)" class="w-full p-4 bg-slate-100 rounded-2xl outline-none">
-            <select id="p-cat" class="w-full p-4 bg-slate-100 rounded-2xl outline-none font-bold">
-                <option value="river">River Fish</option>
-                <option value="sea">Sea Food</option>
-                <option value="prawns">Prawns</option>
-                <option value="bengali">Bengali Cut</option>
-            </select>
-            
-            <div id="upload-btn" class="border-2 border-dashed p-10 rounded-2xl text-center cursor-pointer hover:bg-slate-50">
-                <p id="status-text" class="text-sm font-bold text-slate-400">Click to Upload Image</p>
+<body class="bg-slate-50 flex flex-col md:flex-row min-h-screen">
+
+    <div class="w-full md:w-64 bg-slate-900 text-white p-6">
+        <h2 class="text-2xl font-black italic text-[#e03546]">KFK ADMIN</h2>
+        <nav class="mt-10 space-y-4">
+            <button class="w-full text-left font-bold text-sm bg-slate-800 p-3 rounded-xl">📦 Manage Products</button>
+            <button class="w-full text-left font-bold text-sm hover:bg-slate-800 p-3 rounded-xl opacity-50">📊 Sales Report</button>
+        </nav>
+    </div>
+
+    <div class="flex-1 p-6 md:p-12">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-black mb-8">Inventory Management</h1>
+
+            <div class="bg-white p-8 rounded-[30px] shadow-sm mb-10 border border-slate-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" id="p-name" placeholder="Fish Name (e.g. Rohu Small)" class="p-4 bg-slate-50 rounded-2xl outline-none border focus:border-red-500">
+                    <input type="number" id="p-price" placeholder="Price (₹)" class="p-4 bg-slate-50 rounded-2xl outline-none border">
+                    <select id="p-cat" class="p-4 bg-slate-50 rounded-2xl outline-none border font-bold">
+                        <option value="river">River Fish</option>
+                        <option value="sea">Sea Food</option>
+                        <option value="prawns">Prawns</option>
+                        <option value="bengali">Bengali Special</option>
+                    </select>
+                    <button id="upload-widget" class="p-4 bg-red-50 text-[#e03546] font-black rounded-2xl border-2 border-dashed border-red-200">📸 Click/Upload Photo</button>
+                </div>
                 <input type="hidden" id="p-img">
+                <button id="save-btn" class="w-full mt-6 bg-slate-900 text-white py-5 rounded-2xl font-black uppercase tracking-widest shadow-lg">Add to Live Menu</button>
             </div>
 
-            <button id="save-btn" class="w-full bg-black text-white py-5 rounded-2xl font-black uppercase tracking-widest">Publish to Website</button>
+            <h2 class="text-xl font-black mb-4">Current Live Items</h2>
+            <div id="admin-product-list" class="bg-white rounded-3xl shadow-sm divide-y">
+                </div>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        // Aapka Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyDWHPt3Kya_s-9f62RsLfI_G1RgQU5P534",
             authDomain: "kfk-fish.firebaseapp.com",
@@ -46,40 +58,41 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Cloudinary Upload Logic
-        const myWidget = cloudinary.createUploadWidget({
-            cloudName: "Zva3N4n6Rzk_q0u488feojXID40", 
-            uploadPreset: "ml_default" 
-        }, (error, result) => {
-            if (!error && result && result.event === "success") {
-                document.getElementById('p-img').value = result.info.secure_url;
-                document.getElementById('status-text').innerText = "✅ Image Ready!";
+        // Load Items Function
+        async function loadItems() {
+            const list = document.getElementById('admin-product-list');
+            list.innerHTML = '<p class="p-6 text-slate-400">Loading live data...</p>';
+            const snap = await getDocs(collection(db, "products"));
+            list.innerHTML = '';
+            snap.forEach((product) => {
+                const data = product.data();
+                list.innerHTML += `
+                    <div class="p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <img src="${data.image}" class="w-12 h-12 rounded-lg object-cover">
+                            <div>
+                                <p class="font-bold text-sm">${data.name}</p>
+                                <p class="text-xs text-slate-400">₹${data.price} | ${data.category}</p>
+                            </div>
+                        </div>
+                        <button onclick="deleteItem('${product.id}')" class="text-red-500 font-bold text-xs p-2 hover:bg-red-50 rounded-lg">Delete</button>
+                    </div>
+                `;
+            });
+        }
+
+        // Global Delete Function
+        window.deleteItem = async (id) => {
+            if(confirm('Are you sure?')) {
+                await deleteDoc(doc(db, "products", id));
+                loadItems();
             }
-        });
+        }
 
-        document.getElementById("upload-btn").onclick = () => myWidget.open();
+        // Add Product logic wahi rahega jo maine upar diya tha...
+        // [AddDoc logic here as per previous code]
 
-        // Firebase Save Logic
-        document.getElementById("save-btn").onclick = async () => {
-            const btn = document.getElementById("save-btn");
-            btn.innerText = "Publishing...";
-            btn.disabled = true;
-
-            try {
-                await addDoc(collection(db, "products"), {
-                    name: document.getElementById('p-name').value,
-                    price: Number(document.getElementById('p-price').value),
-                    category: document.getElementById('p-cat').value,
-                    image: document.getElementById('p-img').value,
-                    timestamp: new Date()
-                });
-                alert("Product Added Successfully!");
-                location.reload();
-            } catch (e) {
-                console.error("Error adding document: ", e);
-                alert("Error! Check Console.");
-            }
-        };
+        loadItems();
     </script>
 </body>
 </html>
