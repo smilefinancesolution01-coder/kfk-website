@@ -3,269 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK Mega Menu | 200+ Premium Products</title>
+    <title>KFK | Professional Seafood Menu</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 2rem; border: 1px solid #f1f5f9; background: white; }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1); }
+        .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 2.5rem; overflow: hidden; background: white; border: 1px solid #f1f5f9; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); }
+        .active-cat { background: #002e6e !important; color: white !important; border-color: #002e6e !important; box-shadow: 0 10px 15px -3px rgba(0, 46, 110, 0.3); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .cart-drawer { transition: transform 0.4s ease-in-out; }
-        .active-cat { background: #002e6e !important; color: white !important; border-color: #002e6e !important; }
+        .cart-drawer { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
-<body class="bg-[#f8fafc] text-slate-900">
+<body class="bg-[#f8fafc]">
 
     <header class="sticky top-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100 py-4">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <div class="flex flex-col">
-                <a href="#" class="text-2xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>INDIA</a>
-                <span class="text-[8px] font-bold text-slate-400 tracking-[0.2em] uppercase">River to Kitchen</span>
-            </div>
+            <a href="index.html" class="text-2xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>INDIA</a>
             
-            <button onclick="toggleCart()" class="relative bg-[#002e6e] text-white p-3 rounded-2xl flex items-center gap-2 px-5 group transition-all">
-                <span id="cart-count" class="font-black text-sm">0</span>
-                <span class="text-[10px] font-bold uppercase tracking-widest border-l border-white/20 pl-2">View Cart</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+            <button onclick="toggleCart()" class="relative bg-slate-100 p-3 rounded-2xl flex items-center gap-3 px-6 hover:bg-orange-500 hover:text-white transition-all group">
+                <div class="text-right">
+                    <span id="cart-count" class="block text-[10px] font-black uppercase leading-none">0 Items</span>
+                    <span id="header-total" class="text-xs font-bold opacity-70 leading-none">₹0</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
             </button>
         </div>
     </header>
 
-    <nav class="sticky top-[73px] z-[90] bg-white/90 border-b py-4 overflow-x-auto hide-scrollbar">
-        <div id="category-list" class="max-w-7xl mx-auto px-6 flex gap-3">
+    <nav class="sticky top-[73px] z-[90] bg-white border-b py-5 overflow-x-auto hide-scrollbar">
+        <div id="category-bar" class="max-w-7xl mx-auto px-6 flex gap-3">
             </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 py-10">
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             </div>
     </main>
 
-    <div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[1000] hidden opacity-0 transition-opacity" onclick="toggleCart()"></div>
-    <div id="cart-drawer" class="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[1001] shadow-2xl translate-x-full cart-drawer flex flex-col">
-        <div class="p-6 border-b flex justify-between items-center bg-[#002e6e] text-white">
-            <div>
-                <h2 class="text-xl font-black uppercase italic">My Order</h2>
-                <p class="text-[9px] opacity-70 tracking-widest">KOLKATA FISH KITCHEN</p>
-            </div>
-            <button onclick="toggleCart()" class="text-2xl">&times;</button>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1000] hidden" onclick="toggleCart()"></div>
+    <div id="cart-drawer" class="fixed right-0 top-0 h-full w-full max-w-lg bg-white z-[1001] shadow-2xl translate-x-full cart-drawer flex flex-col">
+        <div class="p-8 border-b flex justify-between items-center bg-[#002e6e] text-white">
+            <h2 class="text-2xl font-black italic uppercase">Order Summary</h2>
+            <button onclick="toggleCart()" class="text-3xl">&times;</button>
         </div>
 
-        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50">
             </div>
 
-        <div class="p-6 border-t bg-slate-50 space-y-4">
-            <div class="space-y-2">
-                <label class="text-[10px] font-black uppercase text-slate-400">Delivery Address</label>
-                <textarea id="delivery-address" rows="2" class="w-full p-3 rounded-xl border text-sm outline-none focus:border-[#002e6e]" placeholder="Enter full address..."></textarea>
-            </div>
-
+        <div class="p-8 border-t bg-white space-y-6">
             <div class="space-y-3">
-                <div class="flex justify-between text-sm font-bold">
-                    <span>Item Total</span>
-                    <span id="subtotal">₹0</span>
-                </div>
-                <div class="flex justify-between text-[10px] text-green-600 font-bold uppercase">
-                    <span>Delivery Fee</span>
-                    <span>FREE</span>
-                </div>
-                <div class="flex justify-between text-xl font-black text-[#002e6e] border-t pt-2">
-                    <span>Total</span>
-                    <span id="grand-total">₹0</span>
-                </div>
+                <p class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Delivery Details</p>
+                <input type="text" id="house-no" placeholder="House / Flat No." class="w-full p-3 border rounded-xl text-sm outline-none focus:border-orange-500">
+                <input type="text" id="full-address" placeholder="Full Address / Landmark" class="w-full p-3 border rounded-xl text-sm outline-none focus:border-orange-500">
             </div>
 
-            <select id="payment-method" class="w-full p-4 rounded-xl border font-bold text-xs uppercase tracking-widest bg-white outline-none">
-                <option value="upi">UPI (GPay/PhonePe/Paytm)</option>
-                <option value="cod">Cash on Delivery</option>
-                <option value="card">Credit / Debit Card</option>
-                <option value="netbanking">Net Banking</option>
-            </select>
+            <div class="border-t border-dashed pt-4 space-y-2">
+                <div class="flex justify-between font-bold text-slate-600"><span>Subtotal</span><span id="sub-total">₹0</span></div>
+                <div class="flex justify-between font-bold text-green-600"><span>Delivery Partner Fee</span><span>FREE</span></div>
+                <div class="flex justify-between text-2xl font-black text-[#002e6e]"><span>Total</span><span id="grand-total">₹0</span></div>
+            </div>
 
-            <button onclick="placeOrder()" class="w-full bg-orange-500 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] shadow-lg hover:shadow-orange-200 transition-all active:scale-95">
-                Place Order
-            </button>
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="setPayment('upi')" id="btn-upi" class="payment-btn border-2 border-orange-500 p-3 rounded-xl text-[10px] font-black uppercase">UPI / Online</button>
+                <button onclick="setPayment('cod')" id="btn-cod" class="payment-btn border p-3 rounded-xl text-[10px] font-black uppercase">Cash on Delivery</button>
+            </div>
+
+            <button onclick="processOrder()" class="w-full bg-orange-500 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] shadow-xl hover:bg-[#002e6e] transition-all">Place Order</button>
         </div>
     </div>
 
     <script>
         const PEXELS_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
         const UPI_ID = "kolka97560@barodampay";
-        
-        let inventory = [];
         let cart = [];
+        let activePayment = 'upi';
+        let products = [];
 
-        // Categories Config
         const categories = [
             { id: 'all', name: 'Show All' },
-            { id: 'rte', name: 'Ready To Eat' },
-            { id: 'river', name: 'River Fish' },
+            { id: 'ready-to-eat', name: 'Ready to Eat' },
+            { id: 'river-fish', name: 'River Fish' },
             { id: 'seafood', name: 'Sea Food' },
             { id: 'prawns', name: 'Prawns' },
             { id: 'boneless', name: 'Boneless' },
-            { id: 'bengali', name: 'Bengali Cut' },
-            { id: 'snacks', name: 'Fish Snacks' }
+            { id: 'bengali-cut', name: 'Bengali Cut' },
+            { id: 'fish-snacks', name: 'Fish Snacks' }
         ];
 
-        // 1. Generate 200 Products Data
-        function initInventory() {
-            const prefixes = {
-                rte: ["Smoked", "Grilled", "Fried", "Steamed", "Baked"],
-                river: ["Fresh", "Large", "Medium", "Small", "Desi"],
-                seafood: ["Atlantic", "Pacific", "Deep Sea", "Premium"],
-                prawns: ["Tiger", "King", "Jumbo", "White", "Pink"],
-                boneless: ["Fillet", "Steak", "Cubed", "Minced"],
-                bengali: ["Standard", "Peti", "Gada", "Whole"],
-                snacks: ["Spicy", "Crispy", "Crunchy", "Masala"]
+        // 1. Generate 200 Products with accurate category mapping
+        function loadProducts() {
+            const data = {
+                'ready-to-eat': ["Fish Tikka", "Fish Pakoda", "Fish Momo", "Grilled Salmon", "Steamed Bhetki", "Fish Curry Bowl"],
+                'river-fish': ["Rohu", "Catla", "Pabda", "Tangra", "Aar", "Boal", "Singi", "Magur"],
+                'seafood': ["White Pomfret", "Surmai", "Red Snapper", "Tuna", "Lobster", "Blue Crab", "Squid Rings"],
+                'prawns': ["Tiger Prawns", "Jumbo King Prawns", "White Shrimp", "Vannamei", "Cocktail Prawns"],
+                'boneless': ["Bhetki Fillet", "Salmon Steak", "Tuna Chunks", "Surmai Boneless", "Fish Fingers Raw"],
+                'bengali-cut': ["Ilish (Hilsa)", "Chital Muitha", "Rohu Bengali Cut", "Parshe", "Koi Fish"],
+                'fish-snacks': ["Fish Popcorn", "Fish Cutlet", "Amritsari Fish", "Fish Samosa", "Fish Nuggets"]
             };
 
-            const fishNames = ["Rohu", "Catla", "Hilsa", "Bhetki", "Pomfret", "Surmai", "Salmon", "Tuna", "Prawns", "Crab", "Squid", "Lobster", "Pabda", "Tangra", "Aar", "Boal", "Mackerel", "Snapper", "Cod", "Singi"];
-
-            let idCounter = 1;
-            categories.forEach(cat => {
-                if(cat.id === 'all') return;
-                // Har category me ~28-30 items (Total 200+)
-                for(let i=1; i<=28; i++) {
-                    let prefix = prefixes[cat.id][Math.floor(Math.random() * prefixes[cat.id].length)];
-                    let fish = fishNames[Math.floor(Math.random() * fishNames.length)];
-                    let name = `${prefix} ${fish} ${cat.name}`;
-                    if(cat.id === 'rte') name = `${prefix} ${fish} (Ready to Eat)`;
-                    
-                    inventory.push({
-                        id: idCounter++,
-                        name: name,
-                        cat: cat.id,
-                        price: 250 + (Math.floor(Math.random() * 80) * 10),
-                        weight: i % 2 === 0 ? "500g" : "1kg",
-                        search: `fresh ${fish} ${cat.name} food`
+            let id = 1;
+            Object.keys(data).forEach(cat => {
+                for(let i=0; i<29; i++) { // Approx 200 products total
+                    let name = data[cat][i % data[cat].length];
+                    products.push({
+                        id: id++,
+                        name: `${name} ${i+1}`,
+                        category: cat,
+                        price: 150 + (Math.floor(Math.random() * 85) * 10),
+                        weight: i % 2 === 0 ? "1kg" : "500g",
+                        // Search query for exact images
+                        query: `fresh ${name} fish seafood`
                     });
                 }
             });
         }
 
-        // 2. Render Functions
-        function renderCategories() {
-            const container = document.getElementById('category-list');
-            categories.forEach(cat => {
-                container.innerHTML += `<button onclick="filterProducts('${cat.id}', this)" class="category-btn ${cat.id==='all'?'active-cat':''} px-6 py-2.5 rounded-xl border border-slate-200 text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all bg-white hover:border-[#002e6e]">${cat.name}</button>`;
-            });
-        }
-
         async function fetchImage(query, imgId) {
             try {
-                const res = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=1`, {
+                const r = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=1`, {
                     headers: { Authorization: PEXELS_KEY }
                 });
-                const data = await res.json();
-                if(data.photos?.[0]) document.getElementById(imgId).src = data.photos[0].src.medium;
+                const d = await r.json();
+                if(d.photos?.[0]) document.getElementById(imgId).src = d.photos[0].src.medium;
             } catch(e) {}
         }
 
-        function renderProducts(filter = 'all') {
+        function renderMenu(filterId = 'all') {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
-            const filtered = filter === 'all' ? inventory : inventory.filter(p => p.cat === filter);
+            const filtered = filterId === 'all' ? products : products.filter(p => p.category === filterId);
 
             filtered.forEach(p => {
                 const imgId = `img-${p.id}`;
                 grid.innerHTML += `
-                    <div class="product-card flex flex-col p-4">
-                        <div class="h-48 rounded-[1.5rem] overflow-hidden bg-slate-100 mb-4">
+                    <div class="product-card flex flex-col p-4 shadow-sm">
+                        <div class="h-48 rounded-[2rem] overflow-hidden bg-slate-100 mb-4">
                             <img id="${imgId}" src="https://via.placeholder.com/400x300?text=KFK+Fresh" class="w-full h-full object-cover">
                         </div>
-                        <span class="text-[8px] font-black text-orange-500 uppercase tracking-widest mb-1">${p.weight} | ${p.cat}</span>
-                        <h3 class="text-sm font-bold text-[#002e6e] mb-4 h-10 overflow-hidden line-clamp-2">${p.name}</h3>
+                        <span class="text-[8px] font-black text-orange-500 uppercase tracking-widest mb-1">${p.category.replace('-', ' ')}</span>
+                        <h3 class="text-sm font-black text-[#002e6e] mb-4 h-10 overflow-hidden leading-tight">${p.name}</h3>
                         <div class="mt-auto flex justify-between items-center">
-                            <span class="text-xl font-black">₹${p.price}</span>
-                            <button onclick="addToCart(${p.id})" class="bg-[#002e6e] text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider active:scale-90 transition-all">Add +</button>
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-slate-400 font-bold">${p.weight}</span>
+                                <span class="text-xl font-black text-slate-800">₹${p.price}</span>
+                            </div>
+                            <button onclick="addToCart(${p.id})" class="bg-[#002e6e] text-white px-6 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest active:scale-90 transition-all">Add +</button>
                         </div>
                     </div>
                 `;
-                fetchImage(p.search, imgId);
+                fetchImage(p.query, imgId);
             });
         }
 
-        // 3. Cart Logic (Swiggy Style)
-        window.addToCart = (id) => {
-            const item = inventory.find(p => p.id === id);
-            cart.push({...item, cartId: Date.now()});
-            updateCartUI();
-        };
-
-        function removeFromCart(cartId) {
-            cart = cart.filter(item => item.cartId !== cartId);
-            updateCartUI();
+        function filterByCat(catId, btn) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active-cat'));
+            btn.classList.add('active-cat');
+            renderMenu(catId);
         }
 
-        function updateCartUI() {
-            document.getElementById('cart-count').innerText = cart.length;
-            const container = document.getElementById('cart-items');
-            container.innerHTML = '';
-            let total = 0;
+        function addToCart(pid) {
+            const item = products.find(x => x.id === pid);
+            cart.push({...item, cartId: Date.now()});
+            updateCart();
+            if(cart.length === 1) toggleCart();
+        }
 
+        function removeItem(cid) {
+            cart = cart.filter(x => x.cartId !== cid);
+            updateCart();
+        }
+
+        function updateCart() {
+            document.getElementById('cart-count').innerText = `${cart.length} Items`;
+            const container = document.getElementById('cart-items');
+            container.innerHTML = cart.length ? '' : '<p class="text-center py-10 text-slate-300 font-black uppercase text-xs">Cart Empty</p>';
+            
+            let total = 0;
             cart.forEach(item => {
                 total += item.price;
                 container.innerHTML += `
-                    <div class="flex justify-between items-center bg-slate-50 p-4 rounded-2xl border border-slate-100 group">
-                        <div class="flex-1">
-                            <h4 class="text-xs font-black text-[#002e6e] uppercase">${item.name}</h4>
-                            <p class="text-[10px] font-bold text-slate-400">₹${item.price}</p>
+                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
+                        <div>
+                            <h4 class="text-[10px] font-black text-[#002e6e] uppercase">${item.name}</h4>
+                            <p class="text-[10px] font-bold text-slate-400">₹${item.price} | ${item.weight}</p>
                         </div>
-                        <button onclick="removeFromCart(${item.cartId})" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors">
+                        <button onclick="removeItem(${item.cartId})" class="text-red-500 hover:bg-red-50 p-2 rounded-xl transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                         </button>
                     </div>
                 `;
             });
-
-            document.getElementById('subtotal').innerText = `₹${total}`;
+            document.getElementById('sub-total').innerText = `₹${total}`;
             document.getElementById('grand-total').innerText = `₹${total}`;
+            document.getElementById('header-total').innerText = `₹${total}`;
         }
 
-        window.toggleCart = () => {
+        function toggleCart() {
             const drawer = document.getElementById('cart-drawer');
             const overlay = document.getElementById('cart-overlay');
-            const isHidden = drawer.classList.contains('translate-x-full');
-            
-            if(isHidden) {
-                overlay.classList.remove('hidden');
-                setTimeout(() => { overlay.classList.add('opacity-100'); drawer.classList.remove('translate-x-full'); }, 10);
-            } else {
-                overlay.classList.remove('opacity-100');
-                drawer.classList.add('translate-x-full');
-                setTimeout(() => overlay.classList.add('hidden'), 400);
-            }
-        };
+            drawer.classList.toggle('translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
 
-        window.filterProducts = (cat, btn) => {
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active-cat'));
-            btn.classList.add('active-cat');
-            renderProducts(cat);
-        };
+        function setPayment(type) {
+            activePayment = type;
+            document.querySelectorAll('.payment-btn').forEach(b => b.classList.remove('border-orange-500', 'border-2'));
+            document.getElementById(`btn-${type}`).classList.add('border-orange-500', 'border-2');
+        }
 
-        window.placeOrder = () => {
-            const address = document.getElementById('delivery-address').value;
-            const method = document.getElementById('payment-method').value;
+        function processOrder() {
             const total = document.getElementById('grand-total').innerText.replace('₹', '');
+            const addr = document.getElementById('full-address').value;
+            if(cart.length === 0) return alert("Please add items!");
+            if(!addr) return alert("Please enter delivery address!");
 
-            if(cart.length === 0) return alert("Cart khali hai!");
-            if(!address) return alert("Kripya address dalein!");
-
-            if(method === 'upi') {
-                window.location.href = `upi://pay?pa=${UPI_ID}&pn=KFK_Kolkata&am=${total}&cu=INR&tn=KFK_Order`;
+            if(activePayment === 'upi') {
+                window.location.href = `upi://pay?pa=${UPI_ID}&pn=KFK_India&am=${total}&cu=INR&tn=KFK_Fish_Order`;
             } else {
-                alert(`Order Success! Method: ${method.toUpperCase()}\nTotal: ₹${total}\nHum aapse sampark karenge.`);
-                cart = [];
-                updateCartUI();
-                toggleCart();
+                alert("Order Success! Cash on Delivery confirmed.");
+                cart = []; updateCart(); toggleCart();
             }
-        };
+        }
 
         // Initialize
-        initInventory();
-        renderCategories();
-        renderProducts();
+        loadProducts();
+        const bar = document.getElementById('category-bar');
+        categories.forEach(c => {
+            bar.innerHTML += `<button onclick="filterByCat('${c.id}', this)" class="cat-btn ${c.id==='all'?'active-cat':''} px-6 py-2.5 rounded-2xl border bg-white text-[9px] font-black uppercase tracking-widest whitespace-nowrap transition-all">${c.name}</button>`;
+        });
+        renderMenu();
 
     </script>
 </body>
