@@ -1,58 +1,153 @@
-<div class="max-w-4xl mx-auto p-10 bg-white shadow-2xl rounded-[3rem] mt-10">
-    <h2 class="text-3xl font-black text-[#002e6e] mb-6 italic">UPLOAD NEW PRODUCT</h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="space-y-4">
-            <input type="text" id="p-name" placeholder="Item Name (e.g. Fresh Rohu)" class="w-full p-4 bg-slate-100 rounded-2xl outline-none font-bold">
-            <input type="text" id="p-price" placeholder="Price (₹)" class="w-full p-4 bg-slate-100 rounded-2xl outline-none font-bold">
-            <input type="file" id="p-image" accept="image/*" class="w-full p-4 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl cursor-pointer">
-            <button onclick="saveToMenu()" class="w-full bg-orange-500 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-[#002e6e] transition-all shadow-lg">Save to Menu</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFK Admin | Manage Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; }
+        .admin-card { border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-12">
+            <div>
+                <h1 class="text-4xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>ADMIN</h1>
+                <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Product & Inventory Control</p>
+            </div>
+            <button onclick="location.href='index.html'" class="bg-white px-6 py-3 rounded-2xl font-black text-[10px] uppercase border border-gray-100 shadow-sm hover:bg-slate-50">Back to Website</button>
         </div>
-        
-        <div id="preview-box" class="h-64 bg-slate-50 rounded-[2rem] border-2 border-slate-100 flex items-center justify-center overflow-hidden">
-            <span class="text-slate-400 font-bold">Image Preview</span>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            
+            <div class="lg:col-span-1">
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl admin-card sticky top-10">
+                    <h2 class="text-xl font-black text-[#002e6e] mb-6 uppercase italic">Add New Item</h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Item Name</label>
+                            <input type="text" id="p-name" placeholder="e.g. Fresh Hilsa" class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border border-transparent focus:border-orange-500 transition-all">
+                        </div>
+                        
+                        <div>
+                            <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Category</label>
+                            <select id="p-cat" class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border border-transparent focus:border-orange-500">
+                                <option value="river">River Fish</option>
+                                <option value="seafood">Sea Food</option>
+                                <option value="prawns">Prawns</option>
+                                <option value="ready">Ready to Eat</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Price (₹)</label>
+                            <input type="number" id="p-price" placeholder="450" class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border border-transparent focus:border-orange-500">
+                        </div>
+
+                        <div>
+                            <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Upload Photo</label>
+                            <input type="file" id="p-image" accept="image/*" class="w-full p-4 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl cursor-pointer text-xs font-bold">
+                        </div>
+
+                        <button onclick="saveToMenu()" class="w-full bg-orange-500 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-[#002e6e] transition-all shadow-lg shadow-orange-500/20">Publish to Menu</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl admin-card min-h-[600px]">
+                    <div class="flex justify-between items-center mb-8">
+                        <h2 class="text-xl font-black text-[#002e6e] uppercase italic">Live Inventory</h2>
+                        <span id="total-items" class="bg-blue-50 text-[#002e6e] px-4 py-1 rounded-full text-[10px] font-black">0 ITEMS</span>
+                    </div>
+
+                    <div id="admin-product-list" class="space-y-4">
+                        </div>
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
 
-<script>
-    // Image Preview Logic
-    document.getElementById('p-image').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            document.getElementById('preview-box').innerHTML = `<img src="${event.target.result}" class="w-full h-full object-cover">`;
-        }
-        reader.readAsDataURL(file);
-    });
+    <script>
+        // 1. SAVE PRODUCT
+        function saveToMenu() {
+            const name = document.getElementById('p-name').value;
+            const price = document.getElementById('p-price').value;
+            const cat = document.getElementById('p-cat').value;
+            const file = document.getElementById('p-image').files[0];
 
-    // Save Function
-    function saveToMenu() {
-        const name = document.getElementById('p-name').value;
-        const price = document.getElementById('p-price').value;
-        const file = document.getElementById('p-image').files[0];
+            if(!name || !price || !file) {
+                alert("Bhai, saari details bharna zaruri hai!");
+                return;
+            }
 
-        if(!name || !price || !file) {
-            alert("Please fill all details!");
-            return;
-        }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const product = {
+                    id: Date.now(),
+                    name: name,
+                    price: price,
+                    cat: cat,
+                    image: e.target.result
+                };
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const product = {
-                id: Date.now(),
-                name: name,
-                price: price,
-                image: e.target.result // Base64 Image
+                let menu = JSON.parse(localStorage.getItem('kfk_custom_menu')) || [];
+                menu.unshift(product); // Naya item sabse upar
+                localStorage.setItem('kfk_custom_menu', JSON.stringify(menu));
+                
+                alert("✅ Item Published!");
+                location.reload(); 
             };
+            reader.readAsDataURL(file);
+        }
 
-            let menu = JSON.parse(localStorage.getItem('kfk_custom_menu')) || [];
-            menu.push(product);
-            localStorage.setItem('kfk_custom_menu', JSON.stringify(menu));
+        // 2. LOAD & MANAGE PRODUCTS
+        function loadAdminInventory() {
+            const listContainer = document.getElementById('admin-product-list');
+            const items = JSON.parse(localStorage.getItem('kfk_custom_menu')) || [];
             
-            alert("✅ Product Added Successfully!");
-            location.reload(); 
-        };
-        reader.readAsDataURL(file);
-    }
-</script>
+            document.getElementById('total-items').innerText = `${items.length} ITEMS`;
+
+            if(items.length === 0) {
+                listContainer.innerHTML = `<div class="text-center py-20 text-slate-300 font-bold">No custom products found. Add some!</div>`;
+                return;
+            }
+
+            listContainer.innerHTML = items.map((item, index) => `
+                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-gray-100 group hover:border-orange-200 transition-all">
+                    <div class="flex items-center gap-4">
+                        <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover border border-white shadow-sm">
+                        <div>
+                            <h4 class="font-black text-[#002e6e] text-sm uppercase">${item.name}</h4>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">${item.cat} • ₹${item.price}</p>
+                        </div>
+                    </div>
+                    <button onclick="deleteItem(${item.id})" class="bg-red-50 text-red-500 p-3 rounded-xl hover:bg-red-500 hover:text-white transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // 3. DELETE FUNCTION
+        function deleteItem(id) {
+            if(confirm("Are you sure you want to delete this item?")) {
+                let menu = JSON.parse(localStorage.getItem('kfk_custom_menu')) || [];
+                menu = menu.filter(item => item.id !== id);
+                localStorage.setItem('kfk_custom_menu', JSON.stringify(menu));
+                loadAdminInventory(); // Refresh list
+            }
+        }
+
+        window.onload = loadAdminInventory;
+    </script>
+</body>
+</html>
