@@ -3,76 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK India | Fish Menu</title>
+    <title>KFK India | Official Seafood Collection</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .cat-active { background: #e03546; color: white; }
-        /* Image fix: Ensures image always fits the box */
-        .fish-img-box { width: 120px; height: 120px; overflow: hidden; border-radius: 12px; position: relative; background: #f3f4f6; }
-        .fish-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .cat-active { background: #e03546; color: white; border-color: #e03546; box-shadow: 0 4px 12px rgba(224, 53, 70, 0.2); }
+        .product-card { transition: all 0.3s ease; border-bottom: 1px solid #f1f5f9; }
+        .product-card:hover { background: #fafafa; }
+        .cart-drawer { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
-<body class="bg-white font-sans">
+<body class="bg-white text-slate-900">
 
-    <header class="p-4 border-b sticky top-0 bg-white z-50">
-        <div class="max-w-xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-black text-[#e03546]">KFK INDIA</h1>
-            <div id="cart-count" class="bg-black text-white px-3 py-1 rounded-full text-xs">0 Items</div>
+    <header class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-100 px-6 py-5">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-black italic text-[#e03546] tracking-tighter uppercase">KFK<span class="text-slate-900">.INDIA</span></h1>
+                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-[0.3em]">Pure Seafood Excellence</p>
+            </div>
+            <button onclick="toggleCart()" class="bg-slate-900 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center gap-3">
+                <span id="cart-count">0</span> Items in Cart
+            </button>
         </div>
     </header>
 
-    <nav class="p-3 border-b overflow-x-auto no-scrollbar flex gap-3 sticky top-[61px] bg-white z-40">
-        <button onclick="renderMenu('river')" class="cat-btn px-4 py-2 rounded-full border text-xs font-bold whitespace-nowrap" id="btn-river">River Fish</button>
-        <button onclick="renderMenu('sea')" class="cat-btn px-4 py-2 rounded-full border text-xs font-bold whitespace-nowrap" id="btn-sea">Sea Food</button>
-        <button onclick="renderMenu('prawns')" class="cat-btn px-4 py-2 rounded-full border text-xs font-bold whitespace-nowrap" id="btn-prawns">Prawns</button>
-        <button onclick="renderMenu('bengali')" class="cat-btn px-4 py-2 rounded-full border text-xs font-bold whitespace-nowrap" id="btn-bengali">Bengali Cut</button>
+    <nav class="sticky top-[85px] z-[90] bg-white border-b overflow-x-auto no-scrollbar py-5 px-6">
+        <div id="category-tabs" class="max-w-5xl mx-auto flex gap-4 whitespace-nowrap text-[11px] font-black uppercase tracking-widest">
+            </div>
     </nav>
 
-    <main id="menu-container" class="p-4 max-w-xl mx-auto mb-20">
-        </main>
+    <main class="max-w-4xl mx-auto px-6 py-12 mb-32">
+        <div id="product-container" class="space-y-2">
+            </div>
+    </main>
+
+    <div id="checkout-bar" class="fixed bottom-0 left-0 w-full bg-white border-t p-5 hidden shadow-[0_-15px_40px_rgba(0,0,0,0.08)] z-50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div>
+                <p id="bar-total" class="text-2xl font-black text-slate-900 tracking-tighter">₹0</p>
+                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest italic">Ready for fast delivery</p>
+            </div>
+            <button onclick="toggleCart()" class="bg-[#e03546] text-white px-12 py-4 rounded-2xl font-black uppercase text-[11px] tracking-widest shadow-xl shadow-red-100">Checkout Now</button>
+        </div>
+    </div>
+
+    <div id="cart-overlay" class="fixed inset-0 bg-slate-900/60 z-[200] hidden backdrop-blur-sm" onclick="toggleCart()"></div>
+    <div id="cart-drawer" class="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[201] cart-drawer translate-x-full flex flex-col">
+        <div class="p-8 border-b flex justify-between items-center bg-slate-50">
+            <h2 class="text-xl font-black italic uppercase tracking-tighter">My Fish Basket</h2>
+            <button onclick="toggleCart()" class="text-3xl text-slate-300">&times;</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+        <div class="p-8 border-t space-y-6">
+            <div class="flex justify-between items-center">
+                <span class="text-slate-400 font-bold uppercase text-[10px]">Total Payable</span>
+                <span id="grand-total" class="text-3xl font-black">₹0</span>
+            </div>
+            <button onclick="checkout()" class="w-full bg-[#e03546] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em]">Order via UPI</button>
+        </div>
+    </div>
 
     <script>
-        // Yahan har category ki ek standard image link hai
-        // Agar aapki apni photo hai to 'image' ki jagah uska naam likhein (e.g., 'rohu.jpg')
-        const categories = {
-            river: { name: "River Fish", image: "https://placehold.co/400x400/e03546/white?text=Fresh+River+Fish" },
-            sea: { name: "Sea Food", image: "https://placehold.co/400x400/2d3436/white?text=Sea+Food" },
-            prawns: { name: "Prawns", image: "https://placehold.co/400x400/fab1a0/black?text=Fresh+Prawns" },
-            bengali: { name: "Bengali Cut", image: "https://placehold.co/400x400/fdcb6e/black?text=Bengali+Fish" }
+        // Cloudinary Configuration
+        const CLOUD_NAME = "Zva3N4n6Rzk_q0u488feojXID40"; 
+        const BASE_IMG_URL = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto/`;
+
+        const categories = [
+            { id: 'rte', name: 'Ready to Eat', img: 'ready-eat-category' },
+            { id: 'river', name: 'River Fish', img: 'river-fish-category' },
+            { id: 'sea', name: 'Sea Food', img: 'sea-food-category' },
+            { id: 'prawns', name: 'Prawns & Crabs', img: 'prawns-category' },
+            { id: 'bengali', name: 'Bengali Special', img: 'bengali-cut-category' },
+            { id: 'snacks', name: 'Fish Snacks', img: 'snacks-category' }
+        ];
+
+        const fishNames = {
+            rte: ["Kerala Curry", "Fish Tikka", "Moilee", "Macher Jhol", "Tawa Fry"],
+            river: ["Rohu", "Catla", "Pabda", "Tangra", "Boal", "Singi"],
+            sea: ["Pomfret", "Surmai", "Salmon", "Snapper", "Mackerel", "Sea Bass"],
+            prawns: ["Tiger Prawns", "Jumbo Prawns", "Cocktail Shrimps", "Mud Crab"],
+            bengali: ["Padma Ilish", "Chital Muitha", "Parshe", "Koi", "Kajoli"],
+            snacks: ["Fish Fingers", "Pakora", "Cutlet", "Popcorn", "Sticks"]
         };
 
-        const fishNames = ["Rohu", "Catla", "Hilsa", "Prawns Jumbo", "Pomfret", "Surmai", "Basa Fillet"];
+        let inventory = [];
+        let cart = [];
 
-        function renderMenu(catKey) {
-            // Update Active Tab
+        function build200Items() {
+            let id = 1;
+            categories.forEach(c => {
+                for(let i=0; i<34; i++) { // Approx 200 items
+                    let base = fishNames[c.id][i % fishNames[c.id].length];
+                    inventory.push({
+                        id: id++,
+                        name: `${base} ${i === 0 ? 'Fresh' : 'Premium Cut '+i}`,
+                        cat: c.id,
+                        price: 250 + (Math.floor(Math.random()*70)*10),
+                        weight: i % 2 === 0 ? "500g" : "1kg",
+                        // Cloudinary image name logic
+                        img: `${c.id}-fish-${(i % 5) + 1}.jpg`
+                    });
+                }
+            });
+        }
+
+        function renderMenu(catId) {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('cat-active'));
-            document.getElementById('btn-' + catKey).classList.add('cat-active');
+            document.getElementById(`tab-${catId}`).classList.add('cat-active');
 
-            const container = document.getElementById('menu-container');
-            container.innerHTML = "";
+            const container = document.getElementById('product-container');
+            container.innerHTML = '';
 
-            // 50 items per category (Total 200 items logic)
-            for(let i=1; i<=50; i++) {
-                let name = fishNames[i % fishNames.length] + " - " + categories[catKey].name;
+            const items = inventory.filter(p => p.cat === catId);
+            items.forEach(p => {
                 container.innerHTML += `
-                    <div class="flex justify-between items-center py-4 border-b">
-                        <div class="flex-1 pr-4">
-                            <h3 class="font-bold text-gray-800">${name} (${i})</h3>
-                            <p class="text-xs text-gray-400 mt-1">Freshly cleaned and ready to cook.</p>
-                            <p class="mt-2 font-bold text-red-600">₹${200 + (i*5)}</p>
+                    <div class="product-card py-8 flex justify-between gap-8 items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-3 h-3 border border-red-600 flex items-center justify-center p-[2px]"><span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span></span>
+                                <span class="text-[9px] font-bold text-orange-500 uppercase tracking-widest">Natural Fresh</span>
+                            </div>
+                            <h3 class="text-xl font-black text-slate-800 tracking-tight leading-none">${p.name}</h3>
+                            <p class="text-sm font-bold text-slate-900 mt-2">₹${p.price} <span class="text-slate-400 font-medium text-xs">/ ${p.weight}</span></p>
+                            <p class="text-[11px] text-slate-400 mt-3 leading-relaxed max-w-sm">Dam Good Fish quality. Cleaned, gutted, and ready for your kitchen. No preservatives.</p>
                         </div>
-                        <div class="fish-img-box">
-                            <img src="${categories[catKey].image}" alt="fish">
-                            <button class="absolute bottom-1 left-1/2 -translate-x-1/2 bg-white text-red-600 border border-red-200 px-4 py-1 rounded shadow-lg text-[10px] font-bold">ADD</button>
+                        <div class="relative w-32 h-32 flex-shrink-0 group">
+                            <img src="${BASE_IMG_URL}${p.img}" class="w-full h-full object-cover rounded-3xl shadow-sm border border-slate-50 group-hover:scale-105 transition-transform" onerror="this.src='https://via.placeholder.com/300?text=KFK+Fish'">
+                            <button onclick="addToCart(${p.id})" class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white text-[#e03546] border border-slate-100 shadow-xl px-8 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-red-50 active:scale-95 transition-all">Add +</button>
                         </div>
                     </div>
                 `;
-            }
+            });
         }
 
-        // Default Load
+        // Initialize App
+        build200Items();
+        const nav = document.getElementById('category-tabs');
+        categories.forEach(c => {
+            nav.innerHTML += `<button id="tab-${c.id}" onclick="renderMenu('${c.id}')" class="cat-btn border border-slate-100 px-6 py-3 rounded-2xl transition-all shadow-sm">${c.name}</button>`;
+        });
         renderMenu('river');
+
+        // Cart Logic
+        function addToCart(pid) {
+            const item = inventory.find(x => x.id === pid);
+            cart.push({...item, cartId: Date.now()});
+            updateUI();
+            document.getElementById('checkout-bar').classList.remove('hidden');
+        }
+
+        function updateUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const drawer = document.getElementById('cart-items');
+            drawer.innerHTML = cart.length ? '' : '<p class="text-center py-20 text-slate-300 font-bold uppercase text-xs">Basket is Empty</p>';
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price;
+                drawer.innerHTML += `<div class="flex justify-between bg-slate-50 p-4 rounded-2xl">
+                    <span class="text-xs font-bold uppercase">${item.name}</span>
+                    <span class="text-xs font-black">₹${item.price}</span>
+                </div>`;
+            });
+            document.getElementById('grand-total').innerText = `₹${total}`;
+            document.getElementById('bar-total').innerText = `₹${total}`;
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-drawer').classList.toggle('translate-x-full');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
+        }
+
+        function checkout() {
+            const total = document.getElementById('grand-total').innerText.replace('₹','');
+            window.location.href = `upi://pay?pa=kolka97560@barodampay&pn=KFK_INDIA&am=${total}&cu=INR`;
+        }
     </script>
 </body>
 </html>
