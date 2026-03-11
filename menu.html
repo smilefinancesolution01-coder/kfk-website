@@ -1,187 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK India | Real Fish Menu</title>
+    <title>KFK India | Official Fish Menu</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fff; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .category-btn.active { background: #e03546; color: white; border-color: #e03546; font-weight: 800; }
-        .product-card { border-bottom: 1px solid #f1f5f9; padding: 1.5rem 0; display: flex; justify-content: space-between; gap: 1rem; }
-        .cart-drawer { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .fish-img { width: 120px; height: 120px; object-fit: cover; border-radius: 16px; background-color: #f8fafc; }
+        .cat-active { background: #e03546; color: white; border-color: #e03546; }
+        .product-card { display: flex; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid #f1f5f9; }
+        .fish-img { width: 130px; height: 130px; object-fit: cover; border-radius: 18px; background: #f8fafc; }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="bg-white">
 
-    <header class="sticky top-0 z-[100] bg-white border-b px-4 py-4">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
+    <header class="sticky top-0 z-50 bg-white border-b p-4">
+        <div class="max-w-2xl mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-black italic text-[#e03546]">KFK<span class="text-slate-900">.INDIA</span></h1>
-            <button onclick="toggleCart()" class="bg-slate-900 text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase flex items-center gap-2">
-                <span id="cart-count">0</span> Items
-            </button>
+            <div id="cart-btn" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-bold">0 Items</div>
         </div>
     </header>
 
-    <nav class="sticky top-[68px] z-[90] bg-white border-b overflow-x-auto no-scrollbar py-3 px-4 shadow-sm">
-        <div id="category-bar" class="max-w-4xl mx-auto flex gap-4 text-[11px] font-black uppercase">
+    <nav class="sticky top-[68px] z-40 bg-white border-b overflow-x-auto no-scrollbar py-3 px-4 shadow-sm">
+        <div id="cat-list" class="max-w-2xl mx-auto flex gap-4 text-[11px] font-black uppercase tracking-widest">
             </div>
     </nav>
 
-    <main class="max-w-2xl mx-auto px-4 py-8 mb-24">
-        <div id="product-list" class="space-y-2">
+    <main class="max-w-2xl mx-auto px-4 py-6 mb-20">
+        <div id="menu-items" class="space-y-2">
             </div>
     </main>
 
-    <div id="bottom-bar" class="fixed bottom-0 left-0 w-full bg-white border-t p-4 hidden shadow-2xl z-50">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <p id="bar-total" class="text-xl font-black italic">₹0</p>
-            <button onclick="toggleCart()" class="bg-[#e03546] text-white px-10 py-3 rounded-xl font-black uppercase text-xs">View Cart</button>
-        </div>
-    </div>
-
-    <div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[200] hidden" onclick="toggleCart()"></div>
-    <div id="cart-drawer" class="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[201] cart-drawer translate-x-full flex flex-col">
-        <div class="p-6 border-b flex justify-between items-center">
-            <h2 class="text-xl font-bold uppercase italic">Your Order</h2>
-            <button onclick="toggleCart()" class="text-3xl">&times;</button>
-        </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50"></div>
-        <div class="p-6 border-t space-y-4">
-            <input type="text" id="address" placeholder="Delivery Address..." class="w-full p-4 bg-slate-100 rounded-xl outline-none border-none">
-            <button onclick="checkout()" class="w-full bg-[#e03546] text-white py-4 rounded-xl font-black">ORDER NOW</button>
-        </div>
-    </div>
-
     <script>
         const categories = [
-            { id: 'rte', name: 'Ready to Eat' },
-            { id: 'river', name: 'River Fish' },
-            { id: 'sea', name: 'Sea Food' },
-            { id: 'prawns', name: 'Prawns' },
-            { id: 'boneless', name: 'Boneless' },
-            { id: 'bengali', name: 'Bengali Cut' },
-            { id: 'snacks', name: 'Fish Snacks' }
+            { id: 'rte', name: 'Ready to Eat', img: 'https://images.unsplash.com/photo-1589187151032-573a91317445?w=400' },
+            { id: 'river', name: 'River Fish', img: 'https://5.imimg.com/data5/ANDROID/Default/2021/1/HX/OL/DU/119931758/product-jpeg-500x500.jpg' },
+            { id: 'sea', name: 'Sea Food', img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400' },
+            { id: 'prawns', name: 'Prawns', img: 'https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=400' },
+            { id: 'bengali', name: 'Bengali Cut', img: 'https://5.imimg.com/data5/SELLER/Default/2021/10/TC/ZB/FY/39290072/paddmar-ilish-fish-500x500.jpg' }
         ];
 
-        // Real Image Links (Permanent)
-        const images = {
-            rte: "https://images.unsplash.com/photo-1589187151032-573a91317445?q=80&w=500&auto=format&fit=crop",
-            river: "https://5.imimg.com/data5/ANDROID/Default/2021/1/HX/OL/DU/119931758/product-jpeg-500x500.jpg",
-            sea: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=500&auto=format&fit=crop",
-            prawns: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?q=80&w=500&auto=format&fit=crop",
-            boneless: "https://images.unsplash.com/photo-1534604973900-c41ab4c5e636?q=80&w=500&auto=format&fit=crop",
-            bengali: "https://5.imimg.com/data5/SELLER/Default/2021/10/TC/ZB/FY/39290072/paddmar-ilish-fish-500x500.jpg",
-            snacks: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=500&auto=format&fit=crop"
-        };
-
-        const names = {
-            rte: ["Kerala Curry", "Meen Moilee", "Fish Tikka", "Goan Curry"],
-            river: ["Rohu Fresh", "Catla Cut", "Pabda Whole", "Tangra"],
+        const fishData = {
+            rte: ["Kerala Fish Curry", "Meen Moilee", "Fish Tikka", "Goan Curry"],
+            river: ["Fresh Rohu", "Catla Steaks", "Pabda Whole", "Tangra"],
             sea: ["Pomfret White", "Surmai Steak", "Red Snapper", "Salmon"],
             prawns: ["Tiger Prawns", "Jumbo Prawns", "Cocktail Prawns"],
-            boneless: ["Basa Fillet", "Bhetki Boneless", "Tuna Chunks"],
-            bengali: ["Hilsa Ilish", "Chital Muitha", "Koi Fish"],
-            snacks: ["Fish Fingers", "Fish Pakora", "Fish Cutlet"]
+            bengali: ["Hilsa Ilish", "Chital Muitha", "Parshe Cut"]
         };
 
         let inventory = [];
-        let cart = [];
-
-        function build() {
-            let id = 1;
+        function init() {
             categories.forEach(c => {
-                for(let i=0; i<30; i++) {
-                    let base = names[c.id][i % names[c.id].length];
+                for(let i=0; i<40; i++) { // Creating 200 items
+                    let name = fishData[c.id][i % fishData[c.id].length];
                     inventory.push({
-                        id: id++,
-                        name: `${base} ${i === 0 ? '' : 'Special Pack '+i}`,
-                        catId: c.id,
-                        price: 150 + (Math.floor(Math.random() * 50) * 10),
-                        img: images[c.id],
-                        desc: "100% Freshly processed fish, cleaned and ready to cook."
+                        id: inventory.length + 1,
+                        name: `${name} ${i === 0 ? '' : '(Special Pack ' + i + ')'}`,
+                        cat: c.id,
+                        price: 180 + (Math.floor(Math.random() * 50) * 10),
+                        img: c.img
                     });
                 }
             });
         }
 
-        function renderMenu(catId) {
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`tab-${catId}`).classList.add('active');
-
-            const list = document.getElementById('product-list');
-            list.innerHTML = '';
-            inventory.filter(p => p.catId === catId).forEach(p => {
-                list.innerHTML += `
+        function render(catId) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('cat-active'));
+            document.getElementById('btn-' + catId).classList.add('cat-active');
+            
+            const container = document.getElementById('menu-items');
+            container.innerHTML = '';
+            inventory.filter(p => p.cat === catId).forEach(p => {
+                container.innerHTML += `
                     <div class="product-card">
                         <div class="flex-1">
-                            <h3 class="text-lg font-bold text-slate-900">${p.name}</h3>
-                            <p class="text-sm font-black text-slate-800">₹${p.price}</p>
-                            <p class="text-xs text-slate-400 mt-2 line-clamp-2">${p.desc}</p>
+                            <h3 class="text-lg font-bold text-slate-800">${p.name}</h3>
+                            <p class="text-sm font-black text-slate-900 mt-1">₹${p.price}</p>
+                            <p class="text-xs text-slate-400 mt-2">100% Fresh & Cleaned fish delivered to your doorstep.</p>
                         </div>
                         <div class="relative flex-shrink-0">
-                            <img src="${p.img}" class="fish-img shadow-md border" onerror="this.src='https://via.placeholder.com/150?text=Fish'">
-                            <button onclick="addToCart(${p.id})" class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white text-[#e03546] border border-slate-200 px-6 py-1 rounded-lg text-[10px] font-black shadow-lg uppercase">Add</button>
+                            <img src="${p.img}" class="fish-img shadow-sm border border-slate-100" onerror="this.src='https://via.placeholder.com/150?text=Fish'">
+                            <button class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white text-[#e03546] border border-slate-200 px-6 py-1 rounded-lg text-[10px] font-black shadow-lg uppercase">Add</button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        function toggleCart() {
-            document.getElementById('cart-drawer').classList.toggle('translate-x-full');
-            document.getElementById('cart-overlay').classList.toggle('hidden');
-        }
-
-        function addToCart(pid) {
-            const item = inventory.find(x => x.id === pid);
-            cart.push({...item, cartId: Date.now()});
-            updateCart();
-            document.getElementById('bottom-bar').classList.remove('hidden');
-        }
-
-        function updateCart() {
-            document.getElementById('cart-count').innerText = cart.length;
-            const container = document.getElementById('cart-items');
-            container.innerHTML = cart.length ? '' : '<p class="text-center py-20 text-slate-300 font-bold uppercase text-xs">Cart Khali Hai</p>';
-            let total = 0;
-            cart.forEach(item => {
-                total += item.price;
-                container.innerHTML += `
-                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-                        <div class="flex items-center gap-3">
-                            <img src="${item.img}" class="w-10 h-10 rounded-lg object-cover">
-                            <div><h4 class="text-[10px] font-black uppercase">${item.name}</h4><p class="text-[10px] font-bold">₹${item.price}</p></div>
-                        </div>
-                        <button onclick="removeFromCart(${item.cartId})" class="text-red-500 font-bold">&times;</button>
-                    </div>
-                `;
-            });
-            document.getElementById('bar-total').innerText = `₹${total}`;
-        }
-
-        function removeFromCart(cid) {
-            cart = cart.filter(x => x.cartId !== cid);
-            updateCart();
-            if(!cart.length) document.getElementById('bottom-bar').classList.add('hidden');
-        }
-
-        function checkout() {
-            const addr = document.getElementById('address').value;
-            const total = document.getElementById('bar-total').innerText.replace('₹','');
-            if(!addr || cart.length === 0) return alert("Address aur Items add karein!");
-            window.location.href = `upi://pay?pa=kolka97560@barodampay&pn=KFK_INDIA&am=${total}&cu=INR`;
-        }
-
-        build();
-        const bar = document.getElementById('category-bar');
+        init();
+        const nav = document.getElementById('cat-list');
         categories.forEach(c => {
-            bar.innerHTML += `<button id="tab-${c.id}" onclick="renderMenu('${c.id}')" class="category-btn border-b-2 border-transparent pb-1 transition-all">${c.name}</button>`;
+            nav.innerHTML += `<button id="btn-${c.id}" onclick="render('${c.id}')" class="cat-btn border-b-2 border-transparent pb-1 transition-all whitespace-nowrap">${c.name}</button>`;
         });
-        renderMenu('rte');
+        render('rte');
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFK India | Official Fish Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .cat-active { background: #e03546; color: white; border-color: #e03546; }
+        .product-card { display: flex; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid #f1f5f9; }
+        .fish-img { width: 130px; height: 130px; object-fit: cover; border-radius: 18px; background: #f8fafc; }
+    </style>
+</head>
+<body class="bg-white">
+
+    <header class="sticky top-0 z-50 bg-white border-b p-4">
+        <div class="max-w-2xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-black italic text-[#e03546]">KFK<span class="text-slate-900">.INDIA</span></h1>
+            <div id="cart-btn" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-bold">0 Items</div>
+        </div>
+    </header>
+
+    <nav class="sticky top-[68px] z-40 bg-white border-b overflow-x-auto no-scrollbar py-3 px-4 shadow-sm">
+        <div id="cat-list" class="max-w-2xl mx-auto flex gap-4 text-[11px] font-black uppercase tracking-widest">
+            </div>
+    </nav>
+
+    <main class="max-w-2xl mx-auto px-4 py-6 mb-20">
+        <div id="menu-items" class="space-y-2">
+            </div>
+    </main>
+
+    <script>
+        const categories = [
+            { id: 'rte', name: 'Ready to Eat', img: 'https://images.unsplash.com/photo-1589187151032-573a91317445?w=400' },
+            { id: 'river', name: 'River Fish', img: 'https://5.imimg.com/data5/ANDROID/Default/2021/1/HX/OL/DU/119931758/product-jpeg-500x500.jpg' },
+            { id: 'sea', name: 'Sea Food', img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400' },
+            { id: 'prawns', name: 'Prawns', img: 'https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=400' },
+            { id: 'bengali', name: 'Bengali Cut', img: 'https://5.imimg.com/data5/SELLER/Default/2021/10/TC/ZB/FY/39290072/paddmar-ilish-fish-500x500.jpg' }
+        ];
+
+        const fishData = {
+            rte: ["Kerala Fish Curry", "Meen Moilee", "Fish Tikka", "Goan Curry"],
+            river: ["Fresh Rohu", "Catla Steaks", "Pabda Whole", "Tangra"],
+            sea: ["Pomfret White", "Surmai Steak", "Red Snapper", "Salmon"],
+            prawns: ["Tiger Prawns", "Jumbo Prawns", "Cocktail Prawns"],
+            bengali: ["Hilsa Ilish", "Chital Muitha", "Parshe Cut"]
+        };
+
+        let inventory = [];
+        function init() {
+            categories.forEach(c => {
+                for(let i=0; i<40; i++) { // Creating 200 items
+                    let name = fishData[c.id][i % fishData[c.id].length];
+                    inventory.push({
+                        id: inventory.length + 1,
+                        name: `${name} ${i === 0 ? '' : '(Special Pack ' + i + ')'}`,
+                        cat: c.id,
+                        price: 180 + (Math.floor(Math.random() * 50) * 10),
+                        img: c.img
+                    });
+                }
+            });
+        }
+
+        function render(catId) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('cat-active'));
+            document.getElementById('btn-' + catId).classList.add('cat-active');
+            
+            const container = document.getElementById('menu-items');
+            container.innerHTML = '';
+            inventory.filter(p => p.cat === catId).forEach(p => {
+                container.innerHTML += `
+                    <div class="product-card">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-slate-800">${p.name}</h3>
+                            <p class="text-sm font-black text-slate-900 mt-1">₹${p.price}</p>
+                            <p class="text-xs text-slate-400 mt-2">100% Fresh & Cleaned fish delivered to your doorstep.</p>
+                        </div>
+                        <div class="relative flex-shrink-0">
+                            <img src="${p.img}" class="fish-img shadow-sm border border-slate-100" onerror="this.src='https://via.placeholder.com/150?text=Fish'">
+                            <button class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white text-[#e03546] border border-slate-200 px-6 py-1 rounded-lg text-[10px] font-black shadow-lg uppercase">Add</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        init();
+        const nav = document.getElementById('cat-list');
+        categories.forEach(c => {
+            nav.innerHTML += `<button id="btn-${c.id}" onclick="render('${c.id}')" class="cat-btn border-b-2 border-transparent pb-1 transition-all whitespace-nowrap">${c.name}</button>`;
+        });
+        render('rte');
     </script>
 </body>
 </html>
