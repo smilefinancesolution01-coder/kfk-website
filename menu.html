@@ -10,19 +10,22 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fafafa; }
         .product-card { transition: all 0.4s ease; }
         .product-card:hover { transform: translateY(-10px); }
+        /* Hide Scrollbar for Slider */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body>
 
     <header class="bg-[#002e6e] text-white p-10 rounded-b-[3.5rem] shadow-2xl text-center">
         <h1 class="text-4xl font-black italic tracking-tighter uppercase">KFK <span class="text-orange-500">FRESH</span></h1>
-        <p class="text-blue-200 font-bold text-[10px] uppercase tracking-widest mt-2">Direct From Cloud Database</p>
+        <p class="text-blue-200 font-bold text-[10px] uppercase tracking-widest mt-2">Premium Fish Collection</p>
     </header>
 
     <main class="p-6 lg:p-12">
         <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="col-span-full text-center py-20 text-slate-400 font-bold animate-pulse">
-                LOADING FRESH STOCK...
+                SYNCING CLOUD INVENTORY...
             </div>
         </div>
     </main>
@@ -31,7 +34,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Aapka Same Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyDWHPt3Kya_s-9f62RsLfI_G1RgQU5P534",
             authDomain: "kfk-fish.firebaseapp.com",
@@ -47,40 +49,61 @@
         async function loadMenu() {
             const container = document.getElementById('product-list');
             try {
-                // Latest products sabse upar dikhane ke liye orderBy use kiya hai
                 const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
                 const snap = await getDocs(q);
                 
                 if(snap.empty) {
-                    container.innerHTML = `<div class="col-span-full text-center py-20 font-bold text-slate-400 uppercase">Aaj ka stock khatam ho gaya hai!</div>`;
+                    container.innerHTML = `<div class="col-span-full text-center py-20 font-bold text-slate-400 uppercase">Stock Out! Check back later.</div>`;
                     return;
                 }
 
                 container.innerHTML = "";
                 snap.forEach(doc => {
                     const p = doc.data();
+                    // Check if 'images' array exists, otherwise fallback to single 'image'
+                    const images = p.images || [p.image];
+                    
                     container.innerHTML += `
-                        <div class="product-card bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100">
-                            <div class="relative">
-                                <img src="${p.image}" class="w-full aspect-square object-cover" alt="${p.name}">
-                                <div class="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Fresh</div>
+                        <div class="product-card bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 flex flex-col">
+                            <div class="relative group">
+                                <div class="relative overflow-x-auto flex snap-x snap-mandatory scrollbar-hide bg-slate-100">
+                                    ${images.map(img => `
+                                        <img src="${img}" class="w-full aspect-square object-cover snap-center flex-shrink-0">
+                                    `).join('')}
+                                </div>
+                                
+                                <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5">
+                                    ${images.map(() => `
+                                        <div class="w-1.5 h-1.5 rounded-full bg-white/60 shadow-sm"></div>
+                                    `).join('')}
+                                </div>
+
+                                <div class="absolute top-4 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest shadow-lg">Live Stock</div>
                             </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-black text-slate-800 italic uppercase">${p.name}</h3>
-                                <div class="flex justify-between items-center mt-4">
+
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-xl font-black text-slate-800 italic uppercase tracking-tighter">${p.name}</h3>
+                                    <p class="text-[10px] text-slate-400 font-bold uppercase mt-1 italic tracking-widest">Guaranteed Fresh Delivery</p>
+                                </div>
+
+                                <div class="flex justify-between items-end mt-6">
                                     <div class="flex flex-col">
-                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Price</span>
-                                        <span class="text-orange-500 font-black italic">₹${p.price} / ${p.weight}</span>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Price / Weight</span>
+                                        <span class="text-2xl font-black text-orange-500 italic leading-none mt-1">₹${p.price}<span class="text-xs text-slate-400 ml-1">/${p.weight}</span></span>
                                     </div>
-                                    <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want to order ${p.name}" class="bg-[#002e6e] text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase hover:bg-orange-500 transition-all shadow-lg">Order Now</a>
+                                    <a href="https://wa.me/919773747761?text=Hello KFK! I want to order ${p.name} (Unit: ${p.weight})" 
+                                       class="bg-[#002e6e] text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase hover:bg-orange-600 transition-all shadow-xl active:scale-95">
+                                        Order Now
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     `;
                 });
             } catch (e) {
-                console.error("Menu Load Error:", e);
-                container.innerHTML = `<div class="col-span-full text-center py-20 text-red-400 font-bold">Error connecting to database. Please check rules.</div>`;
+                console.error(e);
+                container.innerHTML = `<div class="col-span-full text-center py-20 text-red-500 font-bold">Error 404: Cloud Not Responding. Check Firewall.</div>`;
             }
         }
 
