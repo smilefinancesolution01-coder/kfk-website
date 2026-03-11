@@ -215,6 +215,21 @@
         </div>
     </section>
 
+    <section class="py-10 bg-slate-100 border-t">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <h5 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Authorized Personnel Only</h5>
+                <p class="text-xs font-bold text-slate-600">KFK India Internal Management System</p>
+            </div>
+            
+            <div class="flex flex-wrap gap-3 justify-center">
+                <input type="text" id="admin-id" placeholder="Admin ID" class="bg-white border-none rounded-xl px-4 py-3 text-[10px] font-bold outline-none shadow-sm w-32 focus:ring-2 ring-orange-500">
+                <input type="password" id="admin-pass" placeholder="Password" class="bg-white border-none rounded-xl px-4 py-3 text-[10px] font-bold outline-none shadow-sm w-32 focus:ring-2 ring-orange-500">
+                <button onclick="checkAdmin()" class="bg-[#002e6e] text-white px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-orange-500 transition-all shadow-lg">Login to Dashboard</button>
+            </div>
+        </div>
+    </section>
+
     <footer class="bg-white border-t pt-24 pb-12">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
             <div>
@@ -263,6 +278,7 @@
 
     <script>
         const PEXELS_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
+        
         async function setImg(q, id) {
             try {
                 const r = await fetch(`https://api.pexels.com/v1/search?query=${q}&per_page=1`, {headers:{Authorization:PEXELS_KEY}});
@@ -283,6 +299,7 @@
         }
 
         function toggleKFKChat() { document.getElementById('chat-window').classList.toggle('hidden'); }
+        
         function sendMessage() {
             const input = document.getElementById('bot-input-field');
             if(!input.value.trim()) return;
@@ -290,6 +307,7 @@
             input.value = '';
             setTimeout(() => addMessage("Detail share kar di gayi hai. Call us: +91 99173 85863", 'bot'), 600);
         }
+
         function addMessage(text, side) {
             const chat = document.getElementById('chat-messages');
             const msg = document.createElement('div');
@@ -299,6 +317,20 @@
             chat.scrollTop = chat.scrollHeight;
         }
 
+        // NEW ADMIN LOGIN LOGIC
+        function checkAdmin() {
+            const id = document.getElementById('admin-id').value;
+            const pass = document.getElementById('admin-pass').value;
+
+            if(id === "KFK@9773" && pass === "Kfk@#786") {
+                alert("Access Granted! Opening Dashboard...");
+                window.location.href = "admin.html";
+            } else {
+                alert("Invalid Credentials! Unauthorized access is recorded.");
+            }
+        }
+
+        // Image Loaders Execution
         setImg('fresh raw sea fish market', 'hero-img');
         setImg('food testing laboratory quality', 'lab-img');
         cats.forEach(c => setImg(c.q, c.i));
