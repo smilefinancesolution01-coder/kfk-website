@@ -3,149 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK India | Checkout & Invoice</title>
+    <title>KFK India | Checkout & WhatsApp Order</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fcfdfe; }
-        .invoice-box { border: 1px solid #eee; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+        .invoice-preview { box-shadow: 0 20px 50px rgba(0,46,110,0.05); }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
-    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-        
-        <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl border border-gray-100">
-            <h2 class="text-3xl font-black text-[#002e6e] mb-2 italic">CHECKOUT</h2>
-            <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-8">Confirm your delivery details</p>
-
-            <form id="order-form" class="space-y-5">
-                <input type="text" id="cust-name" placeholder="Full Name" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border focus:border-orange-500">
-                <input type="tel" id="cust-phone" placeholder="WhatsApp Number" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border focus:border-orange-500">
-                <textarea id="cust-address" placeholder="Complete Delivery Address" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border focus:border-orange-500 h-32"></textarea>
-                
-                <div class="bg-orange-50 p-6 rounded-[2rem] border border-orange-100">
-                    <div class="flex justify-between font-black text-[#002e6e] mb-2 uppercase text-xs">
-                        <span>Cart Total:</span>
-                        <span id="total-amt">₹0</span>
-                    </div>
-                    <div class="flex justify-between font-bold text-orange-600 uppercase text-[10px]">
-                        <span>Delivery:</span>
-                        <span>FREE</span>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full bg-[#002e6e] text-white py-6 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl hover:bg-orange-500 transition-all">Confirm Order & Generate Invoice</button>
-            </form>
-        </div>
-
-        <div id="invoice-container" class="hidden lg:block">
-            <div id="printable-invoice" class="bg-white p-10 rounded-[2rem] invoice-box relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-10 opacity-10 rotate-12">
-                    <h1 class="text-6xl font-black">KFK</h1>
-                </div>
-
-                <div class="flex justify-between items-start border-b pb-8 mb-8">
-                    <div>
-                        <h1 class="text-3xl font-black text-[#002e6e] italic">KFK<span class="text-orange-500">.</span>INDIA</h1>
-                        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">River to Kitchen Platform</p>
-                    </div>
-                    <div class="text-right">
-                        <h4 class="font-black text-sm uppercase">Tax Invoice</h4>
-                        <p id="inv-date" class="text-[10px] font-bold text-slate-400"></p>
-                    </div>
-                </div>
-
-                <div class="mb-8">
-                    <h5 class="text-[10px] font-black text-orange-500 uppercase mb-2">Billed To:</h5>
-                    <p id="inv-name" class="font-black text-slate-800 uppercase text-lg leading-none"></p>
-                    <p id="inv-phone" class="text-xs font-bold text-slate-500 mt-1"></p>
-                    <p id="inv-addr" class="text-[10px] font-bold text-slate-400 mt-1 max-w-[200px]"></p>
-                </div>
-
-                <table class="w-full text-left mb-8">
-                    <thead>
-                        <tr class="border-b text-[10px] font-black text-slate-400 uppercase">
-                            <th class="pb-4">Description</th>
-                            <th class="pb-4 text-right">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody id="inv-items" class="text-xs font-bold text-slate-700 uppercase">
-                        </tbody>
-                </table>
-
-                <div class="border-t pt-6 flex justify-between items-center">
-                    <div>
-                        <p class="text-[8px] font-bold text-slate-400 uppercase">Payment Status</p>
-                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-[9px] font-black uppercase">COD (Pending)</span>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] font-black text-slate-400 uppercase">Grand Total</p>
-                        <h2 id="inv-total" class="text-3xl font-black text-[#002e6e]">₹0</h2>
-                    </div>
-                </div>
-
-                <div class="mt-10 pt-6 border-t border-dashed text-center">
-                    <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Thank you for choosing chemical-free fresh fish! 🐟</p>
-                </div>
-            </div>
+    <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             
-            <button onclick="downloadPDF()" class="w-full mt-6 bg-slate-100 text-slate-500 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-slate-200 transition-all flex items-center justify-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                Download PDF Receipt
-            </button>
+            <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl border border-gray-50">
+                <h2 class="text-3xl font-black text-[#002e6e] italic mb-2 uppercase tracking-tighter">Confirm <span class="text-orange-500">Order</span></h2>
+                <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-8 text-center md:text-left">Details bharein aur WhatsApp par order place karein</p>
+
+                <form id="order-form" class="space-y-4">
+                    <input type="text" id="cust-name" placeholder="Aapka Poora Naam" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border border-transparent focus:border-orange-500 transition-all shadow-inner">
+                    <input type="tel" id="cust-phone" placeholder="WhatsApp Number" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border border-transparent focus:border-orange-500 transition-all shadow-inner">
+                    <textarea id="cust-address" placeholder="Delivery ka Poora Address" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold border border-transparent focus:border-orange-500 h-32 shadow-inner"></textarea>
+                    
+                    <div class="bg-orange-50 p-6 rounded-[2rem] border border-orange-100 mt-4">
+                        <div class="flex justify-between font-black text-[#002e6e] mb-1 uppercase text-xs tracking-wider">
+                            <span>Cart Total:</span>
+                            <span id="display-total">₹0</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-orange-400 uppercase text-[9px]">
+                            <span>Delivery:</span>
+                            <span class="text-green-600 font-black">FREE (CASH ON DELIVERY)</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-[#002e6e] text-white py-6 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl hover:bg-orange-600 transition-all flex items-center justify-center gap-3 active:scale-95">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                        Place Order via WhatsApp
+                    </button>
+                </form>
+            </div>
+
+            <div id="invoice-section" class="hidden lg:block">
+                <div id="printable-invoice" class="bg-white p-10 rounded-[2.5rem] border border-gray-100 invoice-preview relative">
+                    <div class="flex justify-between items-start border-b pb-6 mb-6">
+                        <div>
+                            <h1 class="text-2xl font-black text-[#002e6e] italic">KFK<span class="text-orange-500">.</span>INDIA</h1>
+                            <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Chemical Free Fresh Fish</p>
+                        </div>
+                        <div class="text-right">
+                            <h4 class="font-black text-xs uppercase italic">Tax Invoice</h4>
+                            <p id="inv-date" class="text-[9px] font-bold text-slate-400"></p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h5 class="text-[9px] font-black text-orange-500 uppercase mb-2 tracking-tighter">Delivery To:</h5>
+                        <p id="inv-name" class="font-black text-slate-800 uppercase text-md">---</p>
+                        <p id="inv-phone" class="text-xs font-bold text-slate-500 mt-1">---</p>
+                        <p id="inv-addr" class="text-[10px] font-bold text-slate-400 mt-1 leading-relaxed italic">---</p>
+                    </div>
+
+                    <div id="inv-items-list" class="border-t pt-4 space-y-3 mb-6">
+                        </div>
+
+                    <div class="border-t border-dashed pt-4 flex justify-between items-center">
+                        <div>
+                            <p class="text-[8px] font-bold text-slate-400 uppercase">Payment Mode</p>
+                            <span class="text-[#002e6e] text-[10px] font-black uppercase italic">Cash on Delivery</span>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-tighter">Grand Total</p>
+                            <h2 id="inv-total" class="text-3xl font-black text-orange-500">₹0</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="downloadInvoice()" class="w-full mt-6 border-2 border-[#002e6e]/10 text-[#002e6e] py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                    Download Invoice (PDF)
+                </button>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // 1. CALCULATE TOTAL FROM CART
-        let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-        // Note: Real price should come from cart objects, here we use a sample sum for the logic
-        let total = cart.length * 450; // Sample average price
-        document.getElementById('total-amt').innerText = `₹${total}`;
-        document.getElementById('inv-total').innerText = `₹${total}`;
-        document.getElementById('inv-date').innerText = new Date().toLocaleDateString('en-IN');
+        // 1. DATA CALCULATION
+        const cartItems = JSON.parse(localStorage.getItem('kfk_cart')) || [];
+        const totalAmount = cartItems.length * 500; // Sample pricing logic
 
-        // 2. FORM SUBMISSION
+        document.getElementById('display-total').innerText = `₹${totalAmount}`;
+        document.getElementById('inv-total').innerText = `₹${totalAmount}`;
+        document.getElementById('inv-date').innerText = new Date().toLocaleDateString('en-IN', {day: '2-digit', month: 'short', year: 'numeric'});
+
+        // 2. FORM HANDLING & REDIRECTION
         document.getElementById('order-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Fill Invoice Details
-            document.getElementById('inv-name').innerText = document.getElementById('cust-name').value;
-            document.getElementById('inv-phone').innerText = document.getElementById('cust-phone').value;
-            document.getElementById('inv-addr').innerText = document.getElementById('cust-address').value;
-            
-            // List Items in Invoice
-            const itemTable = document.getElementById('inv-items');
-            itemTable.innerHTML = `<tr><td class="py-4">Fresh Fish Mix Order (${cart.length} Items)</td><td class="py-4 text-right">₹${total}</td></tr>`;
 
-            // Reveal Invoice for Mobile or Preview
-            document.getElementById('invoice-container').classList.remove('hidden');
-            alert("Order Placed Successfully! Generating your invoice...");
-            
-            // Save order to history
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const address = document.getElementById('cust-address').value;
+
+            // Invoice update
+            document.getElementById('inv-name').innerText = name;
+            document.getElementById('inv-phone').innerText = phone;
+            document.getElementById('inv-addr').innerText = address;
+            document.getElementById('inv-items-list').innerHTML = `
+                <div class="flex justify-between text-xs font-black uppercase text-slate-700 italic">
+                    <span>Fresh Fish Combo (x${cartItems.length})</span>
+                    <span>₹${totalAmount}</span>
+                </div>`;
+            document.getElementById('invoice-section').classList.remove('hidden');
+
+            // WHATSAPP REDIRECT CONFIG
+            const adminNumber = "919773747761"; // UPDATED WITH YOUR NUMBER
+            const whatsappMsg = `*NEW ORDER - KFK INDIA*%0A` +
+                                `--------------------------%0A` +
+                                `*👤 Customer:* ${name}%0A` +
+                                `*📞 Phone:* ${phone}%0A` +
+                                `*📍 Address:* ${address}%0A` +
+                                `--------------------------%0A` +
+                                `*🐟 Items:* ${cartItems.length} Packs%0A` +
+                                `*💰 Total Bill:* ₹${totalAmount}%0A` +
+                                `*🚚 Status:* Cash on Delivery%0A%0A` +
+                                `_Please confirm my delivery fast!_`;
+
+            // Admin History Save
             let orders = JSON.parse(localStorage.getItem('kfk_orders')) || [];
-            orders.push({
-                id: Date.now(),
-                customer: document.getElementById('cust-name').value,
-                amount: total,
-                status: 'Pending'
-            });
+            orders.push({ id: Date.now(), customer: name, phone: phone, amount: totalAmount, address: address });
             localStorage.setItem('kfk_orders', JSON.stringify(orders));
+
+            // Launch WhatsApp
+            setTimeout(() => {
+                window.open(`https://wa.me/${adminNumber}?text=${whatsappMsg}`, '_blank');
+            }, 1000);
         });
 
-        // 3. DOWNLOAD AS PDF
-        function downloadPDF() {
+        // 3. PDF LOGIC
+        function downloadInvoice() {
             const element = document.getElementById('printable-invoice');
-            const opt = {
-                margin: 0.5,
+            const options = {
+                margin: 10,
                 filename: 'KFK-Invoice.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
+                image: { type: 'jpeg', quality: 1 },
                 html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
-            html2pdf().set(opt).from(element).save();
+            html2pdf().from(element).set(options).save();
         }
     </script>
 </body>
