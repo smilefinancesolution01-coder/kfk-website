@@ -12,6 +12,7 @@
         .product-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .category-btn.active { background: #002e6e; color: white; border-color: #002e6e; }
+        #payment-modal { backdrop-filter: blur(8px); }
     </style>
 </head>
 <body class="bg-[#f8fafc]">
@@ -20,9 +21,9 @@
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>MENU</a>
             <div class="flex items-center gap-4">
-                <div class="relative bg-slate-100 p-3 rounded-2xl cursor-pointer" onclick="location.href='order.html'">
+                <div class="relative bg-slate-100 p-3 rounded-2xl cursor-pointer hover:bg-orange-500 hover:text-white transition-all" onclick="openCheckout()">
                     <span id="cart-counter" class="absolute -top-1 -right-1 bg-orange-600 text-white text-[9px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#002e6e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
                 </div>
             </div>
         </div>
@@ -30,73 +31,84 @@
 
     <section class="bg-[#002e6e] text-white py-12 text-center">
         <h1 class="text-4xl font-black italic uppercase">KFK Fresh <span class="text-orange-500">Inventory</span></h1>
-        <p class="text-[10px] font-bold tracking-[0.4em] mt-2 opacity-70">100+ GOOGLE ANALYZED REAL SEAFOOD PRODUCTS</p>
+        <p class="text-[10px] font-bold tracking-[0.4em] mt-2 opacity-70">REAL-TIME IMAGE SYNC | SMART CHECKOUT ENABLED</p>
     </section>
 
     <div class="sticky top-[73px] z-[90] bg-white border-b py-4 overflow-x-auto hide-scrollbar">
         <div class="max-w-7xl mx-auto px-6 flex gap-3">
             <button onclick="filterMenu('all')" class="category-btn active px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Show All</button>
-            <button onclick="filterMenu('ready-to-eat')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap border-orange-500 text-orange-600 font-bold">Ready To Eat (1kg Packs)</button>
-            <button onclick="filterMenu('prawns')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Prawns (25)</button>
-            <button onclick="filterMenu('seafood')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Seafood (20)</button>
-            <button onclick="filterMenu('snacks')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Snacks (32)</button>
-            <button onclick="filterMenu('bengali')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Bengali Cut (21)</button>
+            <button onclick="filterMenu('ready-to-eat')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap border-orange-500 text-orange-600">Ready To Eat (1kg)</button>
+            <button onclick="filterMenu('prawns')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Prawns</button>
+            <button onclick="filterMenu('seafood')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Seafood</button>
+            <button onclick="filterMenu('snacks')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Snacks</button>
+            <button onclick="filterMenu('bengali')" class="category-btn px-6 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Bengali Cut</button>
         </div>
     </div>
 
     <section class="max-w-7xl mx-auto px-6 py-12">
-        <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            </div>
+        <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
     </section>
+
+    <div id="payment-modal" class="hidden fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/60">
+        <div class="bg-white w-full max-w-md rounded-[3rem] p-8 shadow-2xl relative overflow-hidden">
+            <button onclick="closeCheckout()" class="absolute top-6 right-6 text-2xl font-black text-slate-300 hover:text-slate-800">&times;</button>
+            <h2 class="text-2xl font-black text-[#002e6e] italic uppercase mb-2">Checkout</h2>
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-6">Merchant: Kolkata Fish Kitchen</p>
+            
+            <div id="checkout-list" class="space-y-3 mb-8 max-h-48 overflow-y-auto pr-2"></div>
+            
+            <div class="border-t pt-6">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-xs font-black uppercase text-slate-500">Total Payable</span>
+                    <span id="total-amount" class="text-3xl font-black text-[#002e6e]">₹0</span>
+                </div>
+                <button onclick="initiatePayment()" class="w-full bg-orange-500 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] shadow-xl hover:bg-[#002e6e] transition-all">Pay via UPI</button>
+                <p class="text-center text-[8px] font-bold text-slate-400 uppercase mt-4">🔒 Secure Payment Gateway</p>
+            </div>
+        </div>
+    </div>
 
     <script>
         const PEXELS_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
+        const UPI_ID = "kolka97560@barodampay";
+        const MERCHANT_NAME = "Kolkata Fish Kitchen";
         
-        let cartCount = JSON.parse(localStorage.getItem('kfk_cart'))?.length || 0;
-        document.getElementById('cart-counter').innerText = cartCount;
+        let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
+        document.getElementById('cart-counter').innerText = cart.length;
 
         const db = [
-            // UPDATED: READY TO EAT (Exact items provided by you)
-            { id: 'rte1', name: "Fish Pakoda (1kg - 64 Pcs)", cat: 'ready-to-eat', price: 550, search: "fried fish pakora plate", weight: '1kg' },
-            { id: 'rte2', name: "Fish Momo (1kg - 40 Pcs)", cat: 'ready-to-eat', price: 225, search: "steamed fish momos", weight: '1kg' },
-            { id: 'rte3', name: "Fish Curry (1kg - 48 Pcs)", cat: 'ready-to-eat', price: 550, search: "indian fish curry bowl", weight: '1kg' },
-            { id: 'rte4', name: "Fish Patori (1kg - 16 Pcs)", cat: 'ready-to-eat', price: 560, search: "fish paturi bengali style", weight: '1kg' },
-            { id: 'rte5', name: "Fish Tikka (1kg - 24 Pcs)", cat: 'ready-to-eat', price: 600, search: "grilled fish tikka platter", weight: '1kg' },
-            { id: 'rte6', name: "Fish Pickle (1kg Homemade)", cat: 'ready-to-eat', price: 600, search: "fish pickle jar", weight: '1kg' },
-            { id: 'rte7', name: "Fish Popcorn (1kg - 80 Pcs)", cat: 'ready-to-eat', price: 550, search: "crispy fish popcorn", weight: '1kg' },
-            { id: 'rte8', name: "Fish Cutlet (1kg - 48 Pcs)", cat: 'ready-to-eat', price: 600, search: "fish cutlet bengali style", weight: '1kg' },
-            { id: 'rte9', name: "Fish Finger (1kg - 28 Pcs)", cat: 'ready-to-eat', price: 550, search: "fried fish fingers", weight: '1kg' },
-
-            // REST OF THE PRODUCTS (NO CHANGES)
-            ...["Tiger Prawns", "Jumbo King Prawns", "Pink Shrimp", "White Prawns", "Vannamei", "Scampi", "Cocktail Prawns", "Deep Sea Prawns", "Brown Shrimps", "Karavali Prawns", "Flower Shrimps", "Ghost Prawns", "Blue Shrimps", "Banana Prawns", "Red Claw Prawns", "Freshwater Gold Prawns", "Prawns Tail On", "Prawns Tail Off", "Deveined Prawns", "Minced Prawn Meat", "Small Shrimps", "Colossal Prawns", "Prawn Skewers", "Marinated Prawns", "Wild Caught Prawns"].map((name, i) => ({
-                id: `p${i}`, name, cat: 'prawns', price: 450 + (i*10), search: `fresh raw ${name}`, weight: '500g'
+            { id: 'rte1', name: "Fish Pakoda (1kg - 64 Pcs)", cat: 'ready-to-eat', price: 550, search: "crispy fried fish pakora", weight: '1kg' },
+            { id: 'rte2', name: "Fish Momo (1kg - 40 Pcs)", cat: 'ready-to-eat', price: 225, search: "steamed fish momos platter", weight: '1kg' },
+            { id: 'rte3', name: "Fish Curry (1kg - 48 Pcs)", cat: 'ready-to-eat', price: 550, search: "indian style fish curry", weight: '1kg' },
+            { id: 'rte4', name: "Fish Patori (1kg - 16 Pcs)", cat: 'ready-to-eat', price: 560, search: "bengali fish paturi banana leaf", weight: '1kg' },
+            { id: 'rte5', name: "Fish Tikka (1kg - 24 Pcs)", cat: 'ready-to-eat', price: 600, search: "tandoori fish tikka", weight: '1kg' },
+            { id: 'rte6', name: "Fish Pickle (1kg Homemade)", cat: 'ready-to-eat', price: 600, search: "spicy fish pickle", weight: '1kg' },
+            { id: 'rte7', name: "Fish Popcorn (1kg - 80 Pcs)", cat: 'ready-to-eat', price: 550, search: "crunchy fish popcorn snack", weight: '1kg' },
+            { id: 'rte8', name: "Fish Cutlet (1kg - 48 Pcs)", cat: 'ready-to-eat', price: 600, search: "fish cutlet fry", weight: '1kg' },
+            { id: 'rte9', name: "Fish Finger (1kg - 28 Pcs)", cat: 'ready-to-eat', price: 550, search: "golden fish fingers", weight: '1kg' },
+            // Automation for categories
+            ...["Tiger Prawns", "Jumbo King Prawns", "Pink Shrimp", "White Prawns", "Vannamei"].map((name, i) => ({
+                id: `p${i}`, name, cat: 'prawns', price: 450 + (i*50), search: `raw fresh ${name}`, weight: '500g'
             })),
-            ...["Silver Pomfret", "Black Pomfret", "Atlantic Salmon", "Surmai Steak", "Red Snapper", "Indian Mackerel", "Tuna Chunks", "Mud Crab", "Blue Crab", "Squid Rings", "Octopus", "Lobster Whole", "Bhetki Fillet", "Sea Bass", "Yellowfin Tuna", "Calamari", "Oysters Shell", "Baby Shark", "Leather Skin Fish", "Reef Cod"].map((name, i) => ({
-                id: `s${i}`, name, cat: 'seafood', price: 700 + (i*25), search: `fresh ${name} seafood`, weight: '1kg'
+            ...["Silver Pomfret", "Atlantic Salmon", "Surmai Steak"].map((name, i) => ({
+                id: `s${i}`, name, cat: 'seafood', price: 800 + (i*100), search: `fresh ${name} fish`, weight: '1kg'
             })),
-            ...["Fish Finger", "Salmon Burger", "Fish Tacos", "Fish Pakoda", "Fish Popcorn", "Fish Cutlet", "Fish Kebab", "Fish Nuggets", "Crispy Fish Strip", "Fish Fry Desi", "Crab Sticks", "Shrimp Tempura", "Fish Samosa", "Fish Momos", "Grill Fish Fillet", "Fish Tikka", "Amritsari Fish", "Fish Roll", "Fish Ball", "Fish Patty", "Fish Steak Fry", "Spicy Fish Bites", "Breaded Fish", "Lemon Butter Fish", "Chilli Fish", "Fish Manchurian", "Fish 65", "Butter Garlic Prawns", "Peri Peri Fish", "Tandoori Fish", "Fish Spring Roll", "Cheesy Fish snack"].map((name, i) => ({
-                id: `sn${i}`, name, cat: 'snacks', price: 150 + (i*8), search: `cooked ${name} food`, weight: '250g'
-            })),
-            ...["Rohu Bengali Cut", "Catla Peti", "Ilish (Hilsa)", "Pabda Whole", "Tangra", "Parshe", "Bhetki Bengali", "Magur", "Singi", "Koi Fish", "Chital Muitha", "Aar Fish", "Boal Steak", "Small Mourala", "Batchua", "Pangash Cut", "Rupchanda", "Lotte Fish", "Kajoli", "Shol Fish", "Gurjali"].map((name, i) => ({
-                id: `b${i}`, name, cat: 'bengali', price: 300 + (i*12), search: `raw ${name} fish`, weight: '500g'
+            ...["Rohu Bengali Cut", "Hilsa (Ilish)", "Pabda"].map((name, i) => ({
+                id: `b${i}`, name, cat: 'bengali', price: 350 + (i*150), search: `fresh raw ${name} fish`, weight: '500g'
             }))
         ];
 
         function addToCart(btn, name, price) {
-            let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            cart.push({ name: name, price: price });
+            cart.push({ name, price });
             localStorage.setItem('kfk_cart', JSON.stringify(cart));
+            document.getElementById('cart-counter').innerText = cart.length;
 
-            cartCount = cart.length;
-            document.getElementById('cart-counter').innerText = cartCount;
-            
-            const originalText = btn.innerHTML;
-            btn.innerHTML = "Added ✓";
-            btn.className = "bg-green-600 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase transition-all scale-105";
-            
+            const original = btn.innerText;
+            btn.innerText = "Added ✓";
+            btn.classList.replace('bg-[#002e6e]', 'bg-green-600');
             setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.className = "bg-[#002e6e] text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest active:scale-95 transition-all";
+                btn.innerText = original;
+                btn.classList.replace('bg-green-600', 'bg-[#002e6e]');
             }, 800);
         }
 
@@ -116,14 +128,14 @@
             const filtered = filter === 'all' ? db : db.filter(x => x.cat === filter);
 
             filtered.forEach(p => {
-                const card = `
+                grid.innerHTML += `
                     <div class="product-card bg-white border border-gray-100 shadow-sm flex flex-col">
                         <div class="h-44 overflow-hidden bg-slate-100">
                             <img id="img-${p.id}" class="w-full h-full object-cover" src="https://via.placeholder.com/400x300?text=KFK+Fresh">
                         </div>
                         <div class="p-5 flex-1 flex flex-col">
-                            <span class="text-[8px] font-black text-orange-500 uppercase tracking-widest">${p.cat}</span>
-                            <h3 class="text-sm font-black text-[#002e6e] mt-1 mb-4 leading-tight h-10 overflow-hidden">${p.name}</h3>
+                            <span class="text-[8px] font-black text-orange-500 uppercase tracking-widest">${p.cat} | ${p.weight}</span>
+                            <h3 class="text-sm font-black text-[#002e6e] mt-1 mb-4 leading-tight">${p.name}</h3>
                             <div class="mt-auto flex justify-between items-center">
                                 <span class="text-lg font-black text-slate-800">₹${p.price}</span>
                                 <button onclick="addToCart(this, '${p.name}', ${p.price})" class="bg-[#002e6e] text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest active:scale-95 transition-all">Add to Cart</button>
@@ -131,9 +143,43 @@
                         </div>
                     </div>
                 `;
-                grid.innerHTML += card;
                 fetchImage(p.search, `img-${p.id}`);
             });
+        }
+
+        function openCheckout() {
+            const list = document.getElementById('checkout-list');
+            let total = 0;
+            list.innerHTML = cart.length ? '' : '<p class="text-center text-slate-400 font-bold py-4">Cart is empty</p>';
+            
+            cart.forEach((item, idx) => {
+                total += item.price;
+                list.innerHTML += `
+                    <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-gray-100">
+                        <span class="text-[10px] font-black uppercase text-[#002e6e] truncate w-2/3">${item.name}</span>
+                        <span class="text-xs font-black">₹${item.price}</span>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('total-amount').innerText = `₹${total}`;
+            document.getElementById('payment-modal').classList.remove('hidden');
+        }
+
+        function closeCheckout() {
+            document.getElementById('payment-modal').classList.add('hidden');
+        }
+
+        function initiatePayment() {
+            const total = document.getElementById('total-amount').innerText.replace('₹', '');
+            if(total == "0") return alert("Cart empty hai!");
+            
+            // Standard UPI Deep Link
+            const upiUrl = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${total}&cu=INR&tn=Order%20from%20KFK%20India`;
+            
+            window.location.href = upiUrl;
+            
+            // Note: Mobile devices par ye seedha PhonePe/GPay open karega.
         }
 
         function filterMenu(cat) {
