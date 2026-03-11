@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK Admin | Pro Multi-Photo Control</title>
+    <title>KFK Admin | Control Center Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -33,9 +33,20 @@
                 <span>🛠️</span> Manage Menu
             </button>
         </nav>
+        <div class="pt-6 border-t border-white/10">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-blue-300">Smile Financial Solutions</p>
+        </div>
     </aside>
 
     <main class="flex-1 p-6 lg:p-12 overflow-y-auto">
+        
+        <section id="orders-section" class="section-card active">
+            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10 tracking-tighter">Live Orders</h2>
+            <div id="order-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 italic text-slate-400 font-bold font-sans">
+                Fetching latest orders...
+            </div>
+        </section>
+
         <section id="add-product-section" class="section-card">
             <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10 tracking-tighter">Add Multi-Photo Stock</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -48,13 +59,10 @@
                             <p class="mt-2 font-black text-[10px] uppercase tracking-widest">Camera Ready</p>
                         </div>
                     </div>
-                    
-                    <div id="multi-preview" class="flex gap-4 overflow-x-auto p-2 scrollbar-hide min-h-[100px] bg-white rounded-2xl shadow-inner border border-dashed border-slate-300">
-                        </div>
-
+                    <div id="multi-preview" class="flex gap-4 overflow-x-auto p-2 scrollbar-hide min-h-[100px] bg-white rounded-2xl shadow-inner border border-dashed border-slate-300"></div>
                     <div class="flex gap-3">
-                        <button onclick="startCamera()" class="flex-1 bg-slate-800 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest">Start Cam</button>
-                        <button onclick="takePhoto()" class="flex-1 bg-orange-500 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest">Capture Image</button>
+                        <button onclick="startCamera()" class="flex-1 bg-slate-800 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all active:scale-95">Start Cam</button>
+                        <button onclick="takePhoto()" class="flex-1 bg-orange-500 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all active:scale-95">Capture Image</button>
                     </div>
                 </div>
 
@@ -64,9 +72,7 @@
                         <input type="number" id="p-price" placeholder="Price (₹)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none border-2 border-transparent focus:border-orange-500 font-bold">
                         <input type="text" id="p-weight" placeholder="Unit (1kg)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none border-2 border-transparent focus:border-orange-500 font-bold">
                     </div>
-                    <button onclick="uploadToFirebase()" id="upload-btn" class="w-full bg-[#002e6e] text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.2em] shadow-2xl active:scale-95 transition-all">
-                        Make it Live 🚀
-                    </button>
+                    <button onclick="uploadToFirebase()" id="upload-btn" class="w-full bg-[#002e6e] text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.2em] shadow-2xl active:scale-95 transition-all">Make it Live 🚀</button>
                 </div>
             </div>
         </section>
@@ -75,16 +81,11 @@
             <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10 tracking-tighter">Stock Inventory</h2>
             <div id="stock-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
-
-        <section id="orders-section" class="section-card active text-center py-20">
-            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-4 tracking-tighter text-left lg:text-center">Active Orders</h2>
-            <div id="order-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 italic text-slate-400 font-bold">Fetching latest orders...</div>
-        </section>
     </main>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDWHPt3Kya_s-9f62RsLfI_G1RgQU5P534",
@@ -100,7 +101,7 @@
 
         let imageArray = [];
 
-        // Camera Logic
+        // CAMERA LOGIC
         window.startCamera = async () => {
             const video = document.getElementById('video');
             document.getElementById('placeholder').classList.add('hidden');
@@ -110,7 +111,7 @@
         };
 
         window.takePhoto = () => {
-            if(imageArray.length >= 4) return alert("Bas bhai! Amazon ki tarah 4 photos kaafi hain.");
+            if(imageArray.length >= 4) return alert("Bas bhai! Max 4 photos.");
             const canvas = document.getElementById('canvas');
             const video = document.getElementById('video');
             canvas.width = video.videoWidth; canvas.height = video.videoHeight;
@@ -123,41 +124,63 @@
         window.renderPreviews = () => {
             const previewDiv = document.getElementById('multi-preview');
             previewDiv.innerHTML = imageArray.map((img, index) => `
-                <div class="relative min-w-[80px] h-20 group">
+                <div class="relative min-w-[80px] h-20">
                     <img src="${img}" class="w-full h-full object-cover rounded-xl border-2 border-white shadow-md">
                     <button onclick="removeImg(${index})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-[10px] font-bold shadow-lg flex items-center justify-center">X</button>
                 </div>
             `).join('');
         };
 
-        window.removeImg = (index) => {
-            imageArray.splice(index, 1);
-            renderPreviews();
-        };
+        window.removeImg = (index) => { imageArray.splice(index, 1); renderPreviews(); };
 
-        // Firebase Upload
+        // FIREBASE: ADD PRODUCT
         window.uploadToFirebase = async () => {
             const btn = document.getElementById('upload-btn');
             const name = document.getElementById('p-name').value;
             const price = document.getElementById('p-price').value;
             const weight = document.getElementById('p-weight').value;
-
-            if(imageArray.length === 0 || !name) return alert("Kam se kam 1 photo aur naam zaroori hai!");
-
-            btn.disabled = true; btn.innerText = "UPLOADING ALL PHOTOS...";
-
+            if(imageArray.length === 0 || !name) return alert("Photo aur Naam zaroori hai!");
+            btn.disabled = true; btn.innerText = "UPLOADING...";
             try {
-                await addDoc(collection(db, "products"), {
-                    name, price, weight,
-                    images: imageArray, // Ab hum array bhej rahe hain
-                    createdAt: serverTimestamp()
-                });
-                alert("Boom! Multi-photo stock is LIVE!");
+                await addDoc(collection(db, "products"), { name, price, weight, images: imageArray, createdAt: serverTimestamp() });
+                alert("Machhli live ho gayi!");
                 location.reload();
             } catch (e) { alert(e.message); btn.disabled = false; }
         };
 
-        // Load & Delete
+        // FIREBASE: LOAD ORDERS
+        window.loadOrders = async () => {
+            const list = document.getElementById('order-list');
+            const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            list.innerHTML = "";
+            if(snap.empty) {
+                list.innerHTML = `<div class="col-span-full py-10 text-slate-300 font-bold uppercase tracking-widest italic">No New Orders Yet</div>`;
+                return;
+            }
+            snap.forEach(d => {
+                const o = d.data();
+                list.innerHTML += `
+                    <div class="bg-white p-6 rounded-[2.5rem] shadow-xl border-l-8 border-orange-500 flex flex-col gap-3 relative transition-all hover:scale-[1.02]">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-black text-slate-800 uppercase text-sm">${o.item}</h3>
+                            <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter">${o.status}</span>
+                        </div>
+                        <div class="text-[11px] text-slate-600 space-y-1">
+                            <p>👤 <b>${o.customerName}</b></p>
+                            <p class="leading-relaxed text-slate-400 font-semibold">📍 ${o.address}</p>
+                            <p>💰 ₹${o.price} via <span class="text-blue-600 font-bold">${o.payment}</span></p>
+                        </div>
+                        <div class="flex gap-2 mt-2">
+                            <button onclick="updateStatus('${d.id}', 'Packed')" class="flex-1 bg-blue-50 text-blue-600 py-3 rounded-xl font-black text-[9px] uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">Mark Packed</button>
+                            <button onclick="deleteOrder('${d.id}')" class="bg-red-50 text-red-500 px-4 rounded-xl font-black text-[9px] uppercase italic hover:bg-red-500 hover:text-white transition-all">Cancel</button>
+                        </div>
+                    </div>
+                `;
+            });
+        };
+
+        // FIREBASE: LOAD STOCK
         window.loadStock = async () => {
             const list = document.getElementById('stock-list');
             const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
@@ -165,28 +188,27 @@
             list.innerHTML = "";
             snap.forEach(d => {
                 const p = d.data();
-                const firstImg = p.images ? p.images[0] : ''; // Pehli photo dikhao manage mein
+                const firstImg = p.images ? p.images[0] : '';
                 list.innerHTML += `
                     <div class="bg-white p-4 rounded-3xl shadow-lg flex items-center gap-4 border border-slate-50">
-                        <img src="${firstImg}" class="w-20 h-20 rounded-2xl object-cover shadow-md">
+                        <img src="${firstImg}" class="w-16 h-16 rounded-2xl object-cover shadow-md">
                         <div class="flex-1">
-                            <p class="font-black text-slate-800 uppercase text-sm">${p.name}</p>
-                            <p class="text-orange-500 font-bold text-xs">₹${p.price} • ${p.images.length} Photos</p>
+                            <p class="font-black text-slate-800 uppercase text-[10px] leading-tight">${p.name}</p>
+                            <p class="text-orange-500 font-bold text-[10px]">₹${p.price} • ${p.images.length} Pics</p>
                         </div>
-                        <button onclick="deleteProduct('${d.id}')" class="bg-red-50 text-red-500 p-4 rounded-2xl hover:bg-red-500 hover:text-white transition-all font-black text-[10px] uppercase">Del</button>
+                        <button onclick="deleteProduct('${d.id}')" class="bg-red-50 text-red-500 p-3 rounded-xl hover:bg-red-500 hover:text-white transition-all font-black text-[9px] uppercase">Del</button>
                     </div>
                 `;
             });
         };
 
-        window.deleteProduct = async (id) => {
-            if(confirm("Are you sure? Menu se poora stock gayab ho jayega.")) {
-                await deleteDoc(doc(db, "products", id));
-                window.loadStock();
-            }
-        };
+        // ACTIONS: DELETE & STATUS
+        window.deleteProduct = async (id) => { if(confirm("Stock se delete karun?")) { await deleteDoc(doc(db, "products", id)); window.loadStock(); } };
+        window.deleteOrder = async (id) => { if(confirm("Order cancel karun?")) { await deleteDoc(doc(db, "orders", id)); window.loadOrders(); } };
+        window.updateStatus = async (id, s) => { await updateDoc(doc(db, "orders", id), { status: s }); window.loadOrders(); };
 
-        window.onload = () => { window.loadStock(); };
+        // INITIAL LOAD
+        window.onload = () => { window.loadStock(); window.loadOrders(); };
     </script>
 
     <script>
