@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFK Admin | Manage Inventory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <div class="flex justify-between items-center mb-10">
+            <div>
+                <h1 class="text-3xl font-black italic text-slate-900">ADMIN<span class="text-[#e03546]">.PANEL</span></h1>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">KFK India Inventory Manager</p>
+            </div>
+            <a href="menu.html" class="bg-white border px-6 py-2 rounded-xl text-xs font-bold shadow-sm">View Live Site</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-center">
+            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase">Total Items</p>
+                <p id="total-items" class="text-3xl font-black mt-1">200</p>
+            </div>
+            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase">Cloud Storage</p>
+                <p class="text-3xl font-black mt-1 text-green-500 italic">Active</p>
+            </div>
+            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase">Categories</p>
+                <p class="text-3xl font-black mt-1 text-[#e03546]">07</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[40px] shadow-xl p-8 md:p-12 mb-10">
+            <h2 class="text-xl font-black mb-8 italic">ADD NEW FISH VARIANT</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div>
+                        <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Product Name</label>
+                        <input type="text" id="p-name" placeholder="e.g. Fresh Rohu (Small)" class="w-full bg-slate-50 border-none p-4 rounded-2xl outline-none focus:ring-2 ring-red-100 transition-all">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Price (₹)</label>
+                            <input type="number" id="p-price" placeholder="450" class="w-full bg-slate-50 border-none p-4 rounded-2xl outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Category</label>
+                            <select id="p-cat" class="w-full bg-slate-50 border-none p-4 rounded-2xl outline-none text-sm font-bold">
+                                <option value="river">River Fish</option>
+                                <option value="sea">Sea Food</option>
+                                <option value="prawns">Prawns</option>
+                                <option value="bengali">Bengali Cut</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center justify-center border-4 border-dashed border-slate-100 rounded-[40px] p-8 bg-slate-50/50 hover:bg-slate-50 transition-all cursor-pointer" id="upload-widget">
+                    <div class="text-center">
+                        <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg mb-4 text-[#e03546] text-2xl font-black">+</div>
+                        <p class="text-sm font-black text-slate-900">Upload Fish Photo</p>
+                        <p class="text-[10px] text-slate-400 mt-1 uppercase font-bold">Powered by Cloudinary</p>
+                        <input type="hidden" id="p-img-url">
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="saveProduct()" class="w-full mt-10 bg-slate-900 text-white py-5 rounded-3xl font-black uppercase tracking-[0.3em] hover:bg-[#e03546] transition-all shadow-2xl">Publish to Website</button>
+        </div>
+    </div>
+
+    <script>
+        // Cloudinary Widget Config
+        const cloudName = "Zva3N4n6Rzk_q0u488feojXID40"; 
+        const uploadPreset = "ml_default"; // Ye aapke Cloudinary settings mein milega
+
+        var myWidget = cloudinary.createUploadWidget({
+            cloudName: cloudName, 
+            uploadPreset: uploadPreset}, (error, result) => { 
+                if (!error && result && result.event === "success") { 
+                    console.log('Done! Here is the image info: ', result.info); 
+                    document.getElementById('p-img-url').value = result.info.secure_url;
+                    alert("Image Uploaded Successfully!");
+                }
+            }
+        );
+
+        document.getElementById("upload-widget").addEventListener("click", function(){
+            myWidget.open();
+        }, false);
+
+        function saveProduct() {
+            const name = document.getElementById('p-name').value;
+            const price = document.getElementById('p-price').value;
+            const cat = document.getElementById('p-cat').value;
+            const img = document.getElementById('p-img-url').value;
+
+            if(!img) return alert("Pehle photo upload karein!");
+
+            // Logic to send this data to your Firebase or Database
+            console.log({ name, price, cat, img });
+            alert(`${name} has been added to KFK India menu!`);
+        }
+    </script>
+</body>
+</html>
