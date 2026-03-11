@@ -62,13 +62,15 @@
     </main>
 
     <script>
+        // 1. DATA: Aapke Default Items
         const defaultProducts = [
-            { id: 1, name: "Premium Rohu (Bengali Cut)", price: 450, cat: "river", img: "https://images.pexels.com/photos/2130134/pexels-photo-2130134.jpeg?auto=compress&cs=tinysrgb&w=800" },
-            { id: 2, name: "Tiger Prawns (Jumbo)", price: 899, cat: "prawns", img: "https://images.pexels.com/photos/2871757/pexels-photo-2871757.jpeg?auto=compress&cs=tinysrgb&w=800" },
-            { id: 3, name: "Fresh Pomfret", price: 750, cat: "seafood", img: "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=800" },
-            { id: 4, name: "Fish Fingers (Frozen)", price: 299, cat: "ready", img: "https://images.pexels.com/photos/4040400/pexels-photo-4040400.jpeg?auto=compress&cs=tinysrgb&w=800" }
+            { id: 1, name: "Premium Rohu (Bengali Cut)", price: 550, discount: 450, cat: "river", img: "https://images.pexels.com/photos/2130134/pexels-photo-2130134.jpeg?auto=compress&cs=tinysrgb&w=800", weight: "1kg", desc: "Fresh river rohu, expertly cleaned and cut in traditional Bengali style." },
+            { id: 2, name: "Tiger Prawns (Jumbo)", price: 1200, discount: 899, cat: "prawns", img: "https://images.pexels.com/photos/2871757/pexels-photo-2871757.jpeg?auto=compress&cs=tinysrgb&w=800", weight: "500g", desc: "Extra large tiger prawns, perfect for grilling or curries." },
+            { id: 3, name: "Fresh Pomfret", price: 900, discount: 750, cat: "seafood", img: "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=800", weight: "1kg", desc: "Sea fresh Pomfret, high in Omega-3 and extremely tender." },
+            { id: 4, name: "Fish Fingers (Frozen)", price: 399, discount: 299, cat: "ready", img: "https://images.pexels.com/photos/4040400/pexels-photo-4040400.jpeg?auto=compress&cs=tinysrgb&w=800", weight: "250g", desc: "Crispy ready-to-fry fish fingers made with premium fillets." }
         ];
 
+        // 2. LOAD PRODUCTS FUNCTION
         function displayProducts(filter = 'all') {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = ""; 
@@ -79,30 +81,29 @@
             allItems.forEach(item => {
                 if(filter !== 'all' && item.cat !== filter) return;
 
-                // Important: Product details pass ho rahi hain function mein
-                const productData = JSON.stringify({
-                    id: item.id || Date.now(),
-                    name: item.name,
-                    price: item.price,
-                    image: item.image || item.img
-                }).replace(/"/g, '&quot;');
+                // Important: Sab data JSON format mein pass hoga
+                const productData = JSON.stringify(item).replace(/"/g, '&quot;');
 
                 const card = `
-                    <div class="product-card bg-white rounded-[2.5rem] overflow-hidden group">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="${item.image || item.img}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-[10px] font-black text-[#002e6e]">
-                                FRESH CATCH
+                    <div class="product-card bg-white rounded-[2.5rem] overflow-hidden group border border-slate-50">
+                        <div class="h-56 overflow-hidden relative">
+                            <img src="${item.image || item.img}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                            ${item.price > item.discount ? `<div class="absolute top-4 left-4 bg-red-500 text-white text-[9px] font-black px-3 py-1 rounded-full uppercase italic shadow-lg">Save ₹${item.price - item.discount}</div>` : ''}
+                            <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-[9px] font-black text-slate-800 border border-slate-100 uppercase">
+                                ⚖️ ${item.weight || '1kg'}
                             </div>
                         </div>
-                        <div class="p-8">
-                            <h3 class="text-lg font-black text-[#002e6e] mb-2 leading-tight uppercase italic">${item.name}</h3>
-                            <div class="flex justify-between items-center mt-6">
+                        
+                        <div class="p-6">
+                            <h3 class="text-lg font-black text-[#002e6e] leading-tight uppercase italic mb-1">${item.name}</h3>
+                            <p class="text-[10px] font-bold text-slate-400 mb-4 line-clamp-2 uppercase leading-relaxed">${item.desc || 'Freshly cleaned and ready to cook.'}</p>
+                            
+                            <div class="flex justify-between items-end">
                                 <div>
-                                    <span class="text-[10px] font-bold text-slate-400 block uppercase tracking-widest">Price per kg</span>
-                                    <span class="text-2xl font-black text-orange-500 italic">₹${item.price}</span>
+                                    <span class="text-[10px] font-black text-slate-300 block line-through mb-[-4px]">MRP ₹${item.price || item.discount}</span>
+                                    <span class="text-2xl font-black text-orange-500 italic">₹${item.discount || item.price}</span>
                                 </div>
-                                <button onclick="addToCart('${productData}')" class="bg-[#002e6e] text-white p-4 rounded-2xl hover:bg-orange-500 transition-all active:scale-90 shadow-lg shadow-blue-900/10">
+                                <button onclick="addToCart('${productData}')" class="bg-[#002e6e] text-white p-4 rounded-2xl hover:bg-orange-600 transition-all active:scale-90 shadow-xl shadow-blue-900/10">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
                                 </button>
                             </div>
@@ -113,6 +114,7 @@
             });
         }
 
+        // 3. FILTER LOGIC
         function filterItems(category) {
             displayProducts(category);
             document.getElementById('item-count').innerText = `Category: ${category}`;
@@ -124,21 +126,28 @@
             event.currentTarget.classList.add('bg-orange-500', 'text-white');
         }
 
-        // Updated AddToCart Function
+        // 4. ADD TO CART FUNCTION
         function addToCart(productString) {
             const product = JSON.parse(productString);
             let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
             
-            cart.push(product);
+            // Hum discounted price hi cart mein bhejenge final calculation ke liye
+            const cartItem = {
+                id: product.id,
+                name: product.name,
+                price: product.discount || product.price,
+                image: product.image || product.img,
+                weight: product.weight
+            };
+
+            cart.push(cartItem);
             localStorage.setItem('kfk_cart', JSON.stringify(cart));
             
-            // Cart count update
             document.getElementById('cart-count').innerText = cart.length;
-            
-            alert(`${product.name} basket mein add ho gaya! 🛒`);
+            alert(`${product.name} (${product.weight || '1kg'}) added to basket! 🛒`);
         }
 
-        // Page load hone par count set karna
+        // Initialize
         window.onload = () => {
             const cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
             document.getElementById('cart-count').innerText = cart.length;
