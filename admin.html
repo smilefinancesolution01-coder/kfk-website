@@ -1,154 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK Admin | Control Center</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; }
-        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px border-gray-100; }
-        .sidebar-item:hover { background: rgba(255, 255, 255, 0.1); border-left: 4px solid #f97316; }
-        .sidebar-item.active { background: rgba(255, 255, 255, 0.1); border-left: 4px solid #f97316; }
-    </style>
-</head>
-<body class="flex min-h-screen">
-
-    <aside class="w-64 bg-[#002e6e] text-white flex flex-col hidden md:flex sticky top-0 h-screen">
-        <div class="p-8">
-            <h1 class="text-2xl font-black italic tracking-tighter">KFK<span class="text-orange-500">.</span>ADMIN</h1>
+<div class="max-w-4xl mx-auto p-10 bg-white shadow-2xl rounded-[3rem] mt-10">
+    <h2 class="text-3xl font-black text-[#002e6e] mb-6 italic">UPLOAD NEW PRODUCT</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="space-y-4">
+            <input type="text" id="p-name" placeholder="Item Name (e.g. Fresh Rohu)" class="w-full p-4 bg-slate-100 rounded-2xl outline-none font-bold">
+            <input type="text" id="p-price" placeholder="Price (₹)" class="w-full p-4 bg-slate-100 rounded-2xl outline-none font-bold">
+            <input type="file" id="p-image" accept="image/*" class="w-full p-4 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl cursor-pointer">
+            <button onclick="saveToMenu()" class="w-full bg-orange-500 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-[#002e6e] transition-all shadow-lg">Save to Menu</button>
         </div>
         
-        <nav class="flex-1 px-4 space-y-2 text-xs font-black uppercase tracking-widest">
-            <a href="#" class="sidebar-item active flex items-center gap-3 p-4 rounded-xl transition-all">
-                <span>📊 Dashboard</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center gap-3 p-4 rounded-xl transition-all opacity-60">
-                <span>🛒 Orders</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center gap-3 p-4 rounded-xl transition-all opacity-60">
-                <span>👥 Customers</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center gap-3 p-4 rounded-xl transition-all opacity-60">
-                <span>🍗 Inventory</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center gap-3 p-4 rounded-xl transition-all opacity-60">
-                <span>🏢 Franchise Leads</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center gap-3 p-4 rounded-xl transition-all opacity-60 text-red-400">
-                <span>⚙️ Settings</span>
-            </a>
-        </nav>
-
-        <div class="p-6 border-t border-white/10">
-            <button onclick="location.href='index.html'" class="w-full bg-orange-500 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-all">Logout</button>
+        <div id="preview-box" class="h-64 bg-slate-50 rounded-[2rem] border-2 border-slate-100 flex items-center justify-center overflow-hidden">
+            <span class="text-slate-400 font-bold">Image Preview</span>
         </div>
-    </aside>
+    </div>
+</div>
 
-    <main class="flex-1 p-8 overflow-y-auto">
-        
-        <header class="flex justify-between items-center mb-10">
-            <div>
-                <h2 class="text-3xl font-black text-[#002e6e] italic">Welcome, Admin</h2>
-                <p class="text-slate-400 font-bold text-xs uppercase tracking-widest">KFK India Business Overview</p>
-            </div>
-            <div class="flex gap-4">
-                <div class="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3 px-6">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="text-[10px] font-black uppercase text-slate-500 tracking-widest">System Online</span>
-                </div>
-            </div>
-        </header>
+<script>
+    // Image Preview Logic
+    document.getElementById('p-image').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            document.getElementById('preview-box').innerHTML = `<img src="${event.target.result}" class="w-full h-full object-cover">`;
+        }
+        reader.readAsDataURL(file);
+    });
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
-                <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Total Sales</p>
-                <h3 class="text-2xl font-black text-[#002e6e]">₹12,45,000</h3>
-                <span class="text-[9px] text-green-500 font-bold">+12.5% this month</span>
-            </div>
-            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
-                <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Active Orders</p>
-                <h3 class="text-2xl font-black text-[#002e6e]">48</h3>
-                <span class="text-[9px] text-orange-500 font-bold">12 Out for delivery</span>
-            </div>
-            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
-                <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Franchise Queries</p>
-                <h3 class="text-2xl font-black text-[#002e6e]">124</h3>
-                <span class="text-[9px] text-blue-500 font-bold">8 New today</span>
-            </div>
-            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
-                <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Inventory Status</p>
-                <h3 class="text-2xl font-black text-green-600">Healthy</h3>
-                <span class="text-[9px] text-slate-400 font-bold">100+ Varieties stock</span>
-            </div>
-        </div>
+    // Save Function
+    function saveToMenu() {
+        const name = document.getElementById('p-name').value;
+        const price = document.getElementById('p-price').value;
+        const file = document.getElementById('p-image').files[0];
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        if(!name || !price || !file) {
+            alert("Please fill all details!");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const product = {
+                id: Date.now(),
+                name: name,
+                price: price,
+                image: e.target.result // Base64 Image
+            };
+
+            let menu = JSON.parse(localStorage.getItem('kfk_custom_menu')) || [];
+            menu.push(product);
+            localStorage.setItem('kfk_custom_menu', JSON.stringify(menu));
             
-            <div class="lg:col-span-2 bg-white p-8 rounded-[3rem] shadow-sm border border-gray-100">
-                <h4 class="text-xs font-black uppercase tracking-[0.2em] text-[#002e6e] mb-8">Sales Performance</h4>
-                <canvas id="salesChart" height="150"></canvas>
-            </div>
-
-            <div class="bg-white p-8 rounded-[3rem] shadow-sm border border-gray-100">
-                <h4 class="text-xs font-black uppercase tracking-[0.2em] text-[#002e6e] mb-8">Recent Leads</h4>
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-black">S</div>
-                        <div>
-                            <p class="text-[11px] font-black text-[#002e6e]">Sagar Vidhate</p>
-                            <p class="text-[9px] text-slate-400 font-bold uppercase">₹2.5L Model Query</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-black">V</div>
-                        <div>
-                            <p class="text-[11px] font-black text-[#002e6e]">Vikash Team</p>
-                            <p class="text-[9px] text-slate-400 font-bold uppercase">New Agent Login</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-black">R</div>
-                        <div>
-                            <p class="text-[11px] font-black text-[#002e6e]">Raja (Kolkata)</p>
-                            <p class="text-[9px] text-slate-400 font-bold uppercase">Order #8892 Paid</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="w-full mt-8 border-2 border-dashed border-slate-200 py-3 rounded-2xl text-[9px] font-black uppercase text-slate-400 tracking-widest hover:border-orange-500 hover:text-orange-500 transition-all">View All Activity</button>
-            </div>
-
-        </div>
-
-    </main>
-
-    <script>
-        // Sales Chart Initialization
-        const ctx = document.getElementById('salesChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'Sales (₹)',
-                    data: [12000, 19000, 15000, 25000, 22000, 30000, 45000],
-                    borderColor: '#f97316',
-                    backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                    borderWidth: 4,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                plugins: { legend: { display: false } },
-                scales: { 
-                    y: { beginAtZero: true, display: false },
-                    x: { grid: { display: false } }
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+            alert("✅ Product Added Successfully!");
+            location.reload(); 
+        };
+        reader.readAsDataURL(file);
+    }
+</script>
