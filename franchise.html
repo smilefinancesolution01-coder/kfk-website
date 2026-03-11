@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Franchise & Quality | KFK India</title>
+    <title>Franchise Models | KFK India</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
         .form-input { border: 2px solid #f1f5f9; transition: all 0.3s; }
         .form-input:focus { border-color: #002e6e; outline: none; }
+        .model-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .model-card:hover { transform: translateY(-10px); }
     </style>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-[#f8fafc] text-slate-900">
 
-    <header class="p-6 border-b">
+    <header class="p-6 bg-white border-b sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <a href="index.html" class="text-2xl font-black text-[#002e6e] italic">KFK<span class="text-orange-500">.</span>INDIA</a>
             <a href="index.html" class="text-[10px] font-black uppercase tracking-widest text-slate-400">← Back to Home</a>
@@ -22,97 +24,136 @@
     </header>
 
     <section class="py-20 bg-[#002e6e] text-white text-center px-6">
-        <h1 class="text-4xl md:text-7xl font-black italic uppercase mb-6">Partner With <span class="text-orange-500">KFK.</span></h1>
-        <p class="max-w-2xl mx-auto text-slate-300 font-bold text-xs md:text-sm uppercase tracking-widest">Join India's fastest growing chemical-free fish supply network.</p>
+        <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-[0.4em] mb-4">Investment Opportunities</h6>
+        <h1 class="text-4xl md:text-7xl font-black italic uppercase mb-6">Own Your <span class="text-orange-500">Business.</span></h1>
+        <p class="max-w-2xl mx-auto text-slate-300 font-bold text-xs md:text-sm uppercase tracking-widest">Select a model that fits your vision and start your journey with India's premium seafood network.</p>
     </section>
 
-    <section class="py-24 px-6">
-        <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-gray-100 model-card flex flex-col">
+                <div class="mb-6">
+                    <span class="bg-blue-100 text-[#002e6e] text-[9px] font-black px-4 py-1 rounded-full uppercase">Basic Model</span>
+                    <h3 class="text-3xl font-black text-[#002e6e] mt-4 italic uppercase">₹50,000</h3>
+                    <p class="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-widest">Small Scale Business</p>
+                </div>
+                <div class="space-y-4 mb-10 flex-1">
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">✅ Deep Freezer Provided</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">✅ KFK Menu & Branding</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">✅ Low Cost Material Access</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">✅ 12% Managed Supply Chain Margin</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">✅ Product Pictures for Menu</div>
+                </div>
+                <button onclick="document.getElementById('contact-form').scrollIntoView()" class="w-full bg-slate-100 text-[#002e6e] py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-[#002e6e] hover:text-white transition-all">Select Small</button>
+            </div>
+
+            <div class="bg-[#002e6e] p-8 rounded-[2.5rem] shadow-2xl model-card text-white flex flex-col relative scale-105 z-10">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-[8px] font-black px-4 py-1 rounded-full uppercase tracking-[0.2em]">Most Popular</div>
+                <div class="mb-6">
+                    <span class="bg-white/10 text-orange-400 text-[9px] font-black px-4 py-1 rounded-full uppercase italic">Pro Model</span>
+                    <h3 class="text-3xl font-black mt-4 italic uppercase text-orange-500">₹2,50,000</h3>
+                    <p class="text-[10px] font-bold text-slate-300 mt-1 uppercase tracking-widest">Medium Scale Business</p>
+                </div>
+                <div class="space-y-4 mb-10 flex-1">
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-100">🔥 Proper KFK Stall</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-100">🔥 1 Two-Wheeler (with RC)</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-100">🔥 Custom KFK Staff Dress</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-100">🔥 CRM & Sales Automation</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-100">🔥 24/7 Sales Support System</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-100">🔥 Managed Supply Chain</div>
+                </div>
+                <button onclick="document.getElementById('contact-form').scrollIntoView()" class="w-full bg-orange-500 text-white py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-all shadow-xl">Select Medium</button>
+            </div>
+
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-gray-100 model-card flex flex-col">
+                <div class="mb-6">
+                    <span class="bg-orange-100 text-orange-600 text-[9px] font-black px-4 py-1 rounded-full uppercase">Enterprise Model</span>
+                    <h3 class="text-3xl font-black text-[#002e6e] mt-4 italic uppercase">₹15,00,000</h3>
+                    <p class="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-widest">Large Scale Hub</p>
+                </div>
+                <div class="space-y-4 mb-10 flex-1">
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">⭐ Premium KFK Stall</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">⭐ 2 Two-Wheeler Vehicles</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">⭐ Unlimited Business Growth System</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">⭐ All Setup & Packing Material</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">⭐ Employment Establishment Support</div>
+                    <div class="flex items-center gap-3 text-xs font-bold text-slate-600">⭐ 24/7 Custom Chatbot Manager</div>
+                </div>
+                <button onclick="document.getElementById('contact-form').scrollIntoView()" class="w-full bg-slate-100 text-[#002e6e] py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-[#002e6e] hover:text-white transition-all">Select Enterprise</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact-form" class="py-24 px-6 bg-white">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-                <h2 class="text-3xl font-black italic uppercase text-[#002e6e] mb-10">Why KFK Franchise?</h2>
-                <div class="space-y-12">
-                    <div class="flex gap-6">
-                        <div class="text-3xl">💰</div>
+                <h2 class="text-4xl font-black italic uppercase text-[#002e6e] mb-10 leading-tight">Start Your <br><span class="text-orange-500">Application.</span></h2>
+                <div class="space-y-8">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center shrink-0">📊</div>
                         <div>
-                            <h4 class="font-black uppercase text-sm mb-2 italic">Low Investment</h4>
-                            <p class="text-xs text-slate-500 font-bold uppercase tracking-tighter">Sirf 5-8 Lakh mein apna professional seafood outlet shuru karein.</p>
+                            <h5 class="font-black text-xs uppercase italic">Market Dominance</h5>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase mt-1">Join a network with 150+ locations across India.</p>
                         </div>
                     </div>
-                    <div class="flex gap-6">
-                        <div class="text-3xl">🚚</div>
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center shrink-0">⛓️</div>
                         <div>
-                            <h4 class="font-black uppercase text-sm mb-2 italic">Daily Supply</h4>
-                            <p class="text-xs text-slate-500 font-bold uppercase tracking-tighter">Supply ki chinta humari. Hum daily fresh catch aapke outlet tak pahunchayenge.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-6">
-                        <div class="text-3xl">🎓</div>
-                        <div>
-                            <h4 class="font-black uppercase text-sm mb-2 italic">Full Training</h4>
-                            <p class="text-xs text-slate-500 font-bold uppercase tracking-tighter">Machhli cutting se lekar hygiene management tak, sab hum sikhayenge.</p>
+                            <h5 class="font-black text-xs uppercase italic">Supply Chain Mastery</h5>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase mt-1">Total managed supply chain from catch to kitchen.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-gray-50 p-8 md:p-12 rounded-[3rem] border border-gray-100 shadow-2xl">
-                <h3 class="text-xl font-black uppercase italic mb-8">Inquiry Form</h3>
+            <div class="bg-gray-50 p-8 rounded-[3rem] border border-gray-100 shadow-2xl">
                 <form action="#" class="space-y-6">
                     <div>
-                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Full Name</label>
-                        <input type="text" placeholder="Rahul Sharma" class="w-full p-4 rounded-xl form-input bg-white text-sm font-bold">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Your Name</label>
+                        <input type="text" placeholder="Enter Full Name" class="w-full p-4 rounded-xl form-input bg-white text-xs font-bold">
                     </div>
                     <div>
-                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">WhatsApp Number</label>
-                        <input type="tel" placeholder="+91 00000 00000" class="w-full p-4 rounded-xl form-input bg-white text-sm font-bold">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2 block">WhatsApp Number</label>
+                        <input type="tel" placeholder="+91 00000 00000" class="w-full p-4 rounded-xl form-input bg-white text-xs font-bold">
                     </div>
                     <div>
-                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Target City/Area</label>
-                        <input type="text" placeholder="Delhi / Kolkata / Others" class="w-full p-4 rounded-xl form-input bg-white text-sm font-bold">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Desired Model</label>
+                        <select class="w-full p-4 rounded-xl form-input bg-white text-xs font-bold appearance-none">
+                            <option>Small Model (₹50k)</option>
+                            <option>Medium Model (₹2.5L)</option>
+                            <option>Big Model (₹15L)</option>
+                        </select>
                     </div>
-                    <button class="w-full bg-[#002e6e] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] shadow-xl hover:bg-orange-500 transition-all">Submit Application</button>
+                    <button class="w-full bg-[#002e6e] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-orange-500 transition-all shadow-lg">Submit Application</button>
                 </form>
             </div>
-
         </div>
     </section>
 
     <section class="py-24 bg-slate-50 px-6 border-t">
-        <div class="max-w-7xl mx-auto text-center mb-20">
-            <h2 class="text-4xl font-black italic uppercase text-[#002e6e]">Quality <span class="text-orange-500">Protocol.</span></h2>
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <h2 class="text-4xl font-black italic uppercase text-[#002e6e]">Our <span class="text-orange-500">Operation.</span></h2>
         </div>
-        
-        <div class="max-w-5xl mx-auto relative">
-            <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gray-200 -translate-x-1/2"></div>
-            
-            <div class="flex flex-col md:flex-row items-center gap-10 mb-20">
-                <div class="flex-1 text-right hidden md:block">
-                    <h4 class="font-black uppercase text-sm italic">Sourcing</h4>
-                    <p class="text-xs text-slate-400 font-bold uppercase mt-2">Direct from landing centers within 4 hours of catch.</p>
-                </div>
-                <div class="w-12 h-12 bg-[#002e6e] rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center text-white font-black italic">1</div>
-                <div class="flex-1 text-left">
-                    <h4 class="font-black uppercase text-sm italic md:hidden">Sourcing</h4>
-                    <img id="step1-img" class="w-full h-48 object-cover rounded-3xl mb-4" src="">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="relative group">
+                <img id="op-img-1" class="w-full h-64 object-cover rounded-[2.5rem] shadow-lg" src="">
+                <div class="absolute bottom-6 left-6 text-white bg-black/50 p-4 rounded-2xl backdrop-blur-sm">
+                    <p class="text-[9px] font-black uppercase tracking-widest">Sourcing & Hygiene</p>
                 </div>
             </div>
-
-            <div class="flex flex-col md:flex-row items-center gap-10 mb-20">
-                <div class="flex-1 text-right">
-                    <img id="step2-img" class="w-full h-48 object-cover rounded-3xl mb-4" src="">
-                </div>
-                <div class="w-12 h-12 bg-orange-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center text-white font-black italic">2</div>
-                <div class="flex-1 text-left hidden md:block">
-                    <h4 class="font-black uppercase text-sm italic">Ozone Washing</h4>
-                    <p class="text-xs text-slate-400 font-bold uppercase mt-2">3-stage purification to kill 99% bacteria naturally.</p>
+            <div class="relative group">
+                <img id="op-img-2" class="w-full h-64 object-cover rounded-[2.5rem] shadow-lg" src="">
+                <div class="absolute bottom-6 left-6 text-white bg-black/50 p-4 rounded-2xl backdrop-blur-sm">
+                    <p class="text-[9px] font-black uppercase tracking-widest">Professional Packaging</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="p-12 text-center border-t">
-        <p class="text-[9px] font-black text-slate-400 tracking-[0.5em] uppercase">© 2026 KFK INDIA OPERATIONS | FRANCHISE DIVISION</p>
+    <footer class="p-12 text-center border-t bg-white">
+        <p class="text-[9px] font-black text-slate-400 tracking-[0.5em] uppercase">© 2026 KFK INDIA | FRANCHISE DIVISION | GOOGLE VERIFIED PARTNER</p>
     </footer>
 
     <script>
@@ -124,8 +165,8 @@
                 if(d.photos.length > 0) document.getElementById(id).src = d.photos[0].src.large;
             } catch(e) {}
         }
-        fetchImg('fish landing center workers', 'step1-img');
-        fetchImg('clean industrial kitchen fish', 'step2-img');
+        fetchImg('seafood market stall fresh', 'op-img-1');
+        fetchImg('automated food packaging factory', 'op-img-2');
     </script>
 </body>
 </html>
