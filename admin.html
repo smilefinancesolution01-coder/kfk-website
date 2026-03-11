@@ -34,7 +34,7 @@
             </button>
         </nav>
         <div class="pt-6 border-t border-white/10">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-blue-300">Smile Financial Solutions</p>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-blue-300 italic">Smile Financial Solutions</p>
         </div>
     </aside>
 
@@ -42,8 +42,8 @@
         
         <section id="orders-section" class="section-card active">
             <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10 tracking-tighter">Live Orders</h2>
-            <div id="order-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 italic text-slate-400 font-bold font-sans">
-                Fetching latest orders...
+            <div id="order-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 font-bold font-sans">
+                <div class="col-span-full py-20 text-center text-slate-400 italic">Fetching latest orders...</div>
             </div>
         </section>
 
@@ -101,7 +101,7 @@
 
         let imageArray = [];
 
-        // CAMERA LOGIC
+        // --- CAMERA LOGIC ---
         window.startCamera = async () => {
             const video = document.getElementById('video');
             document.getElementById('placeholder').classList.add('hidden');
@@ -133,7 +133,7 @@
 
         window.removeImg = (index) => { imageArray.splice(index, 1); renderPreviews(); };
 
-        // FIREBASE: ADD PRODUCT
+        // --- FIREBASE: STOCK MANAGEMENT ---
         window.uploadToFirebase = async () => {
             const btn = document.getElementById('upload-btn');
             const name = document.getElementById('p-name').value;
@@ -148,39 +148,6 @@
             } catch (e) { alert(e.message); btn.disabled = false; }
         };
 
-        // FIREBASE: LOAD ORDERS
-        window.loadOrders = async () => {
-            const list = document.getElementById('order-list');
-            const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
-            const snap = await getDocs(q);
-            list.innerHTML = "";
-            if(snap.empty) {
-                list.innerHTML = `<div class="col-span-full py-10 text-slate-300 font-bold uppercase tracking-widest italic">No New Orders Yet</div>`;
-                return;
-            }
-            snap.forEach(d => {
-                const o = d.data();
-                list.innerHTML += `
-                    <div class="bg-white p-6 rounded-[2.5rem] shadow-xl border-l-8 border-orange-500 flex flex-col gap-3 relative transition-all hover:scale-[1.02]">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-black text-slate-800 uppercase text-sm">${o.item}</h3>
-                            <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter">${o.status}</span>
-                        </div>
-                        <div class="text-[11px] text-slate-600 space-y-1">
-                            <p>👤 <b>${o.customerName}</b></p>
-                            <p class="leading-relaxed text-slate-400 font-semibold">📍 ${o.address}</p>
-                            <p>💰 ₹${o.price} via <span class="text-blue-600 font-bold">${o.payment}</span></p>
-                        </div>
-                        <div class="flex gap-2 mt-2">
-                            <button onclick="updateStatus('${d.id}', 'Packed')" class="flex-1 bg-blue-50 text-blue-600 py-3 rounded-xl font-black text-[9px] uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">Mark Packed</button>
-                            <button onclick="deleteOrder('${d.id}')" class="bg-red-50 text-red-500 px-4 rounded-xl font-black text-[9px] uppercase italic hover:bg-red-500 hover:text-white transition-all">Cancel</button>
-                        </div>
-                    </div>
-                `;
-            });
-        };
-
-        // FIREBASE: LOAD STOCK
         window.loadStock = async () => {
             const list = document.getElementById('stock-list');
             const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
@@ -202,10 +169,61 @@
             });
         };
 
-        // ACTIONS: DELETE & STATUS
         window.deleteProduct = async (id) => { if(confirm("Stock se delete karun?")) { await deleteDoc(doc(db, "products", id)); window.loadStock(); } };
+
+        // --- FIREBASE: ORDER MANAGEMENT & WHATSAPP ---
+        window.loadOrders = async () => {
+            const list = document.getElementById('order-list');
+            const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            list.innerHTML = "";
+            if(snap.empty) {
+                list.innerHTML = `<div class="col-span-full py-10 text-slate-300 font-bold uppercase tracking-widest italic text-center">No New Orders Yet</div>`;
+                return;
+            }
+            snap.forEach(d => {
+                const o = d.data();
+                list.innerHTML += `
+                    <div class="bg-white p-6 rounded-[2.5rem] shadow-xl border-l-8 border-orange-500 flex flex-col gap-3 relative transition-all hover:scale-[1.02]">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-black text-slate-800 uppercase text-sm">${o.item}</h3>
+                            <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter">${o.status || 'Pending'}</span>
+                        </div>
+                        <div class="text-[11px] text-slate-600 space-y-1">
+                            <p>👤 <b>${o.customerName}</b></p>
+                            <p class="leading-relaxed text-slate-400 font-semibold italic">📍 ${o.address}</p>
+                            <p>💰 ₹${o.price} via <span class="text-blue-600 font-bold">${o.payment}</span></p>
+                        </div>
+                        <div class="flex gap-2 mt-2">
+                            <button onclick="updateStatus('${d.id}', 'Packed')" class="flex-1 bg-blue-50 text-blue-600 py-3 rounded-xl font-black text-[9px] uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">Mark Packed & Notify</button>
+                            <button onclick="deleteOrder('${d.id}')" class="bg-red-50 text-red-500 px-4 rounded-xl font-black text-[9px] uppercase italic hover:bg-red-500 hover:text-white transition-all">Cancel</button>
+                        </div>
+                    </div>
+                `;
+            });
+        };
+
+        window.updateStatus = async (id, s) => {
+            try {
+                // 1. Update status in Firebase
+                const orderRef = doc(db, "orders", id);
+                await updateDoc(orderRef, { status: s });
+
+                // 2. Fetch specific order for WhatsApp message
+                const q = query(collection(db, "orders"));
+                const snap = await getDocs(q);
+                let orderData = null;
+                snap.forEach(doc => { if(doc.id === id) orderData = doc.data(); });
+
+                if(orderData && s === 'Packed') {
+                    const customerMsg = `*KFK FRESH UPDATE* 📦%0A%0AHi *${orderData.customerName}*,%0A%0AAapka order *${orderData.item}* pack ho chuka hai aur delivery ke liye taiyar hai! 🚀%0A%0A📍 *Address:* ${orderData.address}%0A💰 *Amount:* ₹${orderData.price}%0A%0AHumari team jald hi aap tak pahunchegi. Thank you!`;
+                    window.open(`https://wa.me/?text=${customerMsg}`, '_blank');
+                }
+                window.loadOrders();
+            } catch (e) { alert("Status update error: " + e.message); }
+        };
+
         window.deleteOrder = async (id) => { if(confirm("Order cancel karun?")) { await deleteDoc(doc(db, "orders", id)); window.loadOrders(); } };
-        window.updateStatus = async (id, s) => { await updateDoc(doc(db, "orders", id), { status: s }); window.loadOrders(); };
 
         // INITIAL LOAD
         window.onload = () => { window.loadStock(); window.loadOrders(); };
