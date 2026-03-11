@@ -65,7 +65,7 @@
                             </tr>
                         </thead>
                         <tbody id="order-body" class="divide-y divide-slate-50">
-                            </tbody>
+                             </tbody>
                     </table>
                 </div>
             </div>
@@ -139,7 +139,8 @@
     </div>
 
     <script>
-        const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"; // REPLACE THIS
+        // LIVE APPS SCRIPT URL INTEGRATED
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby5IwI7Pmqr5HEkX9zXlna25eZtIYrOZR3R2OXoB2HZjpMK8wNDChWg9XO4A8rYVvxAvA/exec"; 
         let activeOrderId = null;
         let capturedBase64 = "";
 
@@ -156,10 +157,11 @@
         async function startCamera() {
             const video = document.getElementById('video');
             const placeholder = document.getElementById('placeholder');
+            const photoPreview = document.getElementById('photo-preview');
             try {
                 placeholder.classList.add('hidden');
                 video.classList.remove('hidden');
-                document.getElementById('photo-preview').classList.add('hidden');
+                photoPreview.classList.add('hidden');
                 const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
                 video.srcObject = stream;
             } catch (err) { alert("Camera Permission Required"); }
@@ -174,12 +176,14 @@
             canvas.height = video.videoHeight;
             canvas.getContext('2d').drawImage(video, 0, 0);
             
-            capturedBase64 = canvas.toDataURL('image/jpeg', 0.6); // Quality 60% for fast loading
+            capturedBase64 = canvas.toDataURL('image/jpeg', 0.6); 
             photoPreview.src = capturedBase64;
             
             video.classList.add('hidden');
             photoPreview.classList.remove('hidden');
-            video.srcObject.getTracks().forEach(track => track.stop());
+            if(video.srcObject) {
+                video.srcObject.getTracks().forEach(track => track.stop());
+            }
         }
 
         // --- PRODUCT UPLOAD ---
@@ -194,20 +198,21 @@
             };
 
             if(!data.name || !data.price || !data.image) {
-                alert("Please fill all details and capture a photo!");
+                alert("Pahle photo kheenchiye aur details bhariye!");
                 return;
             }
 
-            btn.innerText = "UPLOADING TO SERVER...";
+            btn.innerText = "UPLOADING TO SHEET...";
             btn.disabled = true;
 
             try {
-                await fetch(SCRIPT_URL + "?action=addProduct", {
+                // doPost call
+                await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     body: JSON.stringify(data)
                 });
-                alert("SUCCESS! Fresh stock is now LIVE on the menu.");
+                alert("Mubarak ho! Stock live ho chuka hai.");
                 location.reload();
             } catch (e) {
                 alert("Upload Failed. Check internet.");
@@ -219,38 +224,43 @@
         // --- ORDER MANAGEMENT ---
         async function fetchOrdersFromSheet() {
             const tbody = document.getElementById('order-body');
-            document.getElementById('refresh-icon').classList.add('animate-spin');
+            const refreshIcon = document.getElementById('refresh-icon');
+            refreshIcon.classList.add('animate-spin');
             
             try {
                 const response = await fetch(`${SCRIPT_URL}?action=getOrders`);
                 const orders = await response.json();
                 
-                tbody.innerHTML = orders.map(order => `
-                    <tr class="hover:bg-slate-50/50 transition-all group">
-                        <td class="p-6">
-                            <p class="font-black text-[#002e6e] italic tracking-tighter uppercase">#${order.id}</p>
-                            <div class="mt-1">
-                                <p class="text-xs font-bold text-slate-800">${order.name}</p>
-                                <p class="text-[9px] text-slate-400 font-black tracking-widest uppercase">${order.phone}</p>
-                            </div>
-                        </td>
-                        <td class="p-6 text-center font-black text-slate-800 italic">₹${order.total}</td>
-                        <td class="p-6 text-center">
-                            <span class="px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest ${getStatusStyle(order.status)}">
-                                ${order.status}
-                            </span>
-                        </td>
-                        <td class="p-6 text-right">
-                            <button onclick="openStatusModal('${order.id}')" class="bg-[#002e6e] text-white px-5 py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest hover:bg-orange-500 transition-all shadow-lg shadow-blue-100">
-                                Update Status
-                            </button>
-                        </td>
-                    </tr>
-                `).join('');
+                if(orders.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="p-20 text-center font-bold text-slate-400 uppercase tracking-widest">No orders yet.</td></tr>`;
+                } else {
+                    tbody.innerHTML = orders.map(order => `
+                        <tr class="hover:bg-slate-50/50 transition-all group">
+                            <td class="p-6">
+                                <p class="font-black text-[#002e6e] italic tracking-tighter uppercase">#${order.id}</p>
+                                <div class="mt-1">
+                                    <p class="text-xs font-bold text-slate-800">${order.name}</p>
+                                    <p class="text-[9px] text-slate-400 font-black tracking-widest uppercase">${order.phone}</p>
+                                </div>
+                            </td>
+                            <td class="p-6 text-center font-black text-slate-800 italic">₹${order.total}</td>
+                            <td class="p-6 text-center">
+                                <span class="px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest ${getStatusStyle(order.status)}">
+                                    ${order.status}
+                                </span>
+                            </td>
+                            <td class="p-6 text-right">
+                                <button onclick="openStatusModal('${order.id}')" class="bg-[#002e6e] text-white px-5 py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest hover:bg-orange-500 transition-all shadow-lg shadow-blue-100">
+                                    Update Status
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('');
+                }
             } catch (e) {
-                tbody.innerHTML = `<tr><td colspan="4" class="p-20 text-center font-bold text-red-400">CONNECT SCRIPT URL TO LOAD ORDERS</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="p-20 text-center font-bold text-red-400">SERVER ERROR: CHECK SCRIPT URL</td></tr>`;
             } finally {
-                document.getElementById('refresh-icon').classList.remove('animate-spin');
+                refreshIcon.classList.remove('animate-spin');
             }
         }
 
@@ -266,10 +276,15 @@
         function closeModal() { document.getElementById('status-modal').classList.add('hidden'); }
 
         async function updateStatus(newStatus) {
-            const response = await fetch(`${SCRIPT_URL}?action=updateStatus&id=${activeOrderId}&status=${newStatus}`);
-            if(response.ok) {
-                closeModal();
-                fetchOrdersFromSheet();
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=updateStatus&id=${activeOrderId}&status=${newStatus}`);
+                const res = await response.json();
+                if(res.result === "Success") {
+                    closeModal();
+                    fetchOrdersFromSheet();
+                }
+            } catch (e) {
+                alert("Update failed. Try again.");
             }
         }
 
