@@ -12,7 +12,6 @@
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .product-card { transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
         .product-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 30px 60px -12px rgba(0, 46, 110, 0.15); }
-        .model-card { transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.05); }
         .glass-header { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
         #chat-window { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom right; }
         .img-skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
@@ -30,10 +29,9 @@
             <div class="flex items-center gap-12">
                 <a href="index.html" class="text-3xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>INDIA</a>
                 <nav class="hidden lg:flex gap-8 text-[11px] font-extrabold uppercase tracking-widest text-slate-500">
-                    <a href="about.html" class="hover:text-orange-500 transition-colors">About</a>
-                    <a href="menu.html" class="hover:text-orange-500 transition-colors">Fresh Menu</a>
-                    <a href="franchise.html" class="hover:text-orange-500 transition-colors">Franchise</a>
-                    <a href="locations.html" class="hover:text-orange-500 transition-colors">Locations</a>
+                    <a href="#" class="hover:text-orange-500 transition-colors">About</a>
+                    <a href="#live-menu" class="hover:text-orange-500 transition-colors">Fresh Menu</a>
+                    <a href="#franchise" class="hover:text-orange-500 transition-colors">Franchise</a>
                 </nav>
             </div>
             <div class="flex items-center gap-6">
@@ -51,79 +49,130 @@
         <div class="relative z-10 max-w-7xl mx-auto px-8 text-white">
             <div class="inline-block bg-orange-500 text-white text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-widest mb-6">River Fresh 2026</div>
             <h1 class="text-6xl md:text-[10rem] font-black italic uppercase leading-[0.8] mb-8 tracking-tighter">River to<br><span class="text-orange-500">Kitchen.</span></h1>
-            <p class="max-w-xl text-gray-100 font-bold text-sm md:text-xl mb-12 leading-relaxed opacity-90">India's largest chemical-free seafood network. Freshly caught, expertly cut, and delivered to your doorstep in 120 minutes.</p>
+            <p class="max-w-xl text-gray-100 font-bold text-sm md:text-xl mb-12 leading-relaxed opacity-90">India's largest chemical-free seafood network. Delivered to your doorstep in 120 minutes.</p>
             <div class="flex flex-wrap gap-5">
-                <a href="menu.html" class="bg-orange-500 px-14 py-6 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-orange-600 transition-all shadow-[0_20px_40px_rgba(249,115,22,0.3)] hover:-translate-y-1">Order Fresh Now</a>
-                <a href="franchise.html" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-14 py-6 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-white hover:text-[#002e6e] transition-all hover:-translate-y-1">Be a Franchise</a>
+                <a href="#live-menu" class="bg-orange-500 px-14 py-6 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-orange-600 transition-all shadow-lg hover:-translate-y-1">Order Fresh Now</a>
+                <a href="#franchise" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-14 py-6 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-white hover:text-[#002e6e] transition-all hover:-translate-y-1">Be a Franchise</a>
             </div>
         </div>
     </section>
 
     <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-6 overflow-x-auto hide-scrollbar flex gap-12 md:justify-between items-center">
+        <div class="max-w-7xl mx-auto px-6 overflow-x-auto hide-scrollbar flex gap-12 md:justify-between items-center text-center">
             <script>
                 const cats = [
-                    {n:'Ready To Eat', q:'frozen seafood snacks', i:'c0', l:'ready-to-eat'},
-                    {n:'River Fish', q:'raw fresh fish rohu', i:'c1', l:'river'}, 
-                    {n:'Seafood', q:'fresh seafood crabs pomfret', i:'c2', l:'seafood'}, 
-                    {n:'Prawns', q:'fresh raw prawns', i:'c3', l:'prawns'}, 
-                    {n:'Boneless', q:'fish fillet', i:'c4', l:'boneless'},
-                    {n:'Bengali Cut', q:'hilsa fish', i:'c5', l:'bengali'}
+                    {n:'Ready To Eat', q:'frozen seafood snacks', i:'c0'},
+                    {n:'River Fish', q:'raw fresh fish rohu', i:'c1'}, 
+                    {n:'Seafood', q:'fresh seafood crabs pomfret', i:'c2'}, 
+                    {n:'Prawns', q:'fresh raw prawns', i:'c3'}, 
+                    {n:'Boneless', q:'fish fillet', i:'c4'},
+                    {n:'Bengali Cut', q:'hilsa fish', i:'c5'}
                 ];
                 cats.forEach(c => {
                     document.write(`
-                        <a href="menu.html?cat=${c.l}" class="text-center group min-w-[120px]">
+                        <div class="group min-w-[120px] cursor-pointer">
                             <div class="w-24 h-24 mx-auto rounded-[2.5rem] overflow-hidden group-hover:rounded-full transition-all duration-500 bg-slate-50 mb-4 shadow-xl border border-gray-100 p-1 group-hover:border-orange-500">
                                 <img id="${c.i}" class="w-full h-full object-cover group-hover:scale-125 transition-all duration-700 img-skeleton" src="">
                             </div>
                             <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-orange-500 transition-colors">${c.n}</span>
-                        </a>
+                        </div>
                     `);
                 });
             </script>
         </div>
     </section>
 
-    <section class="py-32 px-6 bg-slate-50/50">
+    <section id="live-menu" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-16">
+                <div>
+                    <h6 class="text-orange-500 font-black text-[11px] uppercase tracking-[0.5em] mb-4 italic">Fresh Stock</h6>
+                    <h2 class="text-5xl font-black italic uppercase text-[#002e6e] tracking-tighter">Daily <span class="text-orange-500">Arrivals.</span></h2>
+                </div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase italic">Updated: Just Now</p>
+            </div>
+            
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="col-span-full py-20 text-center animate-pulse text-slate-300 font-black italic uppercase">Syncing with River Stock...</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 bg-[#002e6e] text-white overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+                <h2 class="text-6xl font-black italic uppercase tracking-tighter mb-10 leading-none">Why India <br><span class="text-orange-500">Trusts KFK?</span></h2>
+                <div class="space-y-8">
+                    <div class="flex gap-6 items-start">
+                        <div class="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center shrink-0 font-black italic">01</div>
+                        <div>
+                            <h4 class="text-xl font-black italic uppercase">No Ammonia / Formalin</h4>
+                            <p class="text-slate-400 text-sm mt-2 font-bold leading-relaxed">Humara har product 100% natural hai, koi chemical preserve use nahi hota.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0 font-black italic">02</div>
+                        <div>
+                            <h4 class="text-xl font-black italic uppercase">24-Step Quality Check</h4>
+                            <p class="text-slate-400 text-sm mt-2 font-bold leading-relaxed">River se kitchen tak har fish 24 alag testing points se guzarti hai.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0 font-black italic">03</div>
+                        <div>
+                            <h4 class="text-xl font-black italic uppercase">Hygienic Temperature Cut</h4>
+                            <p class="text-slate-400 text-sm mt-2 font-bold leading-relaxed">Humara cutting process 4°C temperature control mein hota hai.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <img id="quality-img" src="" class="rounded-[4rem] shadow-2xl border-8 border-white/5 rotate-3 scale-110">
+                <div class="absolute -bottom-10 -left-10 bg-orange-500 p-8 rounded-[2rem] shadow-2xl">
+                    <p class="text-4xl font-black italic uppercase tracking-tighter">100%</p>
+                    <p class="text-[10px] font-bold uppercase tracking-widest">Natural Fresh</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="franchise" class="py-32 px-6 bg-white">
         <div class="max-w-7xl mx-auto text-center mb-24">
             <h6 class="text-orange-500 font-black text-[11px] uppercase tracking-[0.5em] mb-4">India's Fastest Growing Model</h6>
-            <h2 class="text-5xl md:text-8xl font-black italic uppercase text-[#002e6e] tracking-tighter">Business <span class="text-orange-500">Models.</span></h2>
+            <h2 class="text-6xl font-black italic uppercase text-[#002e6e] tracking-tighter">Business <span class="text-orange-500">Models.</span></h2>
         </div>
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
-            <div class="bg-white p-10 rounded-[3rem] shadow-xl model-card">
+            <div class="bg-white p-10 rounded-[3rem] shadow-xl border border-slate-100">
                 <span class="bg-blue-50 text-[#002e6e] text-[10px] font-black px-4 py-1.5 rounded-full uppercase italic">Startup Model</span>
                 <h3 class="text-4xl font-black text-[#002e6e] mt-6 italic tracking-tight">₹50,000</h3>
-                <div class="space-y-4 mt-8 mb-10 text-[11px] font-bold text-slate-500 uppercase tracking-wide">
-                    <p class="flex items-center gap-3">✅ <span class="opacity-70">Commercial Deep Freezer</span></p>
-                    <p class="flex items-center gap-3">✅ <span class="opacity-70">Supply Chain Management</span></p>
-                    <p class="flex items-center gap-3">✅ <span class="opacity-70">12% Guaranteed Margin</span></p>
+                <div class="space-y-4 mt-8 mb-10 text-[11px] font-bold text-slate-500 uppercase tracking-wide italic">
+                    <p>✅ Commercial Deep Freezer</p>
+                    <p>✅ Supply Chain Support</p>
+                    <p>✅ 12% Guaranteed Margin</p>
                 </div>
-                <button class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-orange-500 transition-all shadow-lg">View Details</button>
+                <button class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-orange-500 transition-all">View Details</button>
             </div>
             <div class="bg-[#002e6e] p-12 rounded-[3.5rem] shadow-2xl scale-110 z-10 border-[6px] border-orange-500/10 text-white">
                 <div class="flex justify-between items-center mb-6">
                     <span class="bg-orange-500 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase italic">Recommended</span>
-                    <span class="text-[10px] font-black uppercase text-orange-200">Bestseller</span>
                 </div>
                 <h3 class="text-5xl font-black text-orange-500 italic tracking-tight">₹2,50,000</h3>
-                <div class="space-y-4 mt-10 mb-12 text-[11px] font-bold text-slate-200 uppercase tracking-wide leading-relaxed">
-                    <p>🔥 Full Store Branding & Setup</p>
-                    <p>🔥 Branded Electric Delivery Bike</p>
-                    <p>🔥 CRM & Automation Software</p>
-                    <p>🔥 Marketing Kit (Local Ads)</p>
+                <div class="space-y-4 mt-10 mb-12 text-[11px] font-bold text-slate-200 uppercase tracking-wide leading-relaxed italic">
+                    <p>🔥 Full Store Branding</p>
+                    <p>🔥 Electric Delivery Bike</p>
+                    <p>🔥 Automation Software</p>
                 </div>
-                <button class="w-full bg-orange-500 py-5 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] shadow-2xl shadow-orange-500/40 hover:scale-105 transition-all">Apply for Franchise</button>
+                <button class="w-full bg-orange-500 py-5 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] shadow-xl hover:scale-105 transition-all">Apply Now</button>
             </div>
-            <div class="bg-white p-10 rounded-[3rem] shadow-xl model-card">
+            <div class="bg-white p-10 rounded-[3rem] shadow-xl border border-slate-100">
                 <span class="bg-orange-50 text-orange-600 text-[10px] font-black px-4 py-1.5 rounded-full uppercase italic">Master Model</span>
                 <h3 class="text-4xl font-black text-[#002e6e] mt-6 italic tracking-tight">₹15,00,000</h3>
-                <div class="space-y-4 mt-8 mb-10 text-[11px] font-bold text-slate-500 uppercase tracking-wide">
-                    <p>⭐ City-Wide Distribution Rights</p>
-                    <p>⭐ Dedicated Account Manager</p>
-                    <p>⭐ 24/7 AI-Powered Support</p>
-                    <p>⭐ Warehouse Inventory System</p>
+                <div class="space-y-4 mt-8 mb-10 text-[11px] font-bold text-slate-500 uppercase tracking-wide italic">
+                    <p>⭐ City-Wide Distribution</p>
+                    <p>⭐ Warehouse Inventory</p>
+                    <p>⭐ 24/7 Priority Support</p>
                 </div>
-                <button class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-orange-500 transition-all shadow-lg">Contact Enterprise</button>
+                <button class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-orange-500 transition-all">Contact Enterprise</button>
             </div>
         </div>
     </section>
@@ -131,123 +180,136 @@
     <section class="py-16 bg-slate-100/80 border-y border-gray-200">
         <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
-                <h5 class="text-[11px] font-black uppercase tracking-[0.4em] text-slate-400 mb-2">Secure Management Access</h5>
-                <p class="text-sm font-bold text-[#002e6e]">KFK India Internal Admin Console</p>
+                <h5 class="text-[11px] font-black uppercase tracking-[0.4em] text-slate-400 mb-2 italic">Secure Management Access</h5>
+                <p class="text-sm font-bold text-[#002e6e] uppercase italic">KFK India Internal Console</p>
             </div>
             <div class="flex flex-wrap gap-4 justify-center bg-white/50 p-2 rounded-[2rem]">
                 <input type="text" id="admin-id" placeholder="Admin ID" class="bg-white border border-gray-100 rounded-2xl px-6 py-4 text-[11px] font-bold outline-none shadow-sm w-44 focus:ring-4 ring-orange-500/20">
                 <input type="password" id="admin-pass" placeholder="Password" class="bg-white border border-gray-100 rounded-2xl px-6 py-4 text-[11px] font-bold outline-none shadow-sm w-44 focus:ring-4 ring-orange-500/20">
-                <button onclick="checkAdmin()" class="bg-[#002e6e] text-white px-10 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-500/30 transition-all">Unlock System</button>
+                <button onclick="checkAdmin()" class="bg-[#002e6e] text-white px-10 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-orange-500 transition-all">Unlock System</button>
             </div>
         </div>
     </section>
 
     <div id="kfk-chatbot-container" class="fixed bottom-10 right-8 z-[2000]">
-        <button onclick="toggleKFKChat()" id="chat-bubble" class="bg-[#002e6e] text-white w-20 h-20 rounded-[2rem] shadow-[0_20px_50px_rgba(0,46,110,0.4)] flex items-center justify-center hover:rotate-12 transition-all active:scale-90 border-4 border-white group">
+        <button onclick="toggleKFKChat()" id="chat-bubble" class="bg-[#002e6e] text-white w-20 h-20 rounded-[2rem] shadow-2xl flex items-center justify-center hover:rotate-12 transition-all border-4 border-white group">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
         </button>
-        <div id="chat-window" class="hidden absolute bottom-24 right-0 w-[90vw] sm:w-[400px] bg-white rounded-[3rem] shadow-[0_40px_120px_rgba(0,0,0,0.25)] border border-gray-100 overflow-hidden flex flex-col">
+        <div id="chat-window" class="hidden absolute bottom-24 right-0 w-[90vw] sm:w-[400px] bg-white rounded-[3rem] shadow-2xl border border-gray-100 overflow-hidden flex flex-col">
             <div class="bg-[#002e6e] p-8 text-white">
-                <h4 class="text-xl font-black italic tracking-tighter">KFK AI MANAGER</h4>
-                <p class="text-[9px] uppercase font-bold tracking-[0.2em] opacity-60">Online & Ready to Help</p>
+                <h4 class="text-xl font-black italic tracking-tighter uppercase">KFK AI MANAGER</h4>
+                <p class="text-[9px] uppercase font-bold tracking-[0.2em] opacity-60">Online & Smart Assistance</p>
             </div>
-            <div id="chat-messages" class="h-[400px] overflow-y-auto p-8 space-y-6 bg-slate-50/50">
-                <div class="bg-white p-5 rounded-[2rem] rounded-tl-none shadow-sm border border-gray-100 text-[11px] font-bold text-slate-600 leading-relaxed">
-                    Namaste! 🙏 KFK India mein aapka swagat hai. Main aapki franchise inquiry ya orders mein help kar sakta hoon.
-                </div>
+            <div id="chat-messages" class="h-[350px] overflow-y-auto p-8 space-y-6 bg-slate-50/50 italic text-[11px] font-bold">
+                <div class="bg-white p-5 rounded-[2rem] rounded-tl-none border shadow-sm">Namaste! 👋 Main KFK AI hoon. Aapki help kaise kar sakta hoon?</div>
             </div>
             <div class="p-6 bg-white border-t flex gap-4 items-center">
-                <input type="text" id="bot-input-field" placeholder="Type your message..." class="flex-1 bg-slate-100 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:bg-slate-200 transition-colors">
-                <button onclick="sendMessage()" class="bg-[#002e6e] text-white w-14 h-14 rounded-2xl flex items-center justify-center hover:bg-orange-500 transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
-                </button>
+                <input type="text" id="bot-input-field" placeholder="Puchhiye..." class="flex-1 bg-slate-100 rounded-2xl p-4 text-xs font-bold outline-none italic">
+                <button onclick="sendMessage()" class="bg-[#002e6e] text-white w-14 h-14 rounded-2xl flex items-center justify-center hover:bg-orange-500 transition-all">➤</button>
             </div>
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDWHPt3Kya_s-9f62RsLfI_G1RgQU5P534",
+            authDomain: "kfk-fish.firebaseapp.com",
+            projectId: "kfk-fish",
+            storageBucket: "kfk-fish.firebasestorage.app",
+            messagingSenderId: "171442898165",
+            appId: "1:171442898165:web:9234070d781b8138d4b1bc"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- REAL-TIME LIVE MENU ---
+        const loadLiveMenu = () => {
+            const grid = document.getElementById('product-grid');
+            const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+
+            onSnapshot(q, (snapshot) => {
+                grid.innerHTML = "";
+                if (snapshot.empty) {
+                    grid.innerHTML = `<div class="col-span-full py-20 text-center text-slate-400 font-black italic uppercase tracking-widest">Abhi Stock Khatam Hai! 🐟</div>`;
+                    return;
+                }
+                snapshot.forEach((doc) => {
+                    const p = doc.data();
+                    grid.innerHTML += `
+                        <div class="bg-white rounded-[2.5rem] p-5 shadow-xl border border-slate-50 transition-all active:scale-95 group">
+                            <div class="relative overflow-hidden rounded-[2rem]">
+                                <img src="${p.images[0]}" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700 bg-slate-100">
+                                <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full text-[9px] font-black uppercase italic text-orange-600 border border-orange-100">${p.weight}</div>
+                            </div>
+                            <div class="mt-5 px-1">
+                                <h3 class="font-black text-slate-800 uppercase italic text-sm leading-tight tracking-tighter">${p.name}</h3>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <p class="text-2xl font-black text-[#002e6e] italic">₹${p.price}</p>
+                                    <button onclick="buyNow('${p.name}', '${p.price}', '${p.weight}', '${p.images[0]}')" 
+                                        class="bg-orange-500 text-white px-7 py-3 rounded-2xl font-black text-[10px] uppercase italic shadow-lg shadow-orange-100 hover:bg-[#002e6e] transition-all">
+                                        Order Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+        };
+        loadLiveMenu();
+    </script>
+
     <script>
         const PEXELS_KEY = "kfzzPEicE21y0WcDJEMhLn0eUETxYReptyKIbwehcGdtGB3oW4Ka7xYj";
         
-        // Robust Image Fetcher
         async function setImg(q, id) {
             const el = document.getElementById(id);
             try {
-                const r = await fetch(`https://api.pexels.com/v1/search?query=${q}&per_page=1`, {
-                    headers: { Authorization: PEXELS_KEY }
-                });
+                const r = await fetch(`https://api.pexels.com/v1/search?query=${q}&per_page=1`, { headers: { Authorization: PEXELS_KEY } });
                 const d = await r.json();
-                if(d.photos && d.photos.length > 0) {
-                    el.src = d.photos[0].src.large2x;
-                    el.classList.remove('img-skeleton');
-                }
-            } catch(e) { 
-                console.error("Img error for " + q);
-                el.src = "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=800"; // Fallback
-            }
+                if(d.photos && d.photos.length > 0) { el.src = d.photos[0].src.large2x; el.classList.remove('img-skeleton'); }
+            } catch(e) { el.src = "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=800"; }
         }
 
-        // Cart State
-        let cartCount = JSON.parse(localStorage.getItem('kfk_cart'))?.length || 0;
-        document.getElementById('cart-count').innerText = cartCount;
+        window.buyNow = (name, price, weight, image) => {
+            localStorage.removeItem('selectedProduct');
+            localStorage.setItem('selectedProduct', JSON.stringify({ name, price, weight, image }));
+            location.href = 'order.html';
+        };
 
-        function addToCart() {
-            cartCount++;
-            document.getElementById('cart-count').innerText = cartCount;
-            let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            cart.push({name: "Product", price: 0});
-            localStorage.setItem('kfk_cart', JSON.stringify(cart));
+        function checkAdmin() {
+            const id = document.getElementById('admin-id').value.trim();
+            const pass = document.getElementById('admin-pass').value.trim();
+            if (id === "KFK@9773" && pass === "Kfk@#786") {
+                alert("✅ Access Granted!");
+                window.location.href = "admin.html"; 
+            } else { alert("❌ Unauthorized!"); }
         }
 
-        // Chat Logic
         function toggleKFKChat() { document.getElementById('chat-window').classList.toggle('hidden'); }
-        
         function sendMessage() {
             const input = document.getElementById('bot-input-field');
             const val = input.value.trim();
             if(!val) return;
-            
-            addMessage(val, 'user');
+            const chat = document.getElementById('chat-messages');
+            chat.innerHTML += `<div class="bg-[#002e6e] text-white p-5 rounded-[2rem] rounded-tr-none ml-12 shadow-lg">${val}</div>`;
             input.value = '';
-            
             setTimeout(() => {
-                addMessage("Aapki inquiry humne record kar li hai. Hamari team +91 99173 85863 se aapko contact karegi.", 'bot');
+                chat.innerHTML += `<div class="bg-white p-5 rounded-[2rem] rounded-tl-none border shadow-sm mt-4">Ji, aapki query note kar li hai. Team +91 99173 85863 se contact karegi. 🙏</div>`;
+                chat.scrollTo(0, chat.scrollHeight);
             }, 800);
         }
 
-        function addMessage(text, side) {
-            const chat = document.getElementById('chat-messages');
-            const msg = document.createElement('div');
-            msg.className = side === 'user' 
-                ? 'bg-[#002e6e] text-white p-5 rounded-[2rem] rounded-tr-none ml-12 text-[11px] font-bold shadow-lg shadow-blue-900/10' 
-                : 'bg-white p-5 rounded-[2rem] rounded-tl-none border border-gray-100 text-[11px] font-bold text-slate-600 shadow-sm';
-            msg.innerText = text;
-            chat.appendChild(msg);
-            chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
-        }
-
-        // 4. FINAL FIXED LOGIN LOGIC (MERGED)
-        function checkAdmin() {
-            const idInput = document.getElementById('admin-id').value.trim();
-            const passInput = document.getElementById('admin-pass').value.trim();
-
-            const correctID = "KFK@9773";
-            const correctPass = "Kfk@#786";
-
-            if (idInput === correctID && passInput === correctPass) {
-                alert("✅ Access Granted! Redirecting to Dashboard...");
-                window.location.href = "admin.html"; 
-            } else {
-                alert("❌ Unauthorized Access!\nInvalid Credentials.\n\nNote: Input is Case-Sensitive.");
-                document.getElementById('admin-id').value = "";
-                document.getElementById('admin-pass').value = "";
-            }
-        }
-
-        // Run Initializers
-        window.addEventListener('load', () => {
+        window.onload = () => {
             setImg('fresh raw sea fish market', 'hero-img');
+            setImg('fresh river fish rohu raw', 'quality-img');
             cats.forEach(c => setImg(c.q, c.i));
-        });
+            document.getElementById('cart-count').innerText = JSON.parse(localStorage.getItem('kfk_cart'))?.length || 0;
+        };
     </script>
 </body>
 </html>
