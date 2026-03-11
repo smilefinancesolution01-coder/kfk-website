@@ -3,156 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK India | Fresh Menu</title>
+    <title>Fresh Menu | KFK India</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fcfdfe; }
-        .glass-header { backdrop-filter: blur(15px); background: rgba(255,255,255,0.8); }
-        .category-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .category-card:hover { transform: scale(1.05); }
-        .product-card { transition: all 0.3s ease; border: 1px solid #f1f5f9; }
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,46,110,0.1); border-color: #fb923c; }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fafafa; }
+        .product-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .product-card:hover { transform: translateY(-10px); }
+        .category-pill.active { background: #002e6e; color: white; }
     </style>
 </head>
-<body class="text-slate-800">
+<body>
 
-    <div class="bg-[#002e6e] text-white text-[10px] py-3 px-4 text-center font-black tracking-[0.2em] uppercase sticky top-0 z-[110]">
-        ⚡ FASTEST DELIVERY TO YOUR KITCHEN | 100% CHEMICAL FREE
-    </div>
-
-    <header class="sticky top-9 z-[100] glass-header border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-black text-[#002e6e] italic tracking-tighter">KFK<span class="text-orange-500">.</span>INDIA</a>
-            
-            <div class="flex items-center gap-6">
-                <div class="relative cursor-pointer group p-2" onclick="location.href='order.html'">
-                    <span id="cart-count" class="absolute top-0 right-0 bg-orange-600 text-white text-[9px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white font-black">0</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-[#002e6e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
-                </div>
-                <button onclick="location.href='index.html'" class="bg-slate-100 p-2 rounded-xl hover:bg-orange-50 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#002e6e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-                </button>
-            </div>
+    <header class="bg-[#002e6e] text-white p-8 rounded-b-[3rem] shadow-2xl overflow-hidden relative">
+        <div class="relative z-10 text-center max-w-2xl mx-auto">
+            <h1 class="text-4xl font-black italic tracking-tighter uppercase">Fresh Catch <span class="text-orange-500">Today</span></h1>
+            <p class="text-blue-200 font-bold text-[10px] uppercase tracking-[0.3em] mt-2">Direct from the coast to your kitchen</p>
         </div>
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
     </header>
 
-    <section class="py-10 bg-white">
-        <div class="max-w-7xl mx-auto px-6 overflow-x-auto hide-scrollbar flex gap-6">
-            <button onclick="filterItems('all')" class="category-card min-w-[120px] bg-orange-500 text-white p-4 rounded-3xl text-center shadow-lg shadow-orange-500/20 font-black text-[10px] uppercase tracking-widest">All Items</button>
-            <button onclick="filterItems('river')" class="category-card min-w-[120px] bg-white border border-slate-100 p-4 rounded-3xl text-center font-black text-[10px] uppercase tracking-widest hover:border-orange-500">River Fish</button>
-            <button onclick="filterItems('seafood')" class="category-card min-w-[120px] bg-white border border-slate-100 p-4 rounded-3xl text-center font-black text-[10px] uppercase tracking-widest hover:border-orange-500">Sea Food</button>
-            <button onclick="filterItems('prawns')" class="category-card min-w-[120px] bg-white border border-slate-100 p-4 rounded-3xl text-center font-black text-[10px] uppercase tracking-widest hover:border-orange-500">Prawns</button>
-            <button onclick="filterItems('ready')" class="category-card min-w-[120px] bg-white border border-slate-100 p-4 rounded-3xl text-center font-black text-[10px] uppercase tracking-widest hover:border-orange-500">Ready To Eat</button>
-        </div>
-    </section>
+    <div class="flex gap-3 p-6 overflow-x-auto no-scrollbar justify-center">
+        <button onclick="filterItems('All')" class="category-pill active px-6 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm font-bold text-xs whitespace-nowrap">All Items</button>
+        <button onclick="filterItems('Fresh Water')" class="category-pill px-6 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm font-bold text-xs whitespace-nowrap">Fresh Water</button>
+        <button onclick="filterItems('Sea Food')" class="category-pill px-6 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm font-bold text-xs whitespace-nowrap">Sea Food</button>
+        <button onclick="filterItems('Dry Fish')" class="category-pill px-6 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm font-bold text-xs whitespace-nowrap">Dry Fish</button>
+    </div>
 
-    <main class="max-w-7xl mx-auto px-6 pb-32">
-        <div class="flex justify-between items-end mb-12">
-            <div>
-                <h6 class="text-orange-500 font-black text-[10px] uppercase tracking-[0.4em] mb-2">Daily Fresh Catch</h6>
-                <h2 class="text-4xl md:text-6xl font-black italic uppercase text-[#002e6e] tracking-tighter">The <span class="text-orange-500">Fresh</span> List.</h2>
+    <main class="p-6 lg:p-12">
+        <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="col-span-full text-center py-20">
+                <div class="animate-spin text-4xl mb-4">🔄</div>
+                <p class="font-black text-slate-400 uppercase tracking-widest text-xs">Fetching Today's Fresh Arrivals...</p>
             </div>
-            <div id="item-count" class="text-slate-400 font-bold text-xs uppercase tracking-widest">Showing: All Items</div>
         </div>
-
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            </div>
     </main>
 
     <script>
-        // 1. DATA: Aapke Default Items
-        const defaultProducts = [
-            { id: 1, name: "Premium Rohu (Bengali Cut)", price: 550, discount: 450, cat: "river", img: "https://images.pexels.com/photos/2130134/pexels-photo-2130134.jpeg?auto=compress&cs=tinysrgb&w=800", weight: "1kg", desc: "Fresh river rohu, expertly cleaned and cut in traditional Bengali style." },
-            { id: 2, name: "Tiger Prawns (Jumbo)", price: 1200, discount: 899, cat: "prawns", img: "https://images.pexels.com/photos/2871757/pexels-photo-2871757.jpeg?auto=compress&cs=tinysrgb&w=800", weight: "500g", desc: "Extra large tiger prawns, perfect for grilling or curries." },
-            { id: 3, name: "Fresh Pomfret", price: 900, discount: 750, cat: "seafood", img: "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=800", weight: "1kg", desc: "Sea fresh Pomfret, high in Omega-3 and extremely tender." },
-            { id: 4, name: "Fish Fingers (Frozen)", price: 399, discount: 299, cat: "ready", img: "https://images.pexels.com/photos/4040400/pexels-photo-4040400.jpeg?auto=compress&cs=tinysrgb&w=800", weight: "250g", desc: "Crispy ready-to-fry fish fingers made with premium fillets." }
-        ];
+        const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"; // Wahi URL yahan bhi daalein
+        let allProducts = [];
 
-        // 2. LOAD PRODUCTS FUNCTION
-        function displayProducts(filter = 'all') {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = ""; 
+        async function fetchMenu() {
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getProducts`);
+                allProducts = await response.json();
+                renderProducts(allProducts);
+            } catch (e) {
+                document.getElementById('product-list').innerHTML = `<p class="col-span-full text-center text-red-500 font-bold">Failed to load menu. Check Script URL.</p>`;
+            }
+        }
 
-            const customItems = JSON.parse(localStorage.getItem('kfk_custom_menu')) || [];
-            const allItems = [...customItems, ...defaultProducts];
+        function renderProducts(products) {
+            const container = document.getElementById('product-list');
+            if(products.length === 0) {
+                container.innerHTML = `<p class="col-span-full text-center py-20 text-slate-400 font-bold uppercase tracking-widest">No stock available today.</p>`;
+                return;
+            }
 
-            allItems.forEach(item => {
-                if(filter !== 'all' && item.cat !== filter) return;
-
-                // Important: Sab data JSON format mein pass hoga
-                const productData = JSON.stringify(item).replace(/"/g, '&quot;');
-
-                const card = `
-                    <div class="product-card bg-white rounded-[2.5rem] overflow-hidden group border border-slate-50">
-                        <div class="h-56 overflow-hidden relative">
-                            <img src="${item.image || item.img}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
-                            ${item.price > item.discount ? `<div class="absolute top-4 left-4 bg-red-500 text-white text-[9px] font-black px-3 py-1 rounded-full uppercase italic shadow-lg">Save ₹${item.price - item.discount}</div>` : ''}
-                            <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-[9px] font-black text-slate-800 border border-slate-100 uppercase">
-                                ⚖️ ${item.weight || '1kg'}
-                            </div>
-                        </div>
-                        
-                        <div class="p-6">
-                            <h3 class="text-lg font-black text-[#002e6e] leading-tight uppercase italic mb-1">${item.name}</h3>
-                            <p class="text-[10px] font-bold text-slate-400 mb-4 line-clamp-2 uppercase leading-relaxed">${item.desc || 'Freshly cleaned and ready to cook.'}</p>
-                            
-                            <div class="flex justify-between items-end">
-                                <div>
-                                    <span class="text-[10px] font-black text-slate-300 block line-through mb-[-4px]">MRP ₹${item.price || item.discount}</span>
-                                    <span class="text-2xl font-black text-orange-500 italic">₹${item.discount || item.price}</span>
-                                </div>
-                                <button onclick="addToCart('${productData}')" class="bg-[#002e6e] text-white p-4 rounded-2xl hover:bg-orange-600 transition-all active:scale-90 shadow-xl shadow-blue-900/10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
-                                </button>
-                            </div>
+            container.innerHTML = products.map(product => `
+                <div class="product-card bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 group">
+                    <div class="relative aspect-square overflow-hidden bg-slate-100">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-xl font-black text-[10px] text-[#002e6e] uppercase tracking-widest">
+                            ${product.category}
                         </div>
                     </div>
-                `;
-                grid.innerHTML += card;
-            });
+                    
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-black text-slate-800 italic uppercase tracking-tighter">${product.name}</h3>
+                            <span class="text-orange-500 font-black italic">₹${product.price}</span>
+                        </div>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Pack: ${product.weight}</p>
+                        
+                        <button onclick="addToCart('${product.name}', ${product.price})" class="w-full bg-[#002e6e] text-white py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-blue-100 hover:bg-orange-500 transition-all active:scale-95">
+                            Add to Order
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        // 3. FILTER LOGIC
         function filterItems(category) {
-            displayProducts(category);
-            document.getElementById('item-count').innerText = `Category: ${category}`;
-            const buttons = document.querySelectorAll('.category-card');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-orange-500', 'text-white');
-                btn.classList.add('bg-white', 'text-slate-800');
+            // Update Active Pill UI
+            document.querySelectorAll('.category-pill').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText === category || (category === 'All' && btn.innerText === 'All Items')) {
+                    btn.classList.add('active');
+                }
             });
-            event.currentTarget.classList.add('bg-orange-500', 'text-white');
+
+            if(category === 'All') {
+                renderProducts(allProducts);
+            } else {
+                const filtered = allProducts.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
         }
 
-        // 4. ADD TO CART FUNCTION
-        function addToCart(productString) {
-            const product = JSON.parse(productString);
-            let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            
-            // Hum discounted price hi cart mein bhejenge final calculation ke liye
-            const cartItem = {
-                id: product.id,
-                name: product.name,
-                price: product.discount || product.price,
-                image: product.image || product.img,
-                weight: product.weight
-            };
-
-            cart.push(cartItem);
-            localStorage.setItem('kfk_cart', JSON.stringify(cart));
-            
-            document.getElementById('cart-count').innerText = cart.length;
-            alert(`${product.name} (${product.weight || '1kg'}) added to basket! 🛒`);
+        // Add to Cart Logic (Local Storage or Direct WhatsApp)
+        function addToCart(name, price) {
+            alert(name + " added! (Aap yahan apna WhatsApp Order logic bhi daal sakte hain)");
         }
 
-        // Initialize
-        window.onload = () => {
-            const cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            document.getElementById('cart-count').innerText = cart.length;
-            displayProducts('all');
-        };
+        window.onload = fetchMenu;
     </script>
 </body>
 </html>
