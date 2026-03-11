@@ -18,19 +18,19 @@
 <body class="flex flex-col lg:flex-row min-h-screen">
 
     <aside class="w-full lg:w-72 bg-[#002e6e] text-white p-8 flex flex-col shadow-2xl z-50">
-        <div class="mb-12">
+        <div class="mb-12 text-center lg:text-left">
             <h1 class="text-3xl font-black italic tracking-tighter uppercase text-orange-500 leading-none">KFK <br> ADMIN</h1>
-            <div class="h-1 w-12 bg-orange-500 mt-2"></div>
+            <div class="h-1 w-12 bg-orange-500 mt-2 mx-auto lg:mx-0"></div>
         </div>
         <nav class="space-y-3 flex-1">
-            <button onclick="showSection('orders')" id="btn-orders" class="nav-link active w-full p-4 rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-white/10 text-left">
-                <span>📦</span> Live Orders
+            <button onclick="showSection('orders')" id="btn-orders" class="nav-link active w-full p-4 rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-white/10 text-left italic">
+                <span>📦</span> LIVE ORDERS
             </button>
-            <button onclick="showSection('add-product')" id="btn-add-product" class="nav-link w-full p-4 rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-white/10 text-left">
-                <span>📸</span> Add Fish Stock
+            <button onclick="showSection('add-product')" id="btn-add-product" class="nav-link w-full p-4 rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-white/10 text-left italic">
+                <span>📸</span> ADD FISH STOCK
             </button>
-            <button onclick="showSection('manage-stock')" id="btn-manage-stock" class="nav-link w-full p-4 rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-white/10 text-left">
-                <span>🛠️</span> Manage Menu
+            <button onclick="showSection('manage-stock')" id="btn-manage-stock" class="nav-link w-full p-4 rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-white/10 text-left italic">
+                <span>🛠️</span> MANAGE MENU
             </button>
         </nav>
         <div class="pt-6 border-t border-white/10">
@@ -42,8 +42,8 @@
         
         <section id="orders-section" class="section-card active">
             <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10 tracking-tighter">Live Orders</h2>
-            <div id="order-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 font-bold font-sans">
-                <div class="col-span-full py-20 text-center text-slate-400 italic">Fetching latest orders...</div>
+            <div id="order-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 font-bold">
+                <div class="col-span-full py-20 text-center text-slate-300 italic font-black uppercase tracking-widest">Loading orders...</div>
             </div>
         </section>
 
@@ -56,30 +56,31 @@
                         <canvas id="canvas" class="hidden"></canvas>
                         <div id="placeholder" class="text-center text-slate-400">
                             <span class="text-5xl">📷</span>
-                            <p class="mt-2 font-black text-[10px] uppercase tracking-widest">Camera Ready</p>
+                            <p class="mt-2 font-black text-[10px] uppercase tracking-widest italic">Camera Ready</p>
                         </div>
                     </div>
                     <div id="multi-preview" class="flex gap-4 overflow-x-auto p-2 scrollbar-hide min-h-[100px] bg-white rounded-2xl shadow-inner border border-dashed border-slate-300"></div>
                     <div class="flex gap-3">
-                        <button onclick="startCamera()" class="flex-1 bg-slate-800 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all active:scale-95">Start Cam</button>
-                        <button onclick="takePhoto()" class="flex-1 bg-orange-500 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all active:scale-95">Capture Image</button>
+                        <button onclick="startCamera()" class="flex-1 bg-slate-800 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest italic active:scale-95 transition-all">Start Cam</button>
+                        <button onclick="takePhoto()" class="flex-1 bg-orange-500 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest italic active:scale-95 transition-all">Capture</button>
                     </div>
                 </div>
 
                 <div class="bg-white p-10 rounded-[3rem] shadow-xl space-y-5 border border-slate-100">
-                    <input type="text" id="p-name" placeholder="Fish Name (e.g. Rohu Special)" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-orange-500 font-bold outline-none transition-all">
+                    <input type="text" id="p-name" placeholder="Fish Name" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-orange-500 font-bold outline-none transition-all italic">
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="number" id="p-price" placeholder="Price (₹)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none border-2 border-transparent focus:border-orange-500 font-bold">
-                        <input type="text" id="p-weight" placeholder="Unit (1kg)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none border-2 border-transparent focus:border-orange-500 font-bold">
+                        <input type="number" id="p-price" placeholder="Price (₹)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none border-2 border-transparent focus:border-orange-500 font-bold italic">
+                        <input type="text" id="p-weight" placeholder="Unit (e.g. 1kg)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none border-2 border-transparent focus:border-orange-500 font-bold italic">
                     </div>
-                    <button onclick="uploadToFirebase()" id="upload-btn" class="w-full bg-[#002e6e] text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.2em] shadow-2xl active:scale-95 transition-all">Make it Live 🚀</button>
+                    <button onclick="uploadToFirebase()" id="upload-btn" class="w-full bg-[#002e6e] text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.2em] shadow-2xl active:scale-95 transition-all italic">Make it Live 🚀</button>
                 </div>
             </div>
         </section>
 
         <section id="manage-stock-section" class="section-card">
             <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10 tracking-tighter">Stock Inventory</h2>
-            <div id="stock-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="stock-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
         </section>
     </main>
 
@@ -98,10 +99,9 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
         let imageArray = [];
 
-        // --- CAMERA LOGIC ---
+        // --- CAMERA ---
         window.startCamera = async () => {
             const video = document.getElementById('video');
             document.getElementById('placeholder').classList.add('hidden');
@@ -111,92 +111,95 @@
         };
 
         window.takePhoto = () => {
-            if(imageArray.length >= 4) return alert("Bas bhai! Max 4 photos.");
+            if(imageArray.length >= 4) return alert("Max 4 photos limit!");
             const canvas = document.getElementById('canvas');
             const video = document.getElementById('video');
             canvas.width = video.videoWidth; canvas.height = video.videoHeight;
             canvas.getContext('2d').drawImage(video, 0, 0);
-            let photo = canvas.toDataURL('image/jpeg', 0.5);
-            imageArray.push(photo);
+            imageArray.push(canvas.toDataURL('image/jpeg', 0.5));
             renderPreviews();
         };
 
         window.renderPreviews = () => {
-            const previewDiv = document.getElementById('multi-preview');
-            previewDiv.innerHTML = imageArray.map((img, index) => `
+            document.getElementById('multi-preview').innerHTML = imageArray.map((img, i) => `
                 <div class="relative min-w-[80px] h-20">
-                    <img src="${img}" class="w-full h-full object-cover rounded-xl border-2 border-white shadow-md">
-                    <button onclick="removeImg(${index})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-[10px] font-bold shadow-lg flex items-center justify-center">X</button>
+                    <img src="${img}" class="w-full h-full object-cover rounded-xl border-2 border-white">
+                    <button onclick="removeImg(${i})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-[10px] font-bold">X</button>
                 </div>
             `).join('');
         };
+        window.removeImg = (i) => { imageArray.splice(i, 1); renderPreviews(); };
 
-        window.removeImg = (index) => { imageArray.splice(index, 1); renderPreviews(); };
-
-        // --- FIREBASE: STOCK MANAGEMENT ---
+        // --- MANAGE PRODUCTS (ADD & DELETE) ---
         window.uploadToFirebase = async () => {
             const btn = document.getElementById('upload-btn');
             const name = document.getElementById('p-name').value;
             const price = document.getElementById('p-price').value;
             const weight = document.getElementById('p-weight').value;
-            if(imageArray.length === 0 || !name) return alert("Photo aur Naam zaroori hai!");
+            if(!name || imageArray.length === 0) return alert("Details missing!");
+            
             btn.disabled = true; btn.innerText = "UPLOADING...";
             try {
                 await addDoc(collection(db, "products"), { name, price, weight, images: imageArray, createdAt: serverTimestamp() });
-                alert("Machhli live ho gayi!");
+                alert("Stock Added!");
                 location.reload();
             } catch (e) { alert(e.message); btn.disabled = false; }
         };
 
         window.loadStock = async () => {
             const list = document.getElementById('stock-list');
-            const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
-            const snap = await getDocs(q);
+            const snap = await getDocs(query(collection(db, "products"), orderBy("createdAt", "desc")));
             list.innerHTML = "";
             snap.forEach(d => {
                 const p = d.data();
-                const firstImg = p.images ? p.images[0] : '';
                 list.innerHTML += `
                     <div class="bg-white p-4 rounded-3xl shadow-lg flex items-center gap-4 border border-slate-50">
-                        <img src="${firstImg}" class="w-16 h-16 rounded-2xl object-cover shadow-md">
+                        <img src="${p.images[0]}" class="w-16 h-16 rounded-2xl object-cover">
                         <div class="flex-1">
-                            <p class="font-black text-slate-800 uppercase text-[10px] leading-tight">${p.name}</p>
-                            <p class="text-orange-500 font-bold text-[10px]">₹${p.price} • ${p.images.length} Pics</p>
+                            <p class="font-black text-slate-800 uppercase text-[10px] italic">${p.name}</p>
+                            <p class="text-orange-500 font-bold text-[10px]">₹${p.price} • ${p.weight}</p>
                         </div>
-                        <button onclick="deleteProduct('${d.id}')" class="bg-red-50 text-red-500 p-3 rounded-xl hover:bg-red-500 hover:text-white transition-all font-black text-[9px] uppercase">Del</button>
+                        <button onclick="deleteProduct('${d.id}')" class="bg-red-50 text-red-500 p-3 rounded-xl font-black text-[9px] uppercase hover:bg-red-500 hover:text-white transition-all">Del</button>
                     </div>
                 `;
             });
         };
 
-        window.deleteProduct = async (id) => { if(confirm("Stock se delete karun?")) { await deleteDoc(doc(db, "products", id)); window.loadStock(); } };
+        window.deleteProduct = async (id) => {
+            if(confirm("Permanently delete this product from menu?")) {
+                try {
+                    await deleteDoc(doc(db, "products", id));
+                    window.loadStock();
+                } catch(e) { alert(e.message); }
+            }
+        };
 
-        // --- FIREBASE: ORDER MANAGEMENT & WHATSAPP ---
+        // --- MANAGE ORDERS ---
         window.loadOrders = async () => {
             const list = document.getElementById('order-list');
-            const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
-            const snap = await getDocs(q);
+            const snap = await getDocs(query(collection(db, "orders"), orderBy("createdAt", "desc")));
             list.innerHTML = "";
             if(snap.empty) {
-                list.innerHTML = `<div class="col-span-full py-10 text-slate-300 font-bold uppercase tracking-widest italic text-center">No New Orders Yet</div>`;
+                list.innerHTML = `<div class="col-span-full py-20 text-center text-slate-300 italic">NO ACTIVE ORDERS</div>`;
                 return;
             }
             snap.forEach(d => {
                 const o = d.data();
+                const statusColor = o.status === 'Packed' ? 'bg-green-100 text-green-600' : 'bg-orange-100 text-orange-600';
                 list.innerHTML += `
-                    <div class="bg-white p-6 rounded-[2.5rem] shadow-xl border-l-8 border-orange-500 flex flex-col gap-3 relative transition-all hover:scale-[1.02]">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-black text-slate-800 uppercase text-sm">${o.item}</h3>
-                            <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter">${o.status || 'Pending'}</span>
+                    <div class="bg-white p-6 rounded-[2.5rem] shadow-xl border-l-8 border-orange-500 flex flex-col gap-3 relative">
+                        <div class="flex justify-between">
+                            <h3 class="font-black text-slate-800 uppercase text-xs italic">${o.item}</h3>
+                            <span class="${statusColor} px-3 py-1 rounded-full text-[8px] font-black uppercase">${o.status || 'Pending'}</span>
                         </div>
-                        <div class="text-[11px] text-slate-600 space-y-1">
-                            <p>👤 <b>${o.customerName}</b></p>
-                            <p class="leading-relaxed text-slate-400 font-semibold italic">📍 ${o.address}</p>
-                            <p>💰 ₹${o.price} via <span class="text-blue-600 font-bold">${o.payment}</span></p>
+                        <div class="text-[10px] text-slate-600 space-y-1">
+                            <p class="italic">👤 <b>${o.customerName}</b> (${o.customerPhone || 'No Phone'})</p>
+                            <p class="text-slate-400">📍 ${o.address}</p>
+                            <p>💰 ₹${o.price} via <span class="text-blue-600 font-black italic">${o.payment}</span></p>
                         </div>
                         <div class="flex gap-2 mt-2">
-                            <button onclick="updateStatus('${d.id}', 'Packed')" class="flex-1 bg-blue-50 text-blue-600 py-3 rounded-xl font-black text-[9px] uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">Mark Packed & Notify</button>
-                            <button onclick="deleteOrder('${d.id}')" class="bg-red-50 text-red-500 px-4 rounded-xl font-black text-[9px] uppercase italic hover:bg-red-500 hover:text-white transition-all">Cancel</button>
+                            <button onclick="updateStatus('${d.id}', 'Packed')" class="flex-1 bg-blue-50 text-blue-600 py-3 rounded-xl font-black text-[9px] uppercase hover:bg-blue-600 hover:text-white transition-all italic">Packed & Notify</button>
+                            <button onclick="deleteOrder('${d.id}')" class="bg-red-50 text-red-500 px-4 rounded-xl font-black text-[9px] uppercase italic hover:bg-red-500 hover:text-white">Cancel</button>
                         </div>
                     </div>
                 `;
@@ -204,37 +207,36 @@
         };
 
         window.updateStatus = async (id, s) => {
-            try {
-                // 1. Update status in Firebase
-                const orderRef = doc(db, "orders", id);
-                await updateDoc(orderRef, { status: s });
-
-                // 2. Fetch specific order for WhatsApp message
-                const q = query(collection(db, "orders"));
-                const snap = await getDocs(q);
-                let orderData = null;
-                snap.forEach(doc => { if(doc.id === id) orderData = doc.data(); });
-
-                if(orderData && s === 'Packed') {
-                    const customerMsg = `*KFK FRESH UPDATE* 📦%0A%0AHi *${orderData.customerName}*,%0A%0AAapka order *${orderData.item}* pack ho chuka hai aur delivery ke liye taiyar hai! 🚀%0A%0A📍 *Address:* ${orderData.address}%0A💰 *Amount:* ₹${orderData.price}%0A%0AHumari team jald hi aap tak pahunchegi. Thank you!`;
-                    window.open(`https://wa.me/?text=${customerMsg}`, '_blank');
-                }
-                window.loadOrders();
-            } catch (e) { alert("Status update error: " + e.message); }
+            const orderRef = doc(db, "orders", id);
+            await updateDoc(orderRef, { status: s });
+            const snap = await getDocs(collection(db, "orders"));
+            let oData = null;
+            snap.forEach(doc => { if(doc.id === id) oData = doc.data(); });
+            
+            if(oData && s === 'Packed') {
+                const msg = `*KFK FRESH UPDATE* 📦%0A%0AHi *${oData.customerName}*,%0A%0AAapka order *${oData.item}* pack ho chuka hai!%0A%0A📍 *Address:* ${oData.address}%0A💰 *Price:* ₹${oData.price}%0A%0ATeam jald hi delivery ke liye niklegi.`;
+                window.open(`https://wa.me/?text=${msg}`, '_blank');
+            }
+            window.loadOrders();
         };
 
-        window.deleteOrder = async (id) => { if(confirm("Order cancel karun?")) { await deleteDoc(doc(db, "orders", id)); window.loadOrders(); } };
+        window.deleteOrder = async (id) => {
+            if(confirm("Cancel this order?")) {
+                await deleteDoc(doc(db, "orders", id));
+                window.loadOrders();
+            }
+        };
 
         // INITIAL LOAD
         window.onload = () => { window.loadStock(); window.loadOrders(); };
     </script>
 
     <script>
-        function showSection(section) {
-            document.querySelectorAll('.section-card').forEach(s => s.classList.remove('active'));
+        function showSection(s) {
+            document.querySelectorAll('.section-card').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-            document.getElementById(section + '-section').classList.add('active');
-            document.getElementById('btn-' + section).classList.add('active');
+            document.getElementById(s + '-section').classList.add('active');
+            document.getElementById('btn-' + s).classList.add('active');
         }
     </script>
 </body>
