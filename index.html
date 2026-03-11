@@ -225,16 +225,21 @@
             chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
         }
 
-        // Admin Verification
+        // 4. FINAL FIXED LOGIN LOGIC (MERGED)
         function checkAdmin() {
-            const id = document.getElementById('admin-id').value.trim();
-            const pass = document.getElementById('admin-pass').value.trim();
+            const idInput = document.getElementById('admin-id').value.trim();
+            const passInput = document.getElementById('admin-pass').value.trim();
 
-            if(id === "KFK@9773" && pass === "Kfk@#786") {
-                alert("✅ Access Granted! Opening Dashboard...");
-                window.location.href = "admin.html";
+            const correctID = "KFK@9773";
+            const correctPass = "Kfk@#786";
+
+            if (idInput === correctID && passInput === correctPass) {
+                alert("✅ Access Granted! Redirecting to Dashboard...");
+                window.location.href = "admin.html"; 
             } else {
-                alert("❌ Unauthorized Access! Invalid credentials.");
+                alert("❌ Unauthorized Access!\nInvalid Credentials.\n\nNote: Input is Case-Sensitive.");
+                document.getElementById('admin-id').value = "";
+                document.getElementById('admin-pass').value = "";
             }
         }
 
