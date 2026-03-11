@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK Admin | Firebase Control</title>
+    <title>KFK Admin | Control Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -18,33 +18,28 @@
 
     <aside class="w-full lg:w-72 bg-[#002e6e] text-white p-8 flex flex-col shadow-2xl z-50">
         <div class="mb-12">
-            <h1 class="text-3xl font-black italic tracking-tighter uppercase leading-none text-orange-500">KFK ADMIN</h1>
-            <p class="text-[10px] font-bold text-blue-300 uppercase tracking-widest mt-2">Firebase Powered</p>
+            <h1 class="text-3xl font-black italic tracking-tighter uppercase text-orange-500">KFK ADMIN</h1>
+            <div class="h-1 w-12 bg-orange-500 mt-2"></div>
         </div>
-
         <nav class="space-y-3 flex-1">
             <button onclick="showSection('orders')" id="btn-orders" class="nav-link active w-full p-4 rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-white/10 text-left">
-                <span class="text-xl">📦</span> Live Orders
+                <span>📦</span> Live Orders
             </button>
             <button onclick="showSection('add-product')" id="btn-add-product" class="nav-link w-full p-4 rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-white/10 text-left">
-                <span class="text-xl">📸</span> Add Fish Stock
+                <span>📸</span> Add Fish Stock
+            </button>
+            <button onclick="showSection('manage-stock')" id="btn-manage-stock" class="nav-link w-full p-4 rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-white/10 text-left">
+                <span>🛠️</span> Manage Menu
             </button>
         </nav>
-
-        <div class="pt-10 border-t border-white/10">
-            <p class="text-xs font-bold">Mohmmad Aarif</p>
-            <p class="text-[9px] text-blue-300 uppercase">Founder, Smile Finance</p>
+        <div class="pt-10 border-t border-white/10 mt-auto">
+            <p class="text-xs font-bold uppercase tracking-widest text-blue-300">Aarif Bhai</p>
         </div>
     </aside>
 
     <main class="flex-1 p-6 lg:p-12 overflow-y-auto">
-
         <section id="add-product-section" class="section-card">
-            <div class="mb-10 text-center lg:text-left">
-                <h2 class="text-4xl font-black text-slate-800 italic uppercase tracking-tighter">Add New Stock</h2>
-                <p class="text-slate-500 font-bold text-xs uppercase tracking-widest">Snap a photo to push live on menu</p>
-            </div>
-
+            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10">Add New Fish</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 <div class="space-y-4">
                     <div class="relative aspect-square bg-slate-200 rounded-[3rem] overflow-hidden border-4 border-white shadow-2xl flex items-center justify-center">
@@ -52,48 +47,42 @@
                         <canvas id="canvas" class="hidden"></canvas>
                         <img id="photo-preview" class="hidden w-full h-full object-cover">
                         <div id="placeholder" class="text-center text-slate-400">
-                            <span class="text-5xl">📸</span>
-                            <p class="mt-2 font-black text-[10px] uppercase">Camera Ready</p>
+                            <span class="text-5xl">📷</span>
+                            <p class="mt-2 font-black text-[10px] uppercase">Ready</p>
                         </div>
                     </div>
                     <div class="flex gap-3">
-                        <button onclick="startCamera()" class="flex-1 bg-slate-800 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest active:scale-95 transition-all">Start Cam</button>
-                        <button onclick="takePhoto()" class="flex-1 bg-orange-500 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest active:scale-95 transition-all">Capture</button>
+                        <button onclick="startCamera()" class="flex-1 bg-slate-800 text-white py-5 rounded-2xl font-black text-[10px] uppercase">Start Cam</button>
+                        <button onclick="takePhoto()" class="flex-1 bg-orange-500 text-white py-5 rounded-2xl font-black text-[10px] uppercase">Capture</button>
                     </div>
                 </div>
-
-                <div class="bg-white p-10 rounded-[3rem] shadow-xl border border-slate-100 space-y-5">
-                    <input type="text" id="p-name" placeholder="Fish Name (e.g. Rohu)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none font-bold text-sm border-2 border-transparent focus:border-orange-500">
+                <div class="bg-white p-10 rounded-[3rem] shadow-xl space-y-5">
+                    <input type="text" id="p-name" placeholder="Fish Name" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-orange-500 font-bold outline-none">
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="number" id="p-price" placeholder="Price (₹)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none font-bold text-sm border-2 border-transparent focus:border-orange-500">
-                        <input type="text" id="p-weight" placeholder="Unit (1kg)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none font-bold text-sm border-2 border-transparent focus:border-orange-500">
+                        <input type="number" id="p-price" placeholder="Price (₹)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none border-2 border-transparent focus:border-orange-500 font-bold">
+                        <input type="text" id="p-weight" placeholder="Unit (1kg)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none border-2 border-transparent focus:border-orange-500 font-bold">
                     </div>
-                    <select id="p-category" class="w-full p-5 bg-slate-50 rounded-2xl outline-none font-bold text-sm border-2 border-transparent focus:border-orange-500">
-                        <option value="Fresh Water">Fresh Water Fish</option>
-                        <option value="Sea Food">Sea Food / Prawns</option>
-                        <option value="Dry Fish">Dry Fish Stock</option>
-                    </select>
-                    <button onclick="uploadToFirebase()" id="upload-btn" class="w-full bg-[#002e6e] text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.2em] shadow-2xl active:scale-95 transition-all">
-                        Make it Live 🚀
-                    </button>
+                    <button onclick="uploadToFirebase()" id="upload-btn" class="w-full bg-[#002e6e] text-white py-6 rounded-[2rem] font-black uppercase shadow-2xl active:scale-95 transition-all">Make it Live 🚀</button>
                 </div>
             </div>
+        </section>
+
+        <section id="manage-stock-section" class="section-card">
+            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10">Stock Control</h2>
+            <div id="stock-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
         </section>
 
         <section id="orders-section" class="section-card active">
-            <h2 class="text-4xl font-black text-slate-800 italic uppercase tracking-tighter mb-10">Live Orders</h2>
-            <div id="order-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 italic text-slate-400 font-bold">
-                Loading orders...
-            </div>
+            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10">Orders List</h2>
+            <div id="order-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">Loading...</div>
         </section>
-
     </main>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Aapka Config
         const firebaseConfig = {
             apiKey: "AIzaSyDWHPt3Kya_s-9f62RsLfI_G1RgQU5P534",
             authDomain: "kfk-fish.firebaseapp.com",
@@ -106,82 +95,75 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Upload Product
+        // Upload
         window.uploadToFirebase = async () => {
             const btn = document.getElementById('upload-btn');
             const data = {
                 name: document.getElementById('p-name').value,
                 price: document.getElementById('p-price').value,
                 weight: document.getElementById('p-weight').value,
-                category: document.getElementById('p-category').value,
                 image: window.capturedBase64,
                 createdAt: serverTimestamp()
             };
-
-            if(!data.image || !data.name) return alert("Photo kheenchiye aur naam bhariye!");
-
-            btn.innerText = "UPLOADING...";
-            btn.disabled = true;
-
-            try {
-                await addDoc(collection(db, "products"), data);
-                alert("SUCCESS! Fish is live on the menu.");
-                location.reload();
-            } catch (e) { alert("Error: " + e.message); btn.disabled = false; }
+            if(!data.image || !data.name) return alert("Photo + Naam zaroori hai!");
+            btn.disabled = true; btn.innerText = "SAVING...";
+            await addDoc(collection(db, "products"), data);
+            location.reload();
         };
 
-        // Fetch Orders
-        window.loadOrders = async () => {
-            const container = document.getElementById('order-list');
-            const snap = await getDocs(collection(db, "orders"));
-            if(snap.empty) { container.innerHTML = "No orders yet."; return; }
-            container.innerHTML = "";
-            snap.forEach(doc => {
-                const order = doc.data();
-                container.innerHTML += `
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                        <p class="text-orange-500 font-black">#${doc.id.slice(0,5)}</p>
-                        <h4 class="text-slate-800 font-black uppercase">${order.customerName}</h4>
-                        <p class="text-xs text-slate-400 font-bold">${order.items}</p>
+        // Load & Delete Stock
+        window.loadStock = async () => {
+            const list = document.getElementById('stock-list');
+            const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            list.innerHTML = "";
+            snap.forEach(d => {
+                const p = d.data();
+                list.innerHTML += `
+                    <div class="bg-white p-4 rounded-3xl shadow-lg border border-slate-100 flex items-center gap-4">
+                        <img src="${p.image}" class="w-16 h-16 rounded-xl object-cover">
+                        <div class="flex-1">
+                            <p class="font-black text-slate-800 uppercase text-xs">${p.name}</p>
+                            <p class="text-orange-500 font-bold text-[10px]">₹${p.price}</p>
+                        </div>
+                        <button onclick="deleteProduct('${d.id}')" class="bg-red-50 text-red-500 p-3 rounded-xl hover:bg-red-500 hover:text-white transition-all text-xs font-bold">Delete</button>
                     </div>
                 `;
             });
         };
 
-        window.onload = window.loadOrders;
+        window.deleteProduct = async (id) => {
+            if(confirm("Bhai, kya aap is item ko menu se hatana chahte hain?")) {
+                await deleteDoc(doc(db, "products", id));
+                window.loadStock();
+            }
+        };
+
+        window.onload = () => { window.loadStock(); };
     </script>
 
     <script>
-        let capturedBase64 = "";
         function showSection(section) {
             document.querySelectorAll('.section-card').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
             document.getElementById(section + '-section').classList.add('active');
             document.getElementById('btn-' + section).classList.add('active');
         }
-
         async function startCamera() {
             const video = document.getElementById('video');
-            const placeholder = document.getElementById('placeholder');
-            try {
-                placeholder.classList.add('hidden');
-                video.classList.remove('hidden');
-                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-                video.srcObject = stream;
-            } catch (err) { alert("Camera Error"); }
+            document.getElementById('placeholder').classList.add('hidden');
+            video.classList.remove('hidden');
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+            video.srcObject = stream;
         }
-
         function takePhoto() {
-            const video = document.getElementById('video');
             const canvas = document.getElementById('canvas');
-            const photoPreview = document.getElementById('photo-preview');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
+            const video = document.getElementById('video');
+            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
             canvas.getContext('2d').drawImage(video, 0, 0);
             window.capturedBase64 = canvas.toDataURL('image/jpeg', 0.5);
-            photoPreview.src = window.capturedBase64;
-            video.classList.add('hidden');
-            photoPreview.classList.remove('hidden');
+            document.getElementById('photo-preview').src = window.capturedBase64;
+            video.classList.add('hidden'); document.getElementById('photo-preview').classList.remove('hidden');
         }
     </script>
 </body>
