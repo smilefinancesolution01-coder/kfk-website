@@ -60,9 +60,19 @@
                         </div>
                     </div>
                     <div id="multi-preview" class="flex gap-4 overflow-x-auto p-2 scrollbar-hide min-h-[100px] bg-white rounded-2xl shadow-inner border border-dashed border-slate-300"></div>
-                    <div class="flex gap-3">
-                        <button onclick="startCamera()" class="flex-1 bg-slate-800 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest italic active:scale-95 transition-all">Start Cam</button>
-                        <button onclick="takePhoto()" class="flex-1 bg-orange-500 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest italic active:scale-95 transition-all">Capture</button>
+                    
+                    <div class="space-y-4">
+                        <div class="flex gap-3">
+                            <button onclick="startCamera()" class="flex-1 bg-slate-800 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest italic active:scale-95 transition-all">Start Cam</button>
+                            <button onclick="takePhoto()" class="flex-1 bg-orange-500 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest italic active:scale-95 transition-all">Capture</button>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                            <label class="block mb-2 text-[10px] font-black uppercase tracking-widest text-slate-400 italic">Or Upload from Gallery/PDF</label>
+                            <input type="file" id="file-input" accept="image/*,application/pdf" multiple 
+                                class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-[10px] file:font-black file:uppercase file:bg-orange-50 file:text-orange-600 hover:file:bg-orange-100 cursor-pointer"
+                                onchange="handleFileUpload(event)">
+                        </div>
                     </div>
                 </div>
 
@@ -79,8 +89,7 @@
 
         <section id="manage-stock-section" class="section-card">
             <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10 tracking-tighter">Stock Inventory</h2>
-            <div id="stock-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                </div>
+            <div id="stock-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
     </main>
 
@@ -103,47 +112,87 @@
 
         // --- CAMERA ---
         window.startCamera = async () => {
-            const video = document.getElementById('video');
-            document.getElementById('placeholder').classList.add('hidden');
-            video.classList.remove('hidden');
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-            video.srcObject = stream;
+            try {
+                const video = document.getElementById('video');
+                document.getElementById('placeholder').classList.add('hidden');
+                video.classList.remove('hidden');
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+                video.srcObject = stream;
+            } catch (err) {
+                alert("Camera access denied or not found.");
+            }
         };
 
         window.takePhoto = () => {
             if(imageArray.length >= 4) return alert("Max 4 photos limit!");
             const canvas = document.getElementById('canvas');
             const video = document.getElementById('video');
+            if(!video.srcObject) return alert("Please start camera first!");
+            
             canvas.width = video.videoWidth; canvas.height = video.videoHeight;
             canvas.getContext('2d').drawImage(video, 0, 0);
             imageArray.push(canvas.toDataURL('image/jpeg', 0.5));
             renderPreviews();
         };
 
+        // --- NEW: GALLERY & PDF UPLOAD LOGIC ---
+        window.handleFileUpload = (event) => {
+            const files = event.target.files;
+            if (imageArray.length + files.length > 4) {
+                alert("Maximum 4 items only allowed!");
+                return;
+            }
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imageArray.push(e.target.result);
+                    renderPreviews();
+                };
+                reader.readAsDataURL(file);
+            });
+            // Reset input so same file can be selected again if removed
+            event.target.value = "";
+        };
+
         window.renderPreviews = () => {
             document.getElementById('multi-preview').innerHTML = imageArray.map((img, i) => `
                 <div class="relative min-w-[80px] h-20">
-                    <img src="${img}" class="w-full h-full object-cover rounded-xl border-2 border-white">
-                    <button onclick="removeImg(${i})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-[10px] font-bold">X</button>
+                    <img src="${img}" class="w-full h-full object-cover rounded-xl border-2 border-white shadow-sm">
+                    <button onclick="removeImg(${i})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-[10px] font-bold flex items-center justify-center">×</button>
                 </div>
             `).join('');
         };
+
         window.removeImg = (i) => { imageArray.splice(i, 1); renderPreviews(); };
 
-        // --- MANAGE PRODUCTS (ADD & DELETE) ---
+        // --- FIREBASE OPERATIONS ---
         window.uploadToFirebase = async () => {
             const btn = document.getElementById('upload-btn');
             const name = document.getElementById('p-name').value;
             const price = document.getElementById('p-price').value;
             const weight = document.getElementById('p-weight').value;
-            if(!name || imageArray.length === 0) return alert("Details missing!");
             
-            btn.disabled = true; btn.innerText = "UPLOADING...";
+            if(!name || imageArray.length === 0) return alert("Details and at least one photo required!");
+            
+            btn.disabled = true; 
+            btn.innerText = "UPLOADING...";
+            
             try {
-                await addDoc(collection(db, "products"), { name, price, weight, images: imageArray, createdAt: serverTimestamp() });
-                alert("Stock Added!");
+                await addDoc(collection(db, "products"), { 
+                    name, 
+                    price, 
+                    weight, 
+                    images: imageArray, 
+                    createdAt: serverTimestamp() 
+                });
+                alert("Stock Added Successfully!");
                 location.reload();
-            } catch (e) { alert(e.message); btn.disabled = false; }
+            } catch (e) { 
+                alert("Error: " + e.message); 
+                btn.disabled = false; 
+                btn.innerText = "Make it Live 🚀";
+            }
         };
 
         window.loadStock = async () => {
@@ -174,7 +223,6 @@
             }
         };
 
-        // --- MANAGE ORDERS ---
         window.loadOrders = async () => {
             const list = document.getElementById('order-list');
             const snap = await getDocs(query(collection(db, "orders"), orderBy("createdAt", "desc")));
@@ -209,14 +257,6 @@
         window.updateStatus = async (id, s) => {
             const orderRef = doc(db, "orders", id);
             await updateDoc(orderRef, { status: s });
-            const snap = await getDocs(collection(db, "orders"));
-            let oData = null;
-            snap.forEach(doc => { if(doc.id === id) oData = doc.data(); });
-            
-            if(oData && s === 'Packed') {
-                const msg = `*KFK FRESH UPDATE* 📦%0A%0AHi *${oData.customerName}*,%0A%0AAapka order *${oData.item}* pack ho chuka hai!%0A%0A📍 *Address:* ${oData.address}%0A💰 *Price:* ₹${oData.price}%0A%0ATeam jald hi delivery ke liye niklegi.`;
-                window.open(`https://wa.me/?text=${msg}`, '_blank');
-            }
             window.loadOrders();
         };
 
@@ -227,7 +267,6 @@
             }
         };
 
-        // INITIAL LOAD
         window.onload = () => { window.loadStock(); window.loadOrders(); };
     </script>
 
