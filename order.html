@@ -3,236 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout | Kolkata Fish Kitchen</title>
+    <title>KFK | Confirm Your Order</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f7f9fc; }
-        .payment-option { transition: all 0.2s ease; border: 2px solid transparent; }
-        .payment-option.selected { border-color: #fb923c; background: #fff7ed; }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; }
+        .input-field { border: 2px solid #e2e8f0; transition: all 0.3s ease; }
+        .input-field:focus { border-color: #f97316; box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1); outline: none; }
+        .mesho-shadow { box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1); }
     </style>
 </head>
-<body class="pb-32">
+<body class="bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white sticky top-0 z-50 border-b border-gray-100 p-4">
-        <div class="max-w-2xl mx-auto flex items-center gap-4">
-            <a href="menu.html" class="p-2 hover:bg-gray-100 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-            </a>
-            <h1 class="text-xl font-extrabold text-slate-800 uppercase italic tracking-tighter">Review Order</h1>
-        </div>
+    <header class="bg-white p-6 shadow-sm sticky top-0 z-50 flex items-center gap-4">
+        <button onclick="history.back()" class="text-2xl">←</button>
+        <h1 class="text-xl font-extrabold italic uppercase tracking-tighter text-[#002e6e]">Checkout</h1>
     </header>
 
-    <main class="max-w-2xl mx-auto p-4 space-y-4">
+    <main class="max-w-md mx-auto p-4 space-y-6">
         
-        <div class="bg-white rounded-3xl p-6 shadow-sm">
-            <h2 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Your Basket</h2>
-            <div id="cart-items-list" class="space-y-4"></div>
-        </div>
-
-        <div id="savings-box" class="hidden bg-green-50 rounded-2xl p-4 flex items-center gap-3 border border-green-100">
-            <span class="text-xl">🎉</span>
-            <p class="text-xs font-bold text-green-700">YAY! You are saving <span id="total-savings">₹0</span> on this order!</p>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 shadow-sm">
-            <h2 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Delivery Address</h2>
-            <div class="space-y-3">
-                <input type="text" id="cust-name" placeholder="Full Name" class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold text-sm border-none focus:ring-2 focus:ring-orange-500">
-                <input type="tel" id="cust-phone" placeholder="Phone Number" class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold text-sm border-none focus:ring-2 focus:ring-orange-500">
-                <textarea id="cust-address" placeholder="Flat No, Building, Landmark, City..." class="w-full p-4 bg-slate-50 rounded-2xl outline-none font-bold text-sm border-none focus:ring-2 focus:ring-orange-500 h-24"></textarea>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 shadow-sm">
-            <h2 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Payment Method</h2>
-            <div class="space-y-3">
-                <div onclick="selectPayment('upi')" id="opt-upi" class="payment-option p-4 rounded-2xl flex items-center justify-between cursor-pointer border-slate-100 border">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center font-black text-indigo-600 text-[10px]">UPI</div>
-                        <div>
-                            <p class="font-bold text-sm">UPI (GPay, PhonePe, Paytm)</p>
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Instant QR Payment</p>
-                        </div>
-                    </div>
-                    <div class="radio-dot w-5 h-5 border-2 rounded-full border-slate-200"></div>
-                </div>
-                <div onclick="selectPayment('cod')" id="opt-cod" class="payment-option p-4 rounded-2xl flex items-center justify-between cursor-pointer border-slate-100 border">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center font-black text-green-600 text-[10px]">COD</div>
-                        <div>
-                            <p class="font-bold text-sm">Cash on Delivery</p>
-                        </div>
-                    </div>
-                    <div class="radio-dot w-5 h-5 border-2 rounded-full border-slate-200"></div>
+        <div class="bg-white p-5 rounded-[2rem] mesho-shadow flex gap-4">
+            <img id="summary-img" src="" class="w-24 h-24 rounded-2xl object-cover shadow-sm bg-slate-100">
+            <div class="flex-1">
+                <h2 id="summary-name" class="font-black text-slate-800 uppercase text-sm leading-tight">Product Name</h2>
+                <p id="summary-weight" class="text-slate-400 text-xs font-bold mt-1">Weight: 1kg</p>
+                <div class="flex items-center gap-2 mt-2">
+                    <span class="text-orange-600 font-black text-lg">₹<span id="summary-price">0</span></span>
+                    <span class="bg-green-100 text-green-600 text-[10px] px-2 py-0.5 rounded-full font-black uppercase">Free Delivery</span>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-3xl p-6 shadow-sm space-y-3">
-            <div class="flex justify-between text-sm font-bold text-slate-500">
-                <span>Item Total</span>
-                <span id="bill-subtotal">₹0</span>
+        <div class="bg-white p-6 rounded-[2.5rem] mesho-shadow space-y-4 border border-slate-100">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-orange-500">📍</span>
+                <h3 class="font-black text-slate-800 uppercase text-xs tracking-widest">Delivery Details</h3>
             </div>
-            <div class="flex justify-between text-sm font-bold text-green-500">
-                <span>Delivery Partner Fee</span>
-                <span>FREE</span>
-            </div>
-            <div class="border-t border-dashed pt-3 flex justify-between items-center">
-                <span class="font-black text-slate-800 uppercase italic tracking-tighter text-lg">Grand Total</span>
-                <span id="bill-grandtotal" class="font-black text-2xl text-[#002e6e]">₹0</span>
+            
+            <input type="text" id="cust-name" placeholder="Full Name" class="input-field w-full p-4 rounded-2xl font-bold text-sm">
+            <input type="tel" id="cust-phone" placeholder="Mobile Number" class="input-field w-full p-4 rounded-2xl font-bold text-sm">
+            
+            <div class="space-y-3 pt-2">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Address Information</p>
+                <input type="text" id="cust-house" placeholder="House No. / Building Name" class="input-field w-full p-4 rounded-2xl font-bold text-sm">
+                <input type="text" id="cust-street" placeholder="Road Name / Area / Colony" class="input-field w-full p-4 rounded-2xl font-bold text-sm">
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="number" id="cust-pin" placeholder="Pincode" class="input-field w-full p-4 rounded-2xl font-bold text-sm">
+                    <input type="text" id="cust-city" placeholder="City" class="input-field w-full p-4 rounded-2xl font-bold text-sm">
+                </div>
             </div>
         </div>
+
+        <div class="bg-white p-6 rounded-[2.5rem] mesho-shadow space-y-4">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-orange-500">💳</span>
+                <h3 class="font-black text-slate-800 uppercase text-xs tracking-widest">Select Payment</h3>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="setPayment('UPI')" id="pay-upi" class="p-4 rounded-2xl border-2 border-orange-500 bg-orange-50 text-orange-600 font-black text-xs uppercase transition-all">Online UPI</button>
+                <button onclick="setPayment('COD')" id="pay-cod" class="p-4 rounded-2xl border-2 border-slate-100 text-slate-400 font-black text-xs uppercase transition-all">Cash on Delivery</button>
+            </div>
+
+            <div id="qr-container" class="mt-4 p-4 bg-slate-50 rounded-3xl text-center space-y-3 hidden">
+                <p class="text-[9px] font-black uppercase text-blue-600 tracking-tighter">Scan to Pay & Take Screenshot</p>
+                <img id="qr-image" src="" class="w-48 h-48 mx-auto rounded-xl shadow-lg border-4 border-white">
+                <p class="text-[10px] font-bold text-slate-400">Merchant: KOLKATA FISH KITCHEN</p>
+            </div>
+        </div>
+
+        <button onclick="placeOrder()" id="order-btn" class="w-full bg-[#002e6e] text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.2em] shadow-2xl active:scale-95 transition-all">
+            Confirm Order 🚀
+        </button>
+
     </main>
 
-    <div class="fixed bottom-0 left-0 right-0 bg-white p-4 border-t border-gray-100 flex items-center justify-between gap-4 shadow-2xl z-[100]">
-        <button onclick="placeOrder()" class="flex-1 bg-orange-500 hover:bg-[#002e6e] text-white py-5 rounded-[2rem] font-black uppercase tracking-widest shadow-lg shadow-orange-200 transition-all active:scale-95">
-            Confirm Order
-        </button>
-    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    <div id="qr-modal" class="hidden fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-6">
-        <div class="bg-white rounded-[2.5rem] w-full max-w-sm p-8 text-center relative shadow-2xl">
-            
-            <button onclick="document.getElementById('qr-modal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDWHPt3Kya_s-9f62RsLfI_G1RgQU5P534",
+            authDomain: "kfk-fish.firebaseapp.com",
+            projectId: "kfk-fish",
+            storageBucket: "kfk-fish.firebasestorage.app",
+            messagingSenderId: "171442898165",
+            appId: "1:171442898165:web:9234070d781b8138d4b1bc"
+        };
 
-            <h3 class="text-xl font-black text-[#002e6e] mb-1 italic uppercase tracking-tighter">Scan & Pay</h3>
-            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-6">KOLKATA FISH KITCHEN</p>
-            
-            <div class="bg-slate-50 p-4 rounded-3xl mb-6 border-2 border-dashed border-orange-200">
-                <a id="upi-intent-link" href="#">
-                    <img src="https://i.ibb.co/LzY8vW8F/bob-qr.jpg" class="w-full h-auto rounded-xl shadow-sm" alt="KFK UPI QR">
-                </a>
-                <p class="mt-3 text-[10px] font-bold text-orange-500 animate-pulse uppercase tracking-widest">Tap image if on Mobile</p>
-            </div>
-            
-            <div class="bg-orange-50 p-4 rounded-2xl mb-6 text-left">
-                <p class="text-[9px] font-black text-orange-600 uppercase tracking-widest">Verified UPI ID</p>
-                <p class="font-bold text-slate-800 text-sm">kolka97560@barodampay</p>
-            </div>
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-            <button onclick="finalWhatsAppSubmit()" class="w-full bg-green-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest shadow-lg shadow-green-200 active:scale-95 transition-all">
-                DONE? SEND ON WHATSAPP
-            </button>
-        </div>
-    </div>
+        // Load data from LocalStorage
+        const selectedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
+        let selectedPayment = 'UPI';
 
-    <script>
-        let selectedMethod = 'upi';
-
-        function renderCart() {
-            const cartItems = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            const container = document.getElementById('cart-items-list');
-            let total = 0;
-
-            if(cartItems.length === 0) {
-                container.innerHTML = `<div class="text-center py-10"><p class="font-bold text-slate-300 uppercase text-xs tracking-widest">Basket is empty</p></div>`;
-                updatePriceDisplay(0);
-                return;
-            }
-
-            container.innerHTML = cartItems.map((item, index) => {
-                total += parseInt(item.price);
-                return `
-                <div class="flex items-center justify-between border-b border-slate-50 pb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-14 h-14 bg-slate-100 rounded-2xl overflow-hidden shadow-inner">
-                            <img src="${item.image}" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-black text-slate-800 uppercase italic tracking-tighter">${item.name}</h4>
-                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${item.weight || '1kg'}</p>
-                            <p class="text-sm font-black text-orange-500 mt-0.5">₹${item.price}</p>
-                        </div>
-                    </div>
-                    <button onclick="removeItem(${index})" class="p-2 text-red-400 hover:text-red-600 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                    </button>
-                </div>`;
-            }).join('');
-
-            updatePriceDisplay(total);
+        if(selectedProduct) {
+            document.getElementById('summary-name').innerText = selectedProduct.name;
+            document.getElementById('summary-price').innerText = selectedProduct.price;
+            document.getElementById('summary-weight').innerText = `Unit: ${selectedProduct.weight}`;
+            document.getElementById('summary-img').src = selectedProduct.image;
+            updateQR(selectedProduct.price);
         }
 
-        function updatePriceDisplay(total) {
-            document.getElementById('bill-subtotal').innerText = `₹${total}`;
-            document.getElementById('bill-grandtotal').innerText = `₹${total}`;
-        }
+        window.setPayment = (type) => {
+            selectedPayment = type;
+            const upiBtn = document.getElementById('pay-upi');
+            const codBtn = document.getElementById('pay-cod');
+            const qrBox = document.getElementById('qr-container');
 
-        function removeItem(index) {
-            let cart = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            cart.splice(index, 1);
-            localStorage.setItem('kfk_cart', JSON.stringify(cart));
-            renderCart();
-        }
-
-        function selectPayment(method) {
-            selectedMethod = method;
-            document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
-            document.getElementById('opt-' + method).classList.add('selected');
-        }
-
-        function updateUPILink() {
-            const totalText = document.getElementById('bill-grandtotal').innerText;
-            const amount = totalText.replace('₹', '').trim();
-            const upiID = "kolka97560@barodampay";
-            const name = "KOLKATA FISH KITCHEN";
-            
-            const intent = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-            document.getElementById('upi-intent-link').href = intent;
-        }
-
-        function placeOrder() {
-            const name = document.getElementById('cust-name').value;
-            const phone = document.getElementById('cust-phone').value;
-            const addr = document.getElementById('cust-address').value;
-
-            if(!name || !phone || !addr) {
-                alert("Please fill delivery details!");
-                return;
-            }
-
-            if(selectedMethod === 'upi') {
-                updateUPILink();
-                document.getElementById('qr-modal').classList.remove('hidden');
+            if(type === 'UPI') {
+                upiBtn.className = "p-4 rounded-2xl border-2 border-orange-500 bg-orange-50 text-orange-600 font-black text-xs uppercase transition-all";
+                codBtn.className = "p-4 rounded-2xl border-2 border-slate-100 text-slate-400 font-black text-xs uppercase transition-all";
+                qrBox.classList.remove('hidden');
             } else {
-                finalWhatsAppSubmit();
+                codBtn.className = "p-4 rounded-2xl border-2 border-orange-500 bg-orange-50 text-orange-600 font-black text-xs uppercase transition-all";
+                upiBtn.className = "p-4 rounded-2xl border-2 border-slate-100 text-slate-400 font-black text-xs uppercase transition-all";
+                qrBox.classList.add('hidden');
             }
+        };
+
+        function updateQR(amount) {
+            const upiId = "kolka97560@barodampay";
+            const merchantName = "KOLKATA FISH KITCHEN";
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi://pay?pa=${upiId}%26pn=${encodeURIComponent(merchantName)}%26am=${amount}%26cu=INR`;
+            document.getElementById('qr-image').src = qrUrl;
+            document.getElementById('qr-container').classList.remove('hidden');
         }
 
-        function finalWhatsAppSubmit() {
+        window.placeOrder = async () => {
             const name = document.getElementById('cust-name').value;
             const phone = document.getElementById('cust-phone').value;
-            const addr = document.getElementById('cust-address').value;
-            const total = document.getElementById('bill-grandtotal').innerText;
-            
-            let cartItems = JSON.parse(localStorage.getItem('kfk_cart')) || [];
-            let itemSummary = cartItems.map(i => `${i.name} (${i.weight || '1kg'})`).join(", ");
+            const house = document.getElementById('cust-house').value;
+            const street = document.getElementById('cust-street').value;
+            const city = document.getElementById('cust-city').value;
+            const pin = document.getElementById('cust-pin').value;
 
-            const msg = `*NEW ORDER - KOLKATA FISH KITCHEN*%0A` +
-                        `*Status:* ${selectedMethod === 'upi' ? '🔴 Payment Pending/Sent' : '🟢 COD Order'}%0A` +
-                        `--------------------------%0A` +
-                        `*Customer:* ${name}%0A` +
-                        `*Contact:* ${phone}%0A` +
-                        `*Items:* ${itemSummary}%0A` +
-                        `*Total Amount:* ${total}%0A` +
-                        `*Payment:* ${selectedMethod.toUpperCase()}%0A` +
-                        `*Address:* ${addr}%0A` +
-                        `--------------------------%0A` +
-                        `_Please confirm my order ASAP!_`;
+            if(!name || !phone || !house || !city) return alert("Meesho ki tarah poora address bhariye!");
 
-            window.open(`https://wa.me/919917385863?text=${msg}`, '_blank');
-            
-            localStorage.removeItem('kfk_cart');
-            document.getElementById('qr-modal').classList.add('hidden');
-        }
+            const btn = document.getElementById('order-btn');
+            btn.disabled = true; btn.innerText = "PLACING ORDER...";
 
-        window.onload = () => {
-            selectPayment('upi');
-            renderCart();
+            try {
+                await addDoc(collection(db, "orders"), {
+                    customerName: name,
+                    customerPhone: phone,
+                    address: `${house}, ${street}, ${city} - ${pin}`,
+                    item: selectedProduct.name,
+                    price: selectedProduct.price,
+                    payment: selectedPayment,
+                    status: 'Pending',
+                    createdAt: serverTimestamp()
+                });
+
+                alert("Order Successful! Aapka machhli ka order le liya gaya hai.");
+                location.href = "index.html";
+            } catch (e) { alert(e.message); btn.disabled = false; }
         };
     </script>
 </body>
