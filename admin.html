@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFK Admin | Control Center</title>
+    <title>KFK Admin | Pro Multi-Photo Control</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -12,13 +12,14 @@
         .section-card { display: none; }
         .section-card.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="flex flex-col lg:flex-row min-h-screen">
 
     <aside class="w-full lg:w-72 bg-[#002e6e] text-white p-8 flex flex-col shadow-2xl z-50">
         <div class="mb-12">
-            <h1 class="text-3xl font-black italic tracking-tighter uppercase text-orange-500">KFK ADMIN</h1>
+            <h1 class="text-3xl font-black italic tracking-tighter uppercase text-orange-500 leading-none">KFK <br> ADMIN</h1>
             <div class="h-1 w-12 bg-orange-500 mt-2"></div>
         </div>
         <nav class="space-y-3 flex-1">
@@ -32,50 +33,52 @@
                 <span>🛠️</span> Manage Menu
             </button>
         </nav>
-        <div class="pt-10 border-t border-white/10 mt-auto">
-            <p class="text-xs font-bold uppercase tracking-widest text-blue-300">Aarif Bhai</p>
-        </div>
     </aside>
 
     <main class="flex-1 p-6 lg:p-12 overflow-y-auto">
         <section id="add-product-section" class="section-card">
-            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10">Add New Fish</h2>
+            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10 tracking-tighter">Add Multi-Photo Stock</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="space-y-4">
+                <div class="space-y-6">
                     <div class="relative aspect-square bg-slate-200 rounded-[3rem] overflow-hidden border-4 border-white shadow-2xl flex items-center justify-center">
                         <video id="video" class="hidden w-full h-full object-cover" autoplay playsinline></video>
                         <canvas id="canvas" class="hidden"></canvas>
-                        <img id="photo-preview" class="hidden w-full h-full object-cover">
                         <div id="placeholder" class="text-center text-slate-400">
                             <span class="text-5xl">📷</span>
-                            <p class="mt-2 font-black text-[10px] uppercase">Ready</p>
+                            <p class="mt-2 font-black text-[10px] uppercase tracking-widest">Camera Ready</p>
                         </div>
                     </div>
+                    
+                    <div id="multi-preview" class="flex gap-4 overflow-x-auto p-2 scrollbar-hide min-h-[100px] bg-white rounded-2xl shadow-inner border border-dashed border-slate-300">
+                        </div>
+
                     <div class="flex gap-3">
-                        <button onclick="startCamera()" class="flex-1 bg-slate-800 text-white py-5 rounded-2xl font-black text-[10px] uppercase">Start Cam</button>
-                        <button onclick="takePhoto()" class="flex-1 bg-orange-500 text-white py-5 rounded-2xl font-black text-[10px] uppercase">Capture</button>
+                        <button onclick="startCamera()" class="flex-1 bg-slate-800 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest">Start Cam</button>
+                        <button onclick="takePhoto()" class="flex-1 bg-orange-500 text-white py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest">Capture Image</button>
                     </div>
                 </div>
-                <div class="bg-white p-10 rounded-[3rem] shadow-xl space-y-5">
-                    <input type="text" id="p-name" placeholder="Fish Name" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-orange-500 font-bold outline-none">
+
+                <div class="bg-white p-10 rounded-[3rem] shadow-xl space-y-5 border border-slate-100">
+                    <input type="text" id="p-name" placeholder="Fish Name (e.g. Rohu Special)" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-orange-500 font-bold outline-none transition-all">
                     <div class="grid grid-cols-2 gap-4">
                         <input type="number" id="p-price" placeholder="Price (₹)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none border-2 border-transparent focus:border-orange-500 font-bold">
                         <input type="text" id="p-weight" placeholder="Unit (1kg)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none border-2 border-transparent focus:border-orange-500 font-bold">
                     </div>
-                    <button onclick="uploadToFirebase()" id="upload-btn" class="w-full bg-[#002e6e] text-white py-6 rounded-[2rem] font-black uppercase shadow-2xl active:scale-95 transition-all">Make it Live 🚀</button>
+                    <button onclick="uploadToFirebase()" id="upload-btn" class="w-full bg-[#002e6e] text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.2em] shadow-2xl active:scale-95 transition-all">
+                        Make it Live 🚀
+                    </button>
                 </div>
             </div>
         </section>
 
         <section id="manage-stock-section" class="section-card">
-            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10">Stock Control</h2>
-            <div id="stock-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                </div>
+            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10 tracking-tighter">Stock Inventory</h2>
+            <div id="stock-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
-        <section id="orders-section" class="section-card active">
-            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-10">Orders List</h2>
-            <div id="order-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">Loading...</div>
+        <section id="orders-section" class="section-card active text-center py-20">
+            <h2 class="text-4xl font-black text-slate-800 italic uppercase mb-4 tracking-tighter text-left lg:text-center">Active Orders</h2>
+            <div id="order-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 italic text-slate-400 font-bold">Fetching latest orders...</div>
         </section>
     </main>
 
@@ -95,23 +98,66 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Upload
-        window.uploadToFirebase = async () => {
-            const btn = document.getElementById('upload-btn');
-            const data = {
-                name: document.getElementById('p-name').value,
-                price: document.getElementById('p-price').value,
-                weight: document.getElementById('p-weight').value,
-                image: window.capturedBase64,
-                createdAt: serverTimestamp()
-            };
-            if(!data.image || !data.name) return alert("Photo + Naam zaroori hai!");
-            btn.disabled = true; btn.innerText = "SAVING...";
-            await addDoc(collection(db, "products"), data);
-            location.reload();
+        let imageArray = [];
+
+        // Camera Logic
+        window.startCamera = async () => {
+            const video = document.getElementById('video');
+            document.getElementById('placeholder').classList.add('hidden');
+            video.classList.remove('hidden');
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+            video.srcObject = stream;
         };
 
-        // Load & Delete Stock
+        window.takePhoto = () => {
+            if(imageArray.length >= 4) return alert("Bas bhai! Amazon ki tarah 4 photos kaafi hain.");
+            const canvas = document.getElementById('canvas');
+            const video = document.getElementById('video');
+            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            let photo = canvas.toDataURL('image/jpeg', 0.5);
+            imageArray.push(photo);
+            renderPreviews();
+        };
+
+        window.renderPreviews = () => {
+            const previewDiv = document.getElementById('multi-preview');
+            previewDiv.innerHTML = imageArray.map((img, index) => `
+                <div class="relative min-w-[80px] h-20 group">
+                    <img src="${img}" class="w-full h-full object-cover rounded-xl border-2 border-white shadow-md">
+                    <button onclick="removeImg(${index})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-[10px] font-bold shadow-lg flex items-center justify-center">X</button>
+                </div>
+            `).join('');
+        };
+
+        window.removeImg = (index) => {
+            imageArray.splice(index, 1);
+            renderPreviews();
+        };
+
+        // Firebase Upload
+        window.uploadToFirebase = async () => {
+            const btn = document.getElementById('upload-btn');
+            const name = document.getElementById('p-name').value;
+            const price = document.getElementById('p-price').value;
+            const weight = document.getElementById('p-weight').value;
+
+            if(imageArray.length === 0 || !name) return alert("Kam se kam 1 photo aur naam zaroori hai!");
+
+            btn.disabled = true; btn.innerText = "UPLOADING ALL PHOTOS...";
+
+            try {
+                await addDoc(collection(db, "products"), {
+                    name, price, weight,
+                    images: imageArray, // Ab hum array bhej rahe hain
+                    createdAt: serverTimestamp()
+                });
+                alert("Boom! Multi-photo stock is LIVE!");
+                location.reload();
+            } catch (e) { alert(e.message); btn.disabled = false; }
+        };
+
+        // Load & Delete
         window.loadStock = async () => {
             const list = document.getElementById('stock-list');
             const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
@@ -119,21 +165,22 @@
             list.innerHTML = "";
             snap.forEach(d => {
                 const p = d.data();
+                const firstImg = p.images ? p.images[0] : ''; // Pehli photo dikhao manage mein
                 list.innerHTML += `
-                    <div class="bg-white p-4 rounded-3xl shadow-lg border border-slate-100 flex items-center gap-4">
-                        <img src="${p.image}" class="w-16 h-16 rounded-xl object-cover">
+                    <div class="bg-white p-4 rounded-3xl shadow-lg flex items-center gap-4 border border-slate-50">
+                        <img src="${firstImg}" class="w-20 h-20 rounded-2xl object-cover shadow-md">
                         <div class="flex-1">
-                            <p class="font-black text-slate-800 uppercase text-xs">${p.name}</p>
-                            <p class="text-orange-500 font-bold text-[10px]">₹${p.price}</p>
+                            <p class="font-black text-slate-800 uppercase text-sm">${p.name}</p>
+                            <p class="text-orange-500 font-bold text-xs">₹${p.price} • ${p.images.length} Photos</p>
                         </div>
-                        <button onclick="deleteProduct('${d.id}')" class="bg-red-50 text-red-500 p-3 rounded-xl hover:bg-red-500 hover:text-white transition-all text-xs font-bold">Delete</button>
+                        <button onclick="deleteProduct('${d.id}')" class="bg-red-50 text-red-500 p-4 rounded-2xl hover:bg-red-500 hover:text-white transition-all font-black text-[10px] uppercase">Del</button>
                     </div>
                 `;
             });
         };
 
         window.deleteProduct = async (id) => {
-            if(confirm("Bhai, kya aap is item ko menu se hatana chahte hain?")) {
+            if(confirm("Are you sure? Menu se poora stock gayab ho jayega.")) {
                 await deleteDoc(doc(db, "products", id));
                 window.loadStock();
             }
@@ -148,22 +195,6 @@
             document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
             document.getElementById(section + '-section').classList.add('active');
             document.getElementById('btn-' + section).classList.add('active');
-        }
-        async function startCamera() {
-            const video = document.getElementById('video');
-            document.getElementById('placeholder').classList.add('hidden');
-            video.classList.remove('hidden');
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-            video.srcObject = stream;
-        }
-        function takePhoto() {
-            const canvas = document.getElementById('canvas');
-            const video = document.getElementById('video');
-            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
-            canvas.getContext('2d').drawImage(video, 0, 0);
-            window.capturedBase64 = canvas.toDataURL('image/jpeg', 0.5);
-            document.getElementById('photo-preview').src = window.capturedBase64;
-            video.classList.add('hidden'); document.getElementById('photo-preview').classList.remove('hidden');
         }
     </script>
 </body>
