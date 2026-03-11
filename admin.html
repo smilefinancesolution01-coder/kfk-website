@@ -2,97 +2,153 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KFK Admin | Control Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; }
+        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px border-gray-100; }
+        .sidebar-item:hover { background: rgba(255, 255, 255, 0.1); border-left: 4px solid #f97316; }
+        .sidebar-item.active { background: rgba(255, 255, 255, 0.1); border-left: 4px solid #f97316; }
+    </style>
 </head>
-<body class="bg-slate-50 flex flex-col md:flex-row min-h-screen">
+<body class="flex min-h-screen">
 
-    <div class="w-full md:w-64 bg-slate-900 text-white p-6">
-        <h2 class="text-2xl font-black italic text-[#e03546]">KFK ADMIN</h2>
-        <nav class="mt-10 space-y-4">
-            <button class="w-full text-left font-bold text-sm bg-slate-800 p-3 rounded-xl">📦 Manage Products</button>
-            <button class="w-full text-left font-bold text-sm hover:bg-slate-800 p-3 rounded-xl opacity-50">📊 Sales Report</button>
+    <aside class="w-64 bg-[#002e6e] text-white flex flex-col hidden md:flex sticky top-0 h-screen">
+        <div class="p-8">
+            <h1 class="text-2xl font-black italic tracking-tighter">KFK<span class="text-orange-500">.</span>ADMIN</h1>
+        </div>
+        
+        <nav class="flex-1 px-4 space-y-2 text-xs font-black uppercase tracking-widest">
+            <a href="#" class="sidebar-item active flex items-center gap-3 p-4 rounded-xl transition-all">
+                <span>📊 Dashboard</span>
+            </a>
+            <a href="#" class="sidebar-item flex items-center gap-3 p-4 rounded-xl transition-all opacity-60">
+                <span>🛒 Orders</span>
+            </a>
+            <a href="#" class="sidebar-item flex items-center gap-3 p-4 rounded-xl transition-all opacity-60">
+                <span>👥 Customers</span>
+            </a>
+            <a href="#" class="sidebar-item flex items-center gap-3 p-4 rounded-xl transition-all opacity-60">
+                <span>🍗 Inventory</span>
+            </a>
+            <a href="#" class="sidebar-item flex items-center gap-3 p-4 rounded-xl transition-all opacity-60">
+                <span>🏢 Franchise Leads</span>
+            </a>
+            <a href="#" class="sidebar-item flex items-center gap-3 p-4 rounded-xl transition-all opacity-60 text-red-400">
+                <span>⚙️ Settings</span>
+            </a>
         </nav>
-    </div>
 
-    <div class="flex-1 p-6 md:p-12">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-3xl font-black mb-8">Inventory Management</h1>
+        <div class="p-6 border-t border-white/10">
+            <button onclick="location.href='index.html'" class="w-full bg-orange-500 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-all">Logout</button>
+        </div>
+    </aside>
 
-            <div class="bg-white p-8 rounded-[30px] shadow-sm mb-10 border border-slate-100">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="text" id="p-name" placeholder="Fish Name (e.g. Rohu Small)" class="p-4 bg-slate-50 rounded-2xl outline-none border focus:border-red-500">
-                    <input type="number" id="p-price" placeholder="Price (₹)" class="p-4 bg-slate-50 rounded-2xl outline-none border">
-                    <select id="p-cat" class="p-4 bg-slate-50 rounded-2xl outline-none border font-bold">
-                        <option value="river">River Fish</option>
-                        <option value="sea">Sea Food</option>
-                        <option value="prawns">Prawns</option>
-                        <option value="bengali">Bengali Special</option>
-                    </select>
-                    <button id="upload-widget" class="p-4 bg-red-50 text-[#e03546] font-black rounded-2xl border-2 border-dashed border-red-200">📸 Click/Upload Photo</button>
+    <main class="flex-1 p-8 overflow-y-auto">
+        
+        <header class="flex justify-between items-center mb-10">
+            <div>
+                <h2 class="text-3xl font-black text-[#002e6e] italic">Welcome, Admin</h2>
+                <p class="text-slate-400 font-bold text-xs uppercase tracking-widest">KFK India Business Overview</p>
+            </div>
+            <div class="flex gap-4">
+                <div class="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3 px-6">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <span class="text-[10px] font-black uppercase text-slate-500 tracking-widest">System Online</span>
                 </div>
-                <input type="hidden" id="p-img">
-                <button id="save-btn" class="w-full mt-6 bg-slate-900 text-white py-5 rounded-2xl font-black uppercase tracking-widest shadow-lg">Add to Live Menu</button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Total Sales</p>
+                <h3 class="text-2xl font-black text-[#002e6e]">₹12,45,000</h3>
+                <span class="text-[9px] text-green-500 font-bold">+12.5% this month</span>
+            </div>
+            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Active Orders</p>
+                <h3 class="text-2xl font-black text-[#002e6e]">48</h3>
+                <span class="text-[9px] text-orange-500 font-bold">12 Out for delivery</span>
+            </div>
+            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Franchise Queries</p>
+                <h3 class="text-2xl font-black text-[#002e6e]">124</h3>
+                <span class="text-[9px] text-blue-500 font-bold">8 New today</span>
+            </div>
+            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Inventory Status</p>
+                <h3 class="text-2xl font-black text-green-600">Healthy</h3>
+                <span class="text-[9px] text-slate-400 font-bold">100+ Varieties stock</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2 bg-white p-8 rounded-[3rem] shadow-sm border border-gray-100">
+                <h4 class="text-xs font-black uppercase tracking-[0.2em] text-[#002e6e] mb-8">Sales Performance</h4>
+                <canvas id="salesChart" height="150"></canvas>
             </div>
 
-            <h2 class="text-xl font-black mb-4">Current Live Items</h2>
-            <div id="admin-product-list" class="bg-white rounded-3xl shadow-sm divide-y">
-                </div>
-        </div>
-    </div>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        // Aapka Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyDWHPt3Kya_s-9f62RsLfI_G1RgQU5P534",
-            authDomain: "kfk-fish.firebaseapp.com",
-            projectId: "kfk-fish",
-            storageBucket: "kfk-fish.firebasestorage.app",
-            messagingSenderId: "171442898165",
-            appId: "1:171442898165:web:9234070d781b8138d4b1bc"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Load Items Function
-        async function loadItems() {
-            const list = document.getElementById('admin-product-list');
-            list.innerHTML = '<p class="p-6 text-slate-400">Loading live data...</p>';
-            const snap = await getDocs(collection(db, "products"));
-            list.innerHTML = '';
-            snap.forEach((product) => {
-                const data = product.data();
-                list.innerHTML += `
-                    <div class="p-4 flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <img src="${data.image}" class="w-12 h-12 rounded-lg object-cover">
-                            <div>
-                                <p class="font-bold text-sm">${data.name}</p>
-                                <p class="text-xs text-slate-400">₹${data.price} | ${data.category}</p>
-                            </div>
+            <div class="bg-white p-8 rounded-[3rem] shadow-sm border border-gray-100">
+                <h4 class="text-xs font-black uppercase tracking-[0.2em] text-[#002e6e] mb-8">Recent Leads</h4>
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-black">S</div>
+                        <div>
+                            <p class="text-[11px] font-black text-[#002e6e]">Sagar Vidhate</p>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase">₹2.5L Model Query</p>
                         </div>
-                        <button onclick="deleteItem('${product.id}')" class="text-red-500 font-bold text-xs p-2 hover:bg-red-50 rounded-lg">Delete</button>
                     </div>
-                `;
-            });
-        }
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-black">V</div>
+                        <div>
+                            <p class="text-[11px] font-black text-[#002e6e]">Vikash Team</p>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase">New Agent Login</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-black">R</div>
+                        <div>
+                            <p class="text-[11px] font-black text-[#002e6e]">Raja (Kolkata)</p>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase">Order #8892 Paid</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full mt-8 border-2 border-dashed border-slate-200 py-3 rounded-2xl text-[9px] font-black uppercase text-slate-400 tracking-widest hover:border-orange-500 hover:text-orange-500 transition-all">View All Activity</button>
+            </div>
 
-        // Global Delete Function
-        window.deleteItem = async (id) => {
-            if(confirm('Are you sure?')) {
-                await deleteDoc(doc(db, "products", id));
-                loadItems();
+        </div>
+
+    </main>
+
+    <script>
+        // Sales Chart Initialization
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Sales (₹)',
+                    data: [12000, 19000, 15000, 25000, 22000, 30000, 45000],
+                    borderColor: '#f97316',
+                    backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { 
+                    y: { beginAtZero: true, display: false },
+                    x: { grid: { display: false } }
+                }
             }
-        }
-
-        // Add Product logic wahi rahega jo maine upar diya tha...
-        // [AddDoc logic here as per previous code]
-
-        loadItems();
+        });
     </script>
 </body>
 </html>
