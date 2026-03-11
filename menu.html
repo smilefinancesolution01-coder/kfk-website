@@ -11,6 +11,9 @@
         .product-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .product-card:hover { transform: translateY(-10px); }
         .category-pill.active { background: #002e6e; color: white; }
+        /* Hide scrollbar for category filter */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body>
@@ -33,29 +36,36 @@
     <main class="p-6 lg:p-12">
         <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="col-span-full text-center py-20">
-                <div class="animate-spin text-4xl mb-4">🔄</div>
+                <div class="animate-spin text-4xl mb-4 inline-block">🔄</div>
                 <p class="font-black text-slate-400 uppercase tracking-widest text-xs">Fetching Today's Fresh Arrivals...</p>
             </div>
         </div>
     </main>
 
     <script>
-        const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"; // Wahi URL yahan bhi daalein
+        // Aapka Updated Apps Script URL yahan connect kar diya gaya hai
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby5IwI7Pmqr5HEkX9zXlna25eZtIYrOZR3R2OXoB2HZjpMK8wNDChWg9XO4A8rYVvxAvA/exec"; 
         let allProducts = [];
 
         async function fetchMenu() {
             try {
+                // Menu fetch karne ke liye action=getProducts use ho raha hai
                 const response = await fetch(`${SCRIPT_URL}?action=getProducts`);
                 allProducts = await response.json();
                 renderProducts(allProducts);
             } catch (e) {
-                document.getElementById('product-list').innerHTML = `<p class="col-span-full text-center text-red-500 font-bold">Failed to load menu. Check Script URL.</p>`;
+                console.error("Fetch Error:", e);
+                document.getElementById('product-list').innerHTML = `
+                    <div class="col-span-full text-center py-10">
+                        <p class="text-red-500 font-bold">Failed to load menu. Please check your internet or Script URL.</p>
+                    </div>`;
             }
         }
 
         function renderProducts(products) {
             const container = document.getElementById('product-list');
-            if(products.length === 0) {
+            
+            if(!products || products.length === 0) {
                 container.innerHTML = `<p class="col-span-full text-center py-20 text-slate-400 font-bold uppercase tracking-widest">No stock available today.</p>`;
                 return;
             }
@@ -64,7 +74,7 @@
                 <div class="product-card bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 group">
                     <div class="relative aspect-square overflow-hidden bg-slate-100">
                         <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500">
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-xl font-black text-[10px] text-[#002e6e] uppercase tracking-widest">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-xl font-black text-[10px] text-[#002e6e] uppercase tracking-widest shadow-sm">
                             ${product.category}
                         </div>
                     </div>
@@ -74,7 +84,7 @@
                             <h3 class="text-xl font-black text-slate-800 italic uppercase tracking-tighter">${product.name}</h3>
                             <span class="text-orange-500 font-black italic">₹${product.price}</span>
                         </div>
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Pack: ${product.weight}</p>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 font-bold">Pack: ${product.weight}</p>
                         
                         <button onclick="addToCart('${product.name}', ${product.price})" class="w-full bg-[#002e6e] text-white py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-blue-100 hover:bg-orange-500 transition-all active:scale-95">
                             Add to Order
@@ -85,7 +95,7 @@
         }
 
         function filterItems(category) {
-            // Update Active Pill UI
+            // Update Active Filter Buttons
             document.querySelectorAll('.category-pill').forEach(btn => {
                 btn.classList.remove('active');
                 if(btn.innerText === category || (category === 'All' && btn.innerText === 'All Items')) {
@@ -101,11 +111,12 @@
             }
         }
 
-        // Add to Cart Logic (Local Storage or Direct WhatsApp)
         function addToCart(name, price) {
-            alert(name + " added! (Aap yahan apna WhatsApp Order logic bhi daal sakte hain)");
+            // Yahan aap WhatsApp link generate kar sakte hain
+            alert(name + " (₹" + price + ") has been selected. Order integration ready!");
         }
 
+        // Page load hote hi menu fetch karein
         window.onload = fetchMenu;
     </script>
 </body>
