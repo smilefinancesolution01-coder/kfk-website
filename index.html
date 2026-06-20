@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KFK Fish India | Fish Business & Franchise Opportunity</title>
+
+<meta name="description"
+content="Start your fish business with KFK Fish India. Fish Franchise, Fish Fast Food, Swiggy & Zomato Setup, Training, Machines, Marketing Support.">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#fff;
+overflow-x:hidden;
+color:#222;
+}
+
+img{
+max-width:100%;
+display:block;
+}
+
+a{
+text-decoration:none;
+}
+
+.container{
+width:100%;
+max-width:1300px;
+margin:auto;
+padding:0 20px;
+}
+
+/* HEADER */
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:#fff;
+z-index:9999;
+box-shadow:0 2px 15px rgba(0,0,0,.08);
+}
+
+.navbar{
+height:85px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo{
+font-size:30px;
+font-weight:800;
+color:#00695c;
+}
+
+.menu{
+display:flex;
+gap:30px;
+}
+
+.menu a{
+color:#222;
+font-weight:500;
+transition:.3s;
+}
+
+.menu a:hover{
+color:#00695c;
+}
+
+.apply-btn{
+background:#00695c;
+color:#fff;
+padding:12px 25px;
+border-radius:8px;
+font-weight:600;
+}
+
+/* HERO */
+
+.hero{
+margin-top:85px;
+min-height:100vh;
+background:
+linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+url('https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=1600');
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+}
+
+.hero-content{
+max-width:750px;
+color:#fff;
+}
+
+.hero-tag{
+display:inline-block;
+background:#ffc107;
+padding:10px 20px;
+border-radius:50px;
+font-size:14px;
+font-weight:700;
+color:#000;
+margin-bottom:25px;
+}
+
+.hero h1{
+font-size:64px;
+line-height:1.2;
+margin-bottom:25px;
+font-weight:800;
+}
+
+.hero p{
+font-size:20px;
+line-height:1.8;
+margin-bottom:35px;
+}
+
+.hero-buttons{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn-primary{
+background:#00c853;
+color:#fff;
+padding:15px 35px;
+border-radius:10px;
+font-weight:700;
+}
+
+.btn-secondary{
+border:2px solid #fff;
+color:#fff;
+padding:15px 35px;
+border-radius:10px;
+font-weight:700;
+}
+
+.hero-features{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-top:35px;
+}
+
+.feature{
+background:rgba(255,255,255,.15);
+padding:12px 18px;
+border-radius:8px;
+font-size:14px;
+color:#fff;
+}
+
+/* COMMON SECTIONS */
+
+.section{
+padding:100px 0;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:60px;
+}
+
+.section-title h2{
+font-size:42px;
+color:#00695c;
+margin-bottom:15px;
+}
+
+.section-title p{
+max-width:800px;
+margin:auto;
+line-height:1.8;
+color:#666;
+}
+
+/* CARDS */
+
+.grid-2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+.grid-3{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.grid-4{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+}
+
+.card{
+background:#fff;
+border-radius:20px;
+padding:25px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+/* BUTTONS */
+
+.primary-btn{
+background:#00695c;
+color:#fff;
+padding:15px 30px;
+border-radius:10px;
+display:inline-block;
+}
+
+.secondary-btn{
+background:#ffc107;
+color:#000;
+padding:15px 30px;
+border-radius:10px;
+display:inline-block;
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+position:fixed;
+right:20px;
+bottom:20px;
+width:65px;
+height:65px;
+background:#25D366;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+z-index:99999;
+}
+
+/* MOBILE */
+
+@media(max-width:991px){
+
+.menu{
+display:none;
+}
+
+.grid-4{
+grid-template-columns:1fr 1fr;
+}
+
+.grid-3{
+grid-template-columns:1fr;
+}
+
+.grid-2{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+}
+
+@media(max-width:600px){
+
+.grid-4{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+.hero-buttons{
+flex-direction:column;
+}
+
+.btn-primary,
+.btn-secondary{
+text-align:center;
+}
+
+.logo{
+font-size:24px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="container">
+
+<div class="navbar">
+
+<div class="logo">
+KFK FISH INDIA
+</div>
+
+<div class="menu">
+
+<a href="#">Home</a>
+<a href="#">Franchise</a>
+<a href="#">Products</a>
+<a href="#">Business Model</a>
+<a href="#">Success Stories</a>
+<a href="#">Contact</a>
+
+</div>
+
+<a href="#" class="apply-btn">
+Apply Franchise
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<div class="container">
+
+<div class="hero-content">
+
+<div class="hero-tag">
+India's Fast Growing Fish Franchise Network
+</div>
+
+<h1>
+Start Your Own Fish Business With KFK Fish India
+</h1>
+
+<p>
+Raw Material • Machines • Deep Freezer • Swiggy Setup • Zomato Setup • Marketing Support • Complete Business Training
+</p>
+
+<div class="hero-buttons">
+
+<a href="#" class="btn-primary">
+Apply For Franchise
+</a>
+
+<a href="#" class="btn-secondary">
+Download Brochure
+</a>
+
+</div>
+
+<div class="hero-features">
+
+<div class="feature">Fish Fast Food Business</div>
+
+<div class="feature">Home Kitchen Model</div>
+
+<div class="feature">Swiggy & Zomato Setup</div>
+
+<div class="feature">Pan India Franchise</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<a href="https://wa.me/919999999999" class="whatsapp">
+💬
+</a>
+
+</body>
+</html>
+
+
+<!-- WHY KFK SECTION START -->
+
+<section class="section" style="background:#f8fafc;">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+Why Choose KFK Fish India
+</h2>
+
+<p>
+KFK Fish India sirf fish selling company nahi hai.
+Hum complete fish business setup, franchise support,
+training, machines, deep freezer, Swiggy setup,
+Zomato setup aur marketing support provide karte hain.
+</p>
+
+</div>
+
+<div class="grid-4">
+
+<div class="card">
+
+<img
+src="https://images.unsplash.com/photo-1559847844-d721426d6edc?w=900"
+style="height:220px;width:100%;object-fit:cover;border-radius:15px;margin-bottom:20px;"
+>
+
+<h3 style="margin-bottom:15px;color:#00695c;">
+Home Kitchen Model
+</h3>
+
+<p style="line-height:1.8;color:#666;">
+₹50,000 se ghar se fish fast food business start karo.
+Company training aur setup support degi.
+</p>
+
+</div>
+
+<div class="card">
+
+<img
+src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900"
+style="height:220px;width:100%;object-fit:cover;border-radius:15px;margin-bottom:20px;"
+>
+
+<h3 style="margin-bottom:15px;color:#00695c;">
+Swiggy & Zomato Setup
+</h3>
+
+<p style="line-height:1.8;color:#666;">
+Restaurant listing, menu creation,
+online ordering aur delivery support.
+</p>
+
+</div>
+
+<div class="card">
+
+<img
+src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=900"
+style="height:220px;width:100%;object-fit:cover;border-radius:15px;margin-bottom:20px;"
+>
+
+<h3 style="margin-bottom:15px;color:#00695c;">
+Fish Fast Food Brand
+</h3>
+
+<p style="line-height:1.8;color:#666;">
+Fish Burger, Fish Roll, Fish Cutlet,
+Fish Fry aur Ready To Cook products.
+</p>
+
+</div>
+
+<div class="card">
+
+<img
+src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?w=900"
+style="height:220px;width:100%;object-fit:cover;border-radius:15px;margin-bottom:20px;"
+>
+
+<h3 style="margin-bottom:15px;color:#00695c;">
+Pan India Franchise
+</h3>
+
+<p style="line-height:1.8;color:#666;">
+India bhar me franchise expansion
+aur local market support.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- WHY KFK SECTION END -->
+
+
+
+<!-- COMPLETE BUSINESS SUPPORT -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="grid-2">
+
+<div>
+
+<img
+src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=1200"
+style="
+width:100%;
+border-radius:20px;
+height:500px;
+object-fit:cover;
+"
+>
+
+</div>
+
+<div>
+
+<h2 style="
+font-size:42px;
+margin-bottom:25px;
+color:#00695c;
+">
+
+We Handle Everything For You
+
+</h2>
+
+<p style="
+font-size:18px;
+line-height:1.9;
+margin-bottom:25px;
+color:#666;
+">
+
+Aapko business ka experience ho ya na ho,
+KFK Fish India aapko complete support degi.
+Raw material se lekar marketing tak sab kuch
+company handle karegi.
+
+</p>
+
+<div style="display:grid;gap:15px;">
+
+<div class="card">
+✅ Fish Raw Material Supply
+</div>
+
+<div class="card">
+✅ Deep Freezer Support
+</div>
+
+<div class="card">
+✅ Machines & Equipment
+</div>
+
+<div class="card">
+✅ Branding Material
+</div>
+
+<div class="card">
+✅ Staff Training
+</div>
+
+<div class="card">
+✅ Swiggy Setup
+</div>
+
+<div class="card">
+✅ Zomato Setup
+</div>
+
+<div class="card">
+✅ Digital Marketing Support
+</div>
+
+<div class="card">
+✅ Business Growth Support
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- COMPLETE BUSINESS SUPPORT END -->
+
+
+
+<!-- HOME BUSINESS OPPORTUNITY -->
+
+<section class="section" style="background:#f8fafc;">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+Start From Home & Scale Across India
+</h2>
+
+<p>
+KFK Fish India ka model is tarah design kiya gaya hai
+ki koi bhi vyakti ghar se business start kar sakta hai
+aur baad me outlet, cloud kitchen ya franchise chain
+tak expand kar sakta hai.
+</p>
+
+</div>
+
+<div class="grid-3">
+
+<div class="card">
+
+<h3 style="color:#00695c;margin-bottom:15px;">
+Step 1
+</h3>
+
+<p>
+Home Kitchen se business start karo.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3 style="color:#00695c;margin-bottom:15px;">
+Step 2
+</h3>
+
+<p>
+Swiggy & Zomato par online orders lo.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3 style="color:#00695c;margin-bottom:15px;">
+Step 3
+</h3>
+
+<p>
+Apna outlet ya franchise network build karo.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- HOME BUSINESS OPPORTUNITY END -->
+
